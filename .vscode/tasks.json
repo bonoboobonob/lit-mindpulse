@@ -1,4 +1,4 @@
-﻿{
+{
   "version": "2.0.0",
   "tasks": [
     {
@@ -10,7 +10,7 @@
       },
       "problemMatcher": [],
       "label": "LibrisMind: Sunucuyu Başlat",
-      "detail": "Vite yerel geliştirme sunucusunu başlatır (http://localhost:5173)"
+      "detail": "Vite yerel geliştirme sunucusunu başlatır (http://localhost:5180)"
     }
   ]
 }

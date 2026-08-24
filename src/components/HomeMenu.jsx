@@ -230,7 +230,7 @@ export default function HomeMenu({
       <div>
         <h3 className="text-lg font-serif font-bold text-slate-200 mb-4 flex items-center gap-2">
           <BookOpen className="w-5 h-5 text-amber-400" />
-          <span>Kütüphane Kategorileri (100+ Eser)</span>
+          <span>Edebi Türler & Kategoriler (250+ Eser)</span>
         </h3>
 
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">

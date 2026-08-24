@@ -161,26 +161,26 @@ export default function WordScrambleGame({ onGameOver, onBack, highScore = 0 }) 
 
   return (
     <div className="w-full max-w-3xl mx-auto px-2 sm:px-4 py-2 flex flex-col items-center">
-      {/* Top Bar */}
-      <div className="w-full flex items-center justify-between mb-4">
+      {/* Top Navigation */}
+      <div className="w-full flex items-center justify-between mb-4 gap-2">
         <button
           onClick={onBack}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900/80 hover:bg-slate-800 border border-slate-800 text-slate-300 text-sm transition cursor-pointer"
+          className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl bg-slate-900/80 hover:bg-slate-800 border border-slate-800 text-slate-300 text-xs sm:text-sm transition cursor-pointer shrink-0"
         >
           <ArrowLeft className="w-4 h-4" />
-          <span>Kütüphaneye Dön</span>
+          <span><span className="hidden sm:inline">Kütüphaneye </span>Dön</span>
         </button>
 
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
           {phase === 'study' && (
-            <div className="flex items-center gap-1.5 px-3 py-1 bg-amber-500/10 border border-amber-500/30 rounded-xl text-amber-300 font-bold text-xs sm:text-sm">
-              <Timer className="w-4 h-4 animate-spin text-amber-400" />
+            <div className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1 bg-amber-500/10 border border-amber-500/30 rounded-xl text-amber-300 font-bold text-xs sm:text-sm whitespace-nowrap shrink-0">
+              <Timer className="w-3.5 h-3.5 sm:w-4 sm:h-4 animate-spin text-amber-400 shrink-0" />
               <span>{timeLeft}s Ezber</span>
             </div>
           )}
 
-          <div className="flex items-center gap-1 px-3 py-1 bg-amber-950/40 border border-amber-500/30 rounded-xl text-amber-300 font-bold text-xs sm:text-sm">
-            <Trophy className="w-3.5 h-3.5 text-amber-400" />
+          <div className="flex items-center gap-1 px-2.5 sm:px-3 py-1 bg-amber-950/40 border border-amber-500/30 rounded-xl text-amber-300 font-bold text-xs sm:text-sm whitespace-nowrap shrink-0">
+            <Trophy className="w-3.5 h-3.5 text-amber-400 shrink-0" />
             <span>Skor: {score}</span>
           </div>
         </div>
@@ -276,7 +276,7 @@ export default function WordScrambleGame({ onGameOver, onBack, highScore = 0 }) 
               </div>
             </div>
 
-            <p className="text-lg sm:text-2xl font-serif font-medium text-slate-100 leading-relaxed text-center italic my-6 px-2">
+            <p className="text-base sm:text-xl font-serif font-medium text-slate-100 leading-relaxed text-center italic my-6 px-1 quote-text">
               "{currentQuote.quote}"
             </p>
 
@@ -309,7 +309,7 @@ export default function WordScrambleGame({ onGameOver, onBack, highScore = 0 }) 
           </div>
 
           {/* User's assembled sequence box */}
-          <div className="w-full min-h-[120px] p-4 rounded-3xl bg-slate-900/95 border-2 border-slate-700/80 shadow-2xl mb-6 flex flex-wrap gap-2 items-center justify-center">
+          <div className="w-full min-h-[100px] max-h-40 sm:max-h-48 overflow-y-auto p-3 sm:p-4 rounded-3xl bg-slate-900/95 border-2 border-slate-700/80 shadow-2xl mb-4 sm:mb-6 flex flex-wrap gap-1.5 sm:gap-2 items-center justify-center">
             {userSequence.length === 0 ? (
               <span className="text-xs text-slate-500 italic font-serif">Aşağıdaki kelimelere sırasıyla dokunarak cümleyi oluşturun...</span>
             ) : (
@@ -317,24 +317,24 @@ export default function WordScrambleGame({ onGameOver, onBack, highScore = 0 }) 
                 <button
                   key={idx}
                   onClick={() => handleRemoveWord(item)}
-                  className="px-3.5 py-2 rounded-xl bg-emerald-600/30 border border-emerald-400/60 text-emerald-200 font-serif text-base font-semibold flex items-center gap-1.5 shadow hover:bg-rose-900/40 hover:border-rose-400 hover:text-rose-200 transition cursor-pointer"
+                  className="px-2.5 py-1.5 sm:px-3.5 sm:py-2 rounded-xl bg-emerald-600/30 border border-emerald-400/60 text-emerald-200 font-serif text-sm sm:text-base font-semibold flex items-center gap-1 shadow hover:bg-rose-900/40 hover:border-rose-400 hover:text-rose-200 transition cursor-pointer"
                   title="Geri almak için tıkla"
                 >
                   <span>{item.word}</span>
-                  <X className="w-3.5 h-3.5 opacity-60" />
+                  <X className="w-3 h-3 sm:w-3.5 sm:h-3.5 opacity-60" />
                 </button>
               ))
             )}
           </div>
 
           {/* Scrambled Pool of Chips */}
-          <div className="w-full flex flex-wrap gap-2.5 justify-center mb-8">
+          <div className="w-full flex flex-wrap gap-2 sm:gap-2.5 justify-center mb-6 sm:mb-8">
             {scrambledPool.map((item) => (
               <button
                 key={item.id}
                 disabled={item.isUsed}
                 onClick={() => handlePickWord(item)}
-                className={`px-4 py-2.5 rounded-2xl font-serif text-base font-semibold transition ${
+                className={`px-3 py-2 sm:px-4 sm:py-2.5 rounded-2xl font-serif text-sm sm:text-base font-semibold transition ${
                   item.isUsed
                     ? 'bg-slate-900 text-slate-700 border border-slate-900 cursor-not-allowed opacity-30'
                     : 'bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 hover:border-emerald-400 shadow-md hover:scale-105 cursor-pointer'
@@ -377,7 +377,7 @@ export default function WordScrambleGame({ onGameOver, onBack, highScore = 0 }) 
 
           <div className="w-full p-6 rounded-3xl bg-slate-900 border border-slate-800 shadow-xl mb-6">
             <span className="text-xs text-slate-400 block mb-1">Orijinal Cümle:</span>
-            <p className="text-base sm:text-lg font-serif text-slate-100 italic">
+            <p className="text-base sm:text-lg font-serif text-slate-100 italic quote-text">
               "{currentQuote.quote}"
             </p>
           </div>

@@ -245,32 +245,32 @@ export default function FullTypingGame({
   return (
     <div className="w-full max-w-3xl mx-auto px-2 sm:px-4 py-2 flex flex-col items-center">
       {/* Top Navigation Bar */}
-      <div className="w-full flex items-center justify-between mb-4">
+      <div className="w-full flex items-center justify-between mb-4 gap-2">
         <button
           onClick={onBack}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900/80 hover:bg-slate-800 border border-slate-800 text-slate-300 text-sm transition cursor-pointer"
+          className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl bg-slate-900/80 hover:bg-slate-800 border border-slate-800 text-slate-300 text-xs sm:text-sm transition cursor-pointer shrink-0"
         >
           <ArrowLeft className="w-4 h-4" />
-          <span>Kütüphaneye Dön</span>
+          <span><span className="hidden sm:inline">Kütüphaneye </span>Dön</span>
         </button>
 
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
           {phase === 'study' && (
-            <div className="flex items-center gap-1.5 px-3 py-1 bg-amber-500/10 border border-amber-500/30 rounded-xl text-amber-300 font-bold text-xs sm:text-sm">
-              <Timer className="w-4 h-4 animate-spin text-amber-400" />
+            <div className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1 bg-amber-500/10 border border-amber-500/30 rounded-xl text-amber-300 font-bold text-xs sm:text-sm whitespace-nowrap shrink-0">
+              <Timer className="w-3.5 h-3.5 sm:w-4 sm:h-4 animate-spin text-amber-400 shrink-0" />
               <span>{timeLeft}s Ezber</span>
             </div>
           )}
 
           {phase === 'typing' && (
-            <div className="flex items-center gap-1.5 px-3 py-1 bg-indigo-500/15 border border-indigo-500/30 rounded-xl text-indigo-300 font-bold text-xs sm:text-sm">
-              <Keyboard className="w-4 h-4 text-indigo-400" />
+            <div className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1 bg-indigo-500/15 border border-indigo-500/30 rounded-xl text-indigo-300 font-bold text-xs sm:text-sm whitespace-nowrap shrink-0">
+              <Keyboard className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-indigo-400 shrink-0" />
               <span>Yazma Modu</span>
             </div>
           )}
 
-          <div className="flex items-center gap-1 px-3 py-1 bg-amber-950/40 border border-amber-500/30 rounded-xl text-amber-300 font-bold text-xs sm:text-sm">
-            <Trophy className="w-3.5 h-3.5 text-amber-400" />
+          <div className="flex items-center gap-1 px-2.5 sm:px-3 py-1 bg-amber-950/40 border border-amber-500/30 rounded-xl text-amber-300 font-bold text-xs sm:text-sm whitespace-nowrap shrink-0">
+            <Trophy className="w-3.5 h-3.5 text-amber-400 shrink-0" />
             <span>Skor: {score}</span>
           </div>
         </div>
@@ -372,7 +372,7 @@ export default function FullTypingGame({
               </span>
             </div>
 
-            <p className="text-lg sm:text-2xl font-serif font-medium text-slate-100 leading-relaxed text-center italic my-6 px-2">
+            <p className="text-base sm:text-xl font-serif font-medium text-slate-100 leading-relaxed text-center italic my-6 px-1 quote-text">
               "{currentQuote.quote}"
             </p>
 
@@ -508,7 +508,7 @@ export default function FullTypingGame({
               </div>
             </div>
 
-            <div className="flex flex-wrap gap-2 text-base sm:text-lg font-serif leading-relaxed mb-6">
+            <div className="flex flex-wrap gap-1.5 sm:gap-2 text-sm sm:text-base font-serif leading-relaxed mb-6 max-h-48 sm:max-h-64 overflow-y-auto">
               {diffAnalysis.map((item, idx) => {
                 if (item.status === 'correct') {
                   return (
@@ -542,7 +542,7 @@ export default function FullTypingGame({
             <div className="space-y-3 pt-4 border-t border-slate-800 text-xs">
               <div>
                 <span className="text-slate-400 font-semibold block mb-0.5">Orijinal Eser: <strong className="text-amber-300">{currentQuote.book}</strong> ({currentQuote.author})</span>
-                <p className="text-slate-200 italic font-serif text-sm">
+                <p className="text-slate-200 italic font-serif text-sm quote-text">
                   "{currentQuote.quote}"
                 </p>
               </div>

@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './components/common/Header';
 import BottomNav from './components/common/BottomNav';
 import StatsModal from './components/common/StatsModal';
@@ -54,7 +54,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col justify-between selection:bg-amber-500 selection:text-slate-950 pb-16 sm:pb-0 font-sans">
+    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col justify-between selection:bg-amber-500 selection:text-slate-950 pb-16 sm:pb-0 font-sans overflow-x-hidden">
       <div>
         {/* Literary Header */}
         <Header
