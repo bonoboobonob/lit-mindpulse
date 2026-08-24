@@ -27,6 +27,8 @@ export default function WordScrambleGame({ onGameOver, onBack, highScore = 0 }) 
   const [totalStudyTime, setTotalStudyTime] = useState(15);
 
   const [originalTokens, setOriginalTokens] = useState([]); // array of original words
+  const [scrambledPool, setScrambledPool] = useState([]); // array of { id, word, isUsed }
+  const [userSequence, setUserSequence] = useState([]); // array of { id, word }
   const [diffAnalysis, setDiffAnalysis] = useState([]); // array of { placedWord, expectedWord, isCorrect, index }
   const [correctCount, setCorrectCount] = useState(0);
   const [score, setScore] = useState(0);
