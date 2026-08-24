@@ -27,12 +27,14 @@ export default function WordScrambleGame({ onGameOver, onBack, highScore = 0 }) 
   const [totalStudyTime, setTotalStudyTime] = useState(15);
 
   const [originalTokens, setOriginalTokens] = useState([]); // array of original words
-  const [scrambledPool, setScrambledPool] = useState([]); // array of { id, word, isUsed }
-  const [userSequence, setUserSequence] = useState([]); // array of { id, word }
+  const [diffAnalysis, setDiffAnalysis] = useState([]); // array of { placedWord, expectedWord, isCorrect, index }
+  const [correctCount, setCorrectCount] = useState(0);
   const [score, setScore] = useState(0);
   const [accuracy, setAccuracy] = useState(0);
 
   const timerRef = useRef(null);
+
+  const cleanWord = (w) => (w ? w.toLocaleLowerCase('tr').replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?"'’]/g, "").trim() : '');
 
   const startRound = (quote) => {
     const rawTokens = quote.quote.trim().split(/\s+/);
@@ -46,6 +48,8 @@ export default function WordScrambleGame({ onGameOver, onBack, highScore = 0 }) 
 
     setScrambledPool(pool);
     setUserSequence([]);
+    setDiffAnalysis([]);
+    setCorrectCount(0);
     setCurrentQuote(quote);
 
     const diffDurations = {
@@ -92,21 +96,38 @@ export default function WordScrambleGame({ onGameOver, onBack, highScore = 0 }) 
   const handleCheckSequence = () => {
     if (userSequence.length !== originalTokens.length) return;
     sounds.playClick();
+
     let matches = 0;
-    userSequence.forEach((item, idx) => {
-      if (item.word === originalTokens[idx]) {
+    const diff = userSequence.map((item, idx) => {
+      const origWord = originalTokens[idx] || '';
+      const isExact = item.word === origWord;
+      const isCleanEqual = cleanWord(item.word) === cleanWord(origWord);
+      const isCorrect = isExact || isCleanEqual;
+
+      if (isCorrect) {
         matches++;
       }
+
+      return {
+        placedWord: item.word,
+        expectedWord: origWord,
+        isCorrect: isCorrect,
+        index: idx,
+      };
     });
 
     const acc = Math.round((matches / originalTokens.length) * 100);
-    const calculatedScore = acc * 5;
+    const diffMultiplier = currentQuote.difficulty === 'legendary' ? 4 : currentQuote.difficulty === 'hard' ? 3 : currentQuote.difficulty === 'medium' ? 2 : 1;
+    const calculatedScore = Math.round(acc * 5 * diffMultiplier);
+
+    setCorrectCount(matches);
     setAccuracy(acc);
     setScore(calculatedScore);
+    setDiffAnalysis(diff);
     resultTimestampRef.current = Date.now();
     setPhase('result');
 
-    if (acc === 100) {
+    if (acc >= 80) {
       sounds.playVictory();
       confetti({ particleCount: 75, spread: 75, origin: { y: 0.6 } });
     } else {
@@ -360,41 +381,97 @@ export default function WordScrambleGame({ onGameOver, onBack, highScore = 0 }) 
       {/* 4. RESULT */}
       {phase === 'result' && currentQuote && (
         <div className="w-full max-w-2xl flex flex-col items-center animate-in fade-in duration-200">
-          <div className="w-full grid grid-cols-2 gap-3 mb-6">
+          {/* Metrics Grid */}
+          <div className="w-full grid grid-cols-3 gap-3 mb-6">
             <div className="p-4 rounded-2xl bg-slate-900 border border-slate-800 text-center">
               <div className="text-xs text-slate-400 mb-1">Dizilim Doğruluğu</div>
-              <div className={`text-3xl font-serif font-extrabold ${accuracy === 100 ? 'text-emerald-400' : 'text-amber-400'}`}>
+              <div className={`text-2xl sm:text-3xl font-serif font-extrabold ${accuracy >= 80 ? 'text-emerald-400' : accuracy >= 50 ? 'text-amber-400' : 'text-rose-400'}`}>
                 %{accuracy}
               </div>
             </div>
+
             <div className="p-4 rounded-2xl bg-slate-900 border border-slate-800 text-center">
-              <div className="text-xs text-slate-400 mb-1">Skor</div>
-              <div className="text-3xl font-serif font-extrabold text-emerald-400">
+              <div className="text-xs text-slate-400 mb-1">Doğru Sıralama</div>
+              <div className="text-2xl sm:text-3xl font-serif font-extrabold text-sky-400">
+                {correctCount} / {originalTokens.length}
+              </div>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-slate-900 border border-slate-800 text-center">
+              <div className="text-xs text-slate-400 mb-1">Kazanılan Puan</div>
+              <div className="text-2xl sm:text-3xl font-serif font-extrabold text-emerald-400">
                 {score}
               </div>
             </div>
           </div>
 
-          <div className="w-full p-6 rounded-3xl bg-slate-900 border border-slate-800 shadow-xl mb-6">
-            <span className="text-xs text-slate-400 block mb-1">Orijinal Cümle:</span>
-            <p className="text-base sm:text-lg font-serif text-slate-100 italic quote-text">
-              "{currentQuote.quote}"
-            </p>
+          {/* Word Comparison Panel */}
+          <div className="w-full p-5 sm:p-6 rounded-3xl bg-slate-900 border border-slate-800 shadow-xl mb-6">
+            <div className="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-slate-400 mb-4">
+              <span>Sıralama & Doğruluk Karşılaştırması</span>
+              <div className="flex items-center gap-2.5 text-[11px] font-normal normal-case">
+                <span className="text-emerald-400">● Doğru Konum</span>
+                <span className="text-rose-400">● Hatalı Konum</span>
+              </div>
+            </div>
+
+            {/* User Assembled Words with status */}
+            <div className="mb-4">
+              <span className="text-xs text-slate-400 block mb-2 font-medium">Sizin Oluşturduğunuz Dizilim:</span>
+              <div className="flex flex-wrap gap-1.5 sm:gap-2 text-sm sm:text-base font-serif leading-relaxed p-3.5 rounded-2xl bg-slate-950/60 border border-slate-800/80 max-h-48 sm:max-h-60 overflow-y-auto">
+                {diffAnalysis.map((item, idx) => (
+                  <span
+                    key={idx}
+                    className={`px-2.5 py-1 rounded-xl font-semibold border flex items-center gap-1.5 ${
+                      item.isCorrect
+                        ? 'bg-emerald-950/60 text-emerald-300 border-emerald-500/40 shadow-sm'
+                        : 'bg-rose-950/60 text-rose-300 border-rose-500/40'
+                    }`}
+                  >
+                    <span>{item.placedWord}</span>
+                    {!item.isCorrect && (
+                      <span className="text-[10px] bg-rose-900/80 px-1.5 py-0.5 rounded text-rose-200 font-sans font-normal" title={`Olması gereken: ${item.expectedWord}`}>
+                        ({item.expectedWord})
+                      </span>
+                    )}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Original Literary Quote */}
+            <div className="pt-4 border-t border-slate-800/80 text-xs">
+              <span className="text-slate-400 font-semibold block mb-1">
+                Orijinal Eser: <strong className="text-emerald-300 font-serif">{currentQuote.book}</strong> ({currentQuote.author})
+              </span>
+              <p className="text-slate-200 italic font-serif text-sm sm:text-base quote-text leading-relaxed">
+                "{currentQuote.quote}"
+              </p>
+            </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center justify-center gap-3">
             <button
               onClick={startNewGame}
-              className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold transition shadow-lg cursor-pointer"
+              className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold transition shadow-lg shadow-emerald-600/20 cursor-pointer"
             >
               <Sparkles className="w-4 h-4 fill-white" />
               <span>Sıradaki Yeni Cümle (Enter ↵)</span>
             </button>
+
+            <button
+              onClick={() => startRound(currentQuote)}
+              className="flex items-center gap-2 px-5 py-3 rounded-2xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium text-sm transition cursor-pointer"
+            >
+              <RotateCcw className="w-4 h-4" />
+              <span>Tekrar Dene</span>
+            </button>
+
             <button
               onClick={() => setPhase('selection')}
-              className="px-5 py-3 rounded-2xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm cursor-pointer"
+              className="px-5 py-3 rounded-2xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-400 text-sm transition cursor-pointer"
             >
-              Tür Değiştir
+              Tür / Seviye Değiştir
             </button>
           </div>
         </div>

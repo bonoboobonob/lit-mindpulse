@@ -56,19 +56,50 @@ export default function ClozeRecallGame({ onGameOver, onBack, highScore = 0 }) {
   const setupClozeQuote = (quote) => {
     const rawWords = quote.quote.trim().split(/\s+/);
     
-    // Pick candidate words (core length >= 4 and not in stopwords)
+    // Target blank counts per difficulty (Standardized & Balanced)
+    const TARGET_BLANKS = {
+      easy: 1,
+      medium: 2,
+      hard: 3,
+      legendary: 4,
+    };
+    const desiredBlanks = TARGET_BLANKS[quote.difficulty] || 2;
+
+    // Pick candidate words (core length >= 3 and not in stopwords)
     const eligibleIndices = [];
     rawWords.forEach((w, idx) => {
       const parsed = parseToken(w);
       const clean = cleanWord(parsed.core);
-      if (clean.length >= 4 && !STOPWORDS.includes(clean)) {
+      if (clean.length >= 3 && !STOPWORDS.includes(clean)) {
         eligibleIndices.push(idx);
       }
     });
 
-    const blanksCount = Math.min(Math.max(2, Math.floor(rawWords.length / 4)), 4);
-    const shuffled = [...eligibleIndices].sort(() => 0.5 - Math.random());
-    const selectedBlankIndices = new Set(shuffled.slice(0, blanksCount));
+    // If not enough eligible words, allow any word of length >= 2
+    if (eligibleIndices.length < desiredBlanks) {
+      rawWords.forEach((w, idx) => {
+        if (!eligibleIndices.includes(idx)) {
+          const parsed = parseToken(w);
+          const clean = cleanWord(parsed.core);
+          if (clean.length >= 2) eligibleIndices.push(idx);
+        }
+      });
+    }
+
+    // Select evenly spaced indices from eligible candidates for balanced distribution
+    const actualBlankCount = Math.min(desiredBlanks, eligibleIndices.length);
+    const selectedBlankIndices = new Set();
+    
+    if (eligibleIndices.length <= actualBlankCount) {
+      eligibleIndices.forEach(idx => selectedBlankIndices.add(idx));
+    } else {
+      // Pick evenly spaced indices
+      const step = eligibleIndices.length / actualBlankCount;
+      for (let i = 0; i < actualBlankCount; i++) {
+        const candidateIndex = Math.floor(i * step + Math.min(step - 1, Math.floor(Math.random() * step)));
+        selectedBlankIndices.add(eligibleIndices[Math.min(candidateIndex, eligibleIndices.length - 1)]);
+      }
+    }
 
     let bIndex = 0;
     const tokens = rawWords.map((w, idx) => {
@@ -282,20 +313,33 @@ export default function ClozeRecallGame({ onGameOver, onBack, highScore = 0 }) {
               2. Zorluk Seviyesi
             </label>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {DIFFICULTY_LEVELS.map(d => (
-                <button
-                  key={d.id}
-                  onClick={() => setSelectedDifficulty(d.id)}
-                  className={`p-3.5 rounded-2xl border text-left transition cursor-pointer ${
-                    selectedDifficulty === d.id
-                      ? 'bg-purple-950/40 border-purple-500 text-white'
-                      : 'bg-slate-900/80 border-slate-800 text-slate-400 hover:text-slate-200'
-                  }`}
-                >
-                  <span className="text-sm font-serif font-bold text-slate-100 block">{d.name}</span>
-                  <span className="text-xs text-slate-400">{d.desc}</span>
-                </button>
-              ))}
+              {DIFFICULTY_LEVELS.map(d => {
+                const blankLabels = {
+                  easy: '10s Ezber • 1 Boşluk',
+                  medium: '15s Ezber • 2 Boşluk',
+                  hard: '20s Ezber • 3 Boşluk',
+                  legendary: '30s Ezber • 4 Boşluk',
+                };
+                return (
+                  <button
+                    key={d.id}
+                    onClick={() => setSelectedDifficulty(d.id)}
+                    className={`p-3.5 rounded-2xl border text-left transition cursor-pointer ${
+                      selectedDifficulty === d.id
+                        ? 'bg-purple-950/40 border-purple-500 text-white'
+                        : 'bg-slate-900/80 border-slate-800 text-slate-400 hover:text-slate-200'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-sm font-serif font-bold text-slate-100">{d.name}</span>
+                      <span className="text-[11px] font-semibold text-purple-300 bg-purple-950/80 border border-purple-500/30 px-2 py-0.5 rounded-full">
+                        {blankLabels[d.id]}
+                      </span>
+                    </div>
+                    <span className="text-xs text-slate-400">{d.desc}</span>
+                  </button>
+                );
+              })}
             </div>
           </div>
 
