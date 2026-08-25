@@ -263,7 +263,7 @@ export default function FullTypingGame({
       <div className="w-full flex items-center justify-between mb-4 gap-2">
         <button
           onClick={onBack}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white hover:bg-[#FAF6EE] border border-[#D6CEBE] text-[#44403C] hover:text-[#1C1917] text-xs sm:text-sm font-semibold transition cursor-pointer shrink-0 shadow-xs"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white dark:bg-[#1E1B18] hover:bg-[#FAF6EE] dark:hover:bg-[#282420] border border-[#D6CEBE] dark:border-[#38322B] text-[#44403C] dark:text-[#EDE8DF] hover:text-[#1C1917] dark:hover:text-[#F5EFE4] text-xs sm:text-sm font-semibold transition cursor-pointer shrink-0 shadow-xs"
         >
           <ArrowLeft className="w-4 h-4" />
           <span><span className="hidden sm:inline">Kütüphaneye </span>Dön</span>
@@ -271,21 +271,21 @@ export default function FullTypingGame({
 
         <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
           {phase === 'study' && (
-            <div className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1 bg-[#C85A32]/10 border border-[#C85A32]/40 rounded-xl text-[#B44A22] font-bold text-xs sm:text-sm whitespace-nowrap shrink-0">
-              <Timer className="w-3.5 h-3.5 sm:w-4 sm:h-4 animate-spin text-[#B44A22] shrink-0" />
+            <div className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1 bg-[#C85A32]/10 dark:bg-[#E07048]/20 border border-[#C85A32]/40 dark:border-[#E07048]/40 rounded-xl text-[#B44A22] dark:text-[#E07048] font-bold text-xs sm:text-sm whitespace-nowrap shrink-0">
+              <Timer className="w-3.5 h-3.5 sm:w-4 sm:h-4 animate-spin text-[#B44A22] dark:text-[#E07048] shrink-0" />
               <span>{timeLeft}s Ezber</span>
             </div>
           )}
 
           {phase === 'typing' && (
-            <div className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1 bg-[#8C5E3C]/10 border border-[#8C5E3C]/40 rounded-xl text-[#8C5E3C] font-bold text-xs sm:text-sm whitespace-nowrap shrink-0">
-              <Keyboard className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#8C5E3C] shrink-0" />
+            <div className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1 bg-[#8C5E3C]/10 dark:bg-[#D4AF37]/20 border border-[#8C5E3C]/40 dark:border-[#D4AF37]/40 rounded-xl text-[#8C5E3C] dark:text-[#D4AF37] font-bold text-xs sm:text-sm whitespace-nowrap shrink-0">
+              <Keyboard className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#8C5E3C] dark:text-[#D4AF37] shrink-0" />
               <span>Yazma Modu</span>
             </div>
           )}
 
-          <div className="flex items-center gap-1 px-2.5 sm:px-3.5 py-1 bg-[#FAF6EE] border border-[#D6CEBE] rounded-xl text-[#1C1917] font-bold text-xs sm:text-sm whitespace-nowrap shrink-0 shadow-xs">
-            <Trophy className="w-3.5 h-3.5 text-[#B44A22] shrink-0" />
+          <div className="flex items-center gap-1 px-2.5 sm:px-3.5 py-1 bg-[#FAF6EE] dark:bg-[#24201C] border border-[#D6CEBE] dark:border-[#38322B] rounded-xl text-[#1C1917] dark:text-[#F5EFE4] font-bold text-xs sm:text-sm whitespace-nowrap shrink-0 shadow-xs">
+            <Trophy className="w-3.5 h-3.5 text-[#B44A22] dark:text-[#E07048] shrink-0" />
             <span>Skor: {score}</span>
           </div>
         </div>
@@ -293,11 +293,11 @@ export default function FullTypingGame({
 
       {/* Header Badge & Title */}
       <div className="text-center mb-6">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#C85A32]/10 border border-[#C85A32]/30 text-[#B44A22] text-xs font-bold uppercase tracking-wider mb-2">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#C85A32]/10 dark:bg-[#E07048]/15 border border-[#C85A32]/30 dark:border-[#E07048]/40 text-[#B44A22] dark:text-[#E07048] text-xs font-bold uppercase tracking-wider mb-2">
           <Feather className="w-3.5 h-3.5 stroke-[2.4]" />
           <span>Edebi Hafıza & Tam Yazma</span>
         </div>
-        <h2 className="text-xl sm:text-2xl font-serif font-bold text-[#1C1917]">
+        <h2 className="text-xl sm:text-2xl font-serif font-bold text-[#1C1917] dark:text-[#F5EFE4]">
           {phase === 'selection' && 'Bir Edebi Tür & Seviye Seçin'}
           {phase === 'study' && 'Cümleyi Ruhunuza Kazıyarak Ezberleyin'}
           {phase === 'typing' && 'Hatırladığınız Cümleyi Yazın ve Enter\'a Basın'}
@@ -309,29 +309,29 @@ export default function FullTypingGame({
       {phase === 'selection' && (
         <div className="w-full max-w-2xl space-y-6 animate-in fade-in duration-200">
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-[#B44A22] mb-2.5">
+            <label className="block text-xs font-bold uppercase tracking-wider text-[#B44A22] dark:text-[#E07048] mb-2.5">
               1. Edebi Kategori Seçin
             </label>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2.5 max-h-56 sm:max-h-72 overflow-y-auto p-2 border border-[#D6CEBE] rounded-2xl bg-white shadow-xs">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2.5 max-h-56 sm:max-h-72 overflow-y-auto p-2 border border-[#D6CEBE] dark:border-[#38322B] rounded-2xl bg-white dark:bg-[#1C1917] shadow-xs">
               {BOOK_GENRES.map((genre) => (
                 <button
                   key={genre.id}
                   onClick={() => setSelectedGenre(genre.id)}
                   className={`p-3 rounded-xl border text-left transition flex flex-col justify-between cursor-pointer ${
                     selectedGenre === genre.id
-                      ? 'bg-[#C85A32]/10 border-[#C85A32] text-[#B44A22] shadow-xs'
-                      : 'bg-[#FAF6EE] border-[#D6CEBE] text-[#44403C] hover:text-[#1C1917] hover:border-[#C85A32]/60'
+                      ? 'bg-[#C85A32]/10 dark:bg-[#E07048]/20 border-[#C85A32] dark:border-[#E07048] text-[#B44A22] dark:text-[#E07048] shadow-xs'
+                      : 'bg-[#FAF6EE] dark:bg-[#24201C] border-[#D6CEBE] dark:border-[#38322B] text-[#44403C] dark:text-[#EDE8DF] hover:text-[#1C1917] dark:hover:text-[#F5EFE4] hover:border-[#C85A32]/60'
                   }`}
                 >
                   <span className="text-xs font-serif font-bold truncate">{genre.name}</span>
-                  <span className="text-[10px] text-[#78716C] mt-1 line-clamp-1 font-medium">{genre.desc}</span>
+                  <span className="text-[10px] text-[#78716C] dark:text-[#A8A196] mt-1 line-clamp-1 font-medium">{genre.desc}</span>
                 </button>
               ))}
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-[#B44A22] mb-2.5">
+            <label className="block text-xs font-bold uppercase tracking-wider text-[#B44A22] dark:text-[#E07048] mb-2.5">
               2. Zorluk Seviyesi
             </label>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -341,14 +341,14 @@ export default function FullTypingGame({
                   onClick={() => setSelectedDifficulty(diff.id)}
                   className={`p-3.5 rounded-2xl border text-left transition cursor-pointer ${
                     selectedDifficulty === diff.id
-                      ? 'bg-[#C85A32]/10 border-[#C85A32] text-[#1C1917] shadow-xs'
-                      : 'bg-white border-[#D6CEBE] text-[#44403C] hover:text-[#1C1917] hover:border-[#C85A32]/60'
+                      ? 'bg-[#C85A32]/10 dark:bg-[#E07048]/20 border-[#C85A32] dark:border-[#E07048] text-[#1C1917] dark:text-[#F5EFE4] shadow-xs'
+                      : 'bg-white dark:bg-[#24201C] border-[#D6CEBE] dark:border-[#38322B] text-[#44403C] dark:text-[#EDE8DF] hover:text-[#1C1917] dark:hover:text-[#F5EFE4] hover:border-[#C85A32]/60'
                   }`}
                 >
                   <div className="flex items-center justify-between mb-1">
-                    <span className="text-sm font-serif font-bold text-[#1C1917]">{diff.name}</span>
+                    <span className="text-sm font-serif font-bold text-[#1C1917] dark:text-[#F5EFE4]">{diff.name}</span>
                   </div>
-                  <p className="text-xs text-[#57534E] font-medium">{diff.desc}</p>
+                  <p className="text-xs text-[#57534E] dark:text-[#A8A196] font-medium">{diff.desc}</p>
                 </button>
               ))}
             </div>
@@ -367,33 +367,33 @@ export default function FullTypingGame({
       {/* 2. STUDY PHASE */}
       {phase === 'study' && currentQuote && (
         <div className="w-full max-w-2xl flex flex-col items-center animate-in fade-in duration-200">
-          <div className="w-full bg-[#E5DFD3] h-2 rounded-full mb-6 overflow-hidden border border-[#D8CEBD]">
+          <div className="w-full bg-[#E5DFD3] dark:bg-[#282420] h-2 rounded-full mb-6 overflow-hidden border border-[#D8CEBD] dark:border-[#38322B]">
             <div
               className="bg-gradient-to-r from-[#C85A32] via-[#D4633B] to-[#9A3412] h-full transition-all duration-1000 ease-linear"
               style={{ width: `${(timeLeft / totalStudyTime) * 100}%` }}
             />
           </div>
 
-          <div className="w-full relative p-6 sm:p-8 rounded-3xl bg-white border border-[#D6CEBE] shadow-md mb-8">
-            <div className="flex items-center justify-between text-xs text-[#57534E] mb-4 pb-3 border-b border-[#D6CEBE]">
+          <div className="w-full relative p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#1C1917] border border-[#D6CEBE] dark:border-[#38322B] shadow-md mb-8">
+            <div className="flex items-center justify-between text-xs text-[#57534E] dark:text-[#A8A196] mb-4 pb-3 border-b border-[#D6CEBE] dark:border-[#38322B]">
               <div className="flex items-center gap-2">
-                <BookOpen className="w-4 h-4 text-[#B44A22]" />
-                <span className="font-bold text-[#B44A22] font-serif text-sm">{currentQuote.book}</span>
+                <BookOpen className="w-4 h-4 text-[#B44A22] dark:text-[#E07048]" />
+                <span className="font-bold text-[#B44A22] dark:text-[#E07048] font-serif text-sm">{currentQuote.book}</span>
                 <span>—</span>
-                <span className="text-[#1C1917] font-semibold">{currentQuote.author}</span>
+                <span className="text-[#1C1917] dark:text-[#F5EFE4] font-semibold">{currentQuote.author}</span>
               </div>
-              <span className="px-2.5 py-0.5 rounded-full bg-[#FAF6EE] text-[#B44A22] border border-[#D6CEBE] text-[11px] font-bold">
+              <span className="px-2.5 py-0.5 rounded-full bg-[#FAF6EE] dark:bg-[#282420] text-[#B44A22] dark:text-[#E07048] border border-[#D6CEBE] dark:border-[#38322B] text-[11px] font-bold">
                 {currentQuote.quote.trim().split(/\s+/).length} Kelime
               </span>
             </div>
 
-            <p className="text-lg sm:text-2xl font-serif font-medium text-[#1C1917] leading-relaxed text-center italic my-6 px-1 quote-text font-quote">
+            <p className="text-lg sm:text-2xl font-serif font-medium text-[#1C1917] dark:text-[#F5EFE4] leading-relaxed text-center italic my-6 px-1 quote-text font-quote">
               "{currentQuote.quote}"
             </p>
 
-            <div className="mt-4 pt-3 border-t border-[#D6CEBE] flex items-center justify-between text-xs text-[#B44A22] px-1 font-semibold">
+            <div className="mt-4 pt-3 border-t border-[#D6CEBE] dark:border-[#38322B] flex items-center justify-between text-xs text-[#B44A22] dark:text-[#E07048] px-1 font-semibold">
               <span>💡 Anahtar kavramları zihninizde sabitleyin.</span>
-              <span className="hidden sm:inline text-[#57534E] font-mono bg-[#FAF6EE] border border-[#D6CEBE] px-2 py-0.5 rounded">Enter ↵</span>
+              <span className="hidden sm:inline text-[#57534E] dark:text-[#A8A196] font-mono bg-[#FAF6EE] dark:bg-[#282420] border border-[#D6CEBE] dark:border-[#38322B] px-2 py-0.5 rounded">Enter ↵</span>
             </div>
           </div>
 
@@ -410,21 +410,21 @@ export default function FullTypingGame({
       {/* 3. TYPING PHASE */}
       {phase === 'typing' && currentQuote && (
         <div className="w-full max-w-2xl flex flex-col items-center animate-in fade-in duration-200">
-          <div className="w-full flex items-center justify-between p-3.5 rounded-2xl bg-white border border-[#D6CEBE] mb-4 text-xs shadow-xs">
+          <div className="w-full flex items-center justify-between p-3.5 rounded-2xl bg-white dark:bg-[#1C1917] border border-[#D6CEBE] dark:border-[#38322B] mb-4 text-xs shadow-xs">
             <div className="flex items-center gap-2 truncate">
-              <BookOpen className="w-4 h-4 text-[#B44A22] shrink-0" />
-              <strong className="text-[#B44A22] font-serif truncate">{currentQuote.book}</strong>
-              <span className="text-[#78716C]">•</span>
-              <span className="text-[#1C1917] font-semibold truncate">{currentQuote.author}</span>
+              <BookOpen className="w-4 h-4 text-[#B44A22] dark:text-[#E07048] shrink-0" />
+              <strong className="text-[#B44A22] dark:text-[#E07048] font-serif truncate">{currentQuote.book}</strong>
+              <span className="text-[#78716C] dark:text-[#A8A196]">•</span>
+              <span className="text-[#1C1917] dark:text-[#F5EFE4] font-semibold truncate">{currentQuote.author}</span>
             </div>
 
-            <span className="text-[#57534E] font-bold shrink-0">
+            <span className="text-[#57534E] dark:text-[#A8A196] font-bold shrink-0">
               {currentQuote.quote.trim().split(/\s+/).length} Kelime
             </span>
           </div>
 
           {isPeeking && (
-            <div className="w-full p-4 rounded-2xl bg-[#FAF6EE] border-2 border-[#C85A32] text-[#B44A22] text-center font-serif text-base italic mb-4 animate-in fade-in font-quote">
+            <div className="w-full p-4 rounded-2xl bg-[#FAF6EE] dark:bg-[#282420] border-2 border-[#C85A32] dark:border-[#E07048] text-[#B44A22] dark:text-[#E07048] text-center font-serif text-base italic mb-4 animate-in fade-in font-quote">
               "{currentQuote.quote}"
             </div>
           )}
@@ -437,11 +437,11 @@ export default function FullTypingGame({
               onChange={(e) => setTypedText(e.target.value)}
               onKeyDown={handleTextareaKeyDown}
               placeholder="Ezberlediğiniz edebi alıntıyı buraya tam olarak yazın... (Enter tuşu ile doğrula)"
-              className="w-full p-4 sm:p-5 rounded-2xl bg-white border-2 border-[#D6CEBE] focus:border-[#C85A32] text-[#1C1917] placeholder-[#78716C] text-base sm:text-lg font-serif leading-relaxed resize-none focus:outline-none shadow-sm transition-all"
+              className="w-full p-4 sm:p-5 rounded-2xl bg-white dark:bg-[#1C1917] border-2 border-[#D6CEBE] dark:border-[#38322B] focus:border-[#C85A32] dark:focus:border-[#E07048] text-[#1C1917] dark:text-[#F5EFE4] placeholder-[#78716C] dark:placeholder-[#A8A196] text-base sm:text-lg font-serif leading-relaxed resize-none focus:outline-none shadow-sm transition-all"
             />
 
-            <div className="absolute bottom-3 right-4 text-xs text-[#57534E] flex items-center gap-2 font-medium">
-              <span className="hidden sm:inline bg-[#FAF6EE] border border-[#D6CEBE] px-2 py-0.5 rounded text-[10px] text-[#44403C]">Enter = Kontrol Et</span>
+            <div className="absolute bottom-3 right-4 text-xs text-[#57534E] dark:text-[#A8A196] flex items-center gap-2 font-medium">
+              <span className="hidden sm:inline bg-[#FAF6EE] dark:bg-[#282420] border border-[#D6CEBE] dark:border-[#38322B] px-2 py-0.5 rounded text-[10px] text-[#44403C] dark:text-[#D6CEBE]">Enter = Kontrol Et</span>
               <span>{typedText.trim() ? typedText.trim().split(/\s+/).length : 0} / {currentQuote.quote.trim().split(/\s+/).length} kelime</span>
             </div>
           </div>
@@ -450,7 +450,7 @@ export default function FullTypingGame({
             <div className="flex items-center gap-2">
               <button
                 onClick={handleUseHint}
-                className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white hover:bg-[#FAF6EE] border border-[#D6CEBE] text-[#B44A22] text-xs font-bold transition cursor-pointer shadow-xs"
+                className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white dark:bg-[#1E1B18] hover:bg-[#FAF6EE] dark:hover:bg-[#282420] border border-[#D6CEBE] dark:border-[#38322B] text-[#B44A22] dark:text-[#E07048] text-xs font-bold transition cursor-pointer shadow-xs"
                 title="Sıradaki kelimeyi ekler (-30 Puan)"
               >
                 <Lightbulb className="w-4 h-4" />
@@ -460,17 +460,17 @@ export default function FullTypingGame({
               <button
                 onClick={handlePeek}
                 disabled={isPeeking}
-                className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white hover:bg-[#FAF6EE] border border-[#D6CEBE] text-[#44403C] text-xs font-bold transition cursor-pointer shadow-xs"
+                className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white dark:bg-[#1E1B18] hover:bg-[#FAF6EE] dark:hover:bg-[#282420] border border-[#D6CEBE] dark:border-[#38322B] text-[#44403C] dark:text-[#EDE8DF] text-xs font-bold transition cursor-pointer shadow-xs"
                 title="1 saniyeliğine gösterir (-50 Puan)"
               >
-                <Eye className="w-4 h-4 text-[#8C5E3C]" />
+                <Eye className="w-4 h-4 text-[#8C5E3C] dark:text-[#D4AF37]" />
                 <span>Göz Ucuyla Bak</span>
               </button>
             </div>
 
             <button
               onClick={() => setTypedText('')}
-              className="text-xs text-[#57534E] hover:text-[#1C1917] font-semibold transition cursor-pointer"
+              className="text-xs text-[#57534E] dark:text-[#A8A196] hover:text-[#1C1917] dark:hover:text-[#F5EFE4] font-semibold transition cursor-pointer"
             >
               Temizle
             </button>
@@ -576,7 +576,7 @@ export default function FullTypingGame({
                 if (!matchedBook) return null;
 
                 return (
-                  <div className="pt-3 border-t border-[#D6CEBE]/60">
+                  <div className="pt-3 border-t border-[#D6CEBE]/60 dark:border-[#38322B]/60">
                     <button
                       onClick={() => {
                         sounds.playClick();
@@ -589,29 +589,29 @@ export default function FullTypingGame({
                           });
                         }
                       }}
-                      className="w-full flex items-center justify-between p-3 sm:p-3.5 rounded-2xl bg-[#FAF6EE] hover:bg-[#F2ECE0] border border-[#D6CEBE] hover:border-[#C85A32] transition group cursor-pointer text-left shadow-2xs"
+                      className="w-full flex items-center justify-between p-3 sm:p-3.5 rounded-2xl bg-[#FAF6EE] dark:bg-[#24201C] hover:bg-[#F2ECE0] dark:hover:bg-[#2E2822] border border-[#D6CEBE] dark:border-[#38322B] hover:border-[#C85A32] dark:hover:border-[#E07048] transition group cursor-pointer text-left shadow-2xs"
                     >
                       <div className="flex items-center gap-3 min-w-0">
-                        <div className="w-9 h-11 rounded-lg bg-gradient-to-br from-[#1E293B] to-[#0F172A] border border-[#D6CEBE] flex items-center justify-center text-white shrink-0 shadow-xs">
+                        <div className="w-9 h-11 rounded-lg bg-gradient-to-br from-[#1E293B] to-[#0F172A] border border-[#D6CEBE] dark:border-[#38322B] flex items-center justify-center text-white shrink-0 shadow-xs">
                           <BookOpen className="w-4 h-4 text-[#FAF6EE]" />
                         </div>
                         <div className="min-w-0">
                           <div className="flex items-center gap-2">
-                            <span className="text-[10px] font-bold uppercase tracking-wider text-[#C85A32]">Eser İncelemesi & Pasajlar</span>
-                            <span className="text-[10px] px-1.5 py-0.2 rounded bg-white border border-[#D6CEBE] text-[#57534E] font-medium">
+                            <span className="text-[10px] font-bold uppercase tracking-wider text-[#C85A32] dark:text-[#E07048]">Eser İncelemesi & Pasajlar</span>
+                            <span className="text-[10px] px-1.5 py-0.2 rounded bg-white dark:bg-[#1C1917] border border-[#D6CEBE] dark:border-[#38322B] text-[#57534E] dark:text-[#A8A196] font-medium">
                               {matchedBook.passages?.length || 0} Pasaj
                             </span>
                           </div>
-                          <h4 className="font-serif font-bold text-sm text-[#1C1917] group-hover:text-[#B44A22] transition truncate">
+                          <h4 className="font-serif font-bold text-sm text-[#1C1917] dark:text-[#F5EFE4] group-hover:text-[#B44A22] dark:group-hover:text-[#E07048] transition truncate">
                             {matchedBook.title}
                           </h4>
-                          <p className="text-[11px] text-[#57534E] truncate">
+                          <p className="text-[11px] text-[#57534E] dark:text-[#A8A196] truncate">
                             {matchedBook.author} • {matchedBook.year || ''}
                           </p>
                         </div>
                       </div>
 
-                      <div className="flex items-center gap-1 text-xs font-bold text-[#B44A22] group-hover:translate-x-0.5 transition shrink-0 pl-2">
+                      <div className="flex items-center gap-1 text-xs font-bold text-[#B44A22] dark:text-[#E07048] group-hover:translate-x-0.5 transition shrink-0 pl-2">
                         <span className="hidden sm:inline">Esere Git</span>
                         <ArrowRight className="w-4 h-4" />
                       </div>
@@ -633,7 +633,7 @@ export default function FullTypingGame({
 
             <button
               onClick={() => startStudyPhase(currentQuote)}
-              className="flex items-center gap-2 px-5 py-3 rounded-2xl bg-white hover:bg-[#FAF6EE] border border-[#D6CEBE] text-[#1C1917] font-semibold text-sm transition cursor-pointer shadow-xs"
+              className="flex items-center gap-2 px-5 py-3 rounded-2xl bg-white dark:bg-[#1E1B18] hover:bg-[#FAF6EE] dark:hover:bg-[#282420] border border-[#D6CEBE] dark:border-[#38322B] text-[#1C1917] dark:text-[#F5EFE4] font-semibold text-sm transition cursor-pointer shadow-xs"
             >
               <RotateCcw className="w-4 h-4" />
               <span>Tekrar Dene</span>
@@ -641,7 +641,7 @@ export default function FullTypingGame({
 
             <button
               onClick={() => setPhase('selection')}
-              className="px-5 py-3 rounded-2xl bg-white hover:bg-[#FAF6EE] border border-[#D6CEBE] text-[#57534E] font-semibold text-sm transition cursor-pointer shadow-xs"
+              className="px-5 py-3 rounded-2xl bg-white dark:bg-[#1E1B18] hover:bg-[#FAF6EE] dark:hover:bg-[#282420] border border-[#D6CEBE] dark:border-[#38322B] text-[#57534E] dark:text-[#A8A196] hover:text-[#1C1917] dark:hover:text-[#F5EFE4] font-semibold text-sm transition cursor-pointer shadow-xs"
             >
               Tür / Zorluk Değiştir
             </button>

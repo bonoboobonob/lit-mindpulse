@@ -147,7 +147,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F7F4EE] text-[#1C1917] flex flex-col justify-between selection:bg-[#C85A32] selection:text-white pb-16 sm:pb-0 font-sans overflow-x-hidden">
+    <div className="min-h-screen bg-[#F7F4EE] dark:bg-[#121110] text-[#1C1917] dark:text-[#F5EFE4] flex flex-col justify-between selection:bg-[#C85A32] selection:text-white pb-16 sm:pb-0 font-sans overflow-x-hidden transition-colors duration-200">
       <div>
         {/* Literary Header */}
         <Header

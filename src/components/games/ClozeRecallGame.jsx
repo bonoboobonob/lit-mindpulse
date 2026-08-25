@@ -276,7 +276,7 @@ export default function ClozeRecallGame({
       <div className="w-full flex items-center justify-between mb-4 gap-2">
         <button
           onClick={onBack}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white hover:bg-[#FAF6EE] border border-[#D6CEBE] text-[#44403C] hover:text-[#1C1917] text-xs sm:text-sm font-semibold transition cursor-pointer shrink-0 shadow-xs"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white dark:bg-[#1E1B18] hover:bg-[#FAF6EE] dark:hover:bg-[#282420] border border-[#D6CEBE] dark:border-[#38322B] text-[#44403C] dark:text-[#EDE8DF] hover:text-[#1C1917] dark:hover:text-[#F5EFE4] text-xs sm:text-sm font-semibold transition cursor-pointer shrink-0 shadow-xs"
         >
           <ArrowLeft className="w-4 h-4" />
           <span><span className="hidden sm:inline">Kütüphaneye </span>Dön</span>
@@ -284,14 +284,14 @@ export default function ClozeRecallGame({
 
         <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
           {phase === 'study' && (
-            <div className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1 bg-[#8C5E3C]/10 border border-[#8C5E3C]/40 rounded-xl text-[#8C5E3C] font-bold text-xs sm:text-sm whitespace-nowrap shrink-0">
-              <Timer className="w-3.5 h-3.5 sm:w-4 sm:h-4 animate-spin text-[#8C5E3C] shrink-0" />
+            <div className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1 bg-[#8C5E3C]/10 dark:bg-[#D4AF37]/20 border border-[#8C5E3C]/40 dark:border-[#D4AF37]/40 rounded-xl text-[#8C5E3C] dark:text-[#D4AF37] font-bold text-xs sm:text-sm whitespace-nowrap shrink-0">
+              <Timer className="w-3.5 h-3.5 sm:w-4 sm:h-4 animate-spin text-[#8C5E3C] dark:text-[#D4AF37] shrink-0" />
               <span>{timeLeft}s Ezber</span>
             </div>
           )}
 
-          <div className="flex items-center gap-1 px-2.5 sm:px-3.5 py-1 bg-[#FAF6EE] border border-[#D6CEBE] rounded-xl text-[#1C1917] font-bold text-xs sm:text-sm whitespace-nowrap shrink-0 shadow-xs">
-            <Trophy className="w-3.5 h-3.5 text-[#B44A22] shrink-0" />
+          <div className="flex items-center gap-1 px-2.5 sm:px-3.5 py-1 bg-[#FAF6EE] dark:bg-[#24201C] border border-[#D6CEBE] dark:border-[#38322B] rounded-xl text-[#1C1917] dark:text-[#F5EFE4] font-bold text-xs sm:text-sm whitespace-nowrap shrink-0 shadow-xs">
+            <Trophy className="w-3.5 h-3.5 text-[#B44A22] dark:text-[#E07048] shrink-0" />
             <span>Skor: {score}</span>
           </div>
         </div>
@@ -299,11 +299,11 @@ export default function ClozeRecallGame({
 
       {/* Mode Badge & Title */}
       <div className="text-center mb-6">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#8C5E3C]/10 border border-[#8C5E3C]/30 text-[#8C5E3C] text-xs font-bold uppercase tracking-wider mb-2">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#8C5E3C]/10 dark:bg-[#D4AF37]/20 border border-[#8C5E3C]/30 dark:border-[#D4AF37]/40 text-[#8C5E3C] dark:text-[#D4AF37] text-xs font-bold uppercase tracking-wider mb-2">
           <Puzzle className="w-3.5 h-3.5 stroke-[2.2]" />
           <span>Edebi Boşluk Doldurma (Cloze Test)</span>
         </div>
-        <h2 className="text-xl sm:text-2xl font-serif font-bold text-[#1C1917]">
+        <h2 className="text-xl sm:text-2xl font-serif font-bold text-[#1C1917] dark:text-[#F5EFE4]">
           {phase === 'selection' && 'Bir Edebi Tür & Seviye Belirleyin'}
           {phase === 'study' && 'Öne Çıkan Kelimeleri Hafızanıza Kazıyın'}
           {phase === 'testing' && 'Gizlenen Kelimeleri Yazın (Enter ile Geç)'}
@@ -315,18 +315,18 @@ export default function ClozeRecallGame({
       {phase === 'selection' && (
         <div className="w-full max-w-2xl space-y-6 animate-in fade-in duration-200">
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-[#B44A22] mb-2.5">
+            <label className="block text-xs font-bold uppercase tracking-wider text-[#B44A22] dark:text-[#E07048] mb-2.5">
               1. Edebi Kategori
             </label>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2.5 max-h-56 sm:max-h-72 overflow-y-auto p-2 border border-[#D6CEBE] rounded-2xl bg-white shadow-xs">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2.5 max-h-56 sm:max-h-72 overflow-y-auto p-2 border border-[#D6CEBE] dark:border-[#38322B] rounded-2xl bg-white dark:bg-[#1C1917] shadow-xs">
               {BOOK_GENRES.map(g => (
                 <button
                   key={g.id}
                   onClick={() => setSelectedGenre(g.id)}
                   className={`p-3 rounded-xl border text-left transition cursor-pointer ${
                     selectedGenre === g.id
-                      ? 'bg-[#8C5E3C]/15 border-[#8C5E3C] text-[#8C5E3C] font-bold shadow-xs'
-                      : 'bg-[#FAF6EE] border-[#D6CEBE] text-[#44403C] hover:text-[#1C1917]'
+                      ? 'bg-[#8C5E3C]/15 dark:bg-[#D4AF37]/20 border-[#8C5E3C] dark:border-[#D4AF37] text-[#8C5E3C] dark:text-[#D4AF37] font-bold shadow-xs'
+                      : 'bg-[#FAF6EE] dark:bg-[#24201C] border-[#D6CEBE] dark:border-[#38322B] text-[#44403C] dark:text-[#EDE8DF] hover:text-[#1C1917] dark:hover:text-[#F5EFE4]'
                   }`}
                 >
                   <span className="text-xs font-serif font-bold block">{g.name}</span>
@@ -336,7 +336,7 @@ export default function ClozeRecallGame({
           </div>
 
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-[#B44A22] mb-2.5">
+            <label className="block text-xs font-bold uppercase tracking-wider text-[#B44A22] dark:text-[#E07048] mb-2.5">
               2. Zorluk Seviyesi
             </label>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -353,17 +353,17 @@ export default function ClozeRecallGame({
                     onClick={() => setSelectedDifficulty(d.id)}
                     className={`p-3.5 rounded-2xl border text-left transition cursor-pointer ${
                       selectedDifficulty === d.id
-                        ? 'bg-[#8C5E3C]/10 border-[#8C5E3C] text-[#1C1917]'
-                        : 'bg-white border-[#D6CEBE] text-[#44403C] hover:text-[#1C1917]'
+                        ? 'bg-[#8C5E3C]/10 dark:bg-[#D4AF37]/20 border-[#8C5E3C] dark:border-[#D4AF37] text-[#1C1917] dark:text-[#F5EFE4]'
+                        : 'bg-white dark:bg-[#24201C] border-[#D6CEBE] dark:border-[#38322B] text-[#44403C] dark:text-[#EDE8DF] hover:text-[#1C1917] dark:hover:text-[#F5EFE4]'
                     }`}
                   >
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-sm font-serif font-bold text-[#1C1917]">{d.name}</span>
-                      <span className="text-[11px] font-bold text-[#8C5E3C] bg-[#FAF6EE] border border-[#D6CEBE] px-2 py-0.5 rounded-full">
+                      <span className="text-sm font-serif font-bold text-[#1C1917] dark:text-[#F5EFE4]">{d.name}</span>
+                      <span className="text-[11px] font-bold text-[#8C5E3C] dark:text-[#D4AF37] bg-[#FAF6EE] dark:bg-[#282420] border border-[#D6CEBE] dark:border-[#38322B] px-2 py-0.5 rounded-full">
                         {blankLabels[d.id]}
                       </span>
                     </div>
-                    <span className="text-xs text-[#57534E] font-medium">{d.desc}</span>
+                    <span className="text-xs text-[#57534E] dark:text-[#A8A196] font-medium">{d.desc}</span>
                   </button>
                 );
               })}
@@ -383,30 +383,30 @@ export default function ClozeRecallGame({
       {/* 2. STUDY PHASE */}
       {phase === 'study' && currentQuote && (
         <div className="w-full max-w-2xl flex flex-col items-center animate-in fade-in duration-200">
-          <div className="w-full bg-[#E5DFD3] h-2 rounded-full mb-6 overflow-hidden border border-[#D8CEBD]">
+          <div className="w-full bg-[#E5DFD3] dark:bg-[#282420] h-2 rounded-full mb-6 overflow-hidden border border-[#D8CEBD] dark:border-[#38322B]">
             <div
               className="bg-gradient-to-r from-[#8C5E3C] to-[#C85A32] h-full transition-all duration-1000 ease-linear"
               style={{ width: `${(timeLeft / totalStudyTime) * 100}%` }}
             />
           </div>
 
-          <div className="w-full p-6 sm:p-8 rounded-3xl bg-white border border-[#D6CEBE] shadow-md mb-8">
-            <div className="flex items-center justify-between text-xs text-[#57534E] mb-4 pb-3 border-b border-[#D6CEBE]">
+          <div className="w-full p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#1C1917] border border-[#D6CEBE] dark:border-[#38322B] shadow-md mb-8">
+            <div className="flex items-center justify-between text-xs text-[#57534E] dark:text-[#A8A196] mb-4 pb-3 border-b border-[#D6CEBE] dark:border-[#38322B]">
               <div className="flex items-center gap-2">
-                <BookOpen className="w-4 h-4 text-[#8C5E3C]" />
-                <span className="font-bold text-[#8C5E3C] font-serif text-sm">{currentQuote.book}</span>
+                <BookOpen className="w-4 h-4 text-[#8C5E3C] dark:text-[#D4AF37]" />
+                <span className="font-bold text-[#8C5E3C] dark:text-[#D4AF37] font-serif text-sm">{currentQuote.book}</span>
                 <span>—</span>
-                <span className="text-[#1C1917] font-semibold">{currentQuote.author}</span>
+                <span className="text-[#1C1917] dark:text-[#F5EFE4] font-semibold">{currentQuote.author}</span>
               </div>
             </div>
 
-            <p className="text-lg sm:text-2xl font-serif font-medium text-[#1C1917] leading-relaxed text-center italic my-6 px-1 quote-text font-quote">
+            <p className="text-lg sm:text-2xl font-serif font-medium text-[#1C1917] dark:text-[#F5EFE4] leading-relaxed text-center italic my-6 px-1 quote-text font-quote">
               {clozeTokens.map((t, idx) => {
                 if (t.isBlank) {
                   return (
                     <span key={idx} className="inline-block mx-1 my-0.5">
                       {t.prefix}
-                      <span className="px-2.5 py-0.5 rounded-lg bg-[#C85A32]/15 text-[#9A3412] border border-[#C85A32]/40 not-italic font-bold font-serif shadow-xs">
+                      <span className="px-2.5 py-0.5 rounded-lg bg-[#C85A32]/15 dark:bg-[#E07048]/20 text-[#9A3412] dark:text-[#E07048] border border-[#C85A32]/40 dark:border-[#E07048]/40 not-italic font-bold font-serif shadow-xs">
                         {t.coreWord}
                       </span>
                       {t.suffix}
@@ -417,9 +417,9 @@ export default function ClozeRecallGame({
               })}
             </p>
 
-            <div className="mt-4 pt-3 border-t border-[#D6CEBE] flex items-center justify-between text-xs text-[#8C5E3C] px-1 font-semibold">
+            <div className="mt-4 pt-3 border-t border-[#D6CEBE] dark:border-[#38322B] flex items-center justify-between text-xs text-[#8C5E3C] dark:text-[#D4AF37] px-1 font-semibold">
               <span>💡 Vurgulanan kelimeleri aklınızda tutun.</span>
-              <span className="hidden sm:inline text-[#57534E] font-mono bg-[#FAF6EE] border border-[#D6CEBE] px-2 py-0.5 rounded">Enter ↵</span>
+              <span className="hidden sm:inline text-[#57534E] dark:text-[#A8A196] font-mono bg-[#FAF6EE] dark:bg-[#282420] border border-[#D6CEBE] dark:border-[#38322B] px-2 py-0.5 rounded">Enter ↵</span>
             </div>
           </div>
 
@@ -436,13 +436,13 @@ export default function ClozeRecallGame({
       {/* 3. TESTING PHASE */}
       {phase === 'testing' && currentQuote && (
         <div className="w-full max-w-2xl flex flex-col items-center animate-in fade-in duration-200">
-          <div className="w-full p-6 sm:p-8 rounded-3xl bg-white border border-[#D6CEBE] shadow-md mb-6">
-            <div className="text-xs text-[#57534E] mb-4 pb-3 border-b border-[#D6CEBE] flex items-center justify-between font-medium">
-              <span className="font-serif text-[#8C5E3C] font-bold">{currentQuote.book} ({currentQuote.author})</span>
-              <span className="text-[#57534E] font-bold">{clozeTokens.filter(t => t.isBlank).length} Boşluk</span>
+          <div className="w-full p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#1C1917] border border-[#D6CEBE] dark:border-[#38322B] shadow-md mb-6">
+            <div className="text-xs text-[#57534E] dark:text-[#A8A196] mb-4 pb-3 border-b border-[#D6CEBE] dark:border-[#38322B] flex items-center justify-between font-medium">
+              <span className="font-serif text-[#8C5E3C] dark:text-[#D4AF37] font-bold">{currentQuote.book} ({currentQuote.author})</span>
+              <span className="text-[#57534E] dark:text-[#A8A196] font-bold">{clozeTokens.filter(t => t.isBlank).length} Boşluk</span>
             </div>
 
-            <div className="text-base sm:text-xl font-serif font-medium text-[#1C1917] leading-loose text-center my-4 flex flex-wrap items-center justify-center gap-x-1.5 gap-y-2.5 quote-text">
+            <div className="text-base sm:text-xl font-serif font-medium text-[#1C1917] dark:text-[#F5EFE4] leading-loose text-center my-4 flex flex-wrap items-center justify-center gap-x-1.5 gap-y-2.5 quote-text">
               {clozeTokens.map((t, idx) => {
                 if (!t.isBlank) {
                   return <span key={idx} className="mx-0.5">{t.fullWord}</span>;
@@ -458,7 +458,7 @@ export default function ClozeRecallGame({
                       onChange={(e) => handleInputChange(bIdx, e.target.value)}
                       onKeyDown={(e) => handleKeyDown(e, bIdx)}
                       placeholder={`(${bIdx + 1})`}
-                      className="w-24 sm:w-32 px-2 py-1 text-center font-serif text-sm sm:text-base bg-[#FAF6EE] border-2 border-[#8C5E3C] rounded-xl text-[#9A3412] placeholder-[#78716C] focus:outline-none focus:border-[#C85A32] shadow-inner font-bold"
+                      className="w-24 sm:w-32 px-2 py-1 text-center font-serif text-sm sm:text-base bg-[#FAF6EE] dark:bg-[#24201C] border-2 border-[#8C5E3C] dark:border-[#D4AF37] rounded-xl text-[#9A3412] dark:text-[#F5EFE4] placeholder-[#78716C] dark:placeholder-[#A8A196] focus:outline-none focus:border-[#C85A32] dark:focus:border-[#E07048] shadow-inner font-bold"
                     />
                     {t.suffix}
                   </span>
@@ -547,7 +547,7 @@ export default function ClozeRecallGame({
                 if (!matchedBook) return null;
 
                 return (
-                  <div className="pt-3 border-t border-[#D6CEBE]/60">
+                  <div className="pt-3 border-t border-[#D6CEBE]/60 dark:border-[#38322B]/60">
                     <button
                       onClick={() => {
                         sounds.playClick();
@@ -560,29 +560,29 @@ export default function ClozeRecallGame({
                           });
                         }
                       }}
-                      className="w-full flex items-center justify-between p-3 sm:p-3.5 rounded-2xl bg-[#FAF6EE] hover:bg-[#F2ECE0] border border-[#D6CEBE] hover:border-[#C85A32] transition group cursor-pointer text-left shadow-2xs"
+                      className="w-full flex items-center justify-between p-3 sm:p-3.5 rounded-2xl bg-[#FAF6EE] dark:bg-[#24201C] hover:bg-[#F2ECE0] dark:hover:bg-[#2E2822] border border-[#D6CEBE] dark:border-[#38322B] hover:border-[#C85A32] dark:hover:border-[#E07048] transition group cursor-pointer text-left shadow-2xs"
                     >
                       <div className="flex items-center gap-3 min-w-0">
-                        <div className="w-9 h-11 rounded-lg bg-gradient-to-br from-[#1E293B] to-[#0F172A] border border-[#D6CEBE] flex items-center justify-center text-white shrink-0 shadow-xs">
+                        <div className="w-9 h-11 rounded-lg bg-gradient-to-br from-[#1E293B] to-[#0F172A] border border-[#D6CEBE] dark:border-[#38322B] flex items-center justify-center text-white shrink-0 shadow-xs">
                           <BookOpen className="w-4 h-4 text-[#FAF6EE]" />
                         </div>
                         <div className="min-w-0">
                           <div className="flex items-center gap-2">
-                            <span className="text-[10px] font-bold uppercase tracking-wider text-[#C85A32]">Eser İncelemesi & Pasajlar</span>
-                            <span className="text-[10px] px-1.5 py-0.2 rounded bg-white border border-[#D6CEBE] text-[#57534E] font-medium">
+                            <span className="text-[10px] font-bold uppercase tracking-wider text-[#C85A32] dark:text-[#E07048]">Eser İncelemesi & Pasajlar</span>
+                            <span className="text-[10px] px-1.5 py-0.2 rounded bg-white dark:bg-[#1C1917] border border-[#D6CEBE] dark:border-[#38322B] text-[#57534E] dark:text-[#A8A196] font-medium">
                               {matchedBook.passages?.length || 0} Pasaj
                             </span>
                           </div>
-                          <h4 className="font-serif font-bold text-sm text-[#1C1917] group-hover:text-[#B44A22] transition truncate">
+                          <h4 className="font-serif font-bold text-sm text-[#1C1917] dark:text-[#F5EFE4] group-hover:text-[#B44A22] dark:group-hover:text-[#E07048] transition truncate">
                             {matchedBook.title}
                           </h4>
-                          <p className="text-[11px] text-[#57534E] truncate">
+                          <p className="text-[11px] text-[#57534E] dark:text-[#A8A196] truncate">
                             {matchedBook.author} • {matchedBook.year || ''}
                           </p>
                         </div>
                       </div>
 
-                      <div className="flex items-center gap-1 text-xs font-bold text-[#B44A22] group-hover:translate-x-0.5 transition shrink-0 pl-2">
+                      <div className="flex items-center gap-1 text-xs font-bold text-[#B44A22] dark:text-[#E07048] group-hover:translate-x-0.5 transition shrink-0 pl-2">
                         <span className="hidden sm:inline">Esere Git</span>
                         <ArrowRight className="w-4 h-4" />
                       </div>
@@ -603,7 +603,7 @@ export default function ClozeRecallGame({
             </button>
             <button
               onClick={() => setPhase('selection')}
-              className="px-5 py-3 rounded-2xl bg-white hover:bg-[#FAF6EE] border border-[#D6CEBE] text-[#57534E] font-semibold text-sm cursor-pointer shadow-xs"
+              className="px-5 py-3 rounded-2xl bg-white dark:bg-[#1E1B18] hover:bg-[#FAF6EE] dark:hover:bg-[#282420] border border-[#D6CEBE] dark:border-[#38322B] text-[#57534E] dark:text-[#A8A196] hover:text-[#1C1917] dark:hover:text-[#F5EFE4] font-semibold text-sm cursor-pointer shadow-xs"
             >
               Tür Değiştir
             </button>
