@@ -1,6 +1,28 @@
-﻿// LocalStorage and Literary Statistics Manager
+// LocalStorage and Literary Statistics Manager
 const STORAGE_KEY = 'librismind_literary_stats_v2';
 const CUSTOM_QUOTES_KEY = 'librismind_custom_quotes_v2';
+const THEME_KEY = 'librismind_theme';
+
+export const getSavedTheme = () => {
+  try {
+    const saved = localStorage.getItem(THEME_KEY);
+    if (saved) return saved;
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      return 'dark';
+    }
+    return 'light';
+  } catch (e) {
+    return 'light';
+  }
+};
+
+export const saveTheme = (theme) => {
+  try {
+    localStorage.setItem(THEME_KEY, theme);
+  } catch (e) {
+    console.error('Failed to save theme:', e);
+  }
+};
 
 export const getSavedStats = () => {
   try {

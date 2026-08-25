@@ -10,7 +10,7 @@ import FullTypingGame from './components/games/FullTypingGame';
 import ClozeRecallGame from './components/games/ClozeRecallGame';
 import WordScrambleGame from './components/games/WordScrambleGame';
 import MyLibrary from './components/MyLibrary';
-import { getSavedStats, saveGameResult, getCustomQuotes, saveCustomQuotes } from './utils/storage';
+import { getSavedStats, saveGameResult, getCustomQuotes, saveCustomQuotes, getSavedTheme, saveTheme } from './utils/storage';
 import { quoteQueue } from './utils/quoteQueue';
 import { sounds } from './utils/sound';
 
@@ -24,6 +24,7 @@ export default function App() {
   const [activeQuote, setActiveQuote] = useState(null);
   const [pausedGameSession, setPausedGameSession] = useState(null);
   const [gameSessionId, setGameSessionId] = useState(1);
+  const [theme, setTheme] = useState(getSavedTheme());
   
   const [isStatsOpen, setIsStatsOpen] = useState(false);
   const [isTipsOpen, setIsTipsOpen] = useState(false);
@@ -33,6 +34,19 @@ export default function App() {
     setStats(getSavedStats());
     setCustomQuotes(getCustomQuotes());
   }, []);
+
+  useEffect(() => {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+    saveTheme(theme);
+  }, [theme]);
+
+  const handleToggleTheme = () => {
+    setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
+  };
 
   const handleGameOver = ({ gameId, score, accuracy, wordsCount }) => {
     const updated = saveGameResult({ gameId, score, accuracy, wordsCount });
@@ -154,6 +168,8 @@ export default function App() {
           streak={stats.streak}
           isMuted={isMuted}
           onToggleSound={handleToggleSound}
+          theme={theme}
+          onToggleTheme={handleToggleTheme}
         />
 
         {/* Dynamic Screen View */}

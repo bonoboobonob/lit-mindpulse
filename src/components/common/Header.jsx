@@ -1,5 +1,5 @@
 import React from 'react';
-import { Volume2, VolumeX, Flame, BarChart3, Home, Lightbulb, BookOpen, Feather } from 'lucide-react';
+import { Volume2, VolumeX, Flame, BarChart3, Home, Lightbulb, BookOpen, Feather, Moon, Sun } from 'lucide-react';
 import { sounds } from '../../utils/sound';
 
 export default function Header({ 
@@ -10,10 +10,12 @@ export default function Header({
   onOpenLibrary,
   streak = 1,
   isMuted,
-  onToggleSound 
+  onToggleSound,
+  theme = 'light',
+  onToggleTheme
 }) {
   return (
-    <header className="w-full max-w-5xl mx-auto px-3 sm:px-6 py-3.5 sm:py-4 flex items-center justify-between border-b border-[#D6CEBE] bg-[#FAF7F2]/90 backdrop-blur-sm sticky top-0 z-30 mb-4 sm:mb-6">
+    <header className="w-full max-w-5xl mx-auto px-3 sm:px-6 py-3.5 sm:py-4 flex items-center justify-between border-b border-[#D6CEBE] bg-[#FAF7F2]/90 backdrop-blur-sm sticky top-0 z-30 mb-4 sm:mb-6 transition-colors duration-200">
       {/* Brand / Logo */}
       <div 
         onClick={onNavigateHome}
@@ -38,6 +40,22 @@ export default function Header({
           <Flame className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-[#C85A32] shrink-0" />
           <span>{streak} <span className="hidden sm:inline">Günlük </span>Seri</span>
         </div>
+
+        {/* Dark Mode Toggle */}
+        <button
+          onClick={() => {
+            sounds.playClick();
+            if (onToggleTheme) onToggleTheme();
+          }}
+          title={theme === 'dark' ? "Aydınlık Temaya Geç" : "Koyu Temaya Geç (Gece Modu)"}
+          className="p-1.5 sm:p-2 rounded-xl bg-white hover:bg-[#FAF6EE] border border-[#D6CEBE] text-[#44403C] hover:text-[#B44A22] hover:border-[#C85A32] transition cursor-pointer"
+        >
+          {theme === 'dark' ? (
+            <Sun className="w-4 h-4 sm:w-5 sm:h-5 text-amber-400 fill-amber-400/20" />
+          ) : (
+            <Moon className="w-4 h-4 sm:w-5 sm:h-5 text-[#57534E]" />
+          )}
+        </button>
 
         {/* Notebook / My Library Button (Hidden on mobile header, available in BottomNav) */}
         <button
