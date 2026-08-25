@@ -9,8 +9,9 @@
   --color-terracotta: #C85A32;
   --color-terracotta-dark: #9A3412;
   --color-ink: #1C1917;
+  --color-ink-secondary: #44403C;
   --color-ink-muted: #57534E;
-  --color-border: #E5DFD3;
+  --color-border: #D6CEBE;
 }
 
 @layer base {
@@ -42,6 +43,10 @@
     font-family: "Newsreader", "Playfair Display", Georgia, serif;
   }
 
+  .font-sans {
+    font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  }
+
   * {
     max-width: 100%;
     box-sizing: border-box;
@@ -52,33 +57,15 @@
   }
 }
 
-/* Atelier Paper Card */
-.paper-card {
-  background-color: #FFFFFF;
-  border: 1px solid #E5DFD3;
-  box-shadow: 0 4px 16px -2px rgba(28, 25, 23, 0.05), 0 1px 3px 0 rgba(28, 25, 23, 0.03);
+/* Editorial Typography & Quote Styling */
+.font-quote {
+  font-family: "Newsreader", "Playfair Display", Georgia, serif;
+  font-style: italic;
+  line-height: 1.65;
+  letter-spacing: -0.012em;
+  color: #1C1917;
 }
 
-.paper-card-warm {
-  background-color: #FAF6EE;
-  border: 1px solid #E5DFD3;
-  box-shadow: 0 4px 16px -2px rgba(28, 25, 23, 0.05);
-}
-
-/* Terracotta Button */
-.btn-terracotta {
-  background: linear-gradient(135deg, #D4633B 0%, #C85A32 50%, #B44A22 100%);
-  color: #FFFFFF;
-  box-shadow: 0 4px 14px 0 rgba(200, 90, 50, 0.25);
-  transition: all 0.2s ease;
-}
-
-.btn-terracotta:hover {
-  background: linear-gradient(135deg, #DE7048 0%, #D4633B 50%, #C85A32 100%);
-  box-shadow: 0 6px 20px 0 rgba(200, 90, 50, 0.35);
-}
-
-/* Editorial quote typography */
 .quote-text {
   overflow-wrap: break-word;
   word-break: break-word;
@@ -86,6 +73,34 @@
   -webkit-hyphens: auto;
   max-width: 100%;
   letter-spacing: -0.01em;
+  line-height: 1.6;
+}
+
+/* Atelier High-Contrast Paper Cards */
+.paper-card {
+  background-color: #FFFFFF;
+  border: 1px solid #D6CEBE;
+  box-shadow: 0 4px 16px -2px rgba(28, 25, 23, 0.06), 0 1px 3px 0 rgba(28, 25, 23, 0.04);
+}
+
+.paper-card-warm {
+  background-color: #FAF6EE;
+  border: 1px solid #D6CEBE;
+  box-shadow: 0 4px 16px -2px rgba(28, 25, 23, 0.06);
+}
+
+/* Terracotta High-Contrast Button */
+.btn-terracotta {
+  background: linear-gradient(135deg, #D4633B 0%, #C85A32 50%, #B44A22 100%);
+  color: #FFFFFF;
+  font-weight: 700;
+  box-shadow: 0 4px 14px 0 rgba(200, 90, 50, 0.25);
+  transition: all 0.2s ease;
+}
+
+.btn-terracotta:hover {
+  background: linear-gradient(135deg, #DE7048 0%, #D4633B 50%, #C85A32 100%);
+  box-shadow: 0 6px 20px 0 rgba(200, 90, 50, 0.35);
 }
 
 /* Scrollbar styling for paper aesthetic */
@@ -98,10 +113,10 @@
 }
 
 .overflow-y-auto::-webkit-scrollbar-thumb {
-  background: rgba(120, 113, 108, 0.25);
+  background: rgba(120, 113, 108, 0.35);
   border-radius: 4px;
 }
 
 .overflow-y-auto::-webkit-scrollbar-thumb:hover {
-  background: rgba(200, 90, 50, 0.4);
+  background: rgba(200, 90, 50, 0.6);
 }

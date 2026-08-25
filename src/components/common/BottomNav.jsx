@@ -10,7 +10,7 @@ export default function BottomNav({
   onOpenStats,
 }) {
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-40 sm:hidden bg-[#FAF7F2]/95 backdrop-blur-md border-t border-[#E5DFD3] px-4 py-2 flex items-center justify-around shadow-lg">
+    <nav className="fixed bottom-0 left-0 right-0 z-40 sm:hidden bg-[#FAF7F2]/95 backdrop-blur-md border-t border-[#D6CEBE] px-4 py-2 flex items-center justify-around shadow-md">
       {/* Home / Library */}
       <button
         onClick={() => {
@@ -18,10 +18,10 @@ export default function BottomNav({
           onNavigateHome();
         }}
         className={`flex flex-col items-center gap-1 p-1 transition cursor-pointer ${
-          currentScreen === 'home' ? 'text-[#C85A32]' : 'text-[#78716C] hover:text-[#1C1917]'
+          currentScreen === 'home' ? 'text-[#B44A22] font-bold' : 'text-[#57534E] hover:text-[#1C1917]'
         }`}
       >
-        <Home className="w-5 h-5" />
+        <Home className="w-5 h-5 stroke-[2.2]" />
         <span className="text-[10px] font-semibold font-serif">Kütüphane</span>
       </button>
 
@@ -33,11 +33,11 @@ export default function BottomNav({
         }}
         className={`flex flex-col items-center gap-1 p-1 transition cursor-pointer ${
           currentScreen === 'fullTyping' || currentScreen === 'clozeRecall' || currentScreen === 'wordScramble'
-            ? 'text-[#C85A32]'
-            : 'text-[#78716C] hover:text-[#C85A32]'
+            ? 'text-[#B44A22] font-bold'
+            : 'text-[#57534E] hover:text-[#B44A22]'
         }`}
       >
-        <Feather className="w-5 h-5" />
+        <Feather className="w-5 h-5 stroke-[2.2]" />
         <span className="text-[10px] font-semibold font-serif">Pratik</span>
       </button>
 
@@ -48,10 +48,10 @@ export default function BottomNav({
           onOpenLibrary();
         }}
         className={`flex flex-col items-center gap-1 p-1 transition cursor-pointer ${
-          currentScreen === 'library' ? 'text-[#C85A32]' : 'text-[#78716C] hover:text-[#C85A32]'
+          currentScreen === 'library' ? 'text-[#B44A22] font-bold' : 'text-[#57534E] hover:text-[#B44A22]'
         }`}
       >
-        <BookOpen className="w-5 h-5" />
+        <BookOpen className="w-5 h-5 stroke-[2.2]" />
         <span className="text-[10px] font-semibold font-serif">Defterim</span>
       </button>
 
@@ -61,9 +61,9 @@ export default function BottomNav({
           sounds.playClick();
           onOpenStats();
         }}
-        className="flex flex-col items-center gap-1 p-1 text-[#78716C] hover:text-[#C85A32] transition cursor-pointer"
+        className="flex flex-col items-center gap-1 p-1 text-[#57534E] hover:text-[#B44A22] transition cursor-pointer"
       >
-        <BarChart3 className="w-5 h-5" />
+        <BarChart3 className="w-5 h-5 stroke-[2.2]" />
         <span className="text-[10px] font-semibold font-serif">İstatistik</span>
       </button>
     </nav>

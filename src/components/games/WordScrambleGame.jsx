@@ -188,7 +188,7 @@ export default function WordScrambleGame({ onGameOver, onBack, highScore = 0 }) 
       <div className="w-full flex items-center justify-between mb-4 gap-2">
         <button
           onClick={onBack}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white hover:bg-[#FAF6EE] border border-[#E5DFD3] text-[#57534E] hover:text-[#1C1917] text-xs sm:text-sm transition cursor-pointer shrink-0 shadow-xs"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white hover:bg-[#FAF6EE] border border-[#D6CEBE] text-[#44403C] hover:text-[#1C1917] text-xs sm:text-sm font-semibold transition cursor-pointer shrink-0 shadow-xs"
         >
           <ArrowLeft className="w-4 h-4" />
           <span><span className="hidden sm:inline">Kütüphaneye </span>Dön</span>
@@ -196,14 +196,14 @@ export default function WordScrambleGame({ onGameOver, onBack, highScore = 0 }) 
 
         <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
           {phase === 'study' && (
-            <div className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1 bg-[#588157]/10 border border-[#588157]/30 rounded-xl text-[#588157] font-bold text-xs sm:text-sm whitespace-nowrap shrink-0">
-              <Timer className="w-3.5 h-3.5 sm:w-4 sm:h-4 animate-spin text-[#588157] shrink-0" />
+            <div className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1 bg-[#588157]/10 border border-[#588157]/40 rounded-xl text-[#476C46] font-bold text-xs sm:text-sm whitespace-nowrap shrink-0">
+              <Timer className="w-3.5 h-3.5 sm:w-4 sm:h-4 animate-spin text-[#476C46] shrink-0" />
               <span>{timeLeft}s Ezber</span>
             </div>
           )}
 
-          <div className="flex items-center gap-1 px-2.5 sm:px-3 py-1 bg-[#FAF6EE] border border-[#E5DFD3] rounded-xl text-[#1C1917] font-bold text-xs sm:text-sm whitespace-nowrap shrink-0 shadow-xs">
-            <Trophy className="w-3.5 h-3.5 text-[#C85A32] shrink-0" />
+          <div className="flex items-center gap-1 px-2.5 sm:px-3.5 py-1 bg-[#FAF6EE] border border-[#D6CEBE] rounded-xl text-[#1C1917] font-bold text-xs sm:text-sm whitespace-nowrap shrink-0 shadow-xs">
+            <Trophy className="w-3.5 h-3.5 text-[#B44A22] shrink-0" />
             <span>Skor: {score}</span>
           </div>
         </div>
@@ -211,8 +211,8 @@ export default function WordScrambleGame({ onGameOver, onBack, highScore = 0 }) 
 
       {/* Title */}
       <div className="text-center mb-6">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#588157]/10 border border-[#588157]/30 text-[#588157] text-xs font-semibold uppercase tracking-wider mb-2">
-          <Layers className="w-3.5 h-3.5" />
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#588157]/10 border border-[#588157]/30 text-[#476C46] text-xs font-bold uppercase tracking-wider mb-2">
+          <Layers className="w-3.5 h-3.5 stroke-[2.2]" />
           <span>Dokunmatik Kelime Dizme (Scramble)</span>
         </div>
         <h2 className="text-xl sm:text-2xl font-serif font-bold text-[#1C1917]">
@@ -227,18 +227,18 @@ export default function WordScrambleGame({ onGameOver, onBack, highScore = 0 }) 
       {phase === 'selection' && (
         <div className="w-full max-w-2xl space-y-6 animate-in fade-in duration-200">
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-[#C85A32] mb-2.5">
+            <label className="block text-xs font-bold uppercase tracking-wider text-[#B44A22] mb-2.5">
               1. Edebi Kategori
             </label>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2.5 max-h-56 sm:max-h-72 overflow-y-auto p-2 border border-[#E5DFD3] rounded-2xl bg-white shadow-xs">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2.5 max-h-56 sm:max-h-72 overflow-y-auto p-2 border border-[#D6CEBE] rounded-2xl bg-white shadow-xs">
               {BOOK_GENRES.map(g => (
                 <button
                   key={g.id}
                   onClick={() => setSelectedGenre(g.id)}
                   className={`p-3 rounded-xl border text-left transition cursor-pointer ${
                     selectedGenre === g.id
-                      ? 'bg-[#588157]/15 border-[#588157] text-[#588157] shadow-xs'
-                      : 'bg-[#FAF6EE] border-[#E5DFD3] text-[#57534E] hover:text-[#1C1917]'
+                      ? 'bg-[#588157]/15 border-[#588157] text-[#2D5A27] font-bold shadow-xs'
+                      : 'bg-[#FAF6EE] border-[#D6CEBE] text-[#44403C] hover:text-[#1C1917]'
                   }`}
                 >
                   <span className="text-xs font-serif font-bold block">{g.name}</span>
@@ -248,7 +248,7 @@ export default function WordScrambleGame({ onGameOver, onBack, highScore = 0 }) 
           </div>
 
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-[#C85A32] mb-2.5">
+            <label className="block text-xs font-bold uppercase tracking-wider text-[#B44A22] mb-2.5">
               2. Zorluk
             </label>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -259,11 +259,11 @@ export default function WordScrambleGame({ onGameOver, onBack, highScore = 0 }) 
                   className={`p-3.5 rounded-2xl border text-left transition cursor-pointer ${
                     selectedDifficulty === d.id
                       ? 'bg-[#588157]/10 border-[#588157] text-[#1C1917]'
-                      : 'bg-white border-[#E5DFD3] text-[#57534E] hover:text-[#1C1917]'
+                      : 'bg-white border-[#D6CEBE] text-[#44403C] hover:text-[#1C1917]'
                   }`}
                 >
                   <span className="text-sm font-serif font-bold text-[#1C1917] block">{d.name}</span>
-                  <span className="text-xs text-[#78716C]">{d.desc}</span>
+                  <span className="text-xs text-[#57534E] font-medium">{d.desc}</span>
                 </button>
               ))}
             </div>
@@ -289,23 +289,23 @@ export default function WordScrambleGame({ onGameOver, onBack, highScore = 0 }) 
             />
           </div>
 
-          <div className="w-full p-6 sm:p-8 rounded-3xl bg-white border border-[#E5DFD3] shadow-md mb-8">
-            <div className="flex items-center justify-between text-xs text-[#78716C] mb-4 pb-3 border-b border-[#E5DFD3]">
+          <div className="w-full p-6 sm:p-8 rounded-3xl bg-white border border-[#D6CEBE] shadow-md mb-8">
+            <div className="flex items-center justify-between text-xs text-[#57534E] mb-4 pb-3 border-b border-[#D6CEBE]">
               <div className="flex items-center gap-2">
-                <BookOpen className="w-4 h-4 text-[#588157]" />
-                <span className="font-bold text-[#588157] font-serif text-sm">{currentQuote.book}</span>
+                <BookOpen className="w-4 h-4 text-[#476C46]" />
+                <span className="font-bold text-[#476C46] font-serif text-sm">{currentQuote.book}</span>
                 <span>—</span>
-                <span className="text-[#1C1917] font-medium">{currentQuote.author}</span>
+                <span className="text-[#1C1917] font-semibold">{currentQuote.author}</span>
               </div>
             </div>
 
-            <p className="text-base sm:text-xl font-serif font-medium text-[#1C1917] leading-relaxed text-center italic my-6 px-1 quote-text">
+            <p className="text-lg sm:text-2xl font-serif font-medium text-[#1C1917] leading-relaxed text-center italic my-6 px-1 quote-text font-quote">
               "{currentQuote.quote}"
             </p>
 
-            <div className="mt-4 pt-3 border-t border-[#E5DFD3] flex items-center justify-between text-xs text-[#588157] px-1">
+            <div className="mt-4 pt-3 border-t border-[#D6CEBE] flex items-center justify-between text-xs text-[#476C46] px-1 font-semibold">
               <span>💡 Kelimelerin dizilim sırasını aklınızda tutun.</span>
-              <span className="hidden sm:inline text-[#78716C] font-mono bg-[#FAF6EE] border border-[#E5DFD3] px-2 py-0.5 rounded">Enter ↵</span>
+              <span className="hidden sm:inline text-[#57534E] font-mono bg-[#FAF6EE] border border-[#D6CEBE] px-2 py-0.5 rounded">Enter ↵</span>
             </div>
           </div>
 
@@ -326,25 +326,25 @@ export default function WordScrambleGame({ onGameOver, onBack, highScore = 0 }) 
       {/* 3. SCRAMBLE */}
       {phase === 'scramble' && currentQuote && (
         <div className="w-full max-w-2xl flex flex-col items-center animate-in fade-in duration-200">
-          <div className="text-xs text-[#78716C] mb-3 flex items-center justify-between w-full font-medium">
-            <span className="font-serif text-[#C85A32] font-bold">{currentQuote.book} — {currentQuote.author}</span>
+          <div className="text-xs text-[#57534E] mb-3 flex items-center justify-between w-full font-semibold">
+            <span className="font-serif text-[#B44A22] font-bold">{currentQuote.book} — {currentQuote.author}</span>
             <span>{userSequence.length} / {originalTokens.length} kelime</span>
           </div>
 
           {/* User's assembled sequence box */}
-          <div className="w-full min-h-[100px] max-h-40 sm:max-h-48 overflow-y-auto p-3 sm:p-4 rounded-3xl bg-white border-2 border-[#E5DFD3] shadow-sm mb-4 sm:mb-6 flex flex-wrap gap-1.5 sm:gap-2 items-center justify-center">
+          <div className="w-full min-h-[100px] max-h-40 sm:max-h-48 overflow-y-auto p-3 sm:p-4 rounded-3xl bg-white border-2 border-[#D6CEBE] shadow-xs mb-4 sm:mb-6 flex flex-wrap gap-1.5 sm:gap-2 items-center justify-center">
             {userSequence.length === 0 ? (
-              <span className="text-xs text-[#A8A29E] italic font-serif">Aşağıdaki kelimelere sırasıyla dokunarak cümleyi oluşturun...</span>
+              <span className="text-xs text-[#78716C] italic font-serif">Aşağıdaki kelimelere sırasıyla dokunarak cümleyi oluşturun...</span>
             ) : (
               userSequence.map((item, idx) => (
                 <button
                   key={idx}
                   onClick={() => handleRemoveWord(item)}
-                  className="px-2.5 py-1.5 sm:px-3.5 sm:py-2 rounded-xl bg-[#588157]/15 border border-[#588157]/40 text-[#588157] font-serif text-sm sm:text-base font-semibold flex items-center gap-1 shadow-xs hover:bg-rose-50 hover:border-rose-400 hover:text-rose-700 transition cursor-pointer"
+                  className="px-2.5 py-1.5 sm:px-3.5 sm:py-2 rounded-xl bg-[#588157]/15 border border-[#588157]/50 text-[#2D5A27] font-serif text-sm sm:text-base font-bold flex items-center gap-1 shadow-xs hover:bg-rose-50 hover:border-rose-400 hover:text-rose-800 transition cursor-pointer"
                   title="Geri almak için tıkla"
                 >
                   <span>{item.word}</span>
-                  <X className="w-3 h-3 sm:w-3.5 sm:h-3.5 opacity-60" />
+                  <X className="w-3 h-3 sm:w-3.5 sm:h-3.5 opacity-70" />
                 </button>
               ))
             )}
@@ -359,8 +359,8 @@ export default function WordScrambleGame({ onGameOver, onBack, highScore = 0 }) 
                 onClick={() => handlePickWord(item)}
                 className={`px-3 py-2 sm:px-4 sm:py-2.5 rounded-2xl font-serif text-sm sm:text-base font-semibold transition ${
                   item.isUsed
-                    ? 'bg-[#FAF6EE] text-[#D6CEBE] border border-[#E5DFD3] cursor-not-allowed opacity-40'
-                    : 'bg-white hover:bg-[#FAF6EE] text-[#1C1917] border border-[#E5DFD3] hover:border-[#588157] shadow-xs hover:scale-105 cursor-pointer'
+                    ? 'bg-[#F0EAE1] text-[#A8A29E] border border-[#E5DFD3] cursor-not-allowed opacity-40'
+                    : 'bg-white hover:bg-[#FAF6EE] text-[#1C1917] border border-[#D6CEBE] hover:border-[#588157] shadow-xs hover:scale-105 cursor-pointer font-bold'
                 }`}
               >
                 {item.word}
@@ -372,7 +372,7 @@ export default function WordScrambleGame({ onGameOver, onBack, highScore = 0 }) 
           <button
             onClick={handleCheckSequence}
             disabled={userSequence.length !== originalTokens.length}
-            className="flex items-center gap-2 px-10 py-3.5 rounded-2xl btn-terracotta disabled:opacity-40 font-bold shadow-lg transition cursor-pointer"
+            className="flex items-center gap-2 px-10 py-3.5 rounded-2xl btn-terracotta disabled:opacity-40 font-bold shadow-md transition cursor-pointer"
           >
             <Sparkles className="w-5 h-5 fill-white" />
             <span>Cümleyi Doğrula (Enter ↵)</span>
@@ -385,22 +385,22 @@ export default function WordScrambleGame({ onGameOver, onBack, highScore = 0 }) 
         <div className="w-full max-w-2xl flex flex-col items-center animate-in fade-in duration-200">
           {/* Metrics Grid */}
           <div className="w-full grid grid-cols-3 gap-3 mb-6">
-            <div className="p-4 rounded-2xl bg-white border border-[#E5DFD3] text-center shadow-xs">
-              <div className="text-xs text-[#78716C] mb-1">Dizilim Doğruluğu</div>
+            <div className="p-4 rounded-2xl bg-white border border-[#D6CEBE] text-center shadow-xs">
+              <div className="text-xs text-[#57534E] font-medium mb-1">Dizilim Doğruluğu</div>
               <div className={`text-2xl sm:text-3xl font-serif font-extrabold ${accuracy >= 80 ? 'text-emerald-700' : accuracy >= 50 ? 'text-amber-700' : 'text-rose-700'}`}>
                 %{accuracy}
               </div>
             </div>
 
-            <div className="p-4 rounded-2xl bg-white border border-[#E5DFD3] text-center shadow-xs">
-              <div className="text-xs text-[#78716C] mb-1">Doğru Sıralama</div>
-              <div className="text-2xl sm:text-3xl font-serif font-extrabold text-[#C85A32]">
+            <div className="p-4 rounded-2xl bg-white border border-[#D6CEBE] text-center shadow-xs">
+              <div className="text-xs text-[#57534E] font-medium mb-1">Doğru Sıralama</div>
+              <div className="text-2xl sm:text-3xl font-serif font-extrabold text-[#B44A22]">
                 {correctCount} / {originalTokens.length}
               </div>
             </div>
 
-            <div className="p-4 rounded-2xl bg-white border border-[#E5DFD3] text-center shadow-xs">
-              <div className="text-xs text-[#78716C] mb-1">Kazanılan Puan</div>
+            <div className="p-4 rounded-2xl bg-white border border-[#D6CEBE] text-center shadow-xs">
+              <div className="text-xs text-[#57534E] font-medium mb-1">Kazanılan Puan</div>
               <div className="text-2xl sm:text-3xl font-serif font-extrabold text-[#588157]">
                 {score}
               </div>
@@ -408,31 +408,31 @@ export default function WordScrambleGame({ onGameOver, onBack, highScore = 0 }) 
           </div>
 
           {/* Word Comparison Panel */}
-          <div className="w-full p-5 sm:p-6 rounded-3xl bg-white border border-[#E5DFD3] shadow-md mb-6">
-            <div className="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-[#78716C] mb-4">
+          <div className="w-full p-5 sm:p-6 rounded-3xl bg-white border border-[#D6CEBE] shadow-md mb-6">
+            <div className="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-[#57534E] mb-4">
               <span>Sıralama & Doğruluk Karşılaştırması</span>
-              <div className="flex items-center gap-2.5 text-[11px] font-normal normal-case">
-                <span className="text-emerald-700">● Doğru Konum</span>
-                <span className="text-rose-700">● Hatalı Konum</span>
+              <div className="flex items-center gap-2.5 text-[11px] font-bold normal-case">
+                <span className="text-emerald-800">● Doğru Konum</span>
+                <span className="text-rose-800">● Hatalı Konum</span>
               </div>
             </div>
 
             {/* User Assembled Words with status */}
             <div className="mb-4">
-              <span className="text-xs text-[#78716C] block mb-2 font-medium">Sizin Oluşturduğunuz Dizilim:</span>
-              <div className="flex flex-wrap gap-1.5 sm:gap-2 text-sm sm:text-base font-serif leading-relaxed p-3.5 rounded-2xl bg-[#FAF6EE] border border-[#E5DFD3] max-h-48 sm:max-h-60 overflow-y-auto">
+              <span className="text-xs text-[#57534E] font-medium block mb-2">Sizin Oluşturduğunuz Dizilim:</span>
+              <div className="flex flex-wrap gap-1.5 sm:gap-2 text-sm sm:text-base font-serif leading-relaxed p-3.5 rounded-2xl bg-[#FAF6EE] border border-[#D6CEBE] max-h-48 sm:max-h-60 overflow-y-auto">
                 {diffAnalysis.map((item, idx) => (
                   <span
                     key={idx}
                     className={`px-2.5 py-1 rounded-xl font-semibold border flex items-center gap-1.5 ${
                       item.isCorrect
-                        ? 'bg-emerald-50 text-emerald-800 border-emerald-300 shadow-xs'
-                        : 'bg-rose-50 text-rose-800 border-rose-300'
+                        ? 'bg-emerald-50 text-emerald-950 border-emerald-400 shadow-xs'
+                        : 'bg-rose-50 text-rose-950 border-rose-400'
                     }`}
                   >
                     <span>{item.placedWord}</span>
                     {!item.isCorrect && (
-                      <span className="text-[10px] bg-rose-100 text-rose-800 px-1.5 py-0.5 rounded font-sans font-normal" title={`Olması gereken: ${item.expectedWord}`}>
+                      <span className="text-[10px] bg-rose-100 text-rose-800 px-1.5 py-0.5 rounded font-sans font-bold" title={`Olması gereken: ${item.expectedWord}`}>
                         ({item.expectedWord})
                       </span>
                     )}
@@ -442,11 +442,11 @@ export default function WordScrambleGame({ onGameOver, onBack, highScore = 0 }) 
             </div>
 
             {/* Original Literary Quote */}
-            <div className="pt-4 border-t border-[#E5DFD3] text-xs">
-              <span className="text-[#78716C] font-semibold block mb-1">
-                Orijinal Eser: <strong className="text-[#C85A32] font-serif">{currentQuote.book}</strong> ({currentQuote.author})
+            <div className="pt-4 border-t border-[#D6CEBE] text-xs">
+              <span className="text-[#57534E] font-medium block mb-1">
+                Orijinal Eser: <strong className="text-[#B44A22] font-serif">{currentQuote.book}</strong> ({currentQuote.author})
               </span>
-              <p className="text-[#1C1917] italic font-serif text-sm sm:text-base quote-text leading-relaxed">
+              <p className="text-[#1C1917] italic font-serif text-sm sm:text-base quote-text leading-relaxed font-quote">
                 "{currentQuote.quote}"
               </p>
             </div>
@@ -463,7 +463,7 @@ export default function WordScrambleGame({ onGameOver, onBack, highScore = 0 }) 
 
             <button
               onClick={() => startRound(currentQuote)}
-              className="flex items-center gap-2 px-5 py-3 rounded-2xl bg-white hover:bg-[#FAF6EE] border border-[#E5DFD3] text-[#1C1917] font-medium text-sm transition cursor-pointer shadow-xs"
+              className="flex items-center gap-2 px-5 py-3 rounded-2xl bg-white hover:bg-[#FAF6EE] border border-[#D6CEBE] text-[#1C1917] font-semibold text-sm transition cursor-pointer shadow-xs"
             >
               <RotateCcw className="w-4 h-4" />
               <span>Tekrar Dene</span>
@@ -471,7 +471,7 @@ export default function WordScrambleGame({ onGameOver, onBack, highScore = 0 }) 
 
             <button
               onClick={() => setPhase('selection')}
-              className="px-5 py-3 rounded-2xl bg-white hover:bg-[#FAF6EE] border border-[#E5DFD3] text-[#57534E] text-sm transition cursor-pointer shadow-xs"
+              className="px-5 py-3 rounded-2xl bg-white hover:bg-[#FAF6EE] border border-[#D6CEBE] text-[#57534E] font-semibold text-sm transition cursor-pointer shadow-xs"
             >
               Tür / Seviye Değiştir
             </button>
