@@ -22,9 +22,10 @@ export default function FullTypingGame({
   onGameOver, 
   onBack, 
   highScore = 0, 
-  initialQuote = null 
+  initialQuote = null,
+  initialGenre = 'all'
 }) {
-  const [selectedGenre, setSelectedGenre] = useState('all');
+  const [selectedGenre, setSelectedGenre] = useState(initialGenre || 'all');
   const [selectedDifficulty, setSelectedDifficulty] = useState('medium');
   const [currentQuote, setCurrentQuote] = useState(initialQuote);
 

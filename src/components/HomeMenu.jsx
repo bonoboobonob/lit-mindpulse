@@ -36,7 +36,6 @@ const PRACTICE_MODES = [
     title: 'Tam Yazma & Hatırlama',
     tag: 'Aktif Geri Çağırma • Master Recall',
     desc: 'Cümleyi zihninize kazıyın, ardından tek bir harfine dahi bakmadan klavyenizle eksiksiz yazarak çalışma belleğinizi güçlendirin.',
-    badge: '1. Seviye',
     icon: Feather,
     iconBg: 'bg-[#C85A32]/10 text-[#B44A22] border-[#C85A32]/30',
     tagColor: 'text-[#B44A22]',
@@ -47,7 +46,6 @@ const PRACTICE_MODES = [
     title: 'Edebi Boşluk Doldurma',
     tag: 'Kilit Kavramlar • Cloze Test',
     desc: 'Cümlenin anahtar felsefi kelimelerini ve metaforlarını tespit edip hafızanızdan doğru yerlerine yerleştirin.',
-    badge: '2. Seviye',
     icon: Puzzle,
     iconBg: 'bg-[#8C5E3C]/10 text-[#8C5E3C] border-[#8C5E3C]/30',
     tagColor: 'text-[#8C5E3C]',
@@ -58,7 +56,6 @@ const PRACTICE_MODES = [
     title: 'Dokunmatik Kelime Dizme',
     tag: 'Ritmik Sıralama • Scramble',
     desc: 'Cümleyi oluşturan sözcüklerin edebi ahengini ve ritmini kavrayarak dokunmatik kartlarla doğru sıraya dizin.',
-    badge: '3. Seviye',
     icon: Layers,
     iconBg: 'bg-[#588157]/10 text-[#476C46] border-[#588157]/30',
     tagColor: 'text-[#476C46]',
@@ -210,10 +207,6 @@ export default function HomeMenu({
                     <div className={`p-3 rounded-2xl border ${mode.iconBg}`}>
                       <Icon className="w-6 h-6 stroke-[2.2]" />
                     </div>
-
-                    <span className="text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-[#FAF6EE] text-[#44403C] border border-[#D6CEBE]">
-                      {mode.badge}
-                    </span>
                   </div>
 
                   <h4 className="text-lg font-serif font-bold text-[#1C1917] group-hover:text-[#B44A22] transition-colors mb-1">

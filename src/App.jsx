@@ -4,6 +4,7 @@ import BottomNav from './components/common/BottomNav';
 import StatsModal from './components/common/StatsModal';
 import TipsModal from './components/common/TipsModal';
 import HomeMenu from './components/HomeMenu';
+import GenreDetailView from './components/GenreDetailView';
 import FullTypingGame from './components/games/FullTypingGame';
 import ClozeRecallGame from './components/games/ClozeRecallGame';
 import WordScrambleGame from './components/games/WordScrambleGame';
@@ -12,7 +13,8 @@ import { getSavedStats, saveGameResult, getCustomQuotes, saveCustomQuotes } from
 import { sounds } from './utils/sound';
 
 export default function App() {
-  const [currentScreen, setCurrentScreen] = useState('home'); // 'home' | 'fullTyping' | 'clozeRecall' | 'wordScramble' | 'library'
+  const [currentScreen, setCurrentScreen] = useState('home'); // 'home' | 'genreDetail' | 'fullTyping' | 'clozeRecall' | 'wordScramble' | 'library'
+  const [selectedGenre, setSelectedGenre] = useState('all');
   const [stats, setStats] = useState(getSavedStats());
   const [customQuotes, setCustomQuotes] = useState(getCustomQuotes());
   const [activeQuote, setActiveQuote] = useState(null);
@@ -43,9 +45,15 @@ export default function App() {
     saveCustomQuotes(updated);
   };
 
-  const handleStartQuotePractice = (quote) => {
+  const handleStartQuotePractice = (quote, mode = 'fullTyping') => {
     setActiveQuote(quote);
-    setCurrentScreen('fullTyping');
+    setCurrentScreen(mode);
+  };
+
+  const handleStartGenrePractice = (genreId, mode = 'fullTyping') => {
+    setSelectedGenre(genreId);
+    setActiveQuote(null);
+    setCurrentScreen(mode);
   };
 
   const handleToggleSound = () => {
@@ -88,24 +96,35 @@ export default function App() {
               stats={stats}
               onSelectMode={(modeId) => {
                 setActiveQuote(null);
+                setSelectedGenre('all');
                 setCurrentScreen(modeId);
               }}
               onSelectGenre={(genreId) => {
-                setActiveQuote(null);
-                setCurrentScreen('fullTyping');
+                setSelectedGenre(genreId);
+                setCurrentScreen('genreDetail');
               }}
               onOpenLibrary={() => setCurrentScreen('library')}
               onStartQuote={handleStartQuotePractice}
             />
           )}
 
+          {currentScreen === 'genreDetail' && (
+            <GenreDetailView
+              genreId={selectedGenre}
+              onBack={() => setCurrentScreen('home')}
+              onStartGenrePractice={handleStartGenrePractice}
+              onStartSpecificQuote={handleStartQuotePractice}
+            />
+          )}
+
           {currentScreen === 'fullTyping' && (
             <FullTypingGame
               initialQuote={activeQuote}
+              initialGenre={selectedGenre}
               onGameOver={handleGameOver}
               onBack={() => {
                 setActiveQuote(null);
-                setCurrentScreen('home');
+                setCurrentScreen(selectedGenre !== 'all' ? 'genreDetail' : 'home');
               }}
               highScore={stats.highScores?.fullTyping || 0}
             />
@@ -113,10 +132,12 @@ export default function App() {
 
           {currentScreen === 'clozeRecall' && (
             <ClozeRecallGame
+              initialQuote={activeQuote}
+              initialGenre={selectedGenre}
               onGameOver={handleGameOver}
               onBack={() => {
                 setActiveQuote(null);
-                setCurrentScreen('home');
+                setCurrentScreen(selectedGenre !== 'all' ? 'genreDetail' : 'home');
               }}
               highScore={stats.highScores?.clozeRecall || 0}
             />
@@ -124,10 +145,12 @@ export default function App() {
 
           {currentScreen === 'wordScramble' && (
             <WordScrambleGame
+              initialQuote={activeQuote}
+              initialGenre={selectedGenre}
               onGameOver={handleGameOver}
               onBack={() => {
                 setActiveQuote(null);
-                setCurrentScreen('home');
+                setCurrentScreen(selectedGenre !== 'all' ? 'genreDetail' : 'home');
               }}
               highScore={stats.highScores?.wordScramble || 0}
             />
@@ -161,7 +184,7 @@ export default function App() {
       />
 
       {/* Footer */}
-      <footer className="w-full text-center py-6 border-t border-[#E5DFD3] text-xs text-[#78716C] hidden sm:block">
+      <footer className="w-full text-center py-6 border-t border-[#D6CEBE] text-xs text-[#78716C] hidden sm:block">
         <p className="font-serif italic">LibrisMind &copy; 2026 — The Atelier Edition • Edebi Hafıza Platformu</p>
       </footer>
 

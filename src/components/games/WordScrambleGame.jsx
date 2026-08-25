@@ -17,12 +17,18 @@ import { BOOK_GENRES, DIFFICULTY_LEVELS } from '../../data/bookQuotes';
 import { quoteQueue } from '../../utils/quoteQueue';
 import { sounds } from '../../utils/sound';
 
-export default function WordScrambleGame({ onGameOver, onBack, highScore = 0 }) {
-  const [selectedGenre, setSelectedGenre] = useState('all');
+export default function WordScrambleGame({ 
+  onGameOver, 
+  onBack, 
+  highScore = 0, 
+  initialQuote = null, 
+  initialGenre = 'all' 
+}) {
+  const [selectedGenre, setSelectedGenre] = useState(initialGenre || 'all');
   const [selectedDifficulty, setSelectedDifficulty] = useState('easy');
-  const [currentQuote, setCurrentQuote] = useState(null);
+  const [currentQuote, setCurrentQuote] = useState(initialQuote);
 
-  const [phase, setPhase] = useState('selection'); // 'selection' | 'study' | 'scramble' | 'result'
+  const [phase, setPhase] = useState(initialQuote ? 'study' : 'selection'); // 'selection' | 'study' | 'scramble' | 'result'
   const [timeLeft, setTimeLeft] = useState(15);
   const [totalStudyTime, setTotalStudyTime] = useState(15);
 
@@ -78,6 +84,12 @@ export default function WordScrambleGame({ onGameOver, onBack, highScore = 0 }) 
       });
     }, 1000);
   };
+
+  useEffect(() => {
+    if (initialQuote) {
+      startRound(initialQuote);
+    }
+  }, [initialQuote]);
 
   const handlePickWord = (item) => {
     if (item.isUsed) return;

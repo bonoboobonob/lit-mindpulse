@@ -19,12 +19,18 @@ import { sounds } from '../../utils/sound';
 
 const STOPWORDS = ['ve', 'veya', 'bir', 'bu', 'şu', 'o', 'de', 'da', 'ile', 'için', 'ne', 'ise', 'ki', 'gibi', 'kadar', 'en', 'daha', 'çok', 'ama', 'fakat', 'ancak'];
 
-export default function ClozeRecallGame({ onGameOver, onBack, highScore = 0 }) {
-  const [selectedGenre, setSelectedGenre] = useState('all');
+export default function ClozeRecallGame({ 
+  onGameOver, 
+  onBack, 
+  highScore = 0, 
+  initialQuote = null, 
+  initialGenre = 'all' 
+}) {
+  const [selectedGenre, setSelectedGenre] = useState(initialGenre || 'all');
   const [selectedDifficulty, setSelectedDifficulty] = useState('medium');
-  const [currentQuote, setCurrentQuote] = useState(null);
+  const [currentQuote, setCurrentQuote] = useState(initialQuote);
 
-  const [phase, setPhase] = useState('selection'); // 'selection' | 'study' | 'testing' | 'result'
+  const [phase, setPhase] = useState(initialQuote ? 'study' : 'selection'); // 'selection' | 'study' | 'testing' | 'result'
   const [timeLeft, setTimeLeft] = useState(15);
   const [totalStudyTime, setTotalStudyTime] = useState(15);
   
@@ -145,6 +151,12 @@ export default function ClozeRecallGame({ onGameOver, onBack, highScore = 0 }) {
       });
     }, 1000);
   };
+
+  useEffect(() => {
+    if (initialQuote) {
+      setupClozeQuote(initialQuote);
+    }
+  }, [initialQuote]);
 
   const startTestingPhase = () => {
     sounds.playLevelUp();
