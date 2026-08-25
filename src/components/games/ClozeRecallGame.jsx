@@ -481,21 +481,21 @@ export default function ClozeRecallGame({
       {phase === 'result' && currentQuote && (
         <div className="w-full max-w-2xl flex flex-col items-center animate-in fade-in duration-200">
           <div className="w-full grid grid-cols-2 gap-3 mb-6">
-            <div className="p-4 rounded-2xl bg-white border border-[#D6CEBE] text-center shadow-xs">
-              <div className="text-xs text-[#57534E] font-medium mb-1">Boşluk Doğruluğu</div>
+            <div className="p-4 rounded-2xl bg-white dark:bg-[#1C1917] border border-[#D6CEBE] dark:border-[#38322B] text-center shadow-xs">
+              <div className="text-xs text-[#57534E] dark:text-[#A8A196] font-medium mb-1">Boşluk Doğruluğu</div>
               <div className={`text-3xl font-extrabold font-serif ${accuracy >= 70 ? 'text-emerald-700 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}`}>
                 %{accuracy}
               </div>
             </div>
-            <div className="p-4 rounded-2xl bg-white border border-[#D6CEBE] text-center shadow-xs">
-              <div className="text-xs text-[#57534E] font-medium mb-1">Kazanılan Puan</div>
+            <div className="p-4 rounded-2xl bg-white dark:bg-[#1C1917] border border-[#D6CEBE] dark:border-[#38322B] text-center shadow-xs">
+              <div className="text-xs text-[#57534E] dark:text-[#A8A196] font-medium mb-1">Kazanılan Puan</div>
               <div className="text-3xl font-extrabold font-serif text-[#476C46] dark:text-[#62B889]">
                 {score}
               </div>
             </div>
           </div>
 
-          <div className="w-full p-6 rounded-3xl bg-white border border-[#D6CEBE] shadow-md mb-6">
+          <div className="w-full p-6 rounded-3xl bg-white dark:bg-[#1C1917] border border-[#D6CEBE] dark:border-[#38322B] shadow-md mb-6">
             <h4 className="text-xs font-bold uppercase tracking-wider text-[#1C1917] dark:text-[#F5EFE4] mb-3">Boşluk Analizi</h4>
             <div className="space-y-2.5">
               {clozeTokens.filter(t => t.isBlank).map((b, i) => {
@@ -512,13 +512,13 @@ export default function ClozeRecallGame({
                     }`}
                   >
                     <div>
-                      <span className="font-sans text-xs text-[#57534E] block mb-0.5 font-medium">Boşluk #{i + 1}:</span>
+                      <span className="font-sans text-xs text-[#57534E] dark:text-[#A8A196] block mb-0.5 font-medium">Boşluk #{i + 1}:</span>
                       <strong className="text-base text-[#1C1917] dark:text-[#F5EFE4]">{b.coreWord}</strong>
                     </div>
 
                     <div className="text-right">
-                      <span className="text-xs text-[#57534E] block mb-0.5 font-medium">Sizin cevabınız:</span>
-                      <span className="font-bold">{userInputs[b.blankIndex] || '(Boş bırakıldı)'}</span>
+                      <span className="text-xs text-[#57534E] dark:text-[#A8A196] block mb-0.5 font-medium">Sizin cevabınız:</span>
+                      <span className="font-bold text-[#1C1917] dark:text-[#F5EFE4]">{userInputs[b.blankIndex] || '(Boş bırakıldı)'}</span>
                     </div>
                   </div>
                 );
@@ -526,10 +526,10 @@ export default function ClozeRecallGame({
             </div>
 
             {/* Original Literary Quote & Direct Link to Book Detail */}
-            <div className="space-y-3 pt-4 mt-4 border-t border-[#D6CEBE] text-xs">
+            <div className="space-y-3 pt-4 mt-4 border-t border-[#D6CEBE] dark:border-[#38322B] text-xs">
               <div>
-                <span className="text-[#57534E] font-medium block mb-0.5">Orijinal Eser: <strong className="text-[#B44A22]">{currentQuote.book}</strong> ({currentQuote.author})</span>
-                <p className="text-[#1C1917] italic font-serif text-sm sm:text-base quote-text leading-relaxed font-quote">
+                <span className="text-[#57534E] dark:text-[#A8A196] font-medium block mb-0.5">Orijinal Eser: <strong className="text-[#B44A22] dark:text-[#E07048]">{currentQuote.book}</strong> ({currentQuote.author})</span>
+                <p className="text-[#1C1917] dark:text-[#F5EFE4] italic font-serif text-sm sm:text-base quote-text leading-relaxed font-quote">
                   "{currentQuote.quote}"
                 </p>
               </div>

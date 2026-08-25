@@ -162,26 +162,26 @@ export default function HomeMenu({
       {/* Featured Quote of the Day (Archival Card with Bookmark) */}
       <div className="mb-10">
         <div className="flex items-center justify-between mb-3 px-1">
-          <h3 className="text-xs font-bold uppercase tracking-wider text-[#B44A22] flex items-center gap-2">
+          <h3 className="text-xs font-bold uppercase tracking-wider text-[#B44A22] dark:text-[#E07048] flex items-center gap-2">
             <Sparkles className="w-4 h-4 stroke-[2.2]" />
             <span>Günün Edebi Alıntısı</span>
           </h3>
-          <span className="text-xs text-[#57534E] font-serif font-medium italic">Her gün yenilenir</span>
+          <span className="text-xs text-[#57534E] dark:text-[#A8A196] font-serif font-medium italic">Her gün yenilenir</span>
         </div>
 
-        <div className="relative p-6 sm:p-7 rounded-3xl bg-white border border-[#D6CEBE] shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 group hover:border-[#C85A32]/60 transition">
+        <div className="relative p-6 sm:p-7 rounded-3xl bg-white dark:bg-[#1C1917] border border-[#D6CEBE] dark:border-[#38322B] shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 group hover:border-[#C85A32]/60 dark:hover:border-[#E07048]/60 transition">
           {/* Top Terracotta Ribbon */}
           <div className="absolute top-0 right-6 sm:right-10 pointer-events-none">
-            <BookmarkRibbon className="w-6 h-8 text-[#C85A32]" />
+            <BookmarkRibbon className="w-6 h-8 text-[#C85A32] dark:text-[#E07048]" />
           </div>
 
           <div className="flex-1 pr-6 sm:pr-8">
-            <div className="flex items-center gap-2 text-xs text-[#57534E] mb-2 font-medium">
-              <span className="font-serif font-bold text-[#B44A22] text-sm">{dailyQuote.book}</span>
+            <div className="flex items-center gap-2 text-xs text-[#57534E] dark:text-[#A8A196] mb-2 font-medium">
+              <span className="font-serif font-bold text-[#B44A22] dark:text-[#E07048] text-sm">{dailyQuote.book}</span>
               <span>—</span>
-              <span className="text-[#1C1917] font-semibold">{dailyQuote.author}</span>
+              <span className="text-[#1C1917] dark:text-[#F5EFE4] font-semibold">{dailyQuote.author}</span>
             </div>
-            <p className="text-base sm:text-lg font-serif italic text-[#1C1917] leading-relaxed font-quote">
+            <p className="text-base sm:text-lg font-serif italic text-[#1C1917] dark:text-[#F5EFE4] leading-relaxed font-quote">
               "{dailyQuote.quote}"
             </p>
           </div>
@@ -191,9 +191,9 @@ export default function HomeMenu({
               sounds.playClick();
               onStartQuote(dailyQuote);
             }}
-            className="flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-[#C85A32]/10 hover:bg-[#C85A32]/20 text-[#B44A22] border border-[#C85A32]/40 text-xs sm:text-sm font-bold transition shrink-0 cursor-pointer"
+            className="flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-[#C85A32]/10 dark:bg-[#E07048]/15 hover:bg-[#C85A32]/20 dark:hover:bg-[#E07048]/25 text-[#B44A22] dark:text-[#E07048] border border-[#C85A32]/40 dark:border-[#E07048]/40 text-xs sm:text-sm font-bold transition shrink-0 cursor-pointer"
           >
-            <Play className="w-3.5 h-3.5 fill-[#B44A22]" />
+            <Play className="w-3.5 h-3.5 fill-[#B44A22] dark:fill-[#E07048]" />
             <span>Bu Cümleyi Ezberle</span>
           </button>
         </div>
@@ -201,8 +201,8 @@ export default function HomeMenu({
 
       {/* 3 Main Practice Modes (Atelier Style) */}
       <div className="mb-10">
-        <h3 className="text-lg font-serif font-bold text-[#1C1917] mb-4 flex items-center gap-2">
-          <Feather className="w-5 h-5 text-[#B44A22]" />
+        <h3 className="text-lg font-serif font-bold text-[#1C1917] dark:text-[#F5EFE4] mb-4 flex items-center gap-2">
+          <Feather className="w-5 h-5 text-[#B44A22] dark:text-[#E07048]" />
           <span>Egzersiz ve Hatırlama Modları</span>
         </h3>
 
@@ -217,7 +217,7 @@ export default function HomeMenu({
                   sounds.playClick();
                   onSelectMode(mode.id);
                 }}
-                className="relative group p-6 rounded-3xl bg-white border border-[#D6CEBE] hover:border-[#C85A32]/60 transition-all duration-300 hover:shadow-md cursor-pointer flex flex-col justify-between"
+                className="relative group p-6 rounded-3xl bg-white dark:bg-[#1C1917] border border-[#D6CEBE] dark:border-[#38322B] hover:border-[#C85A32]/60 dark:hover:border-[#E07048]/60 transition-all duration-300 hover:shadow-md cursor-pointer flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-start justify-between mb-4">
@@ -226,19 +226,19 @@ export default function HomeMenu({
                     </div>
                   </div>
 
-                  <h4 className="text-lg font-serif font-bold text-[#1C1917] group-hover:text-[#B44A22] transition-colors mb-1">
+                  <h4 className="text-lg font-serif font-bold text-[#1C1917] dark:text-[#F5EFE4] group-hover:text-[#B44A22] dark:group-hover:text-[#E07048] transition-colors mb-1">
                     {mode.title}
                   </h4>
                   <div className={`text-[11px] font-bold ${mode.tagColor} mb-2.5`}>
                     {mode.tag}
                   </div>
 
-                  <p className="text-xs text-[#44403C] mb-4 line-clamp-3 leading-relaxed font-sans">
+                  <p className="text-xs text-[#44403C] dark:text-[#D6CEBE] mb-4 line-clamp-3 leading-relaxed font-sans">
                     {mode.desc}
                   </p>
                 </div>
 
-                <div className="flex items-center justify-between pt-3 border-t border-[#D6CEBE] text-xs text-[#B44A22] font-bold group-hover:translate-x-1 transition-transform">
+                <div className="flex items-center justify-between pt-3 border-t border-[#D6CEBE] dark:border-[#38322B] text-xs text-[#B44A22] dark:text-[#E07048] font-bold group-hover:translate-x-1 transition-transform">
                   <span>Antrenmana Başla</span>
                   <ChevronRight className="w-4 h-4" />
                 </div>
@@ -250,8 +250,8 @@ export default function HomeMenu({
 
       {/* Genres Explorer Showcase (Book Spine / Archival Style) */}
       <div>
-        <h3 className="text-lg font-serif font-bold text-[#1C1917] mb-4 flex items-center gap-2">
-          <BookOpen className="w-5 h-5 text-[#B44A22]" />
+        <h3 className="text-lg font-serif font-bold text-[#1C1917] dark:text-[#F5EFE4] mb-4 flex items-center gap-2">
+          <BookOpen className="w-5 h-5 text-[#B44A22] dark:text-[#E07048]" />
           <span>Edebi Türler & Kategoriler (250+ Eser)</span>
         </h3>
 
@@ -267,17 +267,17 @@ export default function HomeMenu({
                   sounds.playClick();
                   onSelectGenre(genre.id);
                 }}
-                className="p-4 rounded-2xl bg-white border border-[#D6CEBE] hover:border-[#C85A32]/60 hover:shadow-xs transition-all cursor-pointer group flex flex-col justify-between"
+                className="p-4 rounded-2xl bg-white dark:bg-[#1C1917] border border-[#D6CEBE] dark:border-[#38322B] hover:border-[#C85A32]/60 dark:hover:border-[#E07048]/60 hover:shadow-xs transition-all cursor-pointer group flex flex-col justify-between"
               >
                 <div>
-                  <div className="p-2 w-fit rounded-xl bg-[#FAF6EE] text-[#B44A22] border border-[#D6CEBE] mb-2.5 group-hover:scale-110 transition-transform">
+                  <div className="p-2 w-fit rounded-xl bg-[#FAF6EE] dark:bg-[#282420] text-[#B44A22] dark:text-[#E07048] border border-[#D6CEBE] dark:border-[#38322B] mb-2.5 group-hover:scale-110 transition-transform">
                     <Icon className="w-4 h-4 stroke-[2.2]" />
                   </div>
-                  <h5 className="text-xs sm:text-sm font-serif font-bold text-[#1C1917] group-hover:text-[#B44A22] leading-snug">
+                  <h5 className="text-xs sm:text-sm font-serif font-bold text-[#1C1917] dark:text-[#F5EFE4] group-hover:text-[#B44A22] dark:group-hover:text-[#E07048] leading-snug">
                     {genre.name}
                   </h5>
                 </div>
-                <span className="text-[11px] text-[#57534E] mt-2 font-sans font-semibold">
+                <span className="text-[11px] text-[#57534E] dark:text-[#A8A196] mt-2 font-sans font-semibold">
                   {quoteCount} Alıntı
                 </span>
               </div>

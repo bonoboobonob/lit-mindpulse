@@ -74,7 +74,7 @@ export default function BookDetailView({
                 sounds.playClick();
                 onBack();
               }}
-              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white hover:bg-[#FAF6EE] border border-[#D6CEBE] text-[#44403C] hover:text-[#1C1917] text-sm font-semibold transition shadow-xs cursor-pointer"
+              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white dark:bg-[#1E1B18] hover:bg-[#FAF6EE] dark:hover:bg-[#282420] border border-[#D6CEBE] dark:border-[#38322B] text-[#44403C] dark:text-[#EDE8DF] hover:text-[#1C1917] dark:hover:text-[#F5EFE4] text-sm font-semibold transition shadow-xs cursor-pointer"
             >
               <ArrowLeft className="w-4 h-4" />
               <span>Geri Dön</span>
@@ -87,7 +87,7 @@ export default function BookDetailView({
               if (onNavigateHome) onNavigateHome();
               else onBack();
             }}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white hover:bg-[#FAF6EE] border border-[#D6CEBE] text-[#57534E] hover:text-[#1C1917] text-xs sm:text-sm font-semibold transition shadow-xs cursor-pointer"
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white dark:bg-[#1E1B18] hover:bg-[#FAF6EE] dark:hover:bg-[#282420] border border-[#D6CEBE] dark:border-[#38322B] text-[#57534E] dark:text-[#A8A196] hover:text-[#1C1917] dark:hover:text-[#F5EFE4] text-xs sm:text-sm font-semibold transition shadow-xs cursor-pointer"
             title="Ana Sayfaya Dön"
           >
             <Home className="w-4 h-4" />
@@ -96,20 +96,20 @@ export default function BookDetailView({
         </div>
 
         <div className="flex items-center gap-2">
-          <span className="px-3 py-1 rounded-full bg-[#C85A32]/10 border border-[#C85A32]/30 text-[#B44A22] text-xs font-bold">
+          <span className="px-3 py-1 rounded-full bg-[#C85A32]/10 dark:bg-[#E07048]/15 border border-[#C85A32]/30 dark:border-[#E07048]/40 text-[#B44A22] dark:text-[#E07048] text-xs font-bold">
             {genreObj.name}
           </span>
-          <span className="text-xs text-[#57534E] font-medium hidden sm:inline">
+          <span className="text-xs text-[#57534E] dark:text-[#A8A196] font-medium hidden sm:inline">
             Yayın: {book.year}
           </span>
         </div>
       </div>
 
       {/* Book Hero Presentation (Kinfolk Atelier Book Card) */}
-      <div className="relative p-6 sm:p-8 rounded-3xl bg-white border border-[#D6CEBE] shadow-xs mb-8 overflow-hidden">
+      <div className="relative p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#1C1917] border border-[#D6CEBE] dark:border-[#38322B] shadow-xs mb-8 overflow-hidden">
         {/* Ribbon decoration */}
         <div className="absolute top-0 right-8 sm:right-12 pointer-events-none">
-          <BookmarkRibbon className="w-6 h-10 text-[#C85A32]" />
+          <BookmarkRibbon className="w-6 h-10 text-[#C85A32] dark:text-[#E07048]" />
         </div>
 
         <div className="flex flex-col md:flex-row gap-6 sm:gap-8 items-start">
@@ -148,11 +148,11 @@ export default function BookDetailView({
           {/* Book Metadata & Synopsis */}
           <div className="flex-1 space-y-4">
             <div>
-              <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#1C1917] mb-1">
+              <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#1C1917] dark:text-[#F5EFE4] mb-1">
                 {book.title}
               </h2>
-              <div className="flex flex-wrap items-center gap-2 text-xs text-[#57534E]">
-                <span className="font-serif font-bold text-[#B44A22] text-sm">{book.author}</span>
+              <div className="flex flex-wrap items-center gap-2 text-xs text-[#57534E] dark:text-[#A8A196]">
+                <span className="font-serif font-bold text-[#B44A22] dark:text-[#E07048] text-sm">{book.author}</span>
                 <span>•</span>
                 <span>{book.authorBirthDeath}</span>
                 <span>•</span>
@@ -161,17 +161,17 @@ export default function BookDetailView({
             </div>
 
             {/* Author Bio Snippet */}
-            <div className="p-3.5 rounded-2xl bg-[#FAF6EE] border border-[#D6CEBE] text-xs text-[#44403C] leading-relaxed">
-              <strong className="text-[#1C1917] block mb-0.5">Yazar Hakkında:</strong>
+            <div className="p-3.5 rounded-2xl bg-[#FAF6EE] dark:bg-[#24201C] border border-[#D6CEBE] dark:border-[#38322B] text-xs text-[#44403C] dark:text-[#D6CEBE] leading-relaxed">
+              <strong className="text-[#1C1917] dark:text-[#F5EFE4] block mb-0.5">Yazar Hakkında:</strong>
               {book.authorBio}
             </div>
 
             {/* Synopsis */}
             <div>
-              <h4 className="text-xs font-bold uppercase tracking-wider text-[#B44A22] mb-1.5">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[#B44A22] dark:text-[#E07048] mb-1.5">
                 Eser Özeti & Edebi Anlamı
               </h4>
-              <p className="text-sm text-[#1C1917] leading-relaxed font-serif">
+              <p className="text-sm text-[#1C1917] dark:text-[#F5EFE4] leading-relaxed font-serif">
                 {book.summary}
               </p>
             </div>
@@ -179,14 +179,14 @@ export default function BookDetailView({
             {/* Key Themes */}
             {book.keyThemes && (
               <div>
-                <h4 className="text-xs font-bold uppercase tracking-wider text-[#57534E] mb-2">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-[#57534E] dark:text-[#A8A196] mb-2">
                   Öne Çıkan Temalar & Kavramlar
                 </h4>
                 <div className="flex flex-wrap gap-1.5">
                   {book.keyThemes.map((theme, idx) => (
                     <span
                       key={idx}
-                      className="px-2.5 py-1 rounded-xl bg-white border border-[#D6CEBE] text-[#44403C] text-xs font-semibold shadow-xs"
+                      className="px-2.5 py-1 rounded-xl bg-white dark:bg-[#282420] border border-[#D6CEBE] dark:border-[#38322B] text-[#44403C] dark:text-[#D6CEBE] text-xs font-semibold shadow-xs"
                     >
                       #{theme}
                     </span>
@@ -198,19 +198,19 @@ export default function BookDetailView({
         </div>
 
         {/* Quick Mode Launchers for THIS Book with Difficulty Selection */}
-        <div className="mt-8 pt-6 border-t border-[#D6CEBE]">
+        <div className="mt-8 pt-6 border-t border-[#D6CEBE] dark:border-[#38322B]">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
             <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-[#B44A22] block">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#B44A22] dark:text-[#E07048] block">
                 Bu Eserden Hafıza Egzersizi Başlat
               </span>
-              <span className="text-xs text-[#57534E]">
+              <span className="text-xs text-[#57534E] dark:text-[#A8A196]">
                 Seçilen filtredeki {practicePassageCount} pasaj tekrarsız ve adil olarak sırayla gelir.
               </span>
             </div>
 
             {/* Practice Difficulty Selector */}
-            <div className="flex items-center gap-1 overflow-x-auto pb-1 bg-[#FAF6EE] p-1.5 rounded-2xl border border-[#D6CEBE]">
+            <div className="flex items-center gap-1 overflow-x-auto pb-1 bg-[#FAF6EE] dark:bg-[#24201C] p-1.5 rounded-2xl border border-[#D6CEBE] dark:border-[#38322B]">
               {[
                 { id: 'all', label: '🎲 Karma' },
                 { id: 'easy', label: '🟢 Kolay' },
@@ -231,7 +231,7 @@ export default function BookDetailView({
                     className={`px-2.5 py-1 rounded-xl text-xs font-bold transition cursor-pointer whitespace-nowrap ${
                       isSelected
                         ? 'bg-[#C85A32] text-white shadow-xs'
-                        : 'text-[#57534E] hover:text-[#1C1917] hover:bg-white/60'
+                        : 'text-[#57534E] dark:text-[#A8A196] hover:text-[#1C1917] dark:hover:text-[#F5EFE4] hover:bg-white/60 dark:hover:bg-white/10'
                     }`}
                   >
                     {lvl.label} <span className="opacity-80 text-[10px]">({count})</span>
@@ -247,9 +247,9 @@ export default function BookDetailView({
                 sounds.playClick();
                 onStartBookPractice(book.id, 'fullTyping', practiceDifficulty);
               }}
-              className="flex items-center justify-center gap-2 p-3.5 rounded-2xl bg-[#FAF6EE] hover:bg-[#F2ECE1] border border-[#D6CEBE] text-[#1C1917] hover:text-[#B44A22] hover:border-[#C85A32] font-bold text-sm transition cursor-pointer shadow-xs"
+              className="flex items-center justify-center gap-2 p-3.5 rounded-2xl bg-[#FAF6EE] dark:bg-[#24201C] hover:bg-[#F2ECE1] dark:hover:bg-[#2E2822] border border-[#D6CEBE] dark:border-[#38322B] text-[#1C1917] dark:text-[#F5EFE4] hover:text-[#B44A22] dark:hover:text-[#E07048] hover:border-[#C85A32] dark:hover:border-[#E07048] font-bold text-sm transition cursor-pointer shadow-xs"
             >
-              <Feather className="w-4 h-4 text-[#B44A22]" />
+              <Feather className="w-4 h-4 text-[#B44A22] dark:text-[#E07048]" />
               <span>✍️ Tam Yazma ({practiceDifficulty === 'all' ? 'Tümü' : practiceDifficulty})</span>
             </button>
 
@@ -258,9 +258,9 @@ export default function BookDetailView({
                 sounds.playClick();
                 onStartBookPractice(book.id, 'clozeRecall', practiceDifficulty);
               }}
-              className="flex items-center justify-center gap-2 p-3.5 rounded-2xl bg-[#FAF6EE] hover:bg-[#F2ECE1] border border-[#D6CEBE] text-[#1C1917] hover:text-[#8C5E3C] hover:border-[#8C5E3C] font-bold text-sm transition cursor-pointer shadow-xs"
+              className="flex items-center justify-center gap-2 p-3.5 rounded-2xl bg-[#FAF6EE] dark:bg-[#24201C] hover:bg-[#F2ECE1] dark:hover:bg-[#2E2822] border border-[#D6CEBE] dark:border-[#38322B] text-[#1C1917] dark:text-[#F5EFE4] hover:text-[#8C5E3C] dark:hover:text-[#D4AF37] hover:border-[#8C5E3C] dark:hover:border-[#D4AF37] font-bold text-sm transition cursor-pointer shadow-xs"
             >
-              <Puzzle className="w-4 h-4 text-[#8C5E3C]" />
+              <Puzzle className="w-4 h-4 text-[#8C5E3C] dark:text-[#D4AF37]" />
               <span>🧩 Boşluk Doldurma ({practiceDifficulty === 'all' ? 'Tümü' : practiceDifficulty})</span>
             </button>
 
@@ -269,9 +269,9 @@ export default function BookDetailView({
                 sounds.playClick();
                 onStartBookPractice(book.id, 'wordScramble', practiceDifficulty);
               }}
-              className="flex items-center justify-center gap-2 p-3.5 rounded-2xl bg-[#FAF6EE] hover:bg-[#F2ECE1] border border-[#D6CEBE] text-[#1C1917] hover:text-[#476C46] hover:border-[#588157] font-bold text-sm transition cursor-pointer shadow-xs"
+              className="flex items-center justify-center gap-2 p-3.5 rounded-2xl bg-[#FAF6EE] dark:bg-[#24201C] hover:bg-[#F2ECE1] dark:hover:bg-[#2E2822] border border-[#D6CEBE] dark:border-[#38322B] text-[#1C1917] dark:text-[#F5EFE4] hover:text-[#476C46] dark:hover:text-[#62B889] hover:border-[#588157] dark:hover:border-[#62B889] font-bold text-sm transition cursor-pointer shadow-xs"
             >
-              <Layers className="w-4 h-4 text-[#476C46]" />
+              <Layers className="w-4 h-4 text-[#476C46] dark:text-[#62B889]" />
               <span>📱 Kelime Dizme ({practiceDifficulty === 'all' ? 'Tümü' : practiceDifficulty})</span>
             </button>
           </div>
@@ -281,8 +281,8 @@ export default function BookDetailView({
       {/* Book's Passages List */}
       <div className="mb-6">
         <div className="flex items-center justify-between mb-4 px-1">
-          <h3 className="text-lg font-serif font-bold text-[#1C1917] flex items-center gap-2">
-            <BookOpen className="w-5 h-5 text-[#B44A22]" />
+          <h3 className="text-lg font-serif font-bold text-[#1C1917] dark:text-[#F5EFE4] flex items-center gap-2">
+            <BookOpen className="w-5 h-5 text-[#B44A22] dark:text-[#E07048]" />
             <span>Kitabın Seçkin Pasajları ({passages.length})</span>
           </h3>
 
@@ -298,7 +298,7 @@ export default function BookDetailView({
                   className={`px-2.5 py-1 rounded-xl text-xs font-semibold transition cursor-pointer ${
                     selectedDifficulty === lvl
                       ? 'bg-[#C85A32] text-white shadow-xs'
-                      : 'bg-white border border-[#D6CEBE] text-[#57534E] hover:text-[#1C1917]'
+                      : 'bg-white dark:bg-[#1E1B18] border border-[#D6CEBE] dark:border-[#38322B] text-[#57534E] dark:text-[#A8A196] hover:text-[#1C1917] dark:hover:text-[#F5EFE4]'
                   }`}
                 >
                   {labels[lvl]} ({count})
@@ -312,10 +312,10 @@ export default function BookDetailView({
           {filteredPassages.map((p, index) => {
             const wordCount = p.quote.trim().split(/\s+/).length;
             const diffLabels = {
-              easy: { name: 'Kolay', color: 'bg-emerald-50 text-emerald-800 border-emerald-300' },
-              medium: { name: 'Orta', color: 'bg-amber-50 text-amber-800 border-amber-300' },
-              hard: { name: 'Zor', color: 'bg-orange-50 text-orange-800 border-orange-300' },
-              legendary: { name: 'Efsanevi', color: 'bg-rose-50 text-rose-800 border-rose-300' },
+              easy: { name: 'Kolay', color: 'bg-emerald-50 text-emerald-800 border-emerald-300 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-700/60' },
+              medium: { name: 'Orta', color: 'bg-amber-50 text-amber-800 border-amber-300 dark:bg-amber-950/60 dark:text-amber-300 dark:border-amber-700/60' },
+              hard: { name: 'Zor', color: 'bg-orange-50 text-orange-800 border-orange-300 dark:bg-orange-950/60 dark:text-orange-300 dark:border-orange-700/60' },
+              legendary: { name: 'Efsanevi', color: 'bg-rose-50 text-rose-800 border-rose-300 dark:bg-rose-950/60 dark:text-rose-300 dark:border-rose-700/60' },
             };
             const diffInfo = diffLabels[p.difficulty] || diffLabels.easy;
 
@@ -333,11 +333,11 @@ export default function BookDetailView({
             return (
               <div
                 key={p.id || index}
-                className="p-5 rounded-3xl bg-white border border-[#D6CEBE] hover:border-[#C85A32]/60 transition-all flex flex-col justify-between shadow-xs group"
+                className="p-5 rounded-3xl bg-white dark:bg-[#1C1917] border border-[#D6CEBE] dark:border-[#38322B] hover:border-[#C85A32]/60 dark:hover:border-[#E07048]/60 transition-all flex flex-col justify-between shadow-xs group"
               >
                 <div>
-                  <div className="flex items-center justify-between text-xs text-[#57534E] mb-3 pb-2 border-b border-[#D6CEBE]">
-                    <span className="font-serif font-bold text-[#B44A22] text-xs">
+                  <div className="flex items-center justify-between text-xs text-[#57534E] dark:text-[#A8A196] mb-3 pb-2 border-b border-[#D6CEBE] dark:border-[#38322B]">
+                    <span className="font-serif font-bold text-[#B44A22] dark:text-[#E07048] text-xs">
                       Pasaj #{index + 1}
                     </span>
                     <span className={`px-2 py-0.5 rounded-md text-[10px] font-bold border ${diffInfo.color}`}>
@@ -345,17 +345,17 @@ export default function BookDetailView({
                     </span>
                   </div>
 
-                  <p className="text-sm sm:text-base font-serif italic text-[#1C1917] leading-relaxed mb-4 font-quote">
+                  <p className="text-sm sm:text-base font-serif italic text-[#1C1917] dark:text-[#F5EFE4] leading-relaxed mb-4 font-quote">
                     "{p.quote}"
                   </p>
                 </div>
 
-                <div className="flex items-center justify-end gap-2 pt-3 border-t border-[#D6CEBE]">
+                <div className="flex items-center justify-end gap-2 pt-3 border-t border-[#D6CEBE] dark:border-[#38322B]">
                   <button
                     onClick={() => onStartSpecificQuote(quoteObj, 'fullTyping')}
-                    className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-[#C85A32]/10 hover:bg-[#C85A32]/20 text-[#B44A22] border border-[#C85A32]/40 font-bold transition cursor-pointer text-xs"
+                    className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-[#C85A32]/10 dark:bg-[#E07048]/15 hover:bg-[#C85A32]/20 dark:hover:bg-[#E07048]/25 text-[#B44A22] dark:text-[#E07048] border border-[#C85A32]/40 dark:border-[#E07048]/40 font-bold transition cursor-pointer text-xs"
                   >
-                    <Play className="w-3.5 h-3.5 fill-[#B44A22]" />
+                    <Play className="w-3.5 h-3.5 fill-[#B44A22] dark:fill-[#E07048]" />
                     <span>Bu Cümleyi Ezberle</span>
                   </button>
                 </div>

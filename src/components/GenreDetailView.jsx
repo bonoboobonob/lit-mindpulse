@@ -104,34 +104,34 @@ export default function GenreDetailView({
             sounds.playClick();
             onBack();
           }}
-          className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white hover:bg-[#FAF6EE] border border-[#D6CEBE] text-[#44403C] hover:text-[#1C1917] text-sm font-semibold transition shadow-xs cursor-pointer"
+          className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white dark:bg-[#1E1B18] hover:bg-[#FAF6EE] dark:hover:bg-[#282420] border border-[#D6CEBE] dark:border-[#38322B] text-[#44403C] dark:text-[#EDE8DF] hover:text-[#1C1917] dark:hover:text-[#F5EFE4] text-sm font-semibold transition shadow-xs cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Kütüphaneye Dön</span>
         </button>
 
-        <span className="text-xs text-[#57534E] font-medium hidden sm:inline">
+        <span className="text-xs text-[#57534E] dark:text-[#A8A196] font-medium hidden sm:inline">
           {distinctBooks} Farklı Eser • {distinctAuthors} Yazar
         </span>
       </div>
 
       {/* Genre Showcase Banner */}
-      <div className="relative p-6 sm:p-8 rounded-3xl bg-white border border-[#D6CEBE] shadow-xs mb-8">
+      <div className="relative p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#1C1917] border border-[#D6CEBE] dark:border-[#38322B] shadow-xs mb-8">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="flex items-start gap-4">
-            <div className="p-3.5 rounded-2xl bg-[#C85A32]/10 text-[#B44A22] border border-[#C85A32]/30 shrink-0">
+            <div className="p-3.5 rounded-2xl bg-[#C85A32]/10 dark:bg-[#E07048]/15 text-[#B44A22] dark:text-[#E07048] border border-[#C85A32]/30 dark:border-[#E07048]/40 shrink-0">
               <Icon className="w-8 h-8 stroke-[2.2]" />
             </div>
             <div>
               <div className="flex items-center gap-2 mb-1">
-                <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#1C1917]">
+                <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#1C1917] dark:text-[#F5EFE4]">
                   {genre.name}
                 </h2>
-                <span className="px-2.5 py-0.5 rounded-full bg-[#FAF6EE] text-[#B44A22] border border-[#D6CEBE] text-xs font-bold">
+                <span className="px-2.5 py-0.5 rounded-full bg-[#FAF6EE] dark:bg-[#282420] text-[#B44A22] dark:text-[#E07048] border border-[#D6CEBE] dark:border-[#38322B] text-xs font-bold">
                   {allGenreQuotes.length} Alıntı
                 </span>
               </div>
-              <p className="text-sm text-[#44403C] font-medium leading-relaxed max-w-xl">
+              <p className="text-sm text-[#44403C] dark:text-[#D6CEBE] font-medium leading-relaxed max-w-xl">
                 {genre.desc}
               </p>
             </div>
@@ -139,8 +139,8 @@ export default function GenreDetailView({
         </div>
 
         {/* Quick Launch Buttons for this specific Genre */}
-        <div className="mt-6 pt-5 border-t border-[#D6CEBE]">
-          <span className="text-xs font-bold uppercase tracking-wider text-[#B44A22] block mb-3">
+        <div className="mt-6 pt-5 border-t border-[#D6CEBE] dark:border-[#38322B]">
+          <span className="text-xs font-bold uppercase tracking-wider text-[#B44A22] dark:text-[#E07048] block mb-3">
             Bu Kategoride Antrenman Başlat
           </span>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -149,9 +149,9 @@ export default function GenreDetailView({
                 sounds.playClick();
                 onStartGenrePractice(genre.id, 'fullTyping');
               }}
-              className="flex items-center justify-center gap-2 p-3 rounded-2xl bg-[#FAF6EE] hover:bg-[#F2ECE1] border border-[#D6CEBE] text-[#1C1917] hover:text-[#B44A22] hover:border-[#C85A32] font-semibold text-sm transition cursor-pointer shadow-xs"
+              className="flex items-center justify-center gap-2 p-3 rounded-2xl bg-[#FAF6EE] dark:bg-[#24201C] hover:bg-[#F2ECE1] dark:hover:bg-[#2E2822] border border-[#D6CEBE] dark:border-[#38322B] text-[#1C1917] dark:text-[#F5EFE4] hover:text-[#B44A22] dark:hover:text-[#E07048] hover:border-[#C85A32] dark:hover:border-[#E07048] font-semibold text-sm transition cursor-pointer shadow-xs"
             >
-              <Feather className="w-4 h-4 text-[#B44A22]" />
+              <Feather className="w-4 h-4 text-[#B44A22] dark:text-[#E07048]" />
               <span>✍️ Tam Yazma Modu</span>
             </button>
 
@@ -160,9 +160,9 @@ export default function GenreDetailView({
                 sounds.playClick();
                 onStartGenrePractice(genre.id, 'clozeRecall');
               }}
-              className="flex items-center justify-center gap-2 p-3 rounded-2xl bg-[#FAF6EE] hover:bg-[#F2ECE1] border border-[#D6CEBE] text-[#1C1917] hover:text-[#8C5E3C] hover:border-[#8C5E3C] font-semibold text-sm transition cursor-pointer shadow-xs"
+              className="flex items-center justify-center gap-2 p-3 rounded-2xl bg-[#FAF6EE] dark:bg-[#24201C] hover:bg-[#F2ECE1] dark:hover:bg-[#2E2822] border border-[#D6CEBE] dark:border-[#38322B] text-[#1C1917] dark:text-[#F5EFE4] hover:text-[#8C5E3C] dark:hover:text-[#D4AF37] hover:border-[#8C5E3C] dark:hover:border-[#D4AF37] font-semibold text-sm transition cursor-pointer shadow-xs"
             >
-              <Puzzle className="w-4 h-4 text-[#8C5E3C]" />
+              <Puzzle className="w-4 h-4 text-[#8C5E3C] dark:text-[#D4AF37]" />
               <span>🧩 Boşluk Doldurma</span>
             </button>
 
@@ -171,9 +171,9 @@ export default function GenreDetailView({
                 sounds.playClick();
                 onStartGenrePractice(genre.id, 'wordScramble');
               }}
-              className="flex items-center justify-center gap-2 p-3 rounded-2xl bg-[#FAF6EE] hover:bg-[#F2ECE1] border border-[#D6CEBE] text-[#1C1917] hover:text-[#476C46] hover:border-[#588157] font-semibold text-sm transition cursor-pointer shadow-xs"
+              className="flex items-center justify-center gap-2 p-3 rounded-2xl bg-[#FAF6EE] dark:bg-[#24201C] hover:bg-[#F2ECE1] dark:hover:bg-[#2E2822] border border-[#D6CEBE] dark:border-[#38322B] text-[#1C1917] dark:text-[#F5EFE4] hover:text-[#476C46] dark:hover:text-[#62B889] hover:border-[#588157] dark:hover:border-[#62B889] font-semibold text-sm transition cursor-pointer shadow-xs"
             >
-              <Layers className="w-4 h-4 text-[#476C46]" />
+              <Layers className="w-4 h-4 text-[#476C46] dark:text-[#62B889]" />
               <span>📱 Kelime Dizme</span>
             </button>
           </div>
@@ -184,11 +184,11 @@ export default function GenreDetailView({
       {genreBooks.length > 0 && (
         <div className="mb-10">
           <div className="flex items-center justify-between mb-4 px-1">
-            <h3 className="text-lg font-serif font-bold text-[#1C1917] flex items-center gap-2">
-              <BookOpen className="w-5 h-5 text-[#B44A22]" />
+            <h3 className="text-lg font-serif font-bold text-[#1C1917] dark:text-[#F5EFE4] flex items-center gap-2">
+              <BookOpen className="w-5 h-5 text-[#B44A22] dark:text-[#E07048]" />
               <span>Kategorinin Başyapıtları & Eser İncelemeleri</span>
             </h3>
-            <span className="text-xs text-[#57534E] font-medium hidden sm:inline">
+            <span className="text-xs text-[#57534E] dark:text-[#A8A196] font-medium hidden sm:inline">
               Detaylı özet ve kitap içi pasajlar için esere dokunun
             </span>
           </div>
@@ -201,7 +201,7 @@ export default function GenreDetailView({
                   sounds.playClick();
                   onSelectBook(book.id);
                 }}
-                className="p-5 rounded-3xl bg-white border border-[#D6CEBE] hover:border-[#C85A32] hover:shadow-md transition-all cursor-pointer group flex flex-col justify-between"
+                className="p-5 rounded-3xl bg-white dark:bg-[#1C1917] border border-[#D6CEBE] dark:border-[#38322B] hover:border-[#C85A32] dark:hover:border-[#E07048] hover:shadow-md transition-all cursor-pointer group flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-start gap-4 mb-3">
@@ -212,13 +212,13 @@ export default function GenreDetailView({
                     </div>
 
                     <div className="flex-1 min-w-0">
-                      <h4 className="text-base font-serif font-bold text-[#1C1917] group-hover:text-[#B44A22] transition-colors truncate">
+                      <h4 className="text-base font-serif font-bold text-[#1C1917] dark:text-[#F5EFE4] group-hover:text-[#B44A22] dark:group-hover:text-[#E07048] transition-colors truncate">
                         {book.title}
                       </h4>
-                      <p className="text-xs text-[#57534E] font-medium mb-1.5">
+                      <p className="text-xs text-[#57534E] dark:text-[#A8A196] font-medium mb-1.5">
                         {book.author} • {book.year}
                       </p>
-                      <p className="text-xs text-[#44403C] line-clamp-2 leading-relaxed">
+                      <p className="text-xs text-[#44403C] dark:text-[#D6CEBE] line-clamp-2 leading-relaxed">
                         {book.summary}
                       </p>
                     </div>
@@ -228,7 +228,7 @@ export default function GenreDetailView({
                   {book.keyThemes && (
                     <div className="flex flex-wrap gap-1 mb-2">
                       {book.keyThemes.slice(0, 3).map((t, idx) => (
-                        <span key={idx} className="text-[10px] px-2 py-0.5 rounded-md bg-[#FAF6EE] border border-[#D6CEBE] text-[#57534E]">
+                        <span key={idx} className="text-[10px] px-2 py-0.5 rounded-md bg-[#FAF6EE] dark:bg-[#282420] border border-[#D6CEBE] dark:border-[#38322B] text-[#57534E] dark:text-[#A8A196]">
                           #{t}
                         </span>
                       ))}
@@ -236,7 +236,7 @@ export default function GenreDetailView({
                   )}
                 </div>
 
-                <div className="flex items-center justify-between pt-3 border-t border-[#D6CEBE] text-xs font-bold text-[#B44A22] group-hover:translate-x-1 transition-transform">
+                <div className="flex items-center justify-between pt-3 border-t border-[#D6CEBE] dark:border-[#38322B] text-xs font-bold text-[#B44A22] dark:text-[#E07048] group-hover:translate-x-1 transition-transform">
                   <span>Kitap Özeti & {book.passages?.length || 0} Pasajı İncele</span>
                   <ChevronRight className="w-4 h-4" />
                 </div>
@@ -249,8 +249,8 @@ export default function GenreDetailView({
       {/* Difficulty Filter Tabs & Quotes Stream */}
       <div>
         <div className="flex items-center justify-between gap-2 mb-4 flex-wrap">
-          <div className="flex items-center gap-1.5 text-xs font-bold text-[#1C1917]">
-            <Filter className="w-4 h-4 text-[#B44A22]" />
+          <div className="flex items-center gap-1.5 text-xs font-bold text-[#1C1917] dark:text-[#F5EFE4]">
+            <Filter className="w-4 h-4 text-[#B44A22] dark:text-[#E07048]" />
             <span>Kategori İçi Tüm Cümleler ({allGenreQuotes.length}):</span>
           </div>
 
@@ -260,7 +260,7 @@ export default function GenreDetailView({
               className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition cursor-pointer ${
                 selectedDifficulty === 'all'
                   ? 'bg-[#C85A32] text-white shadow-xs'
-                  : 'bg-white border border-[#D6CEBE] text-[#57534E] hover:text-[#1C1917]'
+                  : 'bg-white dark:bg-[#1E1B18] border border-[#D6CEBE] dark:border-[#38322B] text-[#57534E] dark:text-[#A8A196] hover:text-[#1C1917] dark:hover:text-[#F5EFE4]'
               }`}
             >
               Tümü ({allGenreQuotes.length})
@@ -275,7 +275,7 @@ export default function GenreDetailView({
                   className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition cursor-pointer ${
                     selectedDifficulty === d.id
                       ? 'bg-[#C85A32] text-white shadow-xs'
-                      : 'bg-white border border-[#D6CEBE] text-[#57534E] hover:text-[#1C1917]'
+                      : 'bg-white dark:bg-[#1E1B18] border border-[#D6CEBE] dark:border-[#38322B] text-[#57534E] dark:text-[#A8A196] hover:text-[#1C1917] dark:hover:text-[#F5EFE4]'
                   }`}
                 >
                   {d.name.split(' ')[0]} ({count})
@@ -290,37 +290,37 @@ export default function GenreDetailView({
           {filteredQuotes.map((q) => {
             const wordCount = q.quote.trim().split(/\s+/).length;
             const diffLabels = {
-              easy: { name: 'Kolay', color: 'bg-emerald-50 text-emerald-800 border-emerald-300' },
-              medium: { name: 'Orta', color: 'bg-amber-50 text-amber-800 border-amber-300' },
-              hard: { name: 'Zor', color: 'bg-orange-50 text-orange-800 border-orange-300' },
-              legendary: { name: 'Efsanevi', color: 'bg-rose-50 text-rose-800 border-rose-300' },
+              easy: { name: 'Kolay', color: 'bg-emerald-50 text-emerald-800 border-emerald-300 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-700/60' },
+              medium: { name: 'Orta', color: 'bg-amber-50 text-amber-800 border-amber-300 dark:bg-amber-950/60 dark:text-amber-300 dark:border-amber-700/60' },
+              hard: { name: 'Zor', color: 'bg-orange-50 text-orange-800 border-orange-300 dark:bg-orange-950/60 dark:text-orange-300 dark:border-orange-700/60' },
+              legendary: { name: 'Efsanevi', color: 'bg-rose-50 text-rose-800 border-rose-300 dark:bg-rose-950/60 dark:text-rose-300 dark:border-rose-700/60' },
             };
             const diffInfo = diffLabels[q.difficulty] || diffLabels.easy;
 
             return (
               <div
                 key={q.id}
-                className="p-5 rounded-3xl bg-white border border-[#D6CEBE] hover:border-[#C85A32]/60 transition-all flex flex-col justify-between shadow-xs group"
+                className="p-5 rounded-3xl bg-white dark:bg-[#1C1917] border border-[#D6CEBE] dark:border-[#38322B] hover:border-[#C85A32]/60 dark:hover:border-[#E07048]/60 transition-all flex flex-col justify-between shadow-xs group"
               >
                 <div>
-                  <div className="flex items-center justify-between text-xs text-[#57534E] mb-3 pb-2 border-b border-[#D6CEBE]">
-                    <div className="font-serif font-bold text-[#B44A22] text-sm truncate max-w-[220px]">
+                  <div className="flex items-center justify-between text-xs text-[#57534E] dark:text-[#A8A196] mb-3 pb-2 border-b border-[#D6CEBE] dark:border-[#38322B]">
+                    <div className="font-serif font-bold text-[#B44A22] dark:text-[#E07048] text-sm truncate max-w-[220px]">
                       {q.book}
                     </div>
-                    <span className="text-[#57534E] font-medium text-[11px]">{q.author}</span>
+                    <span className="text-[#57534E] dark:text-[#A8A196] font-medium text-[11px]">{q.author}</span>
                   </div>
 
-                  <p className="text-sm sm:text-base font-serif italic text-[#1C1917] leading-relaxed mb-4 font-quote">
+                  <p className="text-sm sm:text-base font-serif italic text-[#1C1917] dark:text-[#F5EFE4] leading-relaxed mb-4 font-quote">
                     "{q.quote}"
                   </p>
                 </div>
 
-                <div className="flex items-center justify-between pt-3 border-t border-[#D6CEBE] text-xs">
+                <div className="flex items-center justify-between pt-3 border-t border-[#D6CEBE] dark:border-[#38322B] text-xs">
                   <div className="flex items-center gap-2">
                     <span className={`px-2 py-0.5 rounded-md text-[10px] font-bold border ${diffInfo.color}`}>
                       {diffInfo.name}
                     </span>
-                    <span className="text-[11px] text-[#57534E] font-medium">
+                    <span className="text-[11px] text-[#57534E] dark:text-[#A8A196] font-medium">
                       {wordCount} Kelime
                     </span>
                   </div>
@@ -329,9 +329,9 @@ export default function GenreDetailView({
                     <button
                       onClick={() => onStartSpecificQuote(q, 'fullTyping')}
                       title="Tam Yazma ile Ezberle"
-                      className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-[#C85A32]/10 hover:bg-[#C85A32]/20 text-[#B44A22] border border-[#C85A32]/30 font-bold transition cursor-pointer text-xs"
+                      className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-[#C85A32]/10 dark:bg-[#E07048]/15 hover:bg-[#C85A32]/20 dark:hover:bg-[#E07048]/25 text-[#B44A22] dark:text-[#E07048] border border-[#C85A32]/30 dark:border-[#E07048]/40 font-bold transition cursor-pointer text-xs"
                     >
-                      <Play className="w-3 h-3 fill-[#B44A22]" />
+                      <Play className="w-3 h-3 fill-[#B44A22] dark:fill-[#E07048]" />
                       <span>Ezberle</span>
                     </button>
                   </div>

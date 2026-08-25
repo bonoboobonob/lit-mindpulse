@@ -491,30 +491,30 @@ export default function FullTypingGame({
       {phase === 'result' && currentQuote && (
         <div className="w-full max-w-2xl flex flex-col items-center animate-in fade-in duration-200">
           <div className="w-full grid grid-cols-3 gap-3 mb-6">
-            <div className="p-4 rounded-2xl bg-white border border-[#D6CEBE] text-center shadow-xs">
-              <div className="text-xs text-[#57534E] font-medium mb-1">Doğruluk</div>
+            <div className="p-4 rounded-2xl bg-white dark:bg-[#1C1917] border border-[#D6CEBE] dark:border-[#38322B] text-center shadow-xs">
+              <div className="text-xs text-[#57534E] dark:text-[#A8A196] font-medium mb-1">Doğruluk</div>
               <div className={`text-2xl sm:text-3xl font-serif font-extrabold ${accuracy >= 80 ? 'text-emerald-700 dark:text-emerald-400' : accuracy >= 50 ? 'text-amber-700 dark:text-amber-400' : 'text-rose-600 dark:text-rose-400'}`}>
                 %{accuracy}
               </div>
             </div>
 
-            <div className="p-4 rounded-2xl bg-white border border-[#D6CEBE] text-center shadow-xs">
-              <div className="text-xs text-[#57534E] font-medium mb-1">Yazma Hızı</div>
+            <div className="p-4 rounded-2xl bg-white dark:bg-[#1C1917] border border-[#D6CEBE] dark:border-[#38322B] text-center shadow-xs">
+              <div className="text-xs text-[#57534E] dark:text-[#A8A196] font-medium mb-1">Yazma Hızı</div>
               <div className="text-2xl sm:text-3xl font-serif font-extrabold text-[#B44A22] dark:text-[#E07048]">
-                {wpm} <span className="text-xs font-normal text-[#57534E]">WPM</span>
+                {wpm} <span className="text-xs font-normal text-[#57534E] dark:text-[#A8A196]">WPM</span>
               </div>
             </div>
 
-            <div className="p-4 rounded-2xl bg-white border border-[#D6CEBE] text-center shadow-xs">
-              <div className="text-xs text-[#57534E] font-medium mb-1">Kazanılan Puan</div>
+            <div className="p-4 rounded-2xl bg-white dark:bg-[#1C1917] border border-[#D6CEBE] dark:border-[#38322B] text-center shadow-xs">
+              <div className="text-xs text-[#57534E] dark:text-[#A8A196] font-medium mb-1">Kazanılan Puan</div>
               <div className="text-2xl sm:text-3xl font-serif font-extrabold text-[#476C46] dark:text-[#62B889]">
                 {score}
               </div>
             </div>
           </div>
 
-          <div className="w-full p-5 sm:p-6 rounded-3xl bg-white border border-[#D6CEBE] shadow-md mb-6">
-            <div className="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-[#57534E] mb-4">
+          <div className="w-full p-5 sm:p-6 rounded-3xl bg-white dark:bg-[#1C1917] border border-[#D6CEBE] dark:border-[#38322B] shadow-md mb-6">
+            <div className="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-[#57534E] dark:text-[#A8A196] mb-4">
               <span className="text-[#1C1917] dark:text-[#F5EFE4]">Kelime Karşılaştırması</span>
               <div className="flex items-center gap-2.5 text-[11px] font-bold normal-case">
                 <span className="text-emerald-700 dark:text-emerald-400">● Doğru</span>
@@ -523,7 +523,7 @@ export default function FullTypingGame({
               </div>
             </div>
 
-            <div className="flex flex-wrap gap-1.5 sm:gap-2 text-sm sm:text-base font-serif leading-relaxed mb-6 max-h-48 sm:max-h-64 overflow-y-auto p-3.5 rounded-2xl bg-[#FAF6EE] border border-[#D6CEBE]">
+            <div className="flex flex-wrap gap-1.5 sm:gap-2 text-sm sm:text-base font-serif leading-relaxed mb-6 max-h-48 sm:max-h-64 overflow-y-auto p-3.5 rounded-2xl bg-[#FAF6EE] dark:bg-[#24201C] border border-[#D6CEBE] dark:border-[#38322B]">
               {diffAnalysis.map((item, idx) => {
                 if (item.status === 'correct') {
                   return (
@@ -554,10 +554,10 @@ export default function FullTypingGame({
               })}
             </div>
 
-            <div className="space-y-3 pt-4 border-t border-[#D6CEBE] text-xs">
+            <div className="space-y-3 pt-4 border-t border-[#D6CEBE] dark:border-[#38322B] text-xs">
               <div>
-                <span className="text-[#57534E] font-medium block mb-0.5">Orijinal Eser: <strong className="text-[#B44A22]">{currentQuote.book}</strong> ({currentQuote.author})</span>
-                <p className="text-[#1C1917] italic font-serif text-sm sm:text-base quote-text leading-relaxed font-quote">
+                <span className="text-[#57534E] dark:text-[#A8A196] font-medium block mb-0.5">Orijinal Eser: <strong className="text-[#B44A22] dark:text-[#E07048]">{currentQuote.book}</strong> ({currentQuote.author})</span>
+                <p className="text-[#1C1917] dark:text-[#F5EFE4] italic font-serif text-sm sm:text-base quote-text leading-relaxed font-quote">
                   "{currentQuote.quote}"
                 </p>
               </div>
