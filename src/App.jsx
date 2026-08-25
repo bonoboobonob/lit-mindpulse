@@ -21,6 +21,7 @@ export default function App() {
   const [stats, setStats] = useState(getSavedStats());
   const [customQuotes, setCustomQuotes] = useState(getCustomQuotes());
   const [activeQuote, setActiveQuote] = useState(null);
+  const [pausedGameSession, setPausedGameSession] = useState(null);
   
   const [isStatsOpen, setIsStatsOpen] = useState(false);
   const [isTipsOpen, setIsTipsOpen] = useState(false);
@@ -49,11 +50,13 @@ export default function App() {
   };
 
   const handleStartQuotePractice = (quote, mode = 'fullTyping') => {
+    setPausedGameSession(null);
     setActiveQuote(quote);
     setCurrentScreen(mode);
   };
 
   const handleStartGenrePractice = (genreId, mode = 'fullTyping') => {
+    setPausedGameSession(null);
     setSelectedGenre(genreId);
     setSelectedBookId(null);
     setSelectedDifficulty('all');
@@ -62,15 +65,45 @@ export default function App() {
   };
 
   const handleStartBookPractice = (bookId, mode = 'fullTyping', difficulty = 'all') => {
+    setPausedGameSession(null);
     setSelectedBookId(bookId);
     setSelectedDifficulty(difficulty);
     setActiveQuote(null);
     setCurrentScreen(mode);
   };
 
-  const handleSelectBook = (bookId) => {
+  const handleSelectBook = (bookId, gameContext = null) => {
+    if (['fullTyping', 'clozeRecall', 'wordScramble'].includes(currentScreen)) {
+      setPausedGameSession({
+        mode: currentScreen,
+        genre: selectedGenre,
+        difficulty: selectedDifficulty,
+        bookId: selectedBookId,
+        quote: activeQuote,
+        ...(gameContext || {})
+      });
+    }
     setSelectedBookId(bookId);
     setCurrentScreen('bookDetail');
+  };
+
+  const handleResumeExercise = () => {
+    if (!pausedGameSession) return;
+    const { mode, genre, difficulty, bookId, quote } = pausedGameSession;
+    setSelectedGenre(genre || 'all');
+    setSelectedDifficulty(difficulty || 'all');
+    setSelectedBookId(bookId || null);
+    setActiveQuote(quote || null);
+    setCurrentScreen(mode);
+    setPausedGameSession(null);
+  };
+
+  const handleNavigateHome = () => {
+    sounds.playClick();
+    setActiveQuote(null);
+    setSelectedBookId(null);
+    setPausedGameSession(null);
+    setCurrentScreen('home');
   };
 
   const handleToggleSound = () => {
@@ -84,12 +117,7 @@ export default function App() {
         {/* Literary Header */}
         <Header
           currentScreen={currentScreen}
-          onNavigateHome={() => {
-            sounds.playClick();
-            setActiveQuote(null);
-            setSelectedBookId(null);
-            setCurrentScreen('home');
-          }}
+          onNavigateHome={handleNavigateHome}
           onOpenStats={() => {
             sounds.playClick();
             setIsStatsOpen(true);
@@ -116,11 +144,13 @@ export default function App() {
                 setActiveQuote(null);
                 setSelectedGenre('all');
                 setSelectedBookId(null);
+                setPausedGameSession(null);
                 setCurrentScreen(modeId);
               }}
               onSelectGenre={(genreId) => {
                 setSelectedGenre(genreId);
                 setSelectedBookId(null);
+                setPausedGameSession(null);
                 setCurrentScreen('genreDetail');
               }}
               onOpenLibrary={() => setCurrentScreen('library')}
@@ -141,7 +171,18 @@ export default function App() {
           {currentScreen === 'bookDetail' && (
             <BookDetailView
               bookId={selectedBookId}
-              onBack={() => setCurrentScreen(selectedGenre !== 'all' ? 'genreDetail' : 'home')}
+              pausedGameSession={pausedGameSession}
+              onResumeExercise={handleResumeExercise}
+              onNavigateHome={handleNavigateHome}
+              onBack={() => {
+                if (pausedGameSession) {
+                  handleResumeExercise();
+                } else if (selectedGenre !== 'all') {
+                  setCurrentScreen('genreDetail');
+                } else {
+                  setCurrentScreen('home');
+                }
+              }}
               onStartBookPractice={handleStartBookPractice}
               onStartSpecificQuote={handleStartQuotePractice}
             />

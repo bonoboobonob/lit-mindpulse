@@ -35,7 +35,8 @@ export default function FullTypingGame({
   const [selectedDifficulty, setSelectedDifficulty] = useState(initialDifficulty || (initialBookId ? 'all' : 'medium'));
   const [currentQuote, setCurrentQuote] = useState(initialQuote);
 
-  const [phase, setPhase] = useState((initialQuote || initialBookId) ? 'study' : 'selection'); // 'selection' | 'study' | 'typing' | 'result'
+  const shouldAutoStart = Boolean(initialQuote || initialBookId || initialGenre !== 'all' || (initialDifficulty && initialDifficulty !== 'all'));
+  const [phase, setPhase] = useState(shouldAutoStart ? 'study' : 'selection'); // 'selection' | 'study' | 'typing' | 'result'
   const [timeLeft, setTimeLeft] = useState(20);
   const [totalStudyTime, setTotalStudyTime] = useState(20);
   const [typedText, setTypedText] = useState('');
@@ -96,10 +97,10 @@ export default function FullTypingGame({
   useEffect(() => {
     if (initialQuote) {
       startStudyPhase(initialQuote);
-    } else if (initialBookId) {
+    } else if (initialBookId || initialGenre !== 'all' || (initialDifficulty && initialDifficulty !== 'all')) {
       startStudyPhase();
     }
-  }, [initialQuote, initialBookId]);
+  }, [initialQuote, initialBookId, initialGenre, initialDifficulty]);
 
   // Transition to typing phase
   const startTypingPhase = () => {
@@ -573,7 +574,12 @@ export default function FullTypingGame({
                       onClick={() => {
                         sounds.playClick();
                         if (onSelectBook) {
-                          onSelectBook(matchedBook.id);
+                          onSelectBook(matchedBook.id, {
+                            quote: currentQuote,
+                            genre: selectedGenre,
+                            difficulty: selectedDifficulty,
+                            bookId: selectedBookId
+                          });
                         }
                       }}
                       className="w-full flex items-center justify-between p-3 sm:p-3.5 rounded-2xl bg-[#FAF6EE] hover:bg-[#F2ECE0] border border-[#D6CEBE] hover:border-[#C85A32] transition group cursor-pointer text-left shadow-2xs"

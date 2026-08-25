@@ -34,7 +34,8 @@ export default function WordScrambleGame({
   const [selectedDifficulty, setSelectedDifficulty] = useState(initialDifficulty || (initialBookId ? 'all' : 'easy'));
   const [currentQuote, setCurrentQuote] = useState(initialQuote);
 
-  const [phase, setPhase] = useState((initialQuote || initialBookId) ? 'study' : 'selection'); // 'selection' | 'study' | 'scramble' | 'result'
+  const shouldAutoStart = Boolean(initialQuote || initialBookId || initialGenre !== 'all' || (initialDifficulty && initialDifficulty !== 'all'));
+  const [phase, setPhase] = useState(shouldAutoStart ? 'study' : 'selection'); // 'selection' | 'study' | 'scramble' | 'result'
   const [timeLeft, setTimeLeft] = useState(15);
   const [totalStudyTime, setTotalStudyTime] = useState(15);
 
@@ -94,10 +95,10 @@ export default function WordScrambleGame({
   useEffect(() => {
     if (initialQuote) {
       startRound(initialQuote);
-    } else if (initialBookId) {
+    } else if (initialBookId || initialGenre !== 'all' || (initialDifficulty && initialDifficulty !== 'all')) {
       startNewGame();
     }
-  }, [initialQuote, initialBookId]);
+  }, [initialQuote, initialBookId, initialGenre, initialDifficulty]);
 
   const handlePickWord = (item) => {
     if (item.isUsed) return;
@@ -489,7 +490,12 @@ export default function WordScrambleGame({
                       onClick={() => {
                         sounds.playClick();
                         if (onSelectBook) {
-                          onSelectBook(matchedBook.id);
+                          onSelectBook(matchedBook.id, {
+                            quote: currentQuote,
+                            genre: selectedGenre,
+                            difficulty: selectedDifficulty,
+                            bookId: selectedBookId
+                          });
                         }
                       }}
                       className="w-full flex items-center justify-between p-3 sm:p-3.5 rounded-2xl bg-[#FAF6EE] hover:bg-[#F2ECE0] border border-[#D6CEBE] hover:border-[#C85A32] transition group cursor-pointer text-left shadow-2xs"

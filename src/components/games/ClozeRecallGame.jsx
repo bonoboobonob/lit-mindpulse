@@ -36,7 +36,8 @@ export default function ClozeRecallGame({
   const [selectedDifficulty, setSelectedDifficulty] = useState(initialDifficulty || (initialBookId ? 'all' : 'medium'));
   const [currentQuote, setCurrentQuote] = useState(initialQuote);
 
-  const [phase, setPhase] = useState((initialQuote || initialBookId) ? 'study' : 'selection'); // 'selection' | 'study' | 'testing' | 'result'
+  const shouldAutoStart = Boolean(initialQuote || initialBookId || initialGenre !== 'all' || (initialDifficulty && initialDifficulty !== 'all'));
+  const [phase, setPhase] = useState(shouldAutoStart ? 'study' : 'selection'); // 'selection' | 'study' | 'testing' | 'result'
   const [timeLeft, setTimeLeft] = useState(15);
   const [totalStudyTime, setTotalStudyTime] = useState(15);
   
@@ -161,10 +162,10 @@ export default function ClozeRecallGame({
   useEffect(() => {
     if (initialQuote) {
       setupClozeQuote(initialQuote);
-    } else if (initialBookId) {
+    } else if (initialBookId || initialGenre !== 'all' || (initialDifficulty && initialDifficulty !== 'all')) {
       startNewRound();
     }
-  }, [initialQuote, initialBookId]);
+  }, [initialQuote, initialBookId, initialGenre, initialDifficulty]);
 
   const startTestingPhase = () => {
     sounds.playLevelUp();
@@ -544,7 +545,12 @@ export default function ClozeRecallGame({
                       onClick={() => {
                         sounds.playClick();
                         if (onSelectBook) {
-                          onSelectBook(matchedBook.id);
+                          onSelectBook(matchedBook.id, {
+                            quote: currentQuote,
+                            genre: selectedGenre,
+                            difficulty: selectedDifficulty,
+                            bookId: selectedBookId
+                          });
                         }
                       }}
                       className="w-full flex items-center justify-between p-3 sm:p-3.5 rounded-2xl bg-[#FAF6EE] hover:bg-[#F2ECE0] border border-[#D6CEBE] hover:border-[#C85A32] transition group cursor-pointer text-left shadow-2xs"
