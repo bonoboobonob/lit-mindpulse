@@ -1,5 +1,5 @@
 // Master Books Database (LibrisMind Literary Corpus)
-// Comprehensive catalog containing EVERY book referenced in the project with full reviews, summaries, bios, and rich passage pools
+// Comprehensive catalog containing EVERY single literary work cited in the project with full reviews, summaries, author bios, and rich passage pools across all difficulty levels
 
 export const BOOKS_DATABASE = [
   // =========================================================================
@@ -34,14 +34,14 @@ export const BOOKS_DATABASE = [
   },
   {
     id: 'ahlak-mektuplari',
-    title: 'Ahlak Mektupları',
-    originalTitle: 'Epistulae Morales ad Lucilium',
+    title: 'Ahlak Mektupları & Yaşamın Kısalığı',
+    originalTitle: 'Epistulae Morales ad Lucilium / De Brevitate Vitae',
     author: 'Seneca',
     authorBio: 'Romalı devlet adamı, hatip, tragedya yazarı ve Stoacı felsefenin en büyük temsilcilerinden biri.',
     authorBirthDeath: 'MÖ 4 - MS 65',
     year: 'MS 65',
     genre: 'philosophy',
-    secondaryGenres: ['letters', 'classics'],
+    secondaryGenres: ['letters', 'classics', 'essay'],
     coverBg: 'from-[#C85A32] to-[#78350F]',
     summary: 'Seneca\'nın dostu Lucilius\'a yazdığı mektuplardan oluşur. Zamanın doğru kullanımı, ölüm korkusunun yenilmesi, bilgelik ve zenginliğin getirdiği ruhsal tuzaklar üzerine pratik yaşam dersleri sunar.',
     keyThemes: ['Zaman Yönetimi', 'Ölüm Bilinci', 'Sade Yaşam', 'Felsefi Dostluk'],
@@ -59,8 +59,8 @@ export const BOOKS_DATABASE = [
   },
   {
     id: 'dusunceler-ve-sohbetler',
-    title: 'Düşünceler ve Sohbetler',
-    originalTitle: 'Diatribai (Διατριβαί)',
+    title: 'Düşünceler ve Sohbetler (Enchiridion)',
+    originalTitle: 'Diatribai / Enchiridion',
     author: 'Epiktetos',
     authorBio: 'Köle olarak doğup Roma\'nın en saygın Stoacı filozofu haline gelen, özgürlüğün dış koşullarda değil zihinsel tutumda olduğunu öğreten bilge.',
     authorBirthDeath: 'MS 50 - MS 135',
@@ -233,8 +233,8 @@ export const BOOKS_DATABASE = [
   },
   {
     id: 'savas-ve-baris',
-    title: 'Savaş ve Barış',
-    originalTitle: 'Voyna i Mir',
+    title: 'Savaş ve Barış & Anna Karenina',
+    originalTitle: 'Voyna i Mir / Anna Karenina',
     author: 'Lev Tolstoy',
     authorBio: 'Rus edebiyatının devi, destansı anlatım ustası ve ahlak düşünürü.',
     authorBirthDeath: '1828 - 1910',
@@ -281,7 +281,7 @@ export const BOOKS_DATABASE = [
   },
   {
     id: 'sefiller',
-    title: 'Sefiller',
+    title: 'Sefiller & Notre Dame',
     originalTitle: 'Les Misérables',
     author: 'Victor Hugo',
     authorBio: 'Fransız Romantizmi\'nin lideri, şair, oyun yazarı ve adalet savunucusu.',
@@ -300,6 +300,45 @@ export const BOOKS_DATABASE = [
       { id: 'hug_4', difficulty: 'medium', quote: 'Affetmek, adaletin katı kurallarından çok daha yüce ve iyileştirici bir güçtür.' },
       { id: 'hug_5', difficulty: 'hard', quote: 'Sevmek veya sevilmiş olmak yeterlidir; karanlık gecelerin ardından doğacak şafağı beklemek gerekmez.' },
       { id: 'hug_6', difficulty: 'legendary', quote: 'Toplum yoksulları karanlığa mahkum edip sonra da onların işlediği suçlara şaşırıyorsa, asıl suçlu karanlığı yaratan toplumun kendisidir.' }
+    ]
+  },
+  {
+    id: 'siddhartha-bozkirkurdu',
+    title: 'Siddhartha & Bozkırkurdu',
+    originalTitle: 'Siddhartha / Der Steppenwolf',
+    author: 'Hermann Hesse',
+    authorBio: 'Alman-İsviçreli romancı ve Nobel Edebiyat Ödülü sahibi. Doğu mistisizmi ve bireyleşme felsefesinin ustası.',
+    authorBirthDeath: '1877 - 1962',
+    year: '1922',
+    genre: 'classics',
+    secondaryGenres: ['philosophy', 'mysticism'],
+    coverBg: 'from-[#D97706] to-[#78350F]',
+    summary: 'Siddhartha\'nın aydınlanma arayışını nehir kıyısında bulması ve Harry Haller\'in Bozkırkurdu kimliğiyle modern toplumun sığlığına karşı iç hesaplaşmasıdır.',
+    keyThemes: ['Aydınlanma Arayışı', 'Bozkırkurdu İkilemi', 'Yalnızlık', 'Özün Keşfi'],
+    historicalContext: 'Doğu ve Batı düşüncesini modern bireyin ruhunda birleştiren kült eserler.',
+    passages: [
+      { id: 'hss_1', difficulty: 'easy', quote: 'Bilgelik başkasına aktarılamaz; onu kişi kendisi bulmalıdır.' },
+      { id: 'hss_2', difficulty: 'medium', quote: 'Yalnızlık bağımsızlıktır; onu ben istedim ve uzun yıllar boyunca bedelini ödedim.' },
+      { id: 'hss_3', difficulty: 'hard', quote: 'Kuş yumurtadan çıkmak için mücadele eder; yumurta dünyadır; doğmak isteyen bir dünyayı yok etmek zorundadır.' }
+    ]
+  },
+  {
+    id: 'madame-bovary',
+    title: 'Madame Bovary & Kırmızı ve Siyah',
+    originalTitle: 'Madame Bovary / Le Rouge et le Noir',
+    author: 'Gustave Flaubert & Stendhal',
+    authorBio: 'Fransız gerçekçi romanının kurucuları ve tutkunun büyük analistleri.',
+    authorBirthDeath: '1821 - 1880 / 1783 - 1842',
+    year: '1857',
+    genre: 'classics',
+    secondaryGenres: ['drama'],
+    coverBg: 'from-[#BE185D] to-[#831843]',
+    summary: 'Romantik hayallerle gerçek hayatın taşra sıradanlığı arasında sıkışıp kalan Emma Bovary\'nin trajik tatminsizliği ve Julien Sorel\'in yükseliş hırsıdır.',
+    keyThemes: ['Bovarizm', 'Romantik Yanılsama', 'Taşra Yaşamı', 'Tatminsizlik'],
+    historicalContext: 'Modern roman sanatının üslup ve teknik açısından miladı kabul edilen eser.',
+    passages: [
+      { id: 'flb_1', difficulty: 'medium', quote: 'İnsan kalbi bir sokak lambası gibidir; rüzgar estikçe söner ve titrer.' },
+      { id: 'flb_2', difficulty: 'medium', quote: 'Büyük tutkular sessizce büyür ve fırtına gibi aniden patlak verir.' }
     ]
   },
 
@@ -378,6 +417,45 @@ export const BOOKS_DATABASE = [
       { id: 'hzr_4', difficulty: 'medium', quote: 'İçimizdeki boşluğu ancak büyük bir aşk veya sanat doldurabilir.' },
       { id: 'hzr_5', difficulty: 'hard', quote: 'Geçmiş zaman, ruhun derinliklerinde biriktirdiği en asil ve hüzünlü hatıralar hazinesidir.' },
       { id: 'hzr_6', difficulty: 'legendary', quote: 'Musiki öyle bir dildir ki, kelimelerin bittiği ve suskunluğun başladığı yerde insan ruhunun en mahrem köşelerine tercüman olur.' }
+    ]
+  },
+  {
+    id: 'ince-memed',
+    title: 'İnce Memed & Ağrıdağı Efsanesi',
+    originalTitle: 'İnce Memed',
+    author: 'Yaşar Kemal',
+    authorBio: 'Dünya edebiyatının en büyük epik anlatıcılarından Nobel adayı Türk romancı.',
+    authorBirthDeath: '1923 - 2015',
+    year: '1955',
+    genre: 'turkish',
+    secondaryGenres: ['classics', 'epic_fantasy'],
+    coverBg: 'from-[#D97706] to-[#78350F]',
+    summary: 'Çukurova\'da Abdi Ağa\'nın zulmüne karşı dağa çıkan İnce Memed\'in yoksul halkın kurtarıcısına dönüşme destanıdır.',
+    keyThemes: ['Adalet ve Başkaldırı', 'Çukurova Coğrafyası', 'Eşkıyalık Miti', 'Direniş'],
+    historicalContext: '40\'tan fazla dile çevrilen çağdaş bir halk destanı.',
+    passages: [
+      { id: 'im_1', difficulty: 'easy', quote: 'Zulmün olduğu yerde direniş haktır.' },
+      { id: 'im_2', difficulty: 'medium', quote: 'İnsan dediğin bir topraktır; suyu sevgidir, güneşi ise adalettir.' },
+      { id: 'im_3', difficulty: 'hard', quote: 'Dağlar ne kadar yüce olsa da sevda ateşi onların zirvesindeki karları eritmeye yeter.' }
+    ]
+  },
+  {
+    id: 'aylak-adam',
+    title: 'Aylak Adam & Anayurt Oteli',
+    originalTitle: 'Aylak Adam',
+    author: 'Yusuf Atılgan',
+    authorBio: 'Modern Türk edebiyatında yabancılaşma ve psikolojik derinliğin öncü yazarı.',
+    authorBirthDeath: '1921 - 1989',
+    year: '1959',
+    genre: 'turkish',
+    secondaryGenres: ['modernist', 'psychology'],
+    coverBg: 'from-[#4B5563] to-[#1F2937]',
+    summary: 'C. karakterinin gerçek bir sevgi ve anlam arayışıyla sokaklarda dolaşması ve Zebercet\'in yalnızlığın kıskacında çöküşüdür.',
+    keyThemes: ['Aylaklık', 'Varoluşsal Yalnızlık', 'Tutku ve Takıntı', 'İç İçe Geçen Zaman'],
+    historicalContext: 'Türk edebiyatında varoluşçu temanın en yetkin ilk örnekleri.',
+    passages: [
+      { id: 'ayl_1', difficulty: 'easy', quote: 'Sustu; konuşsa her şey bozulacaktı.' },
+      { id: 'ayl_2', difficulty: 'medium', quote: 'Yalnızlık, insanın kendi ayak seslerini dinlemekten bile korktuğu sonsuz bir sessizliktir.' }
     ]
   },
 
@@ -498,54 +576,551 @@ export const BOOKS_DATABASE = [
   },
 
   // =========================================================================
-  // 5. MİZAH & HİCİV (SATIRE & WIT)
+  // 5. PSİKOLOJİ & İNSAN (PSYCHOLOGY)
   // =========================================================================
   {
-    id: 'zubuk',
-    title: 'Zübük - Kağnı Gölgesindeki İt',
-    originalTitle: 'Zübük',
-    author: 'Aziz Nesin',
-    authorBio: 'Türk mizah edebiyatının uluslararası üne sahip en büyük ustası.',
-    authorBirthDeath: '1915 - 1995',
-    year: '1961',
-    genre: 'satire',
-    secondaryGenres: ['turkish'],
-    coverBg: 'from-[#B45309] to-[#713F12]',
-    summary: 'İbrahim Zübükzade\'nin yükselişi üzerinden toplumun sahtekarlığa nasıl çanak tuttuğunu anlatan ölümsüz siyasi taşlama.',
-    keyThemes: ['Zübükizm', 'Siyasi İkiyüzlülük', 'Toplumsal Taşlama', 'Kara Mizah'],
-    historicalContext: 'Türk siyasi diline "Zübük" kavramını kazandıran kült eser.',
+    id: 'insanin-anlam-arayisi',
+    title: 'İnsanın Anlam Arayışı',
+    originalTitle: 'Man\'s Search for Meaning',
+    author: 'Viktor Frankl',
+    authorBio: 'Logoterapinin kurucusu, Avusturyalı nörolog ve psikiyatrist.',
+    authorBirthDeath: '1905 - 1997',
+    year: '1946',
+    genre: 'psychology',
+    secondaryGenres: ['philosophy'],
+    coverBg: 'from-[#059669] to-[#064E3B]',
+    summary: 'Auschwitz toplama kampından sağ kurtulan Frankl\'ın, insanın en ağır acı ve çaresizlik koşullarında dahi bir anlam bularak hayata tutunabileceğini gösteren başyapıtıdır.',
+    keyThemes: ['Anlam İstenci', 'Acının Anlamlandırılması', 'İçsel Tavır Seçimi', 'Logoterapi'],
+    historicalContext: 'Milyonlarca insana zor zamanlarda rehberlik eden modern psikoloji klasiği.',
     passages: [
-      { id: 'zb_1', difficulty: 'easy', quote: 'Gülmek, insanın çaresizliğe karşı bulduğu en asil silahtır.' },
-      { id: 'zb_2', difficulty: 'easy', quote: 'Bu memlekette dürüst olmak suç, kurnaz olmak marifet sayılır.' },
-      { id: 'zb_3', difficulty: 'medium', quote: 'Resmi evraklarda varsan varsın, yoksan nefes alsan bile yaşamazsın.' },
-      { id: 'zb_4', difficulty: 'medium', quote: 'Kabahat tek başına Zübük\'te değil; onu baş tacı eden bizim kendi saflığımızdadır.' },
-      { id: 'zb_5', difficulty: 'hard', quote: 'Biz kendi menfaatimiz için kuralları çiğnemeye razı olduğumuz sürece, başımıza yeni Zübüklerin geçmesi kaçınılmazdır.' }
+      { id: 'frk_1', difficulty: 'easy', quote: 'Yaşamak için bir nedeni olan her türlü nasıla katlanır.' },
+      { id: 'frk_2', difficulty: 'medium', quote: 'İnsanın elinden her şey alınabilir; son özgürlüğü olan tavrını seçme hakkı hariç.' },
+      { id: 'frk_3', difficulty: 'hard', quote: 'Koşulları değiştiremediğimiz anda, kendimizi değiştirmek zorunda olduğumuz gerçeğiyle yüzleşiriz.' }
     ]
   },
   {
-    id: 'candide',
-    title: 'Candide ya da İyimserlik',
-    originalTitle: 'Candide, ou l\'Optimisme',
-    author: 'Voltaire',
-    authorBio: 'Fransız Aydınlanması\'nın en keskin zekalı filozofu ve hiciv ustası.',
-    authorBirthDeath: '1694 - 1778',
-    year: '1759',
-    genre: 'satire',
-    secondaryGenres: ['philosophy', 'classics'],
-    coverBg: 'from-[#CA8A04] to-[#854D0E]',
-    summary: 'Saf Candide\'in başına gelen felaketler zinciri ve sonunda "bahçemizi yetiştirmeliyiz" bilgelik sonucuna varmasıdır.',
-    keyThemes: ['Kör İyimserliğin İflası', 'Bahçemizi Yetiştirmek', 'Felsefi İroni'],
-    historicalContext: 'Aydınlanma çağının kilise dogmalarını yıkan en ünlü felsefi taşlaması.',
+    id: 'kesfedilmemis-benlik',
+    title: 'Keşfedilmemiş Benlik & Kırmızı Kitap',
+    originalTitle: 'The Undiscovered Self / The Red Book',
+    author: 'Carl Gustav Jung',
+    authorBio: 'Analitik psikolojinin kurucusu, arketipler ve kolektif bilinçdışının kaşifi.',
+    authorBirthDeath: '1875 - 1961',
+    year: '1957',
+    genre: 'psychology',
+    secondaryGenres: ['philosophy'],
+    coverBg: 'from-[#6B21A8] to-[#3B0764]',
+    summary: 'Bireyleşme süreci, gölge arketipi ve modern insanın kendi bilinçdışıyla barışarak bütünlüğe ulaşma yolculuğudur.',
+    keyThemes: ['Bilinçdışının Aydınlatılması', 'Gölge Arketipi', 'Bireyleşme', 'Kolektif Bilinçdışı'],
+    historicalContext: 'Modern insanın ruhsal krizine derinlikli bir teşhis koyan eser.',
     passages: [
-      { id: 'cnd_1', difficulty: 'easy', quote: 'Bahçemizi yetiştirmek zorundayız.' },
-      { id: 'cnd_2', difficulty: 'easy', quote: 'Çalışmak bizi üç büyük beladan kurtarır: can sıkıntısı, ahlaksızlık ve yoksulluk.' },
-      { id: 'cnd_3', difficulty: 'medium', quote: 'Her şeyin en iyi olduğu bir dünyada yaşıyorsak, diğer dünyalar kimbilir nasıldır?' },
-      { id: 'cnd_4', difficulty: 'hard', quote: 'Dünyadaki kötülükleri ve felaketleri süslü teorilerle aklamaya çalışmak, aklın kendini kandırmasından başka bir şey değildir.' }
+      { id: 'jng_1', difficulty: 'easy', quote: 'Dışarı bakan rüya görür, içeri bakan uyanır.' },
+      { id: 'jng_2', difficulty: 'medium', quote: 'Kendi karanlığıyla yüzleşmeyen hiçbir insan aydınlığa ve olgunluğa ulaşamaz.' },
+      { id: 'jng_3', difficulty: 'hard', quote: 'Bilinçdışını bilince dönüştürene kadar o hayatınızı yönetir ve siz ona kader dersiniz.' }
+    ]
+  },
+  {
+    id: 'sevme-sanati',
+    title: 'Sevme Sanatı & Özgürlükten Kaçış',
+    originalTitle: 'The Art of Loving',
+    author: 'Erich Fromm',
+    authorBio: 'Psikanalist, sosyolog ve hümanist filozof.',
+    authorBirthDeath: '1900 - 1980',
+    year: '1956',
+    genre: 'psychology',
+    secondaryGenres: ['philosophy'],
+    coverBg: 'from-[#E11D48] to-[#881337]',
+    summary: 'Sevginin kendiliğinden oluşan bir heves değil; bilgi, özen, saygı ve sorumluluk gerektiren bilinçli bir sanat olduğunu açıklar.',
+    keyThemes: ['Sevme Sanatı', 'Olgun Sevgi', 'Yalnızlığın Aşılması', 'Sorumluluk'],
+    historicalContext: 'Milyonlarca okura gerçek sevginin anatomisini sunan psikoloji klasiği.',
+    passages: [
+      { id: 'frm_1', difficulty: 'easy', quote: 'Sevgi bir duygu değil, aktif bir sanattır.' },
+      { id: 'frm_2', difficulty: 'medium', quote: 'İnsan kendi yalnızlığından korktuğu için özgürlüğünü otoriteye feda etmeye hazırdır.' }
+    ]
+  },
+  {
+    id: 'nietzsche-agladiginda',
+    title: 'Nietzsche Ağladığında',
+    originalTitle: 'When Nietzsche Wept',
+    author: 'Irvin Yalom',
+    authorBio: 'Varoluşçu psikoterapinin öncüsü, psikiyatrist ve edebiyatçı.',
+    authorBirthDeath: '1931 - günümüz',
+    year: '1992',
+    genre: 'psychology',
+    secondaryGenres: ['philosophy'],
+    coverBg: 'from-[#0369A1] to-[#0C4A6E]',
+    summary: 'Josef Breuer ile Friedrich Nietzsche\'nin Viyana\'da buluşup psikanalizin doğumunu ve varoluşsal acıyı tedavi etme serüvenidir.',
+    keyThemes: ['Varoluşsal Psikoterapi', 'Ümitsizlik ve Hakikat', 'İçsel İtiraflar'],
+    historicalContext: 'Psikoloji ile felsefeyi edebiyat potasında eriten kült roman.',
+    passages: [
+      { id: 'ylm_1', difficulty: 'medium', quote: 'Ümit etmek, sadece gerçekleşmeyecek arzuların acısını uzatmaktan başka bir işe yaramaz.' }
     ]
   },
 
   // =========================================================================
-  // 6. DİĞER KÜLT BAŞYAPITLAR (DUNE, KOZMOS, ZWEIG, vb.)
+  // 6. ŞİİR & DİZELER (POETRY)
+  // =========================================================================
+  {
+    id: 'memleketimden-insan-manzaralari',
+    title: 'Memleketimden İnsan Manzaraları',
+    originalTitle: 'Memleketimden İnsan Manzaraları',
+    author: 'Nazım Hikmet',
+    authorBio: '20. yüzyıl dünya şiirinin büyük ustası, serbest nazmın devrimcisi.',
+    authorBirthDeath: '1902 - 1963',
+    year: '1966',
+    genre: 'poetry',
+    secondaryGenres: ['turkish', 'history'],
+    coverBg: 'from-[#DC2626] to-[#991B1B]',
+    summary: 'Haydarpaşa Garı\'ndan hareket eden bir trende Anadolu\'nun köylüsünü, mahkumunu, askerini ve insanını destanlaştıran anıtsal şiir ırmağıdır.',
+    keyThemes: ['Halk Sevgisi', 'Hürriyet Tutkusu', 'Anadolu İnsanı', 'Lirik Destan'],
+    historicalContext: 'Türk şiirinin en görkemli nehir destanı.',
+    passages: [
+      { id: 'nh_1', difficulty: 'easy', quote: 'Yaşamak bir ağaç gibi tek ve hür.' },
+      { id: 'nh_2', difficulty: 'medium', quote: 'Dörtnala gelip Uzak Asya\'dan Akdeniz\'e bir kısrak başı gibi uzanan bu memleket bizim.' },
+      { id: 'nh_3', difficulty: 'hard', quote: 'En güzel deniz henüz gidilmemiş olandır; en güzel çocuk henüz büyümedi; en güzel günlerimiz henüz yaşamadıklarımızdır.' }
+    ]
+  },
+  {
+    id: 'sevda-sozleri',
+    title: 'Sevda Sözleri & Üvercinka',
+    originalTitle: 'Sevda Sözleri',
+    author: 'Cemal Süreya',
+    authorBio: 'İkinci Yeni şiirinin öncüsü, Türkçenin en kıvrak ve duyarlı aşk şairi.',
+    authorBirthDeath: '1931 - 1990',
+    year: '1984',
+    genre: 'poetry',
+    secondaryGenres: ['turkish'],
+    coverBg: 'from-[#E11D48] to-[#9F1239]',
+    summary: 'Aşkı, yalnızlığı, bedeni ve gündelik hayatın mucizelerini benzersiz bir dil estetiğiyle buluşturan şiirlerin toplamıdır.',
+    keyThemes: ['Erotizm ve Masumiyet', 'Dilin Estetiği', 'Hüzün', 'İkinci Yeni'],
+    historicalContext: 'Çağdaş Türk şiirinin en çok ezberlenen dizelerinin kaynağı.',
+    passages: [
+      { id: 'cs_1', difficulty: 'easy', quote: 'Hayat kısa, kuşlar uçuyor.' },
+      { id: 'cs_2', difficulty: 'medium', quote: 'Aklıma gelme diye kendime söz verdim; sonra her sokak başında sana rastladım.' },
+      { id: 'cs_3', difficulty: 'hard', quote: 'Seni bir kere öpsem ikinin hatırı kalıyordu; iki kere öpsem üçün boynu bükük kalıyordu.' }
+    ]
+  },
+  {
+    id: 'goge-bakma-duragi',
+    title: 'Göğe Bakma Durağı',
+    originalTitle: 'Dünyanın En Güzel Arabistanı',
+    author: 'Turgut Uyar',
+    authorBio: 'İkinci Yeni\'nin en derin, hüzünlü ve varoluşsal şairlerinden biri.',
+    authorBirthDeath: '1927 - 1985',
+    year: '1959',
+    genre: 'poetry',
+    secondaryGenres: ['turkish'],
+    coverBg: 'from-[#2563EB] to-[#1E40AF]',
+    summary: 'Büyük kentin boğuntusundan kaçıp gökyüzüne sığınan iki sevgilinin saf sığınağını anlatan kült şiir.',
+    keyThemes: ['Göğe Bakmak', 'Kentten Kaçış', 'Ortak Sığınak', 'Hüzün'],
+    historicalContext: 'Modern Türk insanının yalnızlığına tercüman olan en popüler şiirlerden biri.',
+    passages: [
+      { id: 'tu_1', difficulty: 'easy', quote: 'İkimiz birden sevinebiliriz göğe bakalım.' },
+      { id: 'tu_2', difficulty: 'medium', quote: 'Durma göğe bakalım; gökyüzü hepimizin tek ortak sığınağıdır.' }
+    ]
+  },
+  {
+    id: 'hasretinden-prangalar-eskittim',
+    title: 'Hasretinden Prangalar Eskittim',
+    originalTitle: 'Hasretinden Prangalar Eskittim',
+    author: 'Ahmed Arif',
+    authorBio: 'Toplumcu gerçekçi Türk şiirinin en lirik ve gür sesli şairi.',
+    authorBirthDeath: '1927 - 1991',
+    year: '1968',
+    genre: 'poetry',
+    secondaryGenres: ['turkish'],
+    coverBg: 'from-[#7F1D1D] to-[#450A0A]',
+    summary: 'Hapisane duvarları arasından Anadolu\'ya ve sevgiliye duyulan yanardağ gibi tutkulu hasretin şiirleridir.',
+    keyThemes: ['Hasret', 'Hapishane ve Direniş', 'Dağlar ve Sevda', 'Gür Ses'],
+    historicalContext: 'Türk edebiyatında baskı rekorları kıran efsanevi şiir kitabı.',
+    passages: [
+      { id: 'aa_1', difficulty: 'easy', quote: 'Haberin var mı taş duvar; demir kapı, kör pencere?' },
+      { id: 'aa_2', difficulty: 'hard', quote: 'Yokluğun cehennemin öbür adıdır; üşüyorum, kapama gözlerini.' }
+    ]
+  },
+  {
+    id: 'lavinia-yalnizlik',
+    title: 'Lavinia & Yalnızlık Paylaşılmaz',
+    originalTitle: 'Lavinia',
+    author: 'Özdemir Asaf',
+    authorBio: 'Kısa, çarpıcı ve felsefi aforizma şiirlerinin büyük ustası.',
+    authorBirthDeath: '1923 - 1981',
+    year: '1957',
+    genre: 'poetry',
+    secondaryGenres: ['turkish'],
+    coverBg: 'from-[#4C1D95] to-[#2E1065]',
+    summary: 'Aşkın çaresizliğini, gururu ve yalnızlığın tek başına taşınan ağırlığını anlatan unutulmaz dizelerdir.',
+    keyThemes: ['Lavinia', 'Yalnızlık', 'Gurur ve Aşk'],
+    historicalContext: 'Türkçenin en dokunaklı veda ve aşk şiirleri.',
+    passages: [
+      { id: 'oa_1', difficulty: 'easy', quote: 'Sana gitme demeyeceğim, ama gitme Lavinia.' },
+      { id: 'oa_2', difficulty: 'medium', quote: 'Yalnızlık paylaşılsaydı adı yalnızlık olmazdı; o ancak tek başına taşınan bir yüktür.' }
+    ]
+  },
+  {
+    id: 'ben-sana-mecburum',
+    title: 'Ben Sana Mecburum',
+    originalTitle: 'Ben Sana Mecburum',
+    author: 'Attila İlhan',
+    authorBio: 'Mavi akımının öncüsü, sinemacı, romancı ve Türk şiirinin kaptanı.',
+    authorBirthDeath: '1925 - 2005',
+    year: '1960',
+    genre: 'poetry',
+    secondaryGenres: ['turkish'],
+    coverBg: 'from-[#0F172A] to-[#1E293B]',
+    summary: 'Yağmurlu geceler, ayrılıklar ve tutkulu bağlılıklarla örülü modern Türk şiirinin klasiklerindendir.',
+    keyThemes: ['Mecburiyet', 'Gece ve Yağmur', 'Aşk ve Ayrılık'],
+    historicalContext: 'Cumhuriyet dönemi Türk edebiyatının en popüler şiir kitaplarından biri.',
+    passages: [
+      { id: 'ai_1', difficulty: 'easy', quote: 'Ben sana mecburum bilemezsin, adını mıh gibi aklımda tutuyorum.' },
+      { id: 'ai_2', difficulty: 'medium', quote: 'Ne vakit bir yaşamak düşünsem, bu kurtlar sofrasında akşam olur.' }
+    ]
+  },
+
+  // =========================================================================
+  // 7. MODERNİZM & BİLİNÇAKIŞI (MODERNISM)
+  // =========================================================================
+  {
+    id: 'kayip-zamanin-izinde',
+    title: 'Kayıp Zamanın İzinde',
+    originalTitle: 'À la recherche du temps perdu',
+    author: 'Marcel Proust',
+    authorBio: 'Modernist romanın ve hafıza estetiğinin Fransız dehası.',
+    authorBirthDeath: '1871 - 1922',
+    year: '1913',
+    genre: 'modernist',
+    secondaryGenres: ['classics'],
+    coverBg: 'from-[#7C3AED] to-[#5B21B6]',
+    summary: 'İstemsiz hafızanın, bir madlen kekiyle canlanan çocukluk anılarının ve zamanı sanatla ebedileştirmenin 7 ciltlik anıtsal nehir romanıdır.',
+    keyThemes: ['İstemsiz Hafıza', 'Zamanın Geri Kazanılması', 'Sanatın Ölümsüzlüğü', 'Sosyetik Çözümleme'],
+    historicalContext: '20. yüzyıl roman sanatını baştan aşağıya değiştiren devasa başyapıt.',
+    passages: [
+      { id: 'pr_1', difficulty: 'easy', quote: 'Gerçek keşif yolculuğu yeni manzaralar aramakta değil, yeni gözlere sahip olmaktadır.' },
+      { id: 'pr_2', difficulty: 'medium', quote: 'Bir anı, tadılan küçük bir madlen kekiyle zihinde yeniden canlanan koskoca bir dünyadır.' },
+      { id: 'pr_3', difficulty: 'hard', quote: 'Zamanın akışı içinde unuttuğumuzu sandığımız duygular, en beklenmedik bir koku veya sesle capcanlı karşımıza dikilir.' },
+      { id: 'pr_4', difficulty: 'legendary', quote: 'Sanat tek gerçek yaşamdır; çünkü sanatçının kendi gözleriyle dünyayı algılamasını ve bu benzersiz bakış açısını sonsuzluğa armağan etmesini sağlar.' }
+    ]
+  },
+  {
+    id: 'ulysses',
+    title: 'Ulysses & Sanatçının Portresi',
+    originalTitle: 'Ulysses',
+    author: 'James Joyce',
+    authorBio: 'Bilinçakışı tekniğinin ve modern edebiyatın en büyük İrlandalı dehası.',
+    authorBirthDeath: '1882 - 1941',
+    year: '1922',
+    genre: 'modernist',
+    secondaryGenres: ['classics'],
+    coverBg: 'from-[#0D9488] to-[#115E59]',
+    summary: 'Leopold Bloom\'un Dublin\'de geçen 16 Haziran gününü Homeros\'un Odysseia destanına paralel bir bilinçakışıyla anlatan edebiyat anıtıdır.',
+    keyThemes: ['Bilinçakışı', 'Gündelik Destan', 'Dil Oyunları', 'Tarihin Kabusu'],
+    historicalContext: 'Dünya romanının en karmaşık ve en devrimci metni kabul edilir.',
+    passages: [
+      { id: 'jy_1', difficulty: 'easy', quote: 'Tarih, uyanmaya çalıştığım bir kabustur.' },
+      { id: 'jy_2', difficulty: 'medium', quote: 'Ruhum, kendi kanatlarıyla gökyüzüne yükselmek için bütün zincirlerini kırmak zorundaydı.' },
+      { id: 'jy_3', difficulty: 'hard', quote: 'Kar bütün İrlanda üzerine, yaşayanların ve ölülerin üzerine usul usul yağıyordu.' }
+    ]
+  },
+  {
+    id: 'ses-ve-ofke',
+    title: 'Ses ve Öfke',
+    originalTitle: 'The Sound and the Fury',
+    author: 'William Faulkner',
+    authorBio: 'Amerikan Güneyi\'nin trajedisini çok sesli bilinçakışıyla anlatan Nobel Ödüllü yazar.',
+    authorBirthDeath: '1897 - 1962',
+    year: '1929',
+    genre: 'modernist',
+    secondaryGenres: ['classics'],
+    coverBg: 'from-[#B45309] to-[#78350F]',
+    summary: 'Compson ailesinin çöküşünü zihinsel engelli Benjy, intihara sürüklenen Quentin ve kin dolu Jason\'ın gözünden anlatan çok katmanlı başyapıttır.',
+    keyThemes: ['Zamanın Parçalanması', 'Ailenin Çöküşü', 'Bellek ve Travma', 'Ses ve Öfke'],
+    historicalContext: 'Modernist anlatı tekniklerinin zirve noktalarından biri.',
+    passages: [
+      { id: 'flk_1', difficulty: 'easy', quote: 'Geçmiş asla ölmez; hatta geçmiş bile değildir.' },
+      { id: 'flk_2', difficulty: 'medium', quote: 'Kelimeler sadece bir boşluğu doldurmak için kullanılan çaresiz işaretlerdir.' },
+      { id: 'tm_1', difficulty: 'hard', quote: 'Zaman algısı, insanın içinde bulunduğu mekanın genişliği ve ruhun dinginliği ile doğrudan ilişkilidir.' }
+    ]
+  },
+
+  // =========================================================================
+  // 8. DENEME & TEFEKKÜR (ESSAYS)
+  // =========================================================================
+  {
+    id: 'denemeler',
+    title: 'Denemeler',
+    originalTitle: 'Les Essais',
+    author: 'Michel de Montaigne',
+    authorBio: 'Deneme türünün kurucusu ve Rönesans şüpheciliğinin öncüsü.',
+    authorBirthDeath: '1533 - 1592',
+    year: '1580',
+    genre: 'essay',
+    secondaryGenres: ['philosophy', 'classics'],
+    coverBg: 'from-[#854D0E] to-[#422006]',
+    summary: 'Şatosunun kulesine çekilerek "Ben ne biliyorum?" sorusu etrafında insan doğasını, dostluğu, ölümü ve hayatı samimiyetle sorgulayan denemelerdir.',
+    keyThemes: ['Kendini Tanımak', 'Şüphecilik', 'Ölümle Barışmak', 'İnsan Doğası'],
+    historicalContext: 'Dünya edebiyatında deneme türünü başlatan başyapıt.',
+    passages: [
+      { id: 'mnt_1', difficulty: 'easy', quote: 'Kendimi arıyorum, bu yüzden kendimi yazıyorum.' },
+      { id: 'mnt_2', difficulty: 'medium', quote: 'Dünyanın en yüksek tahtında bile otursanız, oturacağınız yer kendi kıçınızın üstüdür.' },
+      { id: 'mnt_3', difficulty: 'hard', quote: 'Başkalarının bilgisiyle bilgili olabilsek bile, ancak kendi aklımızla bilge olabiliriz.' }
+    ]
+  },
+  {
+    id: 'curumenin-kitabi',
+    title: 'Çürümenin Kitabı & Varolma Eğilimi',
+    originalTitle: 'Précis de décomposition',
+    author: 'Emil Cioran',
+    authorBio: 'Rumen asıllı Fransız filozof ve aforizma ustası. Varoluşsal nihilizmin en lirik kalemi.',
+    authorBirthDeath: '1911 - 1995',
+    year: '1949',
+    genre: 'essay',
+    secondaryGenres: ['philosophy'],
+    coverBg: 'from-[#1F2937] to-[#030712]',
+    summary: 'Varoluşun anlamsızlığını, uykusuzluğu, tarihin yanılsamalarını ve faniliği acımasız bir şiirsellikle ele alan aforizmalardır.',
+    keyThemes: ['Çürüme ve Fanilik', 'Uykusuzluk ve Bilinç', 'Lirik Nihilizm', 'Kelimelerin İflası'],
+    historicalContext: 'Modern çağın en keskin ve sarsıcı kötümserlik metinleri.',
+    passages: [
+      { id: 'cir_1', difficulty: 'easy', quote: 'Yalnızca acı çekenler gerçek anlamda uyanıktır.' },
+      { id: 'cir_2', difficulty: 'medium', quote: 'Bütün kitaplar yazılmış birer mezar taşıdır; kelimeler ise içindeki ölü düşünceler.' },
+      { id: 'cir_3', difficulty: 'hard', quote: 'Hiçbir şeye inanmamak, her şeye inanmaktan çok daha büyük bir disiplin ve cesaret gerektirir.' }
+    ]
+  },
+  {
+    id: 'bu-ulke',
+    title: 'Bu Ülke & Jurnal',
+    originalTitle: 'Bu Ülke',
+    author: 'Cemil Meriç',
+    authorBio: 'Türk düşünce dünyasının anıt ismi, mütercim, denemeci ve mütefekkir.',
+    authorBirthDeath: '1916 - 1987',
+    year: '1974',
+    genre: 'essay',
+    secondaryGenres: ['turkish', 'philosophy'],
+    coverBg: 'from-[#78350F] to-[#451A03]',
+    summary: 'Doğu ve Batı medeniyetlerini, aydınların köksüzlüğünü, dilin kutsallığını ve tefekkürün haysiyetini savunan başyapıttır.',
+    keyThemes: ['Tefekkürün Haysiyeti', 'Dil ve Kültür', 'Doğu-Batı Muhasebesi', 'Kitap Sevgisi'],
+    historicalContext: 'Türk aydınının kendi medeniyetiyle hesaplaştığı en temel metin.',
+    passages: [
+      { id: 'cm_1', difficulty: 'easy', quote: 'Kitaplar, insanlığın tek ve ebedi hafızasıdır.' },
+      { id: 'cm_2', difficulty: 'medium', quote: 'Kelimeler kaybolunca düşünceler sığlaşır; dilini kaybeden bir millet hafızasını da kaybeder.' },
+      { id: 'cm_3', difficulty: 'hard', quote: 'Düşünce şüpheyle başlar; şüphe etmeyen ve sorgulamayan bir zihin ancak bir esirdir.' }
+    ]
+  },
+
+  // =========================================================================
+  // 9. TARİH & STRATEJİ (STRATEGY)
+  // =========================================================================
+  {
+    id: 'savas-sanati',
+    title: 'Savaş Sanatı',
+    originalTitle: 'Sunzi Bingfa (孫子兵法)',
+    author: 'Sun Tzu',
+    authorBio: 'Antik Çinli general, askeri stratejist ve filozof.',
+    authorBirthDeath: 'MÖ 544 - MÖ 496',
+    year: 'MÖ 5. yy',
+    genre: 'strategy',
+    secondaryGenres: ['philosophy'],
+    coverBg: 'from-[#991B1B] to-[#7F1D1D]',
+    summary: 'Çatışmaları en az kayıpla ve mümkünse savaşmadan kazanmanın stratejik prensipleridir.',
+    keyThemes: ['Savaşmadan Kazanmak', 'Stratejik Sabır', 'Düşmanı Tanımak', 'Esneklik'],
+    historicalContext: '2500 yıldır dünya liderlerine ve komutanlara rehberlik eden strateji el kitabı.',
+    passages: [
+      { id: 'st_1', difficulty: 'easy', quote: 'En büyük zafer, savaşmadan kazanılan zaferdir.' },
+      { id: 'st_2', difficulty: 'medium', quote: 'Kendini ve düşmanını iyi tanırsan, yüz savaşa girsen de tehlikeye düşmezsin.' }
+    ]
+  },
+  {
+    id: 'prens',
+    title: 'Prens',
+    originalTitle: 'Il Principe',
+    author: 'Niccolò Machiavelli',
+    authorBio: 'İtalyan Rönesansı\'nın siyaset teorisyeni ve tarihçisi.',
+    authorBirthDeath: '1469 - 1527',
+    year: '1532',
+    genre: 'strategy',
+    secondaryGenres: ['history'],
+    coverBg: 'from-[#431407] to-[#1C1917]',
+    summary: 'İktidarın nasıl kazanılacağını ve korunacağını ahlaki yanılsamalardan arındırarak anlatan siyaset bilimi manifestosu.',
+    keyThemes: ['İktidar Sanatı', 'Tilki ve Aslan', 'Korku ve Sevgi', 'Realpolitik'],
+    historicalContext: 'Modern siyaset biliminin kurucu metni.',
+    passages: [
+      { id: 'mch_1', difficulty: 'easy', quote: 'Sevilmektense korkulmak çok daha güvenlidir.' },
+      { id: 'mch_2', difficulty: 'medium', quote: 'Aslan tuzaklardan kaçamaz, tilki ise kurtları kovamaz; öyleyse hem tilki hem aslan olmalısın.' }
+    ]
+  },
+  {
+    id: 'mukaddime',
+    title: 'Mukaddime',
+    originalTitle: 'Al-Muqaddimah (المقدمة)',
+    author: 'İbn Haldun',
+    authorBio: 'Sosyolojinin, tarih felsefesinin ve iktisadın İslam dünyasındaki büyük kurucusu.',
+    authorBirthDeath: '1332 - 1406',
+    year: '1377',
+    genre: 'strategy',
+    secondaryGenres: ['history', 'philosophy'],
+    coverBg: 'from-[#92400E] to-[#451A03]',
+    summary: 'Uygarlıkların doğuşunu, yükselişini ve çöküşünü toplumsal dayanışma (asabiyet) ve coğrafi şartlar ekseninde açıklayan devasa eser.',
+    keyThemes: ['Coğrafya Kaderdir', 'Asabiyet (Toplumsal Dayanışma)', 'Devletlerin Ömrü', 'Medeniyet Tarihi'],
+    historicalContext: 'Tarih felsefesini ve bilimsel sosyolojiyi başlatan öncü eser.',
+    passages: [
+      { id: 'ibh_1', difficulty: 'medium', quote: 'Coğrafya kaderdir; toplumların karakterini ve geleceğini yaşadıkları toprak belirler.' },
+      { id: 'ilb_1', difficulty: 'medium', quote: 'Cesur olun; hayatınızı başkalarının takdirine göre değil, kendi merakınıza göre kurun.' }
+    ]
+  },
+
+  // =========================================================================
+  // 10. DÜNYA TİYATROSU (DRAMA)
+  // =========================================================================
+  {
+    id: 'hamlet-macbeth',
+    title: 'Hamlet & Macbeth & Kral Lear',
+    originalTitle: 'Hamlet / Macbeth / King Lear',
+    author: 'William Shakespeare',
+    authorBio: 'İngiliz tiyatrosunun ve dünya edebiyatının gelmiş geçmiş en büyük dramatik dehası.',
+    authorBirthDeath: '1564 - 1616',
+    year: '1603',
+    genre: 'drama',
+    secondaryGenres: ['classics', 'poetry'],
+    coverBg: 'from-[#312E81] to-[#1E1B4B]',
+    summary: 'İntikam ve şüphe arasında kıvranan Prens Hamlet ile iktidar hırsı yüzünden kanlı bir kabusa sürüklenen Macbeth\'in tragedyalarıdır.',
+    keyThemes: ['Olmak ya da Olmamak', 'İktidar Hırsı', 'Vicdan ve Delilik', 'Hayatın Sahnesi'],
+    historicalContext: 'İnsan psikolojisinin en karanlık odalarını aydınlatan dünya tiyatrosunun doruk noktaları.',
+    passages: [
+      { id: 'shk_1', difficulty: 'easy', quote: 'Olmak ya da olmamak, işte bütün mesele bu.' },
+      { id: 'shk_2', difficulty: 'medium', quote: 'Hayat yürüyen bir gölgedir; sahnede çırpınan ve sonra unutulan zavallı bir aktördür.' },
+      { id: 'shk_3', difficulty: 'hard', quote: 'Biz bu dünyaya delilerin körlere kılavuzluk ettiği bir tiyatro sahnesi olarak doğarız.' }
+    ]
+  },
+  {
+    id: 'faust-godot',
+    title: 'Faust & Godot\'yu Beklerken',
+    originalTitle: 'Faust / En attendant Godot',
+    author: 'Goethe & Samuel Beckett',
+    authorBio: 'Alman ve İrlandalı tiyatro dehaları.',
+    authorBirthDeath: '1749 - 1832 / 1906 - 1989',
+    year: '1808',
+    genre: 'drama',
+    secondaryGenres: ['classics', 'philosophy'],
+    coverBg: 'from-[#7F1D1D] to-[#450A0A]',
+    summary: 'Ruhunu şeytana satan Faust\'un ebedi hakikat arayışı ile hiçbir zaman gelmeyecek Godot\'yu bekleyen insanların absürd tiyatrosudur.',
+    keyThemes: ['Ruhun Arayışı', 'Absürd Bekleyiş', 'Aramaktan Vazgeçmemek'],
+    historicalContext: 'Klasik dramadan absürd tiyatroya dünya sahnesinin köşe taşları.',
+    passages: [
+      { id: 'gth_1', difficulty: 'easy', quote: 'Dur ey an, öyle güzelsin ki!' },
+      { id: 'gth_2', difficulty: 'medium', quote: 'İnsan çabaladığı sürece yanılır; fakat aramaktan vazgeçmeyen kurtuluşa erer.' },
+      { id: 'bck_1', difficulty: 'easy', quote: 'Hep denedin, hep yenildin. Olsun. Yine dene, yine yenil, daha iyi yenil.' }
+    ]
+  },
+
+  // =========================================================================
+  // 11. TASAVVUF & DOĞU (MYSTICISM)
+  // =========================================================================
+  {
+    id: 'mesnevi',
+    title: 'Mesnevi & Divan-ı Kebir',
+    originalTitle: 'Mesnevi-i Manevi',
+    author: 'Mevlana Celaleddin Rumi',
+    authorBio: 'Evrensel sevgi, hoşgörü ve ilahi aşkın büyük Doğu bilgesi ve şairi.',
+    authorBirthDeath: '1207 - 1273',
+    year: '1273',
+    genre: 'mysticism',
+    secondaryGenres: ['poetry', 'philosophy'],
+    coverBg: 'from-[#065F46] to-[#064E3B]',
+    summary: 'Ney\'in kamışlıktan koparılış feryadıyla başlayan, insan ruhunun ilahi aslına dönme serüvenini hikayelerle anlatan aşk abidesidir.',
+    keyThemes: ['İlahi Aşk', 'Yara ve Işık', 'Ney Metaforu', 'Gönül Gözü'],
+    historicalContext: 'Doğu ve İslam tasavvufunun dünya çapında en çok okunan şiirsel şaheseri.',
+    passages: [
+      { id: 'rum_1', difficulty: 'easy', quote: 'Yara, ışığın sana sızdığı yerdir.' },
+      { id: 'rum_2', difficulty: 'medium', quote: 'Dün akıllıydım, dünyayı değiştirmek istedim; bugün bilgeyim, kendimi değiştiriyorum.' },
+      { id: 'rum_3', difficulty: 'hard', quote: 'Sen okyanustaki bir damla değilsin; sen tek bir damlanın içindeki koca bir okyanussun.' }
+    ]
+  },
+  {
+    id: 'kirk-kural-yunus-emre',
+    title: 'Kırk Kural & Yunus Emre Divanı',
+    originalTitle: 'Makalat / Risaletü\'n-Nushiyye',
+    author: 'Şems-i Tebrizi & Yunus Emre',
+    authorBio: 'Gönül erleri ve Anadolu hümanizminin kurucuları.',
+    authorBirthDeath: '1185 - 1248 / 1238 - 1328',
+    year: '1244',
+    genre: 'mysticism',
+    secondaryGenres: ['philosophy', 'poetry'],
+    coverBg: 'from-[#9A3412] to-[#431407]',
+    summary: 'Aşkın ve hakikatin kalpte bulunmasına dair kırk manevi ilke ve Yunus\'un duru Türkçeyle söylediği sevgi ilahileridir.',
+    keyThemes: ['Gönül Aynası', 'İlim Kendin Bilmektir', 'Tevekkül'],
+    historicalContext: 'Anadolu tasavvufunun temelleri.',
+    passages: [
+      { id: 'sms_1', difficulty: 'easy', quote: 'Hakk\'ı nerede ararsan ara, önce kalbinde bulmalısın.' },
+      { id: 'sms_2', difficulty: 'medium', quote: 'Düzenim bozulur, hayatım altüst olur diye endişe etme; nereden bilirsin altının üstünden iyi olmadığını?' },
+      { id: 'yn_1', difficulty: 'easy', quote: 'İlim ilim bilmektir, ilim kendin bilmektir.' }
+    ]
+  },
+  {
+    id: 'tao-te-ching-ermis',
+    title: 'Tao Te Ching & Ermiş',
+    originalTitle: 'Daodejing / The Prophet',
+    author: 'Lao Tzu & Halil Cibran',
+    authorBio: 'Doğu ve Akdeniz bilgeliğinin iki büyük sembolü.',
+    authorBirthDeath: 'MÖ 6. yy / 1883 - 1931',
+    year: 'MÖ 4. yy',
+    genre: 'mysticism',
+    secondaryGenres: ['philosophy'],
+    coverBg: 'from-[#047857] to-[#022C22]',
+    summary: 'Doğanın akışına müdahale etmemeyi (Wu Wei) ve sevginin kendini tamamlamasını öğütleyen bilgelik metinleridir.',
+    keyThemes: ['Wu Wei (Eylemsiz Eylem)', 'Suyun Gücü', 'Aşk ve Özgürlük'],
+    historicalContext: 'Uzak Doğu ve Yakın Doğu felsefesinin temel taşları.',
+    passages: [
+      { id: 'lao_1', difficulty: 'easy', quote: 'Bin millik bir yolculuk tek bir adımla başlar.' },
+      { id: 'lao_2', difficulty: 'medium', quote: 'Suyun yumuşaklığı ve sabrı, en sert kayaları bile zamanla aşındırmaya yeter.' },
+      { id: 'kbr_1', difficulty: 'medium', quote: 'Aşk hiçbir şey istemez, sadece kendi kendisini tamamlamak ister.' }
+    ]
+  },
+
+  // =========================================================================
+  // 12. SİNEMA & SANAT KURAMI (CINEMA & ART)
+  // =========================================================================
+  {
+    id: 'muhurlenmis-zaman',
+    title: 'Mühürlenmiş Zaman',
+    originalTitle: 'Zapechatlennoe Vremya',
+    author: 'Andrey Tarkovski',
+    authorBio: 'Dünya sinema tarihinin en büyük şairi ve düşünürü. Solaris, Stalker ve Ayna\'nın yönetmeni.',
+    authorBirthDeath: '1932 - 1986',
+    year: '1986',
+    genre: 'cinema_art',
+    secondaryGenres: ['essay', 'philosophy'],
+    coverBg: 'from-[#475569] to-[#1E293B]',
+    summary: 'Sinemayı edebiyattan bağımsız bir "zaman heykeltıraşlığı" olarak tanımladığı manifestosudur.',
+    keyThemes: ['Zaman Heykeltıraşlığı', 'Ruhsal Hakikat', 'Sanatçının Sorumluluğu'],
+    historicalContext: 'Görsel sanatların felsefi derinliğini ortaya koyan başucu kitabı.',
+    passages: [
+      { id: 'trk_1', difficulty: 'easy', quote: 'Sanat, insanın mutlak hakikate ve mükemmelliğe duyduğu özlemdir.' },
+      { id: 'trk_2', difficulty: 'medium', quote: 'Zamanı mühürlemek, anın içinde saklı olan sonsuz ruhu yakalamaktır.' },
+      { id: 'trk_3', difficulty: 'hard', quote: 'Sanatçı olabilmek için insanın kendisini kurban etmeye ve hakikatin hizmetine adamaya hazır olması gerekir.' }
+    ]
+  },
+  {
+    id: 'gorme-bicimleri',
+    title: 'Görme Biçimleri & Sanat Kuramı',
+    originalTitle: 'Ways of Seeing / Das Kunstwerk',
+    author: 'John Berger, Susan Sontag & Walter Benjamin',
+    authorBio: 'Görsel kültürün ve modern sanat eleştirisinin dev teorisyenleri.',
+    authorBirthDeath: '1926 - 2017 / 1933 - 2004',
+    year: '1972',
+    genre: 'cinema_art',
+    secondaryGenres: ['essay'],
+    coverBg: 'from-[#4F46E5] to-[#312E81]',
+    summary: 'Görsellerin arkasındaki ideolojiyi, fotoğrafın faniliğe meydan okuyuşunu ve sanat eserinin çoğaltılma çağındaki aurasını çözümler.',
+    keyThemes: ['Görsel İdeoloji', 'İmge ve Bakış', 'Aura Kaybı', 'Fotoğrafın Gücü'],
+    historicalContext: 'Görsel okuryazarlık alanında devrim yaratan kuramsal metinler.',
+    passages: [
+      { id: 'brg_1', difficulty: 'easy', quote: 'Görmek, konuşmaktan önce gelmiştir.' },
+      { id: 'brg_2', difficulty: 'medium', quote: 'Baktığımız nesne ile aramızdaki ilişki, aynı zamanda kendi bakış açımızın bir kurgusudur.' },
+      { id: 'snt_1', difficulty: 'medium', quote: 'Fotoğraf çekmek, bir anı ebediyen sahiplenmek ve onun faniliğine meydan okumaktır.' },
+      { id: 'bnj_1', difficulty: 'hard', quote: 'Mekanik olarak çoğaltılan sanat eseri, kendi özgün aurasını ve biricikliğini yitirir.' }
+    ]
+  },
+
+  // =========================================================================
+  // 13. EPİK & FANTASTİK (EPIC FANTASY)
   // =========================================================================
   {
     id: 'dune',
@@ -570,6 +1145,321 @@ export const BOOKS_DATABASE = [
     ]
   },
   {
+    id: 'yuzuklerin-efendisi',
+    title: 'Yüzüklerin Efendisi',
+    originalTitle: 'The Lord of the Rings',
+    author: 'J.R.R. Tolkien',
+    authorBio: 'Oxford profesörü ve modern yüksek fantezi edebiyatının kurucusu.',
+    authorBirthDeath: '1892 - 1973',
+    year: '1954',
+    genre: 'epic_fantasy',
+    secondaryGenres: ['classics', 'mythology'],
+    coverBg: 'from-[#065F46] to-[#064E3B]',
+    summary: 'Tek Yüzük\'ü yok etmekle görevlendirilen Frodo Baggins ve Yüzük Kardeşliği\'nin karanlığa karşı direnişidir.',
+    keyThemes: ['Dostluk ve Sadakat', 'Gücün Yozlaştırıcı Etkisi', 'Umut'],
+    historicalContext: '20. yüzyıl dünya edebiyatına damga vuran epik efsane.',
+    passages: [
+      { id: 'tlk_1', difficulty: 'easy', quote: 'Gezginlerin hepsi kaybolmuş değildir.' },
+      { id: 'tlk_2', difficulty: 'medium', quote: 'Karanlık ne kadar koyu olursa olsun, şafağın doğuşunu engelleyemez.' },
+      { id: 'tlk_3', difficulty: 'hard', quote: 'Bize düşen tek şey, bize verilen zaman diliminde ne yapacağımıza karar vermektir.' }
+    ]
+  },
+  {
+    id: 'mulksuzler-yerdeniz',
+    title: 'Mülksüzler & Yerdeniz Büyücüsü',
+    originalTitle: 'The Dispossessed / A Wizard of Earthsea',
+    author: 'Ursula K. Le Guin',
+    authorBio: 'Felsefi bilimkurgu ve anarşist ütopyanın dev ismi.',
+    authorBirthDeath: '1929 - 2018',
+    year: '1974',
+    genre: 'epic_fantasy',
+    secondaryGenres: ['philosophy', 'dystopia'],
+    coverBg: 'from-[#0891B2] to-[#164E63]',
+    summary: 'Mülkiyetsiz Anarres gezegeni ile kapitalist Urras arasındaki fizikçi Shevek\'in duvarları yıkma mücadelesidir.',
+    keyThemes: ['Mülksüzlük', 'Duvarlar ve Sınırlar', 'Denge ve Büyü'],
+    historicalContext: 'Hem Hugo hem Nebula ödüllü kurucu ütopya metni.',
+    passages: [
+      { id: 'lgn_1', difficulty: 'easy', quote: 'Işığı görmek için karanlığın var olması gerekir.' },
+      { id: 'lgn_2', difficulty: 'medium', quote: 'Bir duvar ördüğünde kimi içeride, kimi dışarıda bıraktığına dikkat etmelisin.' }
+    ]
+  },
+
+  // =========================================================================
+  // 14. MEKTUP & GÜNLÜK (LETTERS)
+  // =========================================================================
+  {
+    id: 'milenaya-mektuplar',
+    title: 'Milena\'ya Mektuplar & Babaya Mektup',
+    originalTitle: 'Briefe an Milena / Brief an den Vater',
+    author: 'Franz Kafka',
+    authorBio: 'Prag doğumlu büyük yazar.',
+    authorBirthDeath: '1883 - 1924',
+    year: '1952',
+    genre: 'letters',
+    secondaryGenres: ['classics'],
+    coverBg: 'from-[#9A3412] to-[#7C2D12]',
+    summary: 'Kafka\'nın Milena Jesenská\'ya yazdığı tutkulu, kırılgan ve trajik aşk mektuplarıdır.',
+    keyThemes: ['Kırılgan Aşk', 'Uçurum Kenarı', 'İtiraf', 'Baba Otoritesi'],
+    historicalContext: 'Dünya edebiyatının en sarsıcı aşk mektupları derlemesi.',
+    passages: [
+      { id: 'let_kfk_1', difficulty: 'easy', quote: 'Yanımda yürüyordun Milena, düşünsene, yanımdaydın.' },
+      { id: 'let_kfk_2', difficulty: 'medium', quote: 'Seni sevmek, kendimi uçsuz bucaksız bir uçurumun kenarında bulmak gibi.' },
+      { id: 'let_kfk_3', difficulty: 'hard', quote: 'Senin yanındayken konuşma yeteneğimi bütünüyle kaybediyordum çünkü senin otoriten karşısında her sözcük anlamsızlaşıyordu.' }
+    ]
+  },
+  {
+    id: 'kendine-ait-bir-oda',
+    title: 'Kendine Ait Bir Oda & Günlükler',
+    originalTitle: 'A Room of One\'s Own / The Diary of a Young Girl',
+    author: 'Virginia Woolf & Anne Frank',
+    authorBio: 'Modernist feminist yazar ve trajik Holokost günlüğünün yazarı.',
+    authorBirthDeath: '1882 - 1941 / 1929 - 1945',
+    year: '1929',
+    genre: 'letters',
+    secondaryGenres: ['essay', 'modernist'],
+    coverBg: 'from-[#6D28D9] to-[#4C1D95]',
+    summary: 'Kadınların edebiyatta var olabilmesi için kilitli bir odaya sahip olması gerektiğini savunan manifesto ve Anne Frank\'ın umut günlüğüdür.',
+    keyThemes: ['Kendine Ait Bir Oda', 'Kadın ve Edebiyat', 'Umut ve Masumiyet'],
+    historicalContext: 'Feminist edebiyat eleştirisinin ve 20. yüzyıl insanlık hafızasının kurucu eserleri.',
+    passages: [
+      { id: 'wlf_1', difficulty: 'easy', quote: 'Para kazanın ve kendinize ait bir oda edinin.' },
+      { id: 'wlf_2', difficulty: 'medium', quote: 'Kelimeler bizi birbirimize bağlayan tek köprüdür.' },
+      { id: 'wlf_3', difficulty: 'hard', quote: 'Bir kadın eğer kurmaca yazacaksa paraya ve kendine ait kilitli bir odaya sahip olmalıdır.' },
+      { id: 'frk_1', difficulty: 'easy', quote: 'Her şeye rağmen insanların kalplerinin hala iyi olduğuna inanıyorum.' }
+    ]
+  },
+
+  // =========================================================================
+  // 15. DOĞA & İNZİVA (NATURE)
+  // =========================================================================
+  {
+    id: 'walden',
+    title: 'Walden / Ormanda Yaşam & Doğa',
+    originalTitle: 'Walden; or, Life in the Woods / Nature',
+    author: 'Henry David Thoreau & Ralph Waldo Emerson',
+    authorBio: 'Amerikan transandantalistleri, doğa filozofları ve sade yaşamın öncüleri.',
+    authorBirthDeath: '1817 - 1862 / 1803 - 1882',
+    year: '1854',
+    genre: 'nature',
+    secondaryGenres: ['philosophy', 'essay'],
+    coverBg: 'from-[#15803D] to-[#14532D]',
+    summary: 'Thoreau\'nun Walden Gölü kıyısındaki kulübesinde sade, bilinçli ve doğayla uyumlu yaşam deneyimidir.',
+    keyThemes: ['Sadelik', 'Bilinçli Yaşam', 'Doğanın Saflığı', 'Kendine Güven'],
+    historicalContext: 'Modern çevre hareketinin ve sade yaşam felsefesinin kurucu klasiği.',
+    passages: [
+      { id: 'thr_1', difficulty: 'easy', quote: 'Ormana gittim çünkü bilinçli yaşamak istiyordum.' },
+      { id: 'thr_2', difficulty: 'medium', quote: 'Basitleştirin, hayatınızı basitleştirin; üç öğün yerine tek öğün yiyin.' },
+      { id: 'thr_3', difficulty: 'hard', quote: 'İnsanların büyük çoğunluğu sessiz bir çaresizlik içinde yaşar ve mezara gider.' },
+      { id: 'emr_1', difficulty: 'easy', quote: 'Kendine inanmak, başarının ilk sırrıdır.' },
+      { id: 'emr_2', difficulty: 'medium', quote: 'Ormanlarda insan ebedi bir gençliğe ve dinginliğe kavuşur.' }
+    ]
+  },
+  {
+    id: 'moby-dick',
+    title: 'Moby Dick & Vahşetin Çağrısı',
+    originalTitle: 'Moby-Dick / The Call of the Wild',
+    author: 'Herman Melville & Jack London',
+    authorBio: 'Bilinmeyenin peşindeki insan azmini ve doğanın vahşi çağrısını anlatan büyük yazarlar.',
+    authorBirthDeath: '1819 - 1891 / 1876 - 1916',
+    year: '1851',
+    genre: 'nature',
+    secondaryGenres: ['classics'],
+    coverBg: 'from-[#0369A1] to-[#082F49]',
+    summary: 'Kaptan Ahab\'ın Beyaz Balina peşindeki saplantılı tutkusu ve Buck ile Martin Eden\'in doğa karşısındaki sınavıdır.',
+    keyThemes: ['Bilinmeyenin Peşinde', 'Doğanın Yenilmezliği', 'İrade'],
+    historicalContext: 'Amerikan edebiyatının en derin deniz ve insan destanları.',
+    passages: [
+      { id: 'nat_1', difficulty: 'easy', quote: 'Doğa hiçbir zaman insan yapımı kanunlara boyun eğmez.' },
+      { id: 'nat_2', difficulty: 'medium', quote: 'Bana sadece bir kelime söyleyin: İnsan neden hep bilinmeyenin peşinden koşar?' },
+      { id: 'nat_3', difficulty: 'medium', quote: 'Yaşamak istemek, sadece kitapların vadettiği güzellikleri dünyada bulabilmektir.' }
+    ]
+  },
+
+  // =========================================================================
+  // 16. MİTOLOJİ & BÜYÜLÜ GERÇEKÇİLİK (MYTHOLOGY)
+  // =========================================================================
+  {
+    id: 'ilyada-odysseia',
+    title: 'İlyada & Odysseia',
+    originalTitle: 'Iliad & Odyssey',
+    author: 'Homeros',
+    authorBio: 'Antik Yunan epik şiirinin ve Batı edebiyatının kurucu ozanı.',
+    authorBirthDeath: 'MÖ 8. yy',
+    year: 'MÖ 8. yy',
+    genre: 'mythology',
+    secondaryGenres: ['classics', 'poetry'],
+    coverBg: 'from-[#B45309] to-[#78350F]',
+    summary: 'Truva Savaşı\'nın yıkıcı öfkesini ve kurnaz Odysseus\'un İthaka\'ya 10 yıl süren eve dönüş yolculuğunu anlatan kurucu destanlardır.',
+    keyThemes: ['Kahramanlık ve Öfke', 'Eve Dönüş Yolculuğu', 'Kader ve Tanrılar'],
+    historicalContext: 'Batı edebiyatının başlangıç noktası.',
+    passages: [
+      { id: 'hom_1', difficulty: 'easy', quote: 'Öfkeyi söyle tanrıça, Akhilleus\'un yıkıcı öfkesini.' },
+      { id: 'hom_2', difficulty: 'medium', quote: 'Kaderin ağları sabırla örülür ve eninde sonunda hak yerini bulur.' }
+    ]
+  },
+  {
+    id: 'ilahi-komedya',
+    title: 'İlahi Komedya',
+    originalTitle: 'La Divina Commedia',
+    author: 'Dante Alighieri',
+    authorBio: 'İtalyan edebiyatının babası ve Rönesans şafağının şairi.',
+    authorBirthDeath: '1265 - 1321',
+    year: '1320',
+    genre: 'mythology',
+    secondaryGenres: ['classics', 'poetry'],
+    coverBg: 'from-[#7F1D1D] to-[#450A0A]',
+    summary: 'Dante\'nin şair Vergilius rehberliğinde Cehennem, Araf ve Cennet katlarına yaptığı ruhani yolculuktur.',
+    keyThemes: ['Ruhun Arınması', 'İlahi Adalet', 'Aşk ve Kurtuluş'],
+    historicalContext: 'Ortaçağ teolojisini ve insan ruhunu özetleyen anıt eser.',
+    passages: [
+      { id: 'dnt_1', difficulty: 'easy', quote: 'Buraya girenler, her türlü umudu geride bıraksın.' },
+      { id: 'dnt_2', difficulty: 'hard', quote: 'Hayat yolculuğumuzun ortasında kendimi karanlık bir ormanda buldum çünkü doğru yolu kaybetmiştim.' }
+    ]
+  },
+  {
+    id: 'ficciones-alef',
+    title: 'Ficciones / Kurgular, Alef & Görünmez Kentler',
+    originalTitle: 'Ficciones / El Aleph / Le città invisibili',
+    author: 'Jorge Luis Borges, Italo Calvino & Haruki Murakami',
+    authorBio: 'Büyülü gerçekçilik, labirentler ve düşsel kentlerin büyük mimarları.',
+    authorBirthDeath: '1899 - 1986 / 1923 - 1985 / 1949 - günümüz',
+    year: '1944',
+    genre: 'mythology',
+    secondaryGenres: ['modernist', 'philosophy'],
+    coverBg: 'from-[#0369A1] to-[#0C4A6E]',
+    summary: 'Babil Kitaplığı, sonsuz labirentler, mekanın tüm noktalarını içeren Alef ve Calvino\'nun düşsel kentleridir.',
+    keyThemes: ['Sonsuz Kütüphane', 'Labirentler', 'Zamanın Çatallanan Yolları', 'Alef'],
+    historicalContext: 'Büyülü gerçekçilik ve postmodern edebiyatın kurucu başyapıtları.',
+    passages: [
+      { id: 'brg_1', difficulty: 'medium', quote: 'Evren, başkalarının kütüphane adını verdiği sonsuz bir labirenttir.' },
+      { id: 'brg_2', difficulty: 'hard', quote: 'Alef, mekanın bütün noktalarını aynı anda içinde barındıran tek bir gizemli noktadır.' },
+      { id: 'clv_1', difficulty: 'medium', quote: 'Bir kenti anlamak, orada yaşayanların hayallerini ve özlemlerini dinlemektir.' },
+      { id: 'mrk_1', difficulty: 'medium', quote: 'Bazen kader küçük bir kum fırtınası gibidir; kaçtıkça seni içine çeker.' }
+    ]
+  },
+
+  // =========================================================================
+  // 17. POLİSİYE & GİZEM (MYSTERY)
+  // =========================================================================
+  {
+    id: 'sherlock-holmes',
+    title: 'Sherlock Holmes: Dörtlerin İmzası & Kızıl Dosya',
+    originalTitle: 'Sherlock Holmes Canon',
+    author: 'Arthur Conan Doyle',
+    authorBio: 'Dedektiflik kurgusunun gelmiş geçmiş en ünlü karakterinin yaratıcısı.',
+    authorBirthDeath: '1859 - 1930',
+    year: '1887',
+    genre: 'mystery',
+    secondaryGenres: ['classics'],
+    coverBg: 'from-[#334155] to-[#0F172A]',
+    summary: 'Dedüksiyon (tümdengelim) mantığı ve keskin gözlem gücüyle çözümsüz gibi duran suçları aydınlatan Sherlock Holmes maceralarıdır.',
+    keyThemes: ['Tümdengelim Mantığı', 'Keskin Gözlem', 'Gizem Çözümü'],
+    historicalContext: 'Polisiye türünün dünyadaki altın standardı.',
+    passages: [
+      { id: 'sh_1', difficulty: 'easy', quote: 'İmkansızı elediğinde geriye kalan ne kadar olasılıksız olursa olsun gerçektir.' },
+      { id: 'sh_2', difficulty: 'medium', quote: 'Sen görüyorsun ama gözlemlemiyorsun; ayrım işte tam olarak buradadır.' }
+    ]
+  },
+  {
+    id: 'dogu-ekspresinde-cinayet',
+    title: 'Doğu Ekspresinde Cinayet & On Küçük Zenci',
+    originalTitle: 'Murder on the Orient Express / And Then There Were None',
+    author: 'Agatha Christie',
+    authorBio: 'Polisiye kurgunun kraliçesi, Hercule Poirot ve Miss Marple\'ın yaratıcısı.',
+    authorBirthDeath: '1890 - 1976',
+    year: '1934',
+    genre: 'mystery',
+    secondaryGenres: ['classics'],
+    coverBg: 'from-[#831843] to-[#500724]',
+    summary: 'Karlar altında mahsur kalan Doğu Ekspresi treninde işlenen kusursuz cinayeti çözen Belçikalı dedektif Hercule Poirot\'nun hikayesidir.',
+    keyThemes: ['Gri Hücreler', 'Vicdan ve Adalet', 'Kusursuz Plan'],
+    historicalContext: 'Tüm zamanların en ünlü ve şaşırtıcı dedektiflik romanı.',
+    passages: [
+      { id: 'ac_1', difficulty: 'easy', quote: 'İmkansız olan şey gerçekleşemez; öyleyse görünen imkansızlık bir yanılsamadır.' },
+      { id: 'ac_2', difficulty: 'medium', quote: 'Vicdan azabı, insanın kendi içinde taşıdığı en acımasız cellattır.' },
+      { id: 'poe_1', difficulty: 'easy', quote: 'Gözlerimin gördüğü her şey sadece bir düşün içindeki düşten ibaretti.' },
+      { id: 'poe_2', difficulty: 'hard', quote: 'Zihinsel çözümleme yeteneği, sıradan gözlem gücünden çok daha derin ve gizemli bir sanattır.' }
+    ]
+  },
+
+  // =========================================================================
+  // 18. BİYOGRAFİ & PORTRE (BIOGRAPHY)
+  // =========================================================================
+  {
+    id: 'yildizin-parladigi-anlar',
+    title: 'Yıldızın Parladığı Anlar & Dünün Dünyası',
+    originalTitle: 'Sternstunden der Menschheit / Die Welt von Gestern',
+    author: 'Stefan Zweig & Plütarkhos',
+    authorBio: 'İnsan psikolojisini ve tarihi anları büyüleyici bir dille anlatan büyük biyografi ustaları.',
+    authorBirthDeath: '1881 - 1942 / MS 46 - MS 120',
+    year: '1927',
+    genre: 'biography',
+    secondaryGenres: ['history', 'classics'],
+    coverBg: 'from-[#1E3A8A] to-[#1E1B4B]',
+    summary: 'Tarihin akışını birkaç dakikada değiştiren dramatik dönüm noktalarını ve yıkılan hümanist Avrupa\'nın yasını tutan otobiyografidir.',
+    keyThemes: ['Tarihin Kırılma Anları', 'Hümanizm', 'Yıkılan Avrupa', 'Karakter'],
+    historicalContext: 'Biyografi ve tarihi anlatımın edebiyattaki en lirik zirvesi.',
+    passages: [
+      { id: 'zwg_1', difficulty: 'easy', quote: 'Tarih, ancak nadir anlarda bir kahramanın eline kaderi teslim eder.' },
+      { id: 'zwg_2', difficulty: 'medium', quote: 'Büyük bir ruha sahip olmak, hayatın bütün fırtınalarına karşı tek başına direnmektir.' },
+      { id: 'zwg_3', difficulty: 'hard', quote: 'Bizler hiçbir kuşağın yaşamadığı kadar büyük bir çöküşe ve felakete tanıklık ettik.' },
+      { id: 'plt_1', difficulty: 'medium', quote: 'Bir insanın karakteri, en büyük başarılarından çok en küçük alışkanlıklarında gizlidir.' }
+    ]
+  },
+
+  // =========================================================================
+  // 19. MİZAH & HİCİV (SATIRE & WIT)
+  // =========================================================================
+  {
+    id: 'zubuk',
+    title: 'Zübük - Kağnı Gölgesindeki İt & Yaşar Ne Yaşar',
+    originalTitle: 'Zübük / Yaşar Ne Yaşar Ne Yaşamaz',
+    author: 'Aziz Nesin',
+    authorBio: 'Türk mizah edebiyatının uluslararası üne sahip en büyük ustası.',
+    authorBirthDeath: '1915 - 1995',
+    year: '1961',
+    genre: 'satire',
+    secondaryGenres: ['turkish'],
+    coverBg: 'from-[#B45309] to-[#713F12]',
+    summary: 'İbrahim Zübükzade\'nin yükselişi üzerinden toplumun sahtekarlığa nasıl çanak tuttuğunu ve bürokrasinin absürdlüğünü anlatan ölümsüz taşlamalardır.',
+    keyThemes: ['Zübükizm', 'Siyasi İkiyüzlülük', 'Toplumsal Taşlama', 'Bürokrasi Çıkmazı'],
+    historicalContext: 'Türk siyasi diline "Zübük" kavramını kazandıran kült eser.',
+    passages: [
+      { id: 'zb_1', difficulty: 'easy', quote: 'Gülmek, insanın çaresizliğe karşı bulduğu en asil silahtır.' },
+      { id: 'zb_2', difficulty: 'easy', quote: 'Bu memlekette dürüst olmak suç, kurnaz olmak marifet sayılır.' },
+      { id: 'zb_3', difficulty: 'medium', quote: 'Resmi evraklarda varsan varsın, yoksan nefes alsan bile yaşamazsın.' },
+      { id: 'zb_4', difficulty: 'medium', quote: 'Kabahat tek başına Zübük\'te değil; onu baş tacı eden bizim kendi saflığımızdadır.' },
+      { id: 'zb_5', difficulty: 'hard', quote: 'Biz kendi menfaatimiz için kuralları çiğnemeye razı olduğumuz sürece, başımıza yeni Zübüklerin geçmesi kaçınılmazdır.' }
+    ]
+  },
+  {
+    id: 'candide',
+    title: 'Candide ya da İyimserlik & Huckleberry Finn',
+    originalTitle: 'Candide / Adventures of Huckleberry Finn',
+    author: 'Voltaire & Mark Twain',
+    authorBio: 'Aydınlanma çağının ve modern Amerikan mizahının en büyük hiciv ustaları.',
+    authorBirthDeath: '1694 - 1778 / 1835 - 1910',
+    year: '1759',
+    genre: 'satire',
+    secondaryGenres: ['philosophy', 'classics'],
+    coverBg: 'from-[#CA8A04] to-[#854D0E]',
+    summary: 'Saf Candide\'in başına gelen felaketler zinciri ve Huck Finn\'in Mississippi Nehri boyunca süren özgürlük ve sahtekarlık taşlamasıdır.',
+    keyThemes: ['Kör İyimserliğin İflası', 'Bahçemizi Yetiştirmek', 'Kahkahanın Gücü', 'Felsefi İroni'],
+    historicalContext: 'Aydınlanma ve modern hicvin en büyük şaheserleri.',
+    passages: [
+      { id: 'cnd_1', difficulty: 'easy', quote: 'Bahçemizi yetiştirmek zorundayız.' },
+      { id: 'cnd_2', difficulty: 'easy', quote: 'Çalışmak bizi üç büyük beladan kurtarır: can sıkıntısı, ahlaksızlık ve yoksulluk.' },
+      { id: 'cnd_3', difficulty: 'medium', quote: 'Her şeyin en iyi olduğu bir dünyada yaşıyorsak, diğer dünyalar kimbilir nasıldır?' },
+      { id: 'cnd_4', difficulty: 'hard', quote: 'Dünyadaki kötülükleri ve felaketleri süslü teorilerle aklamaya çalışmak, aklın kendini kandırmasından başka bir şey değildir.' },
+      { id: 'mt_1', difficulty: 'easy', quote: 'Doğruyu söylerseniz hiçbir şeyi hatırlamak zorunda kalmazsınız.' },
+      { id: 'mt_2', difficulty: 'medium', quote: 'İnsanın en güçlü silahı kahkahadır; onun karşısında hiçbir zorbalık dayanamaz.' }
+    ]
+  },
+
+  // =========================================================================
+  // 20. BİLİM & EVREN (SCIENCE)
+  // =========================================================================
+  {
     id: 'kozmos',
     title: 'Kozmos & Soluk Mavi Nokta',
     originalTitle: 'Cosmos / Pale Blue Dot',
@@ -589,6 +1479,26 @@ export const BOOKS_DATABASE = [
       { id: 'sgn_3', difficulty: 'medium', quote: 'Bütün tarihimiz ve sevinçlerimiz uzayın sonsuz karanlığında asılı duran o toz zerresinde yaşandı.' },
       { id: 'sgn_4', difficulty: 'hard', quote: 'Bilim sadece bir bilgi bütünü değil, aynı zamanda düşünmenin ve sorgulamanın tek güvenilir yoludur.' },
       { id: 'sgn_5', difficulty: 'legendary', quote: 'Evrenin enginliği karşısında yalnızlığımız bir lanet değil; birbirimize daha fazla sarılmamız ve gezegenimizi korumamız için bir çağrıdır.' }
+    ]
+  },
+  {
+    id: 'zamanin-kisa-tarihi',
+    title: 'Zamanın Kısa Tarihi & Zamanın Düzeni',
+    originalTitle: 'A Brief History of Time / The Order of Time',
+    author: 'Stephen Hawking, Richard Feynman & Carlo Rovelli',
+    authorBio: 'Kozmoloji, kuantum mekaniği ve kuantum çekim kuramının büyük fizikçileri.',
+    authorBirthDeath: '1942 - 2018 / 1918 - 1988 / 1956 - günümüz',
+    year: '1988',
+    genre: 'science',
+    secondaryGenres: ['philosophy'],
+    coverBg: 'from-[#312E81] to-[#0F172A]',
+    summary: 'Büyük Patlama\'dan kara deliklere, zamanın akışının göreliliğinden evrenin sınırlarına kadar kozmolojinin en büyük sırlarıdır.',
+    keyThemes: ['Zamanın Doğası', 'Kuantum ve Kütleçekim', 'Evrenin Başlangıcı', 'Kendini Kandırmamak'],
+    historicalContext: 'Modern teorik fiziğin en çok okunan popüler bilim kitapları.',
+    passages: [
+      { id: 'hwk_1', difficulty: 'easy', quote: 'Zeka, değişime uyum sağlayabilme yeteneğidir.' },
+      { id: 'rvl_1', difficulty: 'medium', quote: 'Zaman olaylardan bağımsız akmaz; nesneler arasındaki ilişkilerin ta kendisidir.' },
+      { id: 'fyn_1', difficulty: 'medium', quote: 'En önemli ilke kendini kandırmamaktır; çünkü kandırılması en kolay kişi kendinsiniz.' }
     ]
   }
 ];
