@@ -43,7 +43,16 @@ class QuoteQueueManager {
         }));
       }
     } else {
-      pool = [...BOOK_QUOTES, ...customQuotes];
+      const allDbQuotes = BOOKS_DATABASE.flatMap(b => (b.passages || []).map(p => ({
+        id: p.id,
+        genre: b.genre,
+        difficulty: p.difficulty,
+        book: b.title,
+        author: b.author,
+        quote: p.quote,
+        bookId: b.id,
+      })));
+      pool = [...allDbQuotes, ...customQuotes];
     }
 
     // Filter by genre (if not single-book mode) and difficulty

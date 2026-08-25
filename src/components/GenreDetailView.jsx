@@ -74,12 +74,18 @@ export default function GenreDetailView({
   // Find books in master books database for this genre
   const genreBooks = genre.id === 'all'
     ? BOOKS_DATABASE
-    : BOOKS_DATABASE.filter(b => b.genre === genre.id || b.secondaryGenres?.includes(genre.id));
+    : BOOKS_DATABASE.filter(b => b.genre === genre.id);
 
-  // Filter quotes belonging to this genre
-  const allGenreQuotes = genre.id === 'all' 
-    ? BOOK_QUOTES 
-    : BOOK_QUOTES.filter(q => q.genre === genre.id);
+  // Derive all quotes directly from genreBooks passages ensuring 100% consistency
+  const allGenreQuotes = genreBooks.flatMap(b => (b.passages || []).map(p => ({
+    id: p.id,
+    genre: b.genre,
+    difficulty: p.difficulty,
+    book: b.title,
+    author: b.author,
+    quote: p.quote,
+    bookId: b.id,
+  })));
 
   const filteredQuotes = selectedDifficulty === 'all'
     ? allGenreQuotes
