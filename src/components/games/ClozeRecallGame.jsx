@@ -33,11 +33,10 @@ export default function ClozeRecallGame({
 }) {
   const [selectedGenre, setSelectedGenre] = useState(initialGenre || 'all');
   const [selectedBookId, setSelectedBookId] = useState(initialBookId || null);
-  const [selectedDifficulty, setSelectedDifficulty] = useState(initialDifficulty || (initialBookId ? 'all' : 'medium'));
+  const [selectedDifficulty, setSelectedDifficulty] = useState(initialDifficulty || 'all');
   const [currentQuote, setCurrentQuote] = useState(initialQuote);
 
-  const shouldAutoStart = Boolean(initialQuote || initialBookId || initialGenre !== 'all' || (initialDifficulty && initialDifficulty !== 'all'));
-  const [phase, setPhase] = useState(shouldAutoStart ? 'study' : 'selection'); // 'selection' | 'study' | 'testing' | 'result'
+  const [phase, setPhase] = useState('study'); // Always start in study mode
   const [timeLeft, setTimeLeft] = useState(15);
   const [totalStudyTime, setTotalStudyTime] = useState(15);
   
@@ -160,9 +159,12 @@ export default function ClozeRecallGame({
   };
 
   useEffect(() => {
+    setSelectedGenre(initialGenre || 'all');
+    setSelectedBookId(initialBookId || null);
+    setSelectedDifficulty(initialDifficulty || 'all');
     if (initialQuote) {
       setupClozeQuote(initialQuote);
-    } else if (initialBookId || initialGenre !== 'all' || (initialDifficulty && initialDifficulty !== 'all')) {
+    } else {
       startNewRound();
     }
   }, [initialQuote, initialBookId, initialGenre, initialDifficulty]);
@@ -233,7 +235,12 @@ export default function ClozeRecallGame({
   };
 
   const startNewRound = () => {
-    const quote = quoteQueue.getNextQuote(selectedGenre, selectedDifficulty, [], selectedBookId);
+    const quote = quoteQueue.getNextQuote(
+      selectedGenre || initialGenre || 'all', 
+      selectedDifficulty || initialDifficulty || 'all', 
+      [], 
+      selectedBookId !== undefined ? selectedBookId : initialBookId
+    );
     setupClozeQuote(quote);
   };
 

@@ -31,11 +31,10 @@ export default function WordScrambleGame({
 }) {
   const [selectedGenre, setSelectedGenre] = useState(initialGenre || 'all');
   const [selectedBookId, setSelectedBookId] = useState(initialBookId || null);
-  const [selectedDifficulty, setSelectedDifficulty] = useState(initialDifficulty || (initialBookId ? 'all' : 'easy'));
+  const [selectedDifficulty, setSelectedDifficulty] = useState(initialDifficulty || 'all');
   const [currentQuote, setCurrentQuote] = useState(initialQuote);
 
-  const shouldAutoStart = Boolean(initialQuote || initialBookId || initialGenre !== 'all' || (initialDifficulty && initialDifficulty !== 'all'));
-  const [phase, setPhase] = useState(shouldAutoStart ? 'study' : 'selection'); // 'selection' | 'study' | 'scramble' | 'result'
+  const [phase, setPhase] = useState('study'); // Always start in study mode
   const [timeLeft, setTimeLeft] = useState(15);
   const [totalStudyTime, setTotalStudyTime] = useState(15);
 
@@ -93,9 +92,12 @@ export default function WordScrambleGame({
   };
 
   useEffect(() => {
+    setSelectedGenre(initialGenre || 'all');
+    setSelectedBookId(initialBookId || null);
+    setSelectedDifficulty(initialDifficulty || 'all');
     if (initialQuote) {
       startRound(initialQuote);
-    } else if (initialBookId || initialGenre !== 'all' || (initialDifficulty && initialDifficulty !== 'all')) {
+    } else {
       startNewGame();
     }
   }, [initialQuote, initialBookId, initialGenre, initialDifficulty]);
@@ -124,35 +126,28 @@ export default function WordScrambleGame({
     const diff = userSequence.map((item, idx) => {
       const origWord = originalTokens[idx] || '';
       const isExact = item.word === origWord;
-      const isCleanEqual = cleanWord(item.word) === cleanWord(origWord);
-      const isCorrect = isExact || isCleanEqual;
-
-      if (isCorrect) {
-        matches++;
-      }
-
+      if (isExact) matches++;
       return {
         placedWord: item.word,
         expectedWord: origWord,
-        isCorrect: isCorrect,
+        isCorrect: isExact,
         index: idx,
       };
     });
 
     const acc = Math.round((matches / originalTokens.length) * 100);
-    const diffMultiplier = currentQuote.difficulty === 'legendary' ? 4 : currentQuote.difficulty === 'hard' ? 3 : currentQuote.difficulty === 'medium' ? 2 : 1;
-    const calculatedScore = Math.round(acc * 5 * diffMultiplier);
+    const calculatedScore = Math.max(0, matches * 100);
 
     setCorrectCount(matches);
+    setDiffAnalysis(diff);
     setAccuracy(acc);
     setScore(calculatedScore);
-    setDiffAnalysis(diff);
     resultTimestampRef.current = Date.now();
     setPhase('result');
 
-    if (acc >= 80) {
+    if (acc >= 75) {
       sounds.playVictory();
-      confetti({ particleCount: 75, spread: 75, origin: { y: 0.6 } });
+      confetti({ particleCount: 70, spread: 70, origin: { y: 0.6 } });
     } else {
       sounds.playError();
     }
@@ -166,7 +161,12 @@ export default function WordScrambleGame({
   };
 
   const startNewGame = () => {
-    const quote = quoteQueue.getNextQuote(selectedGenre, selectedDifficulty, [], selectedBookId);
+    const quote = quoteQueue.getNextQuote(
+      selectedGenre || initialGenre || 'all', 
+      selectedDifficulty || initialDifficulty || 'all', 
+      [], 
+      selectedBookId !== undefined ? selectedBookId : initialBookId
+    );
     startRound(quote);
   };
 

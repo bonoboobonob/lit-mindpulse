@@ -32,11 +32,10 @@ export default function FullTypingGame({
 }) {
   const [selectedGenre, setSelectedGenre] = useState(initialGenre || 'all');
   const [selectedBookId, setSelectedBookId] = useState(initialBookId || null);
-  const [selectedDifficulty, setSelectedDifficulty] = useState(initialDifficulty || (initialBookId ? 'all' : 'medium'));
+  const [selectedDifficulty, setSelectedDifficulty] = useState(initialDifficulty || 'all');
   const [currentQuote, setCurrentQuote] = useState(initialQuote);
 
-  const shouldAutoStart = Boolean(initialQuote || initialBookId || initialGenre !== 'all' || (initialDifficulty && initialDifficulty !== 'all'));
-  const [phase, setPhase] = useState(shouldAutoStart ? 'study' : 'selection'); // 'selection' | 'study' | 'typing' | 'result'
+  const [phase, setPhase] = useState('study'); // Always start in study mode
   const [timeLeft, setTimeLeft] = useState(20);
   const [totalStudyTime, setTotalStudyTime] = useState(20);
   const [typedText, setTypedText] = useState('');
@@ -62,7 +61,12 @@ export default function FullTypingGame({
 
     let quote = quoteToUse;
     if (!quote) {
-      quote = quoteQueue.getNextQuote(selectedGenre, selectedDifficulty, [], selectedBookId);
+      quote = quoteQueue.getNextQuote(
+        selectedGenre || initialGenre || 'all', 
+        selectedDifficulty || initialDifficulty || 'all', 
+        [], 
+        selectedBookId !== undefined ? selectedBookId : initialBookId
+      );
     }
 
     setCurrentQuote(quote);
@@ -95,9 +99,12 @@ export default function FullTypingGame({
   };
 
   useEffect(() => {
+    setSelectedGenre(initialGenre || 'all');
+    setSelectedBookId(initialBookId || null);
+    setSelectedDifficulty(initialDifficulty || 'all');
     if (initialQuote) {
       startStudyPhase(initialQuote);
-    } else if (initialBookId || initialGenre !== 'all' || (initialDifficulty && initialDifficulty !== 'all')) {
+    } else {
       startStudyPhase();
     }
   }, [initialQuote, initialBookId, initialGenre, initialDifficulty]);

@@ -89,11 +89,11 @@ export default function App() {
 
   const handleResumeExercise = () => {
     if (!pausedGameSession) return;
-    const { mode, genre, difficulty, bookId, quote } = pausedGameSession;
+    const { mode, genre, difficulty, bookId } = pausedGameSession;
     setSelectedGenre(genre || 'all');
     setSelectedDifficulty(difficulty || 'all');
     setSelectedBookId(bookId || null);
-    setActiveQuote(quote || null);
+    setActiveQuote(null); // Ensures a brand new, unplayed quote is drawn
     setCurrentScreen(mode);
     setPausedGameSession(null);
   };
