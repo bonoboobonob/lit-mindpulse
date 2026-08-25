@@ -7,6 +7,7 @@ class QuoteQueueManager {
     // Map of key -> shuffled array of quote IDs remaining in current cycle
     this.decks = new Map();
     this.lastQuoteId = null;
+    this.playedQuoteIds = new Set();
     this.lastBook = null;
   }
 
@@ -23,6 +24,17 @@ class QuoteQueueManager {
       [arr[i], arr[j]] = [arr[j], arr[i]];
     }
     return arr;
+  }
+
+  // Explicitly mark a quote as played so it is never repeated immediately
+  markQuotePlayed(quoteId) {
+    if (!quoteId) return;
+    this.lastQuoteId = quoteId;
+    this.playedQuoteIds.add(quoteId);
+    // Remove this ID from all active decks
+    for (const [key, deck] of this.decks.entries()) {
+      this.decks.set(key, deck.filter(id => id !== quoteId));
+    }
   }
 
   // Get matching quote pool for the given filters
@@ -66,18 +78,22 @@ class QuoteQueueManager {
   }
 
   // Get next non-repeating quote supporting full deck cycle
-  getNextQuote(genreOrOptions = 'all', difficulty = 'all', customQuotes = [], bookId = null) {
+  getNextQuote(genreOrOptions = 'all', difficulty = 'all', customQuotes = [], bookId = null, excludeQuoteId = null) {
     let genre = genreOrOptions;
     let targetDifficulty = difficulty;
     let targetBookId = bookId;
     let targetCustom = customQuotes;
+    let explicitExcludeId = excludeQuoteId;
 
     if (typeof genreOrOptions === 'object' && genreOrOptions !== null) {
       genre = genreOrOptions.genre || 'all';
       targetDifficulty = genreOrOptions.difficulty || 'all';
       targetBookId = genreOrOptions.bookId || null;
       targetCustom = genreOrOptions.customQuotes || [];
+      explicitExcludeId = genreOrOptions.excludeQuoteId || excludeQuoteId;
     }
+
+    const bannedId = explicitExcludeId || this.lastQuoteId;
 
     const matchingPool = this.getMatchingQuotes(genre, targetDifficulty, targetCustom, targetBookId);
     if (!matchingPool || matchingPool.length === 0) {
@@ -91,28 +107,36 @@ class QuoteQueueManager {
     const deckKey = this.getDeckKey(genre, targetDifficulty, targetBookId);
     let currentDeck = this.decks.get(deckKey);
 
-    // If deck doesn't exist or is empty, initialize a fresh shuffled deck
-    if (!currentDeck || currentDeck.length === 0) {
-      const shuffledIds = this.shuffle(matchingPool.map(q => q.id));
+    // If deck doesn't exist, is empty, or only contains the banned quote:
+    if (!currentDeck || currentDeck.length === 0 || (currentDeck.length === 1 && currentDeck[0] === bannedId)) {
+      const allIds = matchingPool.map(q => q.id);
+      const candidateIds = allIds.filter(id => id !== bannedId);
       
-      // Ensure the first quote of the new deck is not the immediate last quote shown
-      if (shuffledIds.length > 1 && shuffledIds[0] === this.lastQuoteId) {
-        const temp = shuffledIds[0];
-        shuffledIds[0] = shuffledIds[1];
-        shuffledIds[1] = temp;
+      let shuffled = this.shuffle(candidateIds.length > 0 ? candidateIds : allIds);
+      if (bannedId && allIds.length > 1 && allIds.includes(bannedId)) {
+        // Put the banned quote at the end of the new cycle
+        shuffled.push(bannedId);
       }
-
-      currentDeck = shuffledIds;
+      currentDeck = shuffled;
       this.decks.set(deckKey, currentDeck);
+    }
+
+    // Ensure the top of the deck is NOT bannedId
+    if (currentDeck.length > 1 && currentDeck[0] === bannedId) {
+      const top = currentDeck.shift();
+      currentDeck.push(top);
     }
 
     // Pop the next quote ID from the deck
     const nextId = currentDeck.shift();
     this.decks.set(deckKey, currentDeck);
 
-    const selectedQuote = matchingPool.find(q => q.id === nextId) || matchingPool[0];
+    const selectedQuote = matchingPool.find(q => q.id === nextId) || 
+                          matchingPool.find(q => q.id !== bannedId) || 
+                          matchingPool[0];
 
     this.lastQuoteId = selectedQuote.id;
+    this.playedQuoteIds.add(selectedQuote.id);
     this.lastBook = selectedQuote.book;
 
     return selectedQuote;
@@ -121,6 +145,7 @@ class QuoteQueueManager {
   resetHistory() {
     this.decks.clear();
     this.lastQuoteId = null;
+    this.playedQuoteIds.clear();
     this.lastBook = null;
   }
 }

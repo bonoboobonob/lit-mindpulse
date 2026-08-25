@@ -105,43 +105,6 @@ export default function BookDetailView({
         </div>
       </div>
 
-      {/* Paused Exercise Alert / Continuation Card */}
-      {pausedGameSession && (
-        <div className="w-full p-4 sm:p-5 rounded-3xl bg-[#FAF6EE] border-2 border-[#C85A32] shadow-sm mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 animate-in fade-in slide-in-from-top-2">
-          <div className="flex items-center gap-3.5">
-            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-[#C85A32] text-white flex items-center justify-center shrink-0 shadow-xs">
-              <Play className="w-5 h-5 fill-white" />
-            </div>
-            <div>
-              <div className="flex items-center gap-2 mb-0.5">
-                <span className="text-[10px] font-bold uppercase tracking-wider bg-[#C85A32]/15 text-[#B44A22] px-2 py-0.5 rounded-full">
-                  Egzersiz Duraklatıldı
-                </span>
-                <span className="text-xs text-[#57534E] font-medium">
-                  {modeName} • {pausedGameSession.genre === 'all' ? 'Tüm Türler' : genreObj.name}
-                </span>
-              </div>
-              <p className="text-xs sm:text-sm text-[#1C1917] font-serif font-bold">
-                Eseri inceledikten sonra kaldığınız yerden kesintisiz devam edebilirsiniz.
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2.5 w-full sm:w-auto justify-end shrink-0">
-            <button
-              onClick={() => {
-                sounds.playClick();
-                if (onResumeExercise) onResumeExercise();
-              }}
-              className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl btn-terracotta text-xs sm:text-sm font-bold shadow-md transition cursor-pointer"
-            >
-              <Play className="w-4 h-4 fill-white" />
-              <span>Egzersize Devam Et ➔</span>
-            </button>
-          </div>
-        </div>
-      )}
-
       {/* Book Hero Presentation (Kinfolk Atelier Book Card) */}
       <div className="relative p-6 sm:p-8 rounded-3xl bg-white border border-[#D6CEBE] shadow-xs mb-8 overflow-hidden">
         {/* Ribbon decoration */}
@@ -400,49 +363,6 @@ export default function BookDetailView({
             );
           })}
         </div>
-
-        {/* Bottom Resumption Bar when Paused Game Exists */}
-        {pausedGameSession && (
-          <div className="mt-8 p-4 sm:p-5 rounded-3xl bg-[#FAF6EE] border-2 border-[#C85A32] shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-3 text-center sm:text-left">
-              <div className="w-10 h-10 rounded-2xl bg-[#C85A32] text-white flex items-center justify-center shrink-0 shadow-xs hidden sm:flex">
-                <Play className="w-5 h-5 fill-white" />
-              </div>
-              <div>
-                <h4 className="font-serif font-bold text-sm text-[#1C1917]">
-                  Egzersizinize Geri Dönmeye Hazır Mısınız?
-                </h4>
-                <p className="text-xs text-[#57534E]">
-                  Önceki seçimleriniz ({modeName}) korundu.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-2.5 w-full sm:w-auto justify-center sm:justify-end">
-              <button
-                onClick={() => {
-                  sounds.playClick();
-                  if (onResumeExercise) onResumeExercise();
-                }}
-                className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-3 rounded-2xl btn-terracotta text-sm font-bold shadow-md transition cursor-pointer"
-              >
-                <Play className="w-4 h-4 fill-white" />
-                <span>Egzersize Devam Et</span>
-              </button>
-
-              <button
-                onClick={() => {
-                  sounds.playClick();
-                  if (onNavigateHome) onNavigateHome();
-                  else onBack();
-                }}
-                className="px-4 py-3 rounded-2xl bg-white hover:bg-[#F2ECE0] border border-[#D6CEBE] text-[#57534E] hover:text-[#1C1917] text-sm font-semibold transition cursor-pointer shadow-xs"
-              >
-                <span>Ana Sayfa</span>
-              </button>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

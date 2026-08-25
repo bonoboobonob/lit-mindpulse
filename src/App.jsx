@@ -11,6 +11,7 @@ import ClozeRecallGame from './components/games/ClozeRecallGame';
 import WordScrambleGame from './components/games/WordScrambleGame';
 import MyLibrary from './components/MyLibrary';
 import { getSavedStats, saveGameResult, getCustomQuotes, saveCustomQuotes } from './utils/storage';
+import { quoteQueue } from './utils/quoteQueue';
 import { sounds } from './utils/sound';
 
 export default function App() {
@@ -22,6 +23,7 @@ export default function App() {
   const [customQuotes, setCustomQuotes] = useState(getCustomQuotes());
   const [activeQuote, setActiveQuote] = useState(null);
   const [pausedGameSession, setPausedGameSession] = useState(null);
+  const [gameSessionId, setGameSessionId] = useState(1);
   
   const [isStatsOpen, setIsStatsOpen] = useState(false);
   const [isTipsOpen, setIsTipsOpen] = useState(false);
@@ -51,7 +53,11 @@ export default function App() {
 
   const handleStartQuotePractice = (quote, mode = 'fullTyping') => {
     setPausedGameSession(null);
+    if (quote?.id) {
+      quoteQueue.markQuotePlayed(quote.id);
+    }
     setActiveQuote(quote);
+    setGameSessionId(prev => prev + 1);
     setCurrentScreen(mode);
   };
 
@@ -61,6 +67,7 @@ export default function App() {
     setSelectedBookId(null);
     setSelectedDifficulty('all');
     setActiveQuote(null);
+    setGameSessionId(prev => prev + 1);
     setCurrentScreen(mode);
   };
 
@@ -69,17 +76,23 @@ export default function App() {
     setSelectedBookId(bookId);
     setSelectedDifficulty(difficulty);
     setActiveQuote(null);
+    setGameSessionId(prev => prev + 1);
     setCurrentScreen(mode);
   };
 
   const handleSelectBook = (bookId, gameContext = null) => {
     if (['fullTyping', 'clozeRecall', 'wordScramble'].includes(currentScreen)) {
+      const completedId = gameContext?.quote?.id || activeQuote?.id;
+      if (completedId) {
+        quoteQueue.markQuotePlayed(completedId);
+      }
       setPausedGameSession({
         mode: currentScreen,
         genre: selectedGenre,
         difficulty: selectedDifficulty,
         bookId: selectedBookId,
         quote: activeQuote,
+        completedQuoteId: completedId,
         ...(gameContext || {})
       });
     }
@@ -89,11 +102,19 @@ export default function App() {
 
   const handleResumeExercise = () => {
     if (!pausedGameSession) return;
-    const { mode, genre, difficulty, bookId } = pausedGameSession;
+    const { mode, genre, difficulty, bookId, completedQuoteId, quote } = pausedGameSession;
+    
+    // Explicitly mark the completed quote as played so quoteQueue NEVER returns it
+    const finishedId = completedQuoteId || quote?.id;
+    if (finishedId) {
+      quoteQueue.markQuotePlayed(finishedId);
+    }
+
     setSelectedGenre(genre || 'all');
     setSelectedDifficulty(difficulty || 'all');
     setSelectedBookId(bookId || null);
-    setActiveQuote(null); // Ensures a brand new, unplayed quote is drawn
+    setActiveQuote(null); // Force brand new unplayed quote
+    setGameSessionId(prev => prev + 1); // Force fresh component mount
     setCurrentScreen(mode);
     setPausedGameSession(null);
   };
@@ -145,6 +166,7 @@ export default function App() {
                 setSelectedGenre('all');
                 setSelectedBookId(null);
                 setPausedGameSession(null);
+                setGameSessionId(prev => prev + 1);
                 setCurrentScreen(modeId);
               }}
               onSelectGenre={(genreId) => {
@@ -190,6 +212,7 @@ export default function App() {
 
           {currentScreen === 'fullTyping' && (
             <FullTypingGame
+              key={`fullTyping_${gameSessionId}`}
               initialQuote={activeQuote}
               initialGenre={selectedGenre}
               initialBookId={selectedBookId}
@@ -212,6 +235,7 @@ export default function App() {
 
           {currentScreen === 'clozeRecall' && (
             <ClozeRecallGame
+              key={`clozeRecall_${gameSessionId}`}
               initialQuote={activeQuote}
               initialGenre={selectedGenre}
               initialBookId={selectedBookId}
@@ -234,6 +258,7 @@ export default function App() {
 
           {currentScreen === 'wordScramble' && (
             <WordScrambleGame
+              key={`wordScramble_${gameSessionId}`}
               initialQuote={activeQuote}
               initialGenre={selectedGenre}
               initialBookId={selectedBookId}
