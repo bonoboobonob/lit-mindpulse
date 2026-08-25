@@ -110,26 +110,26 @@ export default function HomeMenu({
   return (
     <div className="w-full max-w-5xl mx-auto px-2 sm:px-4 py-2">
       {/* Atelier Hero Banner (Woodcut & Editorial Grid) */}
-      <div className="relative overflow-hidden rounded-3xl bg-white border border-[#D6CEBE] p-6 sm:p-10 mb-8 shadow-xs">
-        {/* Subtle decorative background watermark */}
-        <div className="absolute right-4 -bottom-6 opacity-10 pointer-events-none hidden md:block">
+      <div className="relative overflow-hidden rounded-3xl bg-white dark:bg-[#1E1B18] border border-[#D6CEBE] dark:border-[#38322B] p-6 sm:p-10 mb-8 shadow-xs">
+        {/* Subtle decorative background watermark without box */}
+        <div className="absolute right-4 -bottom-6 opacity-15 dark:opacity-10 pointer-events-none hidden md:block text-[#C85A32]">
           <OakTreeIllustration className="w-64 h-64" />
         </div>
 
         <div className="relative z-10 max-w-2xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C85A32]/10 border border-[#C85A32]/30 text-[#B44A22] text-xs font-bold uppercase tracking-wider mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C85A32]/10 dark:bg-[#E07048]/20 border border-[#C85A32]/30 dark:border-[#E07048]/40 text-[#B44A22] dark:text-[#E07048] text-xs font-bold uppercase tracking-wider mb-4">
             <Feather className="w-3.5 h-3.5 stroke-[2.4]" />
             <span>The Atelier Edition • Edebi Hafıza Mizanpajı</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-[#1C1917] tracking-tight leading-snug mb-3">
+          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-[#1C1917] dark:text-[#F5EFE4] tracking-tight leading-snug mb-3">
             Zihninizi Edebiyatın <br className="hidden sm:inline" />
-            <span className="text-[#B44A22] italic font-serif font-normal">
+            <span className="text-[#B44A22] dark:text-[#E07048] italic font-serif font-normal">
               Kalıcı Sözcükleriyle
             </span> Güçlendirin
           </h2>
 
-          <p className="text-sm sm:text-base text-[#44403C] mb-6 leading-relaxed font-sans font-normal">
+          <p className="text-sm sm:text-base text-[#44403C] dark:text-[#D6CEBE] mb-6 leading-relaxed font-sans font-normal">
             Dünya klasikleri, felsefe ve Türk edebiyatı şaheserlerinden seçilen 250+ kült cümleyi ezberleyin; çalışma belleğinizi, dil zenginliğinizi ve odaklanmanızı zirveye taşıyın.
           </p>
 
@@ -150,9 +150,9 @@ export default function HomeMenu({
                 sounds.playClick();
                 onOpenLibrary();
               }}
-              className="flex items-center gap-2 px-5 py-3.5 rounded-2xl bg-[#FAF6EE] hover:bg-[#F2ECE1] border border-[#D6CEBE] text-[#1C1917] text-sm font-semibold transition cursor-pointer"
+              className="flex items-center gap-2 px-5 py-3.5 rounded-2xl bg-[#FAF6EE] dark:bg-[#282420] hover:bg-[#F2ECE1] dark:hover:bg-[#342F2A] border border-[#D6CEBE] dark:border-[#443D35] text-[#1C1917] dark:text-[#EDE8DF] text-sm font-semibold transition cursor-pointer shadow-xs"
             >
-              <BookOpen className="w-4 h-4 text-[#B44A22]" />
+              <BookOpen className="w-4 h-4 text-[#B44A22] dark:text-[#E07048]" />
               <span>Hafıza Defterim</span>
             </button>
           </div>

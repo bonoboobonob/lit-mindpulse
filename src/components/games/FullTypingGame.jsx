@@ -493,21 +493,21 @@ export default function FullTypingGame({
           <div className="w-full grid grid-cols-3 gap-3 mb-6">
             <div className="p-4 rounded-2xl bg-white border border-[#D6CEBE] text-center shadow-xs">
               <div className="text-xs text-[#57534E] font-medium mb-1">Doğruluk</div>
-              <div className={`text-2xl sm:text-3xl font-serif font-extrabold ${accuracy >= 80 ? 'text-emerald-700' : accuracy >= 50 ? 'text-amber-700' : 'text-rose-700'}`}>
+              <div className={`text-2xl sm:text-3xl font-serif font-extrabold ${accuracy >= 80 ? 'text-emerald-700 dark:text-emerald-400' : accuracy >= 50 ? 'text-amber-700 dark:text-amber-400' : 'text-rose-600 dark:text-rose-400'}`}>
                 %{accuracy}
               </div>
             </div>
 
             <div className="p-4 rounded-2xl bg-white border border-[#D6CEBE] text-center shadow-xs">
               <div className="text-xs text-[#57534E] font-medium mb-1">Yazma Hızı</div>
-              <div className="text-2xl sm:text-3xl font-serif font-extrabold text-[#B44A22]">
+              <div className="text-2xl sm:text-3xl font-serif font-extrabold text-[#B44A22] dark:text-[#E07048]">
                 {wpm} <span className="text-xs font-normal text-[#57534E]">WPM</span>
               </div>
             </div>
 
             <div className="p-4 rounded-2xl bg-white border border-[#D6CEBE] text-center shadow-xs">
               <div className="text-xs text-[#57534E] font-medium mb-1">Kazanılan Puan</div>
-              <div className="text-2xl sm:text-3xl font-serif font-extrabold text-[#8C5E3C]">
+              <div className="text-2xl sm:text-3xl font-serif font-extrabold text-[#476C46] dark:text-[#62B889]">
                 {score}
               </div>
             </div>
@@ -515,11 +515,11 @@ export default function FullTypingGame({
 
           <div className="w-full p-5 sm:p-6 rounded-3xl bg-white border border-[#D6CEBE] shadow-md mb-6">
             <div className="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-[#57534E] mb-4">
-              <span>Kelime Karşılaştırması</span>
+              <span className="text-[#1C1917] dark:text-[#F5EFE4]">Kelime Karşılaştırması</span>
               <div className="flex items-center gap-2.5 text-[11px] font-bold normal-case">
-                <span className="text-emerald-800">● Doğru</span>
-                <span className="text-rose-800">● Hatalı</span>
-                <span className="text-amber-800">● Eksik</span>
+                <span className="text-emerald-700 dark:text-emerald-400">● Doğru</span>
+                <span className="text-rose-600 dark:text-rose-400">● Hatalı</span>
+                <span className="text-amber-600 dark:text-amber-400">● Eksik</span>
               </div>
             </div>
 
@@ -527,26 +527,26 @@ export default function FullTypingGame({
               {diffAnalysis.map((item, idx) => {
                 if (item.status === 'correct') {
                   return (
-                    <span key={idx} className="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-900 border border-emerald-400 font-semibold shadow-xs">
+                    <span key={idx} className="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-900 border border-emerald-400 dark:bg-emerald-950/60 dark:text-emerald-200 dark:border-emerald-700/80 font-semibold shadow-xs">
                       {item.word}
                     </span>
                   );
                 } else if (item.status === 'incorrect') {
                   return (
-                    <span key={idx} className="px-2.5 py-1 rounded-lg bg-rose-50 text-rose-900 border border-rose-400 font-semibold flex items-center gap-1">
+                    <span key={idx} className="px-2.5 py-1 rounded-lg bg-rose-50 text-rose-900 border border-rose-400 dark:bg-rose-950/60 dark:text-rose-200 dark:border-rose-700/80 font-semibold flex items-center gap-1">
                       <span className="line-through opacity-70 text-xs">{item.userWord}</span>
                       <span>{item.word}</span>
                     </span>
                   );
                 } else if (item.status === 'missing') {
                   return (
-                    <span key={idx} className="px-2.5 py-1 rounded-lg bg-amber-50 text-amber-900 border border-amber-400 font-semibold border-dashed">
+                    <span key={idx} className="px-2.5 py-1 rounded-lg bg-amber-50 text-amber-900 border border-amber-400 dark:bg-amber-950/60 dark:text-amber-200 dark:border-amber-700/80 font-semibold border-dashed">
                       {item.word}
                     </span>
                   );
                 } else {
                   return (
-                    <span key={idx} className="px-2 py-1 rounded-lg bg-stone-200 text-stone-700 line-through text-xs font-medium">
+                    <span key={idx} className="px-2 py-1 rounded-lg bg-stone-200 text-stone-700 dark:bg-stone-800 dark:text-stone-300 line-through text-xs font-medium">
                       {item.userWord}
                     </span>
                   );

@@ -408,21 +408,21 @@ export default function WordScrambleGame({
           <div className="w-full grid grid-cols-3 gap-3 mb-6">
             <div className="p-4 rounded-2xl bg-white border border-[#D6CEBE] text-center shadow-xs">
               <div className="text-xs text-[#57534E] font-medium mb-1">Dizilim Doğruluğu</div>
-              <div className={`text-2xl sm:text-3xl font-serif font-extrabold ${accuracy >= 80 ? 'text-emerald-700' : accuracy >= 50 ? 'text-amber-700' : 'text-rose-700'}`}>
+              <div className={`text-2xl sm:text-3xl font-serif font-extrabold ${accuracy >= 80 ? 'text-emerald-700 dark:text-emerald-400' : accuracy >= 50 ? 'text-amber-700 dark:text-amber-400' : 'text-rose-600 dark:text-rose-400'}`}>
                 %{accuracy}
               </div>
             </div>
 
             <div className="p-4 rounded-2xl bg-white border border-[#D6CEBE] text-center shadow-xs">
               <div className="text-xs text-[#57534E] font-medium mb-1">Doğru Sıralama</div>
-              <div className="text-2xl sm:text-3xl font-serif font-extrabold text-[#B44A22]">
+              <div className="text-2xl sm:text-3xl font-serif font-extrabold text-[#B44A22] dark:text-[#E07048]">
                 {correctCount} / {originalTokens.length}
               </div>
             </div>
 
             <div className="p-4 rounded-2xl bg-white border border-[#D6CEBE] text-center shadow-xs">
               <div className="text-xs text-[#57534E] font-medium mb-1">Kazanılan Puan</div>
-              <div className="text-2xl sm:text-3xl font-serif font-extrabold text-[#588157]">
+              <div className="text-2xl sm:text-3xl font-serif font-extrabold text-[#476C46] dark:text-[#62B889]">
                 {score}
               </div>
             </div>
@@ -431,10 +431,10 @@ export default function WordScrambleGame({
           {/* Word Comparison Panel */}
           <div className="w-full p-5 sm:p-6 rounded-3xl bg-white border border-[#D6CEBE] shadow-md mb-6">
             <div className="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-[#57534E] mb-4">
-              <span>Sıralama & Doğruluk Karşılaştırması</span>
+              <span className="text-[#1C1917] dark:text-[#F5EFE4]">Sıralama & Doğruluk Karşılaştırması</span>
               <div className="flex items-center gap-2.5 text-[11px] font-bold normal-case">
-                <span className="text-emerald-800">● Doğru Konum</span>
-                <span className="text-rose-800">● Hatalı Konum</span>
+                <span className="text-emerald-700 dark:text-emerald-400">● Doğru Konum</span>
+                <span className="text-rose-600 dark:text-rose-400">● Hatalı Konum</span>
               </div>
             </div>
 
@@ -447,13 +447,13 @@ export default function WordScrambleGame({
                     key={idx}
                     className={`px-2.5 py-1 rounded-xl font-semibold border flex items-center gap-1.5 ${
                       item.isCorrect
-                        ? 'bg-emerald-50 text-emerald-950 border-emerald-400 shadow-xs'
-                        : 'bg-rose-50 text-rose-950 border-rose-400'
+                        ? 'bg-emerald-50 text-emerald-950 border-emerald-400 dark:bg-emerald-950/60 dark:text-emerald-200 dark:border-emerald-700/80 shadow-xs'
+                        : 'bg-rose-50 text-rose-950 border-rose-400 dark:bg-rose-950/60 dark:text-rose-200 dark:border-rose-700/80'
                     }`}
                   >
                     <span>{item.placedWord}</span>
                     {!item.isCorrect && (
-                      <span className="text-[10px] bg-rose-100 text-rose-800 px-1.5 py-0.5 rounded font-sans font-bold" title={`Olması gereken: ${item.expectedWord}`}>
+                      <span className="text-[10px] bg-rose-100 text-rose-800 dark:bg-rose-900/80 dark:text-rose-200 px-1.5 py-0.5 rounded font-sans font-bold" title={`Olması gereken: ${item.expectedWord}`}>
                         ({item.expectedWord})
                       </span>
                     )}

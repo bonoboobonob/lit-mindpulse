@@ -483,20 +483,20 @@ export default function ClozeRecallGame({
           <div className="w-full grid grid-cols-2 gap-3 mb-6">
             <div className="p-4 rounded-2xl bg-white border border-[#D6CEBE] text-center shadow-xs">
               <div className="text-xs text-[#57534E] font-medium mb-1">Boşluk Doğruluğu</div>
-              <div className={`text-3xl font-extrabold font-serif ${accuracy >= 70 ? 'text-emerald-700' : 'text-amber-700'}`}>
+              <div className={`text-3xl font-extrabold font-serif ${accuracy >= 70 ? 'text-emerald-700 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}`}>
                 %{accuracy}
               </div>
             </div>
             <div className="p-4 rounded-2xl bg-white border border-[#D6CEBE] text-center shadow-xs">
               <div className="text-xs text-[#57534E] font-medium mb-1">Kazanılan Puan</div>
-              <div className="text-3xl font-extrabold font-serif text-[#8C5E3C]">
+              <div className="text-3xl font-extrabold font-serif text-[#476C46] dark:text-[#62B889]">
                 {score}
               </div>
             </div>
           </div>
 
           <div className="w-full p-6 rounded-3xl bg-white border border-[#D6CEBE] shadow-md mb-6">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-[#57534E] mb-3">Boşluk Analizi</h4>
+            <h4 className="text-xs font-bold uppercase tracking-wider text-[#1C1917] dark:text-[#F5EFE4] mb-3">Boşluk Analizi</h4>
             <div className="space-y-2.5">
               {clozeTokens.filter(t => t.isBlank).map((b, i) => {
                 const userVal = cleanWord(userInputs[b.blankIndex] || '');
@@ -507,13 +507,13 @@ export default function ClozeRecallGame({
                     key={i}
                     className={`flex items-center justify-between p-3.5 rounded-2xl border text-sm font-serif ${
                       isCorrect
-                        ? 'bg-emerald-50 border-emerald-400 text-emerald-950 shadow-xs'
-                        : 'bg-rose-50 border-rose-400 text-rose-950'
+                        ? 'bg-emerald-50 border-emerald-400 text-emerald-950 dark:bg-emerald-950/60 dark:border-emerald-700/80 dark:text-emerald-200 shadow-xs'
+                        : 'bg-rose-50 border-rose-400 text-rose-950 dark:bg-rose-950/60 dark:border-rose-700/80 dark:text-rose-200'
                     }`}
                   >
                     <div>
                       <span className="font-sans text-xs text-[#57534E] block mb-0.5 font-medium">Boşluk #{i + 1}:</span>
-                      <strong className="text-base text-[#1C1917]">{b.coreWord}</strong>
+                      <strong className="text-base text-[#1C1917] dark:text-[#F5EFE4]">{b.coreWord}</strong>
                     </div>
 
                     <div className="text-right">

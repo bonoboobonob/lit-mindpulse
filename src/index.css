@@ -251,7 +251,71 @@ html.dark input[type="text"]:focus {
 html.dark .fixed.inset-0.bg-black\/40,
 html.dark .fixed.inset-0.bg-black\/50,
 html.dark .fixed.inset-0.bg-black\/60 {
-  background-color: rgba(0, 0, 0, 0.75) !important;
+  background-color: rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Difficulty Badges & Metric Badges in Dark Mode */
+html.dark .bg-emerald-50 {
+  background-color: rgba(6, 78, 59, 0.45) !important;
+}
+html.dark .text-emerald-800,
+html.dark .text-emerald-900,
+html.dark .text-emerald-950 {
+  color: #6EE7B7 !important;
+}
+html.dark .border-emerald-300,
+html.dark .border-emerald-400 {
+  border-color: rgba(16, 185, 129, 0.45) !important;
+}
+
+html.dark .bg-amber-50 {
+  background-color: rgba(120, 53, 15, 0.45) !important;
+}
+html.dark .text-amber-800,
+html.dark .text-amber-900,
+html.dark .text-amber-950 {
+  color: #FCD34D !important;
+}
+html.dark .border-amber-300,
+html.dark .border-amber-400 {
+  border-color: rgba(245, 158, 11, 0.45) !important;
+}
+
+html.dark .bg-orange-50 {
+  background-color: rgba(124, 45, 18, 0.45) !important;
+}
+html.dark .text-orange-800,
+html.dark .text-orange-900,
+html.dark .text-orange-950 {
+  color: #FDBA74 !important;
+}
+html.dark .border-orange-300,
+html.dark .border-orange-400 {
+  border-color: rgba(249, 115, 22, 0.45) !important;
+}
+
+html.dark .bg-rose-50 {
+  background-color: rgba(136, 19, 55, 0.45) !important;
+}
+html.dark .text-rose-800,
+html.dark .text-rose-900,
+html.dark .text-rose-950 {
+  color: #FDA4AF !important;
+}
+html.dark .border-rose-300,
+html.dark .border-rose-400 {
+  border-color: rgba(244, 63, 94, 0.45) !important;
+}
+
+html.dark .text-rose-600,
+html.dark .text-rose-700 {
+  color: #FB7185 !important;
+}
+html.dark .text-emerald-700 {
+  color: #34D399 !important;
+}
+html.dark .text-amber-700 {
+  color: #FBBF24 !important;
 }
 
 /* Scrollbar styling for paper aesthetic */
