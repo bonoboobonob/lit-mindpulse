@@ -24,13 +24,15 @@ export default function ClozeRecallGame({
   onBack, 
   highScore = 0, 
   initialQuote = null, 
-  initialGenre = 'all' 
+  initialGenre = 'all',
+  initialBookId = null
 }) {
   const [selectedGenre, setSelectedGenre] = useState(initialGenre || 'all');
+  const [selectedBookId, setSelectedBookId] = useState(initialBookId || null);
   const [selectedDifficulty, setSelectedDifficulty] = useState('medium');
   const [currentQuote, setCurrentQuote] = useState(initialQuote);
 
-  const [phase, setPhase] = useState(initialQuote ? 'study' : 'selection'); // 'selection' | 'study' | 'testing' | 'result'
+  const [phase, setPhase] = useState((initialQuote || initialBookId) ? 'study' : 'selection'); // 'selection' | 'study' | 'testing' | 'result'
   const [timeLeft, setTimeLeft] = useState(15);
   const [totalStudyTime, setTotalStudyTime] = useState(15);
   
@@ -155,8 +157,10 @@ export default function ClozeRecallGame({
   useEffect(() => {
     if (initialQuote) {
       setupClozeQuote(initialQuote);
+    } else if (initialBookId) {
+      startNewRound();
     }
-  }, [initialQuote]);
+  }, [initialQuote, initialBookId]);
 
   const startTestingPhase = () => {
     sounds.playLevelUp();
@@ -224,7 +228,7 @@ export default function ClozeRecallGame({
   };
 
   const startNewRound = () => {
-    const quote = quoteQueue.getNextQuote(selectedGenre, selectedDifficulty);
+    const quote = quoteQueue.getNextQuote(selectedGenre, selectedDifficulty, [], selectedBookId);
     setupClozeQuote(quote);
   };
 

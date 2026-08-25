@@ -22,14 +22,16 @@ export default function FullTypingGame({
   onGameOver, 
   onBack, 
   highScore = 0, 
-  initialQuote = null,
-  initialGenre = 'all'
+  initialQuote = null, 
+  initialGenre = 'all',
+  initialBookId = null
 }) {
   const [selectedGenre, setSelectedGenre] = useState(initialGenre || 'all');
+  const [selectedBookId, setSelectedBookId] = useState(initialBookId || null);
   const [selectedDifficulty, setSelectedDifficulty] = useState('medium');
   const [currentQuote, setCurrentQuote] = useState(initialQuote);
 
-  const [phase, setPhase] = useState(initialQuote ? 'study' : 'selection'); // 'selection' | 'study' | 'typing' | 'result'
+  const [phase, setPhase] = useState((initialQuote || initialBookId) ? 'study' : 'selection'); // 'selection' | 'study' | 'typing' | 'result'
   const [timeLeft, setTimeLeft] = useState(20);
   const [totalStudyTime, setTotalStudyTime] = useState(20);
   const [typedText, setTypedText] = useState('');
@@ -55,7 +57,7 @@ export default function FullTypingGame({
 
     let quote = quoteToUse;
     if (!quote) {
-      quote = quoteQueue.getNextQuote(selectedGenre, selectedDifficulty);
+      quote = quoteQueue.getNextQuote(selectedGenre, selectedDifficulty, [], selectedBookId);
     }
 
     setCurrentQuote(quote);
@@ -90,8 +92,10 @@ export default function FullTypingGame({
   useEffect(() => {
     if (initialQuote) {
       startStudyPhase(initialQuote);
+    } else if (initialBookId) {
+      startStudyPhase();
     }
-  }, [initialQuote]);
+  }, [initialQuote, initialBookId]);
 
   // Transition to typing phase
   const startTypingPhase = () => {

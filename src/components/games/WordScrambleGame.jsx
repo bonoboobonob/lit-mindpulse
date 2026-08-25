@@ -22,13 +22,15 @@ export default function WordScrambleGame({
   onBack, 
   highScore = 0, 
   initialQuote = null, 
-  initialGenre = 'all' 
+  initialGenre = 'all',
+  initialBookId = null
 }) {
   const [selectedGenre, setSelectedGenre] = useState(initialGenre || 'all');
+  const [selectedBookId, setSelectedBookId] = useState(initialBookId || null);
   const [selectedDifficulty, setSelectedDifficulty] = useState('easy');
   const [currentQuote, setCurrentQuote] = useState(initialQuote);
 
-  const [phase, setPhase] = useState(initialQuote ? 'study' : 'selection'); // 'selection' | 'study' | 'scramble' | 'result'
+  const [phase, setPhase] = useState((initialQuote || initialBookId) ? 'study' : 'selection'); // 'selection' | 'study' | 'scramble' | 'result'
   const [timeLeft, setTimeLeft] = useState(15);
   const [totalStudyTime, setTotalStudyTime] = useState(15);
 
@@ -88,8 +90,10 @@ export default function WordScrambleGame({
   useEffect(() => {
     if (initialQuote) {
       startRound(initialQuote);
+    } else if (initialBookId) {
+      startNewGame();
     }
-  }, [initialQuote]);
+  }, [initialQuote, initialBookId]);
 
   const handlePickWord = (item) => {
     if (item.isUsed) return;
@@ -157,7 +161,7 @@ export default function WordScrambleGame({
   };
 
   const startNewGame = () => {
-    const quote = quoteQueue.getNextQuote(selectedGenre, selectedDifficulty);
+    const quote = quoteQueue.getNextQuote(selectedGenre, selectedDifficulty, [], selectedBookId);
     startRound(quote);
   };
 

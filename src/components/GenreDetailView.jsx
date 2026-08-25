@@ -26,9 +26,12 @@ import {
   Laugh,
   Hourglass,
   Scale,
-  Heart
+  Heart,
+  ChevronRight,
+  Info
 } from 'lucide-react';
 import { BOOK_GENRES, BOOK_QUOTES, DIFFICULTY_LEVELS } from '../data/bookQuotes';
+import { BOOKS_DATABASE } from '../data/booksDatabase';
 import { sounds } from '../utils/sound';
 
 const genreIcons = {
@@ -60,12 +63,18 @@ export default function GenreDetailView({
   genreId, 
   onBack, 
   onStartGenrePractice, 
-  onStartSpecificQuote 
+  onStartSpecificQuote,
+  onSelectBook
 }) {
   const [selectedDifficulty, setSelectedDifficulty] = useState('all');
 
   const genre = BOOK_GENRES.find(g => g.id === genreId) || BOOK_GENRES[1];
   const Icon = genreIcons[genre.icon] || BookOpen;
+
+  // Find books in master books database for this genre
+  const genreBooks = genre.id === 'all'
+    ? BOOKS_DATABASE
+    : BOOKS_DATABASE.filter(b => b.genre === genre.id || b.secondaryGenres?.includes(genre.id));
 
   // Filter quotes belonging to this genre
   const allGenreQuotes = genre.id === 'all' 
@@ -165,98 +174,166 @@ export default function GenreDetailView({
         </div>
       </div>
 
-      {/* Difficulty Filter Tabs */}
-      <div className="flex items-center justify-between gap-2 mb-4 flex-wrap">
-        <div className="flex items-center gap-1.5 text-xs font-bold text-[#1C1917]">
-          <Filter className="w-4 h-4 text-[#B44A22]" />
-          <span>Kategori İçi Eserler & Cümleler:</span>
+      {/* Featured Master Books in this Genre */}
+      {genreBooks.length > 0 && (
+        <div className="mb-10">
+          <div className="flex items-center justify-between mb-4 px-1">
+            <h3 className="text-lg font-serif font-bold text-[#1C1917] flex items-center gap-2">
+              <BookOpen className="w-5 h-5 text-[#B44A22]" />
+              <span>Kategorinin Başyapıtları & Eser İncelemeleri</span>
+            </h3>
+            <span className="text-xs text-[#57534E] font-medium hidden sm:inline">
+              Detaylı özet ve kitap içi pasajlar için esere dokunun
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {genreBooks.map((book) => (
+              <div
+                key={book.id}
+                onClick={() => {
+                  sounds.playClick();
+                  onSelectBook(book.id);
+                }}
+                className="p-5 rounded-3xl bg-white border border-[#D6CEBE] hover:border-[#C85A32] hover:shadow-md transition-all cursor-pointer group flex flex-col justify-between"
+              >
+                <div>
+                  <div className="flex items-start gap-4 mb-3">
+                    {/* Small Book Cover Thumbnail */}
+                    <div className={`w-16 h-20 rounded-xl bg-gradient-to-br ${book.coverBg || 'from-[#8C5E3C] to-[#5C3D26]'} p-2 text-white flex flex-col justify-between shrink-0 shadow-xs border border-white/20 group-hover:scale-105 transition-transform`}>
+                      <span className="text-[8px] uppercase tracking-widest text-amber-200 font-bold">Libris</span>
+                      <BookOpen className="w-4 h-4 opacity-70" />
+                    </div>
+
+                    <div className="flex-1 min-w-0">
+                      <h4 className="text-base font-serif font-bold text-[#1C1917] group-hover:text-[#B44A22] transition-colors truncate">
+                        {book.title}
+                      </h4>
+                      <p className="text-xs text-[#57534E] font-medium mb-1.5">
+                        {book.author} • {book.year}
+                      </p>
+                      <p className="text-xs text-[#44403C] line-clamp-2 leading-relaxed">
+                        {book.summary}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Themes preview */}
+                  {book.keyThemes && (
+                    <div className="flex flex-wrap gap-1 mb-2">
+                      {book.keyThemes.slice(0, 3).map((t, idx) => (
+                        <span key={idx} className="text-[10px] px-2 py-0.5 rounded-md bg-[#FAF6EE] border border-[#D6CEBE] text-[#57534E]">
+                          #{t}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                <div className="flex items-center justify-between pt-3 border-t border-[#D6CEBE] text-xs font-bold text-[#B44A22] group-hover:translate-x-1 transition-transform">
+                  <span>Kitap Özeti & {book.passages?.length || 0} Pasajı İncele</span>
+                  <ChevronRight className="w-4 h-4" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Difficulty Filter Tabs & Quotes Stream */}
+      <div>
+        <div className="flex items-center justify-between gap-2 mb-4 flex-wrap">
+          <div className="flex items-center gap-1.5 text-xs font-bold text-[#1C1917]">
+            <Filter className="w-4 h-4 text-[#B44A22]" />
+            <span>Kategori İçi Tüm Cümleler ({allGenreQuotes.length}):</span>
+          </div>
+
+          <div className="flex items-center gap-1.5 overflow-x-auto pb-1">
+            <button
+              onClick={() => setSelectedDifficulty('all')}
+              className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition cursor-pointer ${
+                selectedDifficulty === 'all'
+                  ? 'bg-[#C85A32] text-white shadow-xs'
+                  : 'bg-white border border-[#D6CEBE] text-[#57534E] hover:text-[#1C1917]'
+              }`}
+            >
+              Tümü ({allGenreQuotes.length})
+            </button>
+            {DIFFICULTY_LEVELS.map(d => {
+              const count = allGenreQuotes.filter(q => q.difficulty === d.id).length;
+              if (count === 0) return null;
+              return (
+                <button
+                  key={d.id}
+                  onClick={() => setSelectedDifficulty(d.id)}
+                  className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition cursor-pointer ${
+                    selectedDifficulty === d.id
+                      ? 'bg-[#C85A32] text-white shadow-xs'
+                      : 'bg-white border border-[#D6CEBE] text-[#57534E] hover:text-[#1C1917]'
+                  }`}
+                >
+                  {d.name.split(' ')[0]} ({count})
+                </button>
+              );
+            })}
+          </div>
         </div>
 
-        <div className="flex items-center gap-1.5 overflow-x-auto pb-1">
-          <button
-            onClick={() => setSelectedDifficulty('all')}
-            className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition cursor-pointer ${
-              selectedDifficulty === 'all'
-                ? 'bg-[#C85A32] text-white shadow-xs'
-                : 'bg-white border border-[#D6CEBE] text-[#57534E] hover:text-[#1C1917]'
-            }`}
-          >
-            Tümü ({allGenreQuotes.length})
-          </button>
-          {DIFFICULTY_LEVELS.map(d => {
-            const count = allGenreQuotes.filter(q => q.difficulty === d.id).length;
-            if (count === 0) return null;
+        {/* Quotes Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {filteredQuotes.map((q) => {
+            const wordCount = q.quote.trim().split(/\s+/).length;
+            const diffLabels = {
+              easy: { name: 'Kolay', color: 'bg-emerald-50 text-emerald-800 border-emerald-300' },
+              medium: { name: 'Orta', color: 'bg-amber-50 text-amber-800 border-amber-300' },
+              hard: { name: 'Zor', color: 'bg-orange-50 text-orange-800 border-orange-300' },
+              legendary: { name: 'Efsanevi', color: 'bg-rose-50 text-rose-800 border-rose-300' },
+            };
+            const diffInfo = diffLabels[q.difficulty] || diffLabels.easy;
+
             return (
-              <button
-                key={d.id}
-                onClick={() => setSelectedDifficulty(d.id)}
-                className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition cursor-pointer ${
-                  selectedDifficulty === d.id
-                    ? 'bg-[#C85A32] text-white shadow-xs'
-                    : 'bg-white border border-[#D6CEBE] text-[#57534E] hover:text-[#1C1917]'
-                }`}
+              <div
+                key={q.id}
+                className="p-5 rounded-3xl bg-white border border-[#D6CEBE] hover:border-[#C85A32]/60 transition-all flex flex-col justify-between shadow-xs group"
               >
-                {d.name.split(' ')[0]} ({count})
-              </button>
+                <div>
+                  <div className="flex items-center justify-between text-xs text-[#57534E] mb-3 pb-2 border-b border-[#D6CEBE]">
+                    <div className="font-serif font-bold text-[#B44A22] text-sm truncate max-w-[220px]">
+                      {q.book}
+                    </div>
+                    <span className="text-[#57534E] font-medium text-[11px]">{q.author}</span>
+                  </div>
+
+                  <p className="text-sm sm:text-base font-serif italic text-[#1C1917] leading-relaxed mb-4 font-quote">
+                    "{q.quote}"
+                  </p>
+                </div>
+
+                <div className="flex items-center justify-between pt-3 border-t border-[#D6CEBE] text-xs">
+                  <div className="flex items-center gap-2">
+                    <span className={`px-2 py-0.5 rounded-md text-[10px] font-bold border ${diffInfo.color}`}>
+                      {diffInfo.name}
+                    </span>
+                    <span className="text-[11px] text-[#57534E] font-medium">
+                      {wordCount} Kelime
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-1.5">
+                    <button
+                      onClick={() => onStartSpecificQuote(q, 'fullTyping')}
+                      title="Tam Yazma ile Ezberle"
+                      className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-[#C85A32]/10 hover:bg-[#C85A32]/20 text-[#B44A22] border border-[#C85A32]/30 font-bold transition cursor-pointer text-xs"
+                    >
+                      <Play className="w-3 h-3 fill-[#B44A22]" />
+                      <span>Ezberle</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
             );
           })}
         </div>
-      </div>
-
-      {/* Quotes Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {filteredQuotes.map((q) => {
-          const wordCount = q.quote.trim().split(/\s+/).length;
-          const diffLabels = {
-            easy: { name: 'Kolay', color: 'bg-emerald-50 text-emerald-800 border-emerald-300' },
-            medium: { name: 'Orta', color: 'bg-amber-50 text-amber-800 border-amber-300' },
-            hard: { name: 'Zor', color: 'bg-orange-50 text-orange-800 border-orange-300' },
-            legendary: { name: 'Efsanevi', color: 'bg-rose-50 text-rose-800 border-rose-300' },
-          };
-          const diffInfo = diffLabels[q.difficulty] || diffLabels.easy;
-
-          return (
-            <div
-              key={q.id}
-              className="p-5 rounded-3xl bg-white border border-[#D6CEBE] hover:border-[#C85A32]/60 transition-all flex flex-col justify-between shadow-xs group"
-            >
-              <div>
-                <div className="flex items-center justify-between text-xs text-[#57534E] mb-3 pb-2 border-b border-[#D6CEBE]">
-                  <div className="font-serif font-bold text-[#B44A22] text-sm truncate max-w-[220px]">
-                    {q.book}
-                  </div>
-                  <span className="text-[#57534E] font-medium text-[11px]">{q.author}</span>
-                </div>
-
-                <p className="text-sm sm:text-base font-serif italic text-[#1C1917] leading-relaxed mb-4 font-quote">
-                  "{q.quote}"
-                </p>
-              </div>
-
-              <div className="flex items-center justify-between pt-3 border-t border-[#D6CEBE] text-xs">
-                <div className="flex items-center gap-2">
-                  <span className={`px-2 py-0.5 rounded-md text-[10px] font-bold border ${diffInfo.color}`}>
-                    {diffInfo.name}
-                  </span>
-                  <span className="text-[11px] text-[#57534E] font-medium">
-                    {wordCount} Kelime
-                  </span>
-                </div>
-
-                <div className="flex items-center gap-1.5">
-                  <button
-                    onClick={() => onStartSpecificQuote(q, 'fullTyping')}
-                    title="Tam Yazma ile Ezberle"
-                    className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-[#C85A32]/10 hover:bg-[#C85A32]/20 text-[#B44A22] border border-[#C85A32]/30 font-bold transition cursor-pointer text-xs"
-                  >
-                    <Play className="w-3 h-3 fill-[#B44A22]" />
-                    <span>Ezberle</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          );
-        })}
       </div>
     </div>
   );

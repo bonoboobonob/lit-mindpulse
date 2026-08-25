@@ -5,6 +5,7 @@ import StatsModal from './components/common/StatsModal';
 import TipsModal from './components/common/TipsModal';
 import HomeMenu from './components/HomeMenu';
 import GenreDetailView from './components/GenreDetailView';
+import BookDetailView from './components/BookDetailView';
 import FullTypingGame from './components/games/FullTypingGame';
 import ClozeRecallGame from './components/games/ClozeRecallGame';
 import WordScrambleGame from './components/games/WordScrambleGame';
@@ -13,8 +14,9 @@ import { getSavedStats, saveGameResult, getCustomQuotes, saveCustomQuotes } from
 import { sounds } from './utils/sound';
 
 export default function App() {
-  const [currentScreen, setCurrentScreen] = useState('home'); // 'home' | 'genreDetail' | 'fullTyping' | 'clozeRecall' | 'wordScramble' | 'library'
+  const [currentScreen, setCurrentScreen] = useState('home'); // 'home' | 'genreDetail' | 'bookDetail' | 'fullTyping' | 'clozeRecall' | 'wordScramble' | 'library'
   const [selectedGenre, setSelectedGenre] = useState('all');
+  const [selectedBookId, setSelectedBookId] = useState(null);
   const [stats, setStats] = useState(getSavedStats());
   const [customQuotes, setCustomQuotes] = useState(getCustomQuotes());
   const [activeQuote, setActiveQuote] = useState(null);
@@ -52,8 +54,20 @@ export default function App() {
 
   const handleStartGenrePractice = (genreId, mode = 'fullTyping') => {
     setSelectedGenre(genreId);
+    setSelectedBookId(null);
     setActiveQuote(null);
     setCurrentScreen(mode);
+  };
+
+  const handleStartBookPractice = (bookId, mode = 'fullTyping') => {
+    setSelectedBookId(bookId);
+    setActiveQuote(null);
+    setCurrentScreen(mode);
+  };
+
+  const handleSelectBook = (bookId) => {
+    setSelectedBookId(bookId);
+    setCurrentScreen('bookDetail');
   };
 
   const handleToggleSound = () => {
@@ -70,6 +84,7 @@ export default function App() {
           onNavigateHome={() => {
             sounds.playClick();
             setActiveQuote(null);
+            setSelectedBookId(null);
             setCurrentScreen('home');
           }}
           onOpenStats={() => {
@@ -97,10 +112,12 @@ export default function App() {
               onSelectMode={(modeId) => {
                 setActiveQuote(null);
                 setSelectedGenre('all');
+                setSelectedBookId(null);
                 setCurrentScreen(modeId);
               }}
               onSelectGenre={(genreId) => {
                 setSelectedGenre(genreId);
+                setSelectedBookId(null);
                 setCurrentScreen('genreDetail');
               }}
               onOpenLibrary={() => setCurrentScreen('library')}
@@ -114,6 +131,16 @@ export default function App() {
               onBack={() => setCurrentScreen('home')}
               onStartGenrePractice={handleStartGenrePractice}
               onStartSpecificQuote={handleStartQuotePractice}
+              onSelectBook={handleSelectBook}
+            />
+          )}
+
+          {currentScreen === 'bookDetail' && (
+            <BookDetailView
+              bookId={selectedBookId}
+              onBack={() => setCurrentScreen(selectedGenre !== 'all' ? 'genreDetail' : 'home')}
+              onStartBookPractice={handleStartBookPractice}
+              onStartSpecificQuote={handleStartQuotePractice}
             />
           )}
 
@@ -121,10 +148,17 @@ export default function App() {
             <FullTypingGame
               initialQuote={activeQuote}
               initialGenre={selectedGenre}
+              initialBookId={selectedBookId}
               onGameOver={handleGameOver}
               onBack={() => {
                 setActiveQuote(null);
-                setCurrentScreen(selectedGenre !== 'all' ? 'genreDetail' : 'home');
+                if (selectedBookId) {
+                  setCurrentScreen('bookDetail');
+                } else if (selectedGenre !== 'all') {
+                  setCurrentScreen('genreDetail');
+                } else {
+                  setCurrentScreen('home');
+                }
               }}
               highScore={stats.highScores?.fullTyping || 0}
             />
@@ -134,10 +168,17 @@ export default function App() {
             <ClozeRecallGame
               initialQuote={activeQuote}
               initialGenre={selectedGenre}
+              initialBookId={selectedBookId}
               onGameOver={handleGameOver}
               onBack={() => {
                 setActiveQuote(null);
-                setCurrentScreen(selectedGenre !== 'all' ? 'genreDetail' : 'home');
+                if (selectedBookId) {
+                  setCurrentScreen('bookDetail');
+                } else if (selectedGenre !== 'all') {
+                  setCurrentScreen('genreDetail');
+                } else {
+                  setCurrentScreen('home');
+                }
               }}
               highScore={stats.highScores?.clozeRecall || 0}
             />
@@ -147,10 +188,17 @@ export default function App() {
             <WordScrambleGame
               initialQuote={activeQuote}
               initialGenre={selectedGenre}
+              initialBookId={selectedBookId}
               onGameOver={handleGameOver}
               onBack={() => {
                 setActiveQuote(null);
-                setCurrentScreen(selectedGenre !== 'all' ? 'genreDetail' : 'home');
+                if (selectedBookId) {
+                  setCurrentScreen('bookDetail');
+                } else if (selectedGenre !== 'all') {
+                  setCurrentScreen('genreDetail');
+                } else {
+                  setCurrentScreen('home');
+                }
               }}
               highScore={stats.highScores?.wordScramble || 0}
             />
@@ -173,10 +221,12 @@ export default function App() {
         currentScreen={currentScreen}
         onNavigateHome={() => {
           setActiveQuote(null);
+          setSelectedBookId(null);
           setCurrentScreen('home');
         }}
         onOpenPractice={() => {
           setActiveQuote(null);
+          setSelectedBookId(null);
           setCurrentScreen('fullTyping');
         }}
         onOpenLibrary={() => setCurrentScreen('library')}
@@ -185,7 +235,7 @@ export default function App() {
 
       {/* Footer */}
       <footer className="w-full text-center py-6 border-t border-[#D6CEBE] text-xs text-[#78716C] hidden sm:block">
-        <p className="font-serif italic">LibrisMind &copy; 2026 — The Atelier Edition • Edebi Hafıza Platformu</p>
+        <p className="font-serif italic">LibrisMind &copy; 2026 — The Atelier Edition • Edebi Hafıza & Kütüphane Platformu</p>
       </footer>
 
       {/* Modals */}
