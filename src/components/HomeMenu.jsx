@@ -18,7 +18,15 @@ import {
   Wand2,
   Compass,
   Eye,
-  Bookmark
+  Bookmark,
+  Film,
+  PenTool,
+  Crown,
+  Scroll,
+  Laugh,
+  Hourglass,
+  Scale,
+  Heart
 } from 'lucide-react';
 import { 
   OakTreeIllustration, 
@@ -77,6 +85,15 @@ const genreIcons = {
   Wand2,
   Compass,
   Eye,
+  Film,
+  PenTool,
+  Crown,
+  Scroll,
+  Laugh,
+  Hourglass,
+  Scale,
+  Heart,
+  Sparkles,
 };
 
 export default function HomeMenu({ 

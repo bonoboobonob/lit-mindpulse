@@ -18,7 +18,15 @@ import {
   Wand2,
   Compass,
   Eye,
-  Filter
+  Filter,
+  Film,
+  PenTool,
+  Crown,
+  Scroll,
+  Laugh,
+  Hourglass,
+  Scale,
+  Heart
 } from 'lucide-react';
 import { BOOK_GENRES, BOOK_QUOTES, DIFFICULTY_LEVELS } from '../data/bookQuotes';
 import { sounds } from '../utils/sound';
@@ -37,6 +45,15 @@ const genreIcons = {
   Wand2,
   Compass,
   Eye,
+  Film,
+  PenTool,
+  Crown,
+  Scroll,
+  Laugh,
+  Hourglass,
+  Scale,
+  Heart,
+  Sparkles,
 };
 
 export default function GenreDetailView({ 
