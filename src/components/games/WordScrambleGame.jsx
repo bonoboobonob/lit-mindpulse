@@ -23,11 +23,12 @@ export default function WordScrambleGame({
   highScore = 0, 
   initialQuote = null, 
   initialGenre = 'all',
-  initialBookId = null
+  initialBookId = null,
+  initialDifficulty = 'all'
 }) {
   const [selectedGenre, setSelectedGenre] = useState(initialGenre || 'all');
   const [selectedBookId, setSelectedBookId] = useState(initialBookId || null);
-  const [selectedDifficulty, setSelectedDifficulty] = useState('easy');
+  const [selectedDifficulty, setSelectedDifficulty] = useState(initialDifficulty || (initialBookId ? 'all' : 'easy'));
   const [currentQuote, setCurrentQuote] = useState(initialQuote);
 
   const [phase, setPhase] = useState((initialQuote || initialBookId) ? 'study' : 'selection'); // 'selection' | 'study' | 'scramble' | 'result'

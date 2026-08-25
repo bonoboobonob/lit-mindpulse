@@ -17,6 +17,7 @@ export default function App() {
   const [currentScreen, setCurrentScreen] = useState('home'); // 'home' | 'genreDetail' | 'bookDetail' | 'fullTyping' | 'clozeRecall' | 'wordScramble' | 'library'
   const [selectedGenre, setSelectedGenre] = useState('all');
   const [selectedBookId, setSelectedBookId] = useState(null);
+  const [selectedDifficulty, setSelectedDifficulty] = useState('all');
   const [stats, setStats] = useState(getSavedStats());
   const [customQuotes, setCustomQuotes] = useState(getCustomQuotes());
   const [activeQuote, setActiveQuote] = useState(null);
@@ -55,12 +56,14 @@ export default function App() {
   const handleStartGenrePractice = (genreId, mode = 'fullTyping') => {
     setSelectedGenre(genreId);
     setSelectedBookId(null);
+    setSelectedDifficulty('all');
     setActiveQuote(null);
     setCurrentScreen(mode);
   };
 
-  const handleStartBookPractice = (bookId, mode = 'fullTyping') => {
+  const handleStartBookPractice = (bookId, mode = 'fullTyping', difficulty = 'all') => {
     setSelectedBookId(bookId);
+    setSelectedDifficulty(difficulty);
     setActiveQuote(null);
     setCurrentScreen(mode);
   };
@@ -149,6 +152,7 @@ export default function App() {
               initialQuote={activeQuote}
               initialGenre={selectedGenre}
               initialBookId={selectedBookId}
+              initialDifficulty={selectedDifficulty}
               onGameOver={handleGameOver}
               onBack={() => {
                 setActiveQuote(null);
@@ -169,6 +173,7 @@ export default function App() {
               initialQuote={activeQuote}
               initialGenre={selectedGenre}
               initialBookId={selectedBookId}
+              initialDifficulty={selectedDifficulty}
               onGameOver={handleGameOver}
               onBack={() => {
                 setActiveQuote(null);
@@ -189,6 +194,7 @@ export default function App() {
               initialQuote={activeQuote}
               initialGenre={selectedGenre}
               initialBookId={selectedBookId}
+              initialDifficulty={selectedDifficulty}
               onGameOver={handleGameOver}
               onBack={() => {
                 setActiveQuote(null);

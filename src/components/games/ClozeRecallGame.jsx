@@ -25,11 +25,12 @@ export default function ClozeRecallGame({
   highScore = 0, 
   initialQuote = null, 
   initialGenre = 'all',
-  initialBookId = null
+  initialBookId = null,
+  initialDifficulty = 'all'
 }) {
   const [selectedGenre, setSelectedGenre] = useState(initialGenre || 'all');
   const [selectedBookId, setSelectedBookId] = useState(initialBookId || null);
-  const [selectedDifficulty, setSelectedDifficulty] = useState('medium');
+  const [selectedDifficulty, setSelectedDifficulty] = useState(initialDifficulty || (initialBookId ? 'all' : 'medium'));
   const [currentQuote, setCurrentQuote] = useState(initialQuote);
 
   const [phase, setPhase] = useState((initialQuote || initialBookId) ? 'study' : 'selection'); // 'selection' | 'study' | 'testing' | 'result'

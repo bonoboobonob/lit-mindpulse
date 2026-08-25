@@ -12,10 +12,11 @@ import {
   Tag, 
   Award, 
   Bookmark,
-  Share2
+  Share2,
+  Sliders
 } from 'lucide-react';
 import { BOOKS_DATABASE } from '../data/booksDatabase';
-import { BOOK_GENRES } from '../data/bookQuotes';
+import { BOOK_GENRES, DIFFICULTY_LEVELS } from '../data/bookQuotes';
 import { BookmarkRibbon } from '../assets/illustrations';
 import { sounds } from '../utils/sound';
 
@@ -26,6 +27,7 @@ export default function BookDetailView({
   onStartSpecificQuote 
 }) {
   const [selectedDifficulty, setSelectedDifficulty] = useState('all');
+  const [practiceDifficulty, setPracticeDifficulty] = useState('all'); // Difficulty filter for quick practice buttons
 
   const book = BOOKS_DATABASE.find(b => b.id === bookId) || BOOKS_DATABASE[0];
   const genreObj = BOOK_GENRES.find(g => g.id === book.genre) || BOOK_GENRES[1];
@@ -34,6 +36,10 @@ export default function BookDetailView({
   const filteredPassages = selectedDifficulty === 'all'
     ? passages
     : passages.filter(p => p.difficulty === selectedDifficulty);
+
+  const practicePassageCount = practiceDifficulty === 'all'
+    ? passages.length
+    : passages.filter(p => p.difficulty === practiceDifficulty).length;
 
   return (
     <div className="w-full max-w-5xl mx-auto px-2 sm:px-4 py-2 animate-in fade-in duration-200">
@@ -152,46 +158,82 @@ export default function BookDetailView({
           </div>
         </div>
 
-        {/* Quick Mode Launchers for THIS Book */}
+        {/* Quick Mode Launchers for THIS Book with Difficulty Selection */}
         <div className="mt-8 pt-6 border-t border-[#D6CEBE]">
-          <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#B44A22]">
-              Bu Eserden Hafıza Egzersizi Başlat ({passages.length} Pasaj)
-            </span>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+            <div>
+              <span className="text-xs font-bold uppercase tracking-wider text-[#B44A22] block">
+                Bu Eserden Hafıza Egzersizi Başlat
+              </span>
+              <span className="text-xs text-[#57534E]">
+                Seçilen filtredeki {practicePassageCount} pasaj tekrarsız ve adil olarak sırayla gelir.
+              </span>
+            </div>
+
+            {/* Practice Difficulty Selector */}
+            <div className="flex items-center gap-1 overflow-x-auto pb-1 bg-[#FAF6EE] p-1.5 rounded-2xl border border-[#D6CEBE]">
+              {[
+                { id: 'all', label: '🎲 Karma' },
+                { id: 'easy', label: '🟢 Kolay' },
+                { id: 'medium', label: '🟡 Orta' },
+                { id: 'hard', label: '🟠 Zor' },
+                { id: 'legendary', label: '🔴 Efsanevi' },
+              ].map((lvl) => {
+                const count = lvl.id === 'all' ? passages.length : passages.filter(p => p.difficulty === lvl.id).length;
+                if (count === 0 && lvl.id !== 'all') return null;
+                const isSelected = practiceDifficulty === lvl.id;
+                return (
+                  <button
+                    key={lvl.id}
+                    onClick={() => {
+                      sounds.playClick();
+                      setPracticeDifficulty(lvl.id);
+                    }}
+                    className={`px-2.5 py-1 rounded-xl text-xs font-bold transition cursor-pointer whitespace-nowrap ${
+                      isSelected
+                        ? 'bg-[#C85A32] text-white shadow-xs'
+                        : 'text-[#57534E] hover:text-[#1C1917] hover:bg-white/60'
+                    }`}
+                  >
+                    {lvl.label} <span className="opacity-80 text-[10px]">({count})</span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <button
               onClick={() => {
                 sounds.playClick();
-                onStartBookPractice(book.id, 'fullTyping');
+                onStartBookPractice(book.id, 'fullTyping', practiceDifficulty);
               }}
               className="flex items-center justify-center gap-2 p-3.5 rounded-2xl bg-[#FAF6EE] hover:bg-[#F2ECE1] border border-[#D6CEBE] text-[#1C1917] hover:text-[#B44A22] hover:border-[#C85A32] font-bold text-sm transition cursor-pointer shadow-xs"
             >
               <Feather className="w-4 h-4 text-[#B44A22]" />
-              <span>✍️ Tam Yazma Modu</span>
+              <span>✍️ Tam Yazma ({practiceDifficulty === 'all' ? 'Tümü' : practiceDifficulty})</span>
             </button>
 
             <button
               onClick={() => {
                 sounds.playClick();
-                onStartBookPractice(book.id, 'clozeRecall');
+                onStartBookPractice(book.id, 'clozeRecall', practiceDifficulty);
               }}
               className="flex items-center justify-center gap-2 p-3.5 rounded-2xl bg-[#FAF6EE] hover:bg-[#F2ECE1] border border-[#D6CEBE] text-[#1C1917] hover:text-[#8C5E3C] hover:border-[#8C5E3C] font-bold text-sm transition cursor-pointer shadow-xs"
             >
               <Puzzle className="w-4 h-4 text-[#8C5E3C]" />
-              <span>🧩 Boşluk Doldurma</span>
+              <span>🧩 Boşluk Doldurma ({practiceDifficulty === 'all' ? 'Tümü' : practiceDifficulty})</span>
             </button>
 
             <button
               onClick={() => {
                 sounds.playClick();
-                onStartBookPractice(book.id, 'wordScramble');
+                onStartBookPractice(book.id, 'wordScramble', practiceDifficulty);
               }}
               className="flex items-center justify-center gap-2 p-3.5 rounded-2xl bg-[#FAF6EE] hover:bg-[#F2ECE1] border border-[#D6CEBE] text-[#1C1917] hover:text-[#476C46] hover:border-[#588157] font-bold text-sm transition cursor-pointer shadow-xs"
             >
               <Layers className="w-4 h-4 text-[#476C46]" />
-              <span>📱 Kelime Dizme</span>
+              <span>📱 Kelime Dizme ({practiceDifficulty === 'all' ? 'Tümü' : practiceDifficulty})</span>
             </button>
           </div>
         </div>
