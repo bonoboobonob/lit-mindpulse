@@ -1,21 +1,36 @@
 @import "tailwindcss";
 
 @theme {
-  --font-serif: "Merriweather", Georgia, "Times New Roman", serif;
+  --font-serif: "Newsreader", "Playfair Display", Georgia, serif;
   --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  --color-paper: #F7F4EE;
+  --color-paper-card: #FFFFFF;
+  --color-paper-warm: #FAF6EE;
+  --color-terracotta: #C85A32;
+  --color-terracotta-dark: #9A3412;
+  --color-ink: #1C1917;
+  --color-ink-muted: #57534E;
+  --color-border: #E5DFD3;
 }
 
 @layer base {
   html {
     overflow-x: hidden;
+    background-color: #F7F4EE;
   }
 
   body {
-    @apply bg-slate-950 text-slate-100 min-h-screen font-sans antialiased select-none;
-    background: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #0f172a 50%, #020617 100%);
+    background-color: #F7F4EE;
+    color: #1C1917;
+    min-height: 100vh;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    user-select: none;
     overflow-wrap: break-word;
     word-break: break-word;
-    -webkit-text-size-adjust: 100%;
+    /* Soft ambient paper gradient */
+    background: radial-gradient(circle at 50% 0%, #FFFFFF 0%, #F7F4EE 65%, #ECE5D8 100%);
     /* Android safe area padding */
     padding-top: env(safe-area-inset-top, 0px);
     padding-bottom: env(safe-area-inset-bottom, 0px);
@@ -24,86 +39,58 @@
   }
 
   .font-serif {
-    font-family: "Merriweather", Georgia, serif;
+    font-family: "Newsreader", "Playfair Display", Georgia, serif;
   }
 
-  /* Prevent horizontal overflow globally */
   * {
     max-width: 100%;
     box-sizing: border-box;
   }
 
-  /* Exclude specific elements that need unconstrained width */
   img, video, canvas, svg, input, textarea, select, button {
     max-width: revert;
   }
 }
 
-/* Literary quote text — responsive and overflow-safe */
+/* Atelier Paper Card */
+.paper-card {
+  background-color: #FFFFFF;
+  border: 1px solid #E5DFD3;
+  box-shadow: 0 4px 16px -2px rgba(28, 25, 23, 0.05), 0 1px 3px 0 rgba(28, 25, 23, 0.03);
+}
+
+.paper-card-warm {
+  background-color: #FAF6EE;
+  border: 1px solid #E5DFD3;
+  box-shadow: 0 4px 16px -2px rgba(28, 25, 23, 0.05);
+}
+
+/* Terracotta Button */
+.btn-terracotta {
+  background: linear-gradient(135deg, #D4633B 0%, #C85A32 50%, #B44A22 100%);
+  color: #FFFFFF;
+  box-shadow: 0 4px 14px 0 rgba(200, 90, 50, 0.25);
+  transition: all 0.2s ease;
+}
+
+.btn-terracotta:hover {
+  background: linear-gradient(135deg, #DE7048 0%, #D4633B 50%, #C85A32 100%);
+  box-shadow: 0 6px 20px 0 rgba(200, 90, 50, 0.35);
+}
+
+/* Editorial quote typography */
 .quote-text {
   overflow-wrap: break-word;
   word-break: break-word;
   hyphens: auto;
   -webkit-hyphens: auto;
   max-width: 100%;
+  letter-spacing: -0.01em;
 }
 
-/* Custom 3D Card Flip styles */
-.perspective-1000 {
-  perspective: 1000px;
-}
-
-.transform-style-3d {
-  transform-style: preserve-3d;
-}
-
-.backface-hidden {
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-
-.rotate-y-180 {
-  transform: rotateY(180deg);
-}
-
-/* Pulse Glow & Neon */
-@keyframes glowPulse {
-  0%, 100% {
-    box-shadow: 0 0 15px rgba(99, 102, 241, 0.4), inset 0 0 15px rgba(99, 102, 241, 0.2);
-  }
-  50% {
-    box-shadow: 0 0 30px rgba(168, 85, 247, 0.7), inset 0 0 20px rgba(168, 85, 247, 0.4);
-  }
-}
-
-.animate-glow {
-  animation: glowPulse 2s infinite ease-in-out;
-}
-
-/* Glassmorphism */
-.glass-panel {
-  background: rgba(15, 23, 42, 0.75);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.glass-card {
-  background: rgba(30, 41, 59, 0.7);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Android Capacitor-specific adjustments */
-@media (max-width: 480px) {
-  .font-serif {
-    letter-spacing: -0.01em;
-  }
-}
-
-/* Scrollbar styling for category grids */
+/* Scrollbar styling for paper aesthetic */
 .overflow-y-auto::-webkit-scrollbar {
-  width: 4px;
+  width: 5px;
 }
 
 .overflow-y-auto::-webkit-scrollbar-track {
@@ -111,6 +98,10 @@
 }
 
 .overflow-y-auto::-webkit-scrollbar-thumb {
-  background: rgba(148, 163, 184, 0.2);
+  background: rgba(120, 113, 108, 0.25);
   border-radius: 4px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb:hover {
+  background: rgba(200, 90, 50, 0.4);
 }

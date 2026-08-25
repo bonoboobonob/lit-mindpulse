@@ -2,18 +2,18 @@
   "appId": "com.mindpulse.memoryapp",
   "appName": "LibrisMind",
   "webDir": "dist",
-  "backgroundColor": "#020617",
+  "backgroundColor": "#F7F4EE",
   "server": {
     "androidScheme": "https"
   },
   "android": {
-    "backgroundColor": "#020617",
+    "backgroundColor": "#F7F4EE",
     "allowMixedContent": true
   },
   "plugins": {
     "SplashScreen": {
       "launchAutoHide": true,
-      "backgroundColor": "#020617",
+      "backgroundColor": "#F7F4EE",
       "androidSplashResourceName": "splash",
       "showSpinner": false,
       "splashFullScreen": true,

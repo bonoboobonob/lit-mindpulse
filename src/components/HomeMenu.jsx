@@ -1,72 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { 
-  BookOpen, 
-  Feather, 
-  Puzzle, 
-  Layers, 
   Play, 
-  Trophy, 
+  BookOpen, 
   Sparkles, 
-  Flame, 
-  Compass, 
-  Brain, 
-  Scale, 
-  Heart, 
-  Eye, 
-  Bookmark,
-  ChevronRight,
-  Shield,
-  Drama,
-  Search,
-  Mail,
-  Trees,
-  Wand2
-} from 'lucide-react';
-import { BOOK_GENRES, BOOK_QUOTES } from '../data/bookQuotes';
-import { sounds } from '../utils/sound';
-
-const PRACTICE_MODES = [
-  {
-    id: 'fullTyping',
-    title: 'Tam Yazma Modu',
-    subtitle: 'Master Recall',
-    tag: 'Klavyeyle Eksiksiz Yazma',
-    desc: 'Cümleyi hafızana al, ekrandan kaybolunca klavyeyle orijinal metni birebir yazarak doğruluğunu test et.',
-    icon: Feather,
-    gradient: 'from-amber-600/20 via-orange-600/20 to-amber-950/40 hover:border-amber-500/60',
-    iconColor: 'text-amber-400 bg-amber-500/20',
-    badge: 'En Popüler',
-  },
-  {
-    id: 'clozeRecall',
-    title: 'Boşluk Doldurma',
-    subtitle: 'Cloze Memory',
-    tag: 'Kilit Kelime Hafızası',
-    desc: 'Cümlenin anlamını taşıyan kilit felsefi ve edebi kavramlar gizlenir. Sadece doğru kelimeleri hatırla ve tamamla.',
-    icon: Puzzle,
-    gradient: 'from-purple-600/20 via-indigo-600/20 to-purple-950/40 hover:border-purple-500/60',
-    iconColor: 'text-purple-400 bg-purple-500/20',
-    badge: 'Eğitici',
-  },
-  {
-    id: 'wordScramble',
-    title: 'Dokunmatik Kelime Dizme',
-    subtitle: 'Word Scramble',
-    tag: 'Mobilde Hızlı Pratik',
-    desc: 'Karışık olarak verilen kelimelere doğru sırayla dokunarak edebi cümleyi yeniden inşa et. Yazmak istemeyenler için ideal.',
-    icon: Layers,
-    gradient: 'from-emerald-600/20 via-teal-600/20 to-emerald-950/40 hover:border-emerald-500/60',
-    iconColor: 'text-emerald-400 bg-emerald-500/20',
-    badge: 'Hızlı Mod',
-  },
-];
-
-const genreIcons = {
-  Sparkles,
-  Scale,
-  BookOpen,
-  Feather,
-  Heart,
+  ChevronRight, 
+  Feather, 
+  Layers, 
+  Puzzle,
+  Brain,
+  Quote,
   Shield,
   Drama,
   Flame,
@@ -75,7 +17,68 @@ const genreIcons = {
   Trees,
   Wand2,
   Compass,
+  Eye,
+  Bookmark
+} from 'lucide-react';
+import { 
+  OakTreeIllustration, 
+  AuthorPortraitIllustration, 
+  OpenBookIllustration, 
+  LighthouseIllustration, 
+  BookmarkRibbon 
+} from '../assets/illustrations';
+import { BOOK_GENRES, BOOK_QUOTES } from '../data/bookQuotes';
+import { sounds } from '../utils/sound';
+
+const PRACTICE_MODES = [
+  {
+    id: 'fullTyping',
+    title: 'Tam Yazma & Hatırlama',
+    tag: 'Aktif Geri Çağırma • Master Recall',
+    desc: 'Cümleyi zihninize kazıyın, ardından tek bir harfine dahi bakmadan klavyenizle eksiksiz yazarak çalışma belleğinizi güçlendirin.',
+    badge: '1. Seviye',
+    icon: Feather,
+    iconBg: 'bg-[#C85A32]/10 text-[#C85A32] border-[#C85A32]/30',
+    tagColor: 'text-[#C85A32]',
+    illustration: OakTreeIllustration,
+  },
+  {
+    id: 'clozeRecall',
+    title: 'Edebi Boşluk Doldurma',
+    tag: 'Kilit Kavramlar • Cloze Test',
+    desc: 'Cümlenin anahtar felsefi kelimelerini ve metaforlarını tespit edip hafızanızdan doğru yerlerine yerleştirin.',
+    badge: '2. Seviye',
+    icon: Puzzle,
+    iconBg: 'bg-[#8C5E3C]/10 text-[#8C5E3C] border-[#8C5E3C]/30',
+    tagColor: 'text-[#8C5E3C]',
+    illustration: LighthouseIllustration,
+  },
+  {
+    id: 'wordScramble',
+    title: 'Dokunmatik Kelime Dizme',
+    tag: 'Ritmik Sıralama • Scramble',
+    desc: 'Cümleyi oluşturan sözcüklerin edebi ahengini ve ritmini kavrayarak dokunmatik kartlarla doğru sıraya dizin.',
+    badge: '3. Seviye',
+    icon: Layers,
+    iconBg: 'bg-[#588157]/10 text-[#588157] border-[#588157]/30',
+    tagColor: 'text-[#588157]',
+    illustration: OpenBookIllustration,
+  },
+];
+
+const genreIcons = {
   Brain,
+  Quote,
+  BookOpen,
+  Feather,
+  Shield,
+  Drama,
+  Flame,
+  Search,
+  Mail,
+  Trees,
+  Wand2,
+  Compass,
   Eye,
 };
 
@@ -92,23 +95,28 @@ export default function HomeMenu({
 
   return (
     <div className="w-full max-w-5xl mx-auto px-2 sm:px-4 py-2">
-      {/* Literary Hero Banner */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 via-slate-900 to-amber-950/40 border border-amber-500/30 p-6 sm:p-10 mb-8 shadow-2xl">
+      {/* Atelier Hero Banner (Woodcut & Editorial Grid) */}
+      <div className="relative overflow-hidden rounded-3xl bg-white border border-[#E5DFD3] p-6 sm:p-10 mb-8 shadow-sm">
+        {/* Subtle decorative background watermark */}
+        <div className="absolute right-4 -bottom-6 opacity-10 pointer-events-none hidden md:block">
+          <OakTreeIllustration className="w-64 h-64" />
+        </div>
+
         <div className="relative z-10 max-w-2xl">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-300 text-xs font-semibold uppercase tracking-wider mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C85A32]/10 border border-[#C85A32]/25 text-[#C85A32] text-xs font-semibold uppercase tracking-wider mb-4">
             <Feather className="w-3.5 h-3.5" />
-            <span>Edebi Hafıza & Zihin Kütüphanesi</span>
+            <span>The Atelier Edition • Edebi Hafıza Mizanpajı</span>
           </div>
 
-          <h2 className="text-2xl sm:text-4xl font-serif font-extrabold text-white tracking-tight leading-tight mb-3">
+          <h2 className="text-2xl sm:text-4xl font-serif font-bold text-[#1C1917] tracking-tight leading-tight mb-3">
             Zihninizi Edebiyatın <br className="hidden sm:inline" />
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-300 via-orange-300 to-amber-500">
-              Sözcükleriyle Güçlendirin
-            </span>
+            <span className="text-[#C85A32] italic font-serif font-normal">
+              Kalıcı Sözcükleriyle
+            </span> Güçlendirin
           </h2>
 
-          <p className="text-sm sm:text-base text-slate-300 mb-6 leading-relaxed">
-            Dünya klasikleri, felsefe ve Türk edebiyatı şaheserlerinden seçilen kült cümleleri ezberleyin; çalışma belleğinizi, dil zenginliğinizi ve odaklanmanızı zirveye taşıyın.
+          <p className="text-sm sm:text-base text-[#57534E] mb-6 leading-relaxed font-sans">
+            Dünya klasikleri, felsefe ve Türk edebiyatı şaheserlerinden seçilen 250+ kült cümleyi ezberleyin; çalışma belleğinizi, dil zenginliğinizi ve odaklanmanızı zirveye taşıyın.
           </p>
 
           <div className="flex flex-wrap items-center gap-3">
@@ -117,9 +125,9 @@ export default function HomeMenu({
                 sounds.playClick();
                 onSelectMode('fullTyping');
               }}
-              className="flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-bold text-sm sm:text-base shadow-xl shadow-amber-500/20 hover:scale-105 transition cursor-pointer"
+              className="flex items-center gap-2 px-6 py-3.5 rounded-2xl btn-terracotta font-bold text-sm sm:text-base cursor-pointer"
             >
-              <Play className="w-4 h-4 fill-slate-950" />
+              <Play className="w-4 h-4 fill-white" />
               <span>Ezber Antrenmanına Başla</span>
             </button>
 
@@ -128,36 +136,38 @@ export default function HomeMenu({
                 sounds.playClick();
                 onOpenLibrary();
               }}
-              className="flex items-center gap-2 px-5 py-3.5 rounded-2xl bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-slate-200 text-sm font-semibold transition cursor-pointer"
+              className="flex items-center gap-2 px-5 py-3.5 rounded-2xl bg-[#FAF6EE] hover:bg-[#F2ECE1] border border-[#E5DFD3] text-[#1C1917] text-sm font-semibold transition cursor-pointer"
             >
-              <BookOpen className="w-4 h-4 text-amber-400" />
+              <BookOpen className="w-4 h-4 text-[#C85A32]" />
               <span>Hafıza Defterim</span>
             </button>
           </div>
         </div>
-
-        {/* Ambient golden background glow */}
-        <div className="absolute right-0 top-0 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
       </div>
 
-      {/* Featured Quote of the Day */}
+      {/* Featured Quote of the Day (Archival Card with Bookmark) */}
       <div className="mb-10">
         <div className="flex items-center justify-between mb-3 px-1">
-          <h3 className="text-sm font-bold uppercase tracking-wider text-amber-400 flex items-center gap-2">
+          <h3 className="text-xs font-bold uppercase tracking-wider text-[#C85A32] flex items-center gap-2">
             <Sparkles className="w-4 h-4" />
             <span>Günün Edebi Alıntısı</span>
           </h3>
-          <span className="text-xs text-slate-500">Her gün yenilenir</span>
+          <span className="text-xs text-[#78716C] font-serif italic">Her gün yenilenir</span>
         </div>
 
-        <div className="relative p-6 rounded-3xl bg-gradient-to-r from-slate-900 via-slate-900 to-slate-950 border border-amber-500/40 shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 group">
-          <div className="flex-1">
-            <div className="flex items-center gap-2 text-xs text-slate-400 mb-2">
-              <span className="font-serif font-bold text-amber-300">{dailyQuote.book}</span>
+        <div className="relative p-6 sm:p-7 rounded-3xl bg-white border border-[#E5DFD3] shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 group hover:border-[#C85A32]/40 transition">
+          {/* Top Terracotta Ribbon */}
+          <div className="absolute top-0 right-6 sm:right-10 pointer-events-none">
+            <BookmarkRibbon className="w-6 h-8 text-[#C85A32]" />
+          </div>
+
+          <div className="flex-1 pr-6 sm:pr-8">
+            <div className="flex items-center gap-2 text-xs text-[#78716C] mb-2 font-medium">
+              <span className="font-serif font-bold text-[#C85A32] text-sm">{dailyQuote.book}</span>
               <span>—</span>
-              <span>{dailyQuote.author}</span>
+              <span className="text-[#1C1917]">{dailyQuote.author}</span>
             </div>
-            <p className="text-base sm:text-lg font-serif italic text-slate-100 leading-relaxed">
+            <p className="text-base sm:text-lg font-serif italic text-[#1C1917] leading-relaxed">
               "{dailyQuote.quote}"
             </p>
           </div>
@@ -167,24 +177,25 @@ export default function HomeMenu({
               sounds.playClick();
               onStartQuote(dailyQuote);
             }}
-            className="flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 text-xs sm:text-sm font-bold transition shrink-0 cursor-pointer"
+            className="flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-[#C85A32]/10 hover:bg-[#C85A32]/20 text-[#C85A32] border border-[#C85A32]/30 text-xs sm:text-sm font-bold transition shrink-0 cursor-pointer"
           >
-            <Play className="w-3.5 h-3.5 fill-amber-300" />
+            <Play className="w-3.5 h-3.5 fill-[#C85A32]" />
             <span>Bu Cümleyi Ezberle</span>
           </button>
         </div>
       </div>
 
-      {/* 3 Main Practice Modes */}
+      {/* 3 Main Practice Modes (Atelier Style) */}
       <div className="mb-10">
-        <h3 className="text-lg font-serif font-bold text-slate-200 mb-4 flex items-center gap-2">
-          <Feather className="w-5 h-5 text-amber-400" />
+        <h3 className="text-lg font-serif font-bold text-[#1C1917] mb-4 flex items-center gap-2">
+          <Feather className="w-5 h-5 text-[#C85A32]" />
           <span>Egzersiz ve Hatırlama Modları</span>
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {PRACTICE_MODES.map((mode) => {
             const Icon = mode.icon;
+            const Illustration = mode.illustration;
 
             return (
               <div
@@ -193,30 +204,32 @@ export default function HomeMenu({
                   sounds.playClick();
                   onSelectMode(mode.id);
                 }}
-                className={`relative group p-6 rounded-3xl bg-slate-900/90 border border-slate-800 transition-all duration-300 hover:scale-[1.02] cursor-pointer shadow-xl bg-gradient-to-br ${mode.gradient}`}
+                className="relative group p-6 rounded-3xl bg-white border border-[#E5DFD3] hover:border-[#C85A32]/50 transition-all duration-300 hover:shadow-md cursor-pointer flex flex-col justify-between"
               >
-                <div className="flex items-start justify-between mb-4">
-                  <div className={`p-3 rounded-2xl ${mode.iconColor}`}>
-                    <Icon className="w-6 h-6" />
+                <div>
+                  <div className="flex items-start justify-between mb-4">
+                    <div className={`p-3 rounded-2xl border ${mode.iconBg}`}>
+                      <Icon className="w-6 h-6" />
+                    </div>
+
+                    <span className="text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-[#FAF6EE] text-[#78716C] border border-[#E5DFD3]">
+                      {mode.badge}
+                    </span>
                   </div>
 
-                  <span className="text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700">
-                    {mode.badge}
-                  </span>
+                  <h4 className="text-lg font-serif font-bold text-[#1C1917] group-hover:text-[#C85A32] transition-colors">
+                    {mode.title}
+                  </h4>
+                  <div className={`text-[11px] font-semibold ${mode.tagColor} mb-2`}>
+                    {mode.tag}
+                  </div>
+
+                  <p className="text-xs text-[#57534E] mb-4 line-clamp-3 leading-relaxed">
+                    {mode.desc}
+                  </p>
                 </div>
 
-                <h4 className="text-lg font-serif font-bold text-white group-hover:text-amber-300 transition-colors">
-                  {mode.title}
-                </h4>
-                <div className="text-[11px] font-semibold text-amber-400/90 mb-2">
-                  {mode.tag}
-                </div>
-
-                <p className="text-xs text-slate-400 mb-4 line-clamp-3 leading-relaxed">
-                  {mode.desc}
-                </p>
-
-                <div className="flex items-center justify-between pt-3 border-t border-slate-800/80 text-xs text-amber-400 font-semibold group-hover:translate-x-1 transition-transform">
+                <div className="flex items-center justify-between pt-3 border-t border-[#E5DFD3] text-xs text-[#C85A32] font-semibold group-hover:translate-x-1 transition-transform">
                   <span>Antrenmana Başla</span>
                   <ChevronRight className="w-4 h-4" />
                 </div>
@@ -226,10 +239,10 @@ export default function HomeMenu({
         </div>
       </div>
 
-      {/* Genres Explorer Showcase */}
+      {/* Genres Explorer Showcase (Book Spine / Archival Style) */}
       <div>
-        <h3 className="text-lg font-serif font-bold text-slate-200 mb-4 flex items-center gap-2">
-          <BookOpen className="w-5 h-5 text-amber-400" />
+        <h3 className="text-lg font-serif font-bold text-[#1C1917] mb-4 flex items-center gap-2">
+          <BookOpen className="w-5 h-5 text-[#C85A32]" />
           <span>Edebi Türler & Kategoriler (250+ Eser)</span>
         </h3>
 
@@ -245,15 +258,17 @@ export default function HomeMenu({
                   sounds.playClick();
                   onSelectGenre(genre.id);
                 }}
-                className="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-amber-500/50 transition-all cursor-pointer group shadow"
+                className="p-4 rounded-2xl bg-white border border-[#E5DFD3] hover:border-[#C85A32]/50 hover:shadow-xs transition-all cursor-pointer group flex flex-col justify-between"
               >
-                <div className="p-2 w-fit rounded-xl bg-slate-800 text-amber-400 mb-2 group-hover:scale-110 transition-transform">
-                  <Icon className="w-4 h-4" />
+                <div>
+                  <div className="p-2 w-fit rounded-xl bg-[#FAF6EE] text-[#C85A32] border border-[#E5DFD3] mb-2.5 group-hover:scale-110 transition-transform">
+                    <Icon className="w-4 h-4" />
+                  </div>
+                  <h5 className="text-xs sm:text-sm font-serif font-bold text-[#1C1917] group-hover:text-[#C85A32] leading-snug">
+                    {genre.name}
+                  </h5>
                 </div>
-                <h5 className="text-xs sm:text-sm font-serif font-bold text-slate-200 group-hover:text-amber-300">
-                  {genre.name}
-                </h5>
-                <span className="text-[11px] text-slate-500">
+                <span className="text-[11px] text-[#78716C] mt-2 font-sans font-medium">
                   {quoteCount} Alıntı
                 </span>
               </div>

@@ -1,5 +1,5 @@
-﻿import React from 'react';
-import { X, Feather, Compass, BookOpen, Layers, Repeat, Sparkles } from 'lucide-react';
+import React from 'react';
+import { X, Feather, Compass, BookOpen, Layers, Repeat } from 'lucide-react';
 
 export default function TipsModal({ isOpen, onClose }) {
   if (!isOpen) return null;
@@ -38,24 +38,24 @@ export default function TipsModal({ isOpen, onClose }) {
   ];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="relative w-full max-w-2xl bg-slate-900 border border-amber-500/30 rounded-3xl p-6 sm:p-8 shadow-2xl overflow-y-auto max-h-[90vh]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-200">
+      <div className="relative w-full max-w-2xl bg-white border border-[#E5DFD3] rounded-3xl p-6 sm:p-8 shadow-2xl overflow-y-auto max-h-[90vh]">
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 p-2 text-slate-400 hover:text-white rounded-xl hover:bg-slate-800 transition cursor-pointer"
+          className="absolute top-5 right-5 p-2 text-[#78716C] hover:text-[#1C1917] rounded-xl hover:bg-[#FAF6EE] transition cursor-pointer"
         >
           <X className="w-5 h-5" />
         </button>
 
         {/* Header */}
         <div className="flex items-center gap-3.5 mb-6">
-          <div className="p-3 bg-amber-500/20 text-amber-400 border border-amber-500/30 rounded-2xl">
+          <div className="p-3 bg-[#C85A32]/10 text-[#C85A32] border border-[#C85A32]/25 rounded-2xl">
             <Feather className="w-6 h-6" />
           </div>
           <div>
-            <h2 className="text-xl sm:text-2xl font-serif font-bold text-white">Edebi Cümle Ezberleme Sanatı</h2>
-            <p className="text-xs text-slate-400">Kitapları ve felsefi alıntıları kalıcı hafızaya kazıma teknikleri</p>
+            <h2 className="text-xl sm:text-2xl font-serif font-bold text-[#1C1917]">Edebi Cümle Ezberleme Sanatı</h2>
+            <p className="text-xs text-[#78716C]">Kitapları ve felsefi alıntıları kalıcı hafızaya kazıma teknikleri</p>
           </div>
         </div>
 
@@ -64,19 +64,19 @@ export default function TipsModal({ isOpen, onClose }) {
           {techniques.map((tech, i) => {
             const Icon = tech.icon;
             return (
-              <div key={i} className="p-4 bg-slate-950/60 rounded-2xl border border-slate-800 hover:border-amber-500/30 transition">
+              <div key={i} className="p-4 bg-[#FAF6EE] rounded-2xl border border-[#E5DFD3] hover:border-[#C85A32]/30 transition">
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2.5">
-                    <div className="p-2 bg-amber-500/15 text-amber-400 rounded-xl">
+                    <div className="p-2 bg-white text-[#C85A32] border border-[#E5DFD3] rounded-xl shadow-xs">
                       <Icon className="w-4 h-4" />
                     </div>
-                    <h3 className="text-sm sm:text-base font-serif font-bold text-slate-100">{tech.title}</h3>
+                    <h3 className="text-sm sm:text-base font-serif font-bold text-[#1C1917]">{tech.title}</h3>
                   </div>
-                  <span className="text-[10px] px-2.5 py-0.5 rounded-full bg-amber-950/60 border border-amber-500/30 text-amber-300 font-medium">
+                  <span className="text-[10px] px-2.5 py-0.5 rounded-full bg-white border border-[#E5DFD3] text-[#C85A32] font-semibold">
                     {tech.tag}
                   </span>
                 </div>
-                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed pl-10 font-serif">
+                <p className="text-xs sm:text-sm text-[#57534E] leading-relaxed pl-10 font-sans">
                   {tech.desc}
                 </p>
               </div>
@@ -85,8 +85,8 @@ export default function TipsModal({ isOpen, onClose }) {
         </div>
 
         {/* Golden Quote */}
-        <div className="p-4 rounded-2xl bg-gradient-to-r from-amber-950/40 to-orange-950/40 border border-amber-500/30 text-center">
-          <p className="text-xs sm:text-sm font-serif italic text-amber-200">
+        <div className="p-4 rounded-2xl bg-[#FAF6EE] border border-[#E5DFD3] text-center">
+          <p className="text-xs sm:text-sm font-serif italic text-[#C85A32]">
             "Ezberlenen her asil cümle, ruhun karanlık odalarını aydınlatan sönmez bir kandildir."
           </p>
         </div>

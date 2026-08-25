@@ -54,7 +54,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col justify-between selection:bg-amber-500 selection:text-slate-950 pb-16 sm:pb-0 font-sans overflow-x-hidden">
+    <div className="min-h-screen bg-[#F7F4EE] text-[#1C1917] flex flex-col justify-between selection:bg-[#C85A32] selection:text-white pb-16 sm:pb-0 font-sans overflow-x-hidden">
       <div>
         {/* Literary Header */}
         <Header
@@ -161,8 +161,8 @@ export default function App() {
       />
 
       {/* Footer */}
-      <footer className="w-full text-center py-6 border-t border-slate-900/80 text-xs text-slate-500 hidden sm:block">
-        <p className="font-serif">LibrisMind &copy; 2026 — Edebi Hafıza & Kitap Cümlesi Ezberleme Platformu</p>
+      <footer className="w-full text-center py-6 border-t border-[#E5DFD3] text-xs text-[#78716C] hidden sm:block">
+        <p className="font-serif italic">LibrisMind &copy; 2026 — The Atelier Edition • Edebi Hafıza Platformu</p>
       </footer>
 
       {/* Modals */}

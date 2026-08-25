@@ -15,17 +15,17 @@ public class MainActivity extends BridgeActivity {
 
         Window window = getWindow();
 
-        // Dark status bar and navigation bar
+        // Warm ivory status bar and navigation bar
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.setStatusBarColor(0xFF020617);
-            window.setNavigationBarColor(0xFF020617);
+            window.setStatusBarColor(0xFFF7F4EE);
+            window.setNavigationBarColor(0xFFEFE9DE);
         }
 
-        // Remove light status bar icons (force white icons on dark background)
+        // Enable light status bar (dark ink icons on warm ivory background)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             View decorView = window.getDecorView();
             int flags = decorView.getSystemUiVisibility();
-            flags &= ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+            flags |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
             decorView.setSystemUiVisibility(flags);
         }
 
@@ -34,7 +34,7 @@ public class MainActivity extends BridgeActivity {
             WindowCompat.setDecorFitsSystemWindows(window, true);
         }
 
-        // Keep screen on during memorization
+        // Keep screen on during memorization sessions
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 }
