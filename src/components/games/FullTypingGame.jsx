@@ -5,6 +5,7 @@ import {
   RotateCcw, 
   Trophy, 
   ArrowLeft, 
+  ArrowRight,
   Check, 
   Timer, 
   Sparkles, 
@@ -15,12 +16,14 @@ import {
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { BOOK_GENRES, DIFFICULTY_LEVELS } from '../../data/bookQuotes';
+import { BOOKS_DATABASE } from '../../data/booksDatabase';
 import { quoteQueue } from '../../utils/quoteQueue';
 import { sounds } from '../../utils/sound';
 
 export default function FullTypingGame({ 
   onGameOver, 
   onBack, 
+  onSelectBook,
   highScore = 0, 
   initialQuote = null, 
   initialGenre = 'all',
@@ -550,6 +553,59 @@ export default function FullTypingGame({
                   "{currentQuote.quote}"
                 </p>
               </div>
+
+              {/* Direct Link to Book Detail & Passages */}
+              {(() => {
+                const matchedBook = currentQuote.bookId 
+                  ? BOOKS_DATABASE.find(b => b.id === currentQuote.bookId)
+                  : BOOKS_DATABASE.find(b => 
+                      b.title.toLowerCase() === currentQuote.book?.toLowerCase() ||
+                      b.passages?.some(p => p.id === currentQuote.id || p.quote === currentQuote.quote) ||
+                      b.title.toLowerCase().includes(currentQuote.book?.toLowerCase() || '') ||
+                      (currentQuote.book && currentQuote.book.toLowerCase().includes(b.title.toLowerCase()))
+                    );
+
+                if (!matchedBook) return null;
+
+                return (
+                  <div className="pt-3 border-t border-[#D6CEBE]/60">
+                    <button
+                      onClick={() => {
+                        sounds.playClick();
+                        if (onSelectBook) {
+                          onSelectBook(matchedBook.id);
+                        }
+                      }}
+                      className="w-full flex items-center justify-between p-3 sm:p-3.5 rounded-2xl bg-[#FAF6EE] hover:bg-[#F2ECE0] border border-[#D6CEBE] hover:border-[#C85A32] transition group cursor-pointer text-left shadow-2xs"
+                    >
+                      <div className="flex items-center gap-3 min-w-0">
+                        <div className="w-9 h-11 rounded-lg bg-gradient-to-br from-[#1E293B] to-[#0F172A] border border-[#D6CEBE] flex items-center justify-center text-white shrink-0 shadow-xs">
+                          <BookOpen className="w-4 h-4 text-[#FAF6EE]" />
+                        </div>
+                        <div className="min-w-0">
+                          <div className="flex items-center gap-2">
+                            <span className="text-[10px] font-bold uppercase tracking-wider text-[#C85A32]">Eser İncelemesi & Pasajlar</span>
+                            <span className="text-[10px] px-1.5 py-0.2 rounded bg-white border border-[#D6CEBE] text-[#57534E] font-medium">
+                              {matchedBook.passages?.length || 0} Pasaj
+                            </span>
+                          </div>
+                          <h4 className="font-serif font-bold text-sm text-[#1C1917] group-hover:text-[#B44A22] transition truncate">
+                            {matchedBook.title}
+                          </h4>
+                          <p className="text-[11px] text-[#57534E] truncate">
+                            {matchedBook.author} • {matchedBook.year || ''}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-1 text-xs font-bold text-[#B44A22] group-hover:translate-x-0.5 transition shrink-0 pl-2">
+                        <span className="hidden sm:inline">Esere Git</span>
+                        <ArrowRight className="w-4 h-4" />
+                      </div>
+                    </button>
+                  </div>
+                );
+              })()}
             </div>
           </div>
 

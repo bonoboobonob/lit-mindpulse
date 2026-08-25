@@ -154,6 +154,7 @@ export default function App() {
               initialBookId={selectedBookId}
               initialDifficulty={selectedDifficulty}
               onGameOver={handleGameOver}
+              onSelectBook={handleSelectBook}
               onBack={() => {
                 setActiveQuote(null);
                 if (selectedBookId) {
@@ -175,6 +176,7 @@ export default function App() {
               initialBookId={selectedBookId}
               initialDifficulty={selectedDifficulty}
               onGameOver={handleGameOver}
+              onSelectBook={handleSelectBook}
               onBack={() => {
                 setActiveQuote(null);
                 if (selectedBookId) {
@@ -196,6 +198,7 @@ export default function App() {
               initialBookId={selectedBookId}
               initialDifficulty={selectedDifficulty}
               onGameOver={handleGameOver}
+              onSelectBook={handleSelectBook}
               onBack={() => {
                 setActiveQuote(null);
                 if (selectedBookId) {
