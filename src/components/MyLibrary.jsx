@@ -1,7 +1,6 @@
+import React, { useState } from 'react';
 import { BookOpen, PlusCircle, Trash2, Play, Bookmark, Sparkles, Feather, ArrowLeft } from 'lucide-react';
 import { sounds } from '../utils/sound';
-import { speechEngine } from '../utils/speech';
-import AudioSpeakButton from './common/AudioSpeakButton';
 
 export default function MyLibrary({ 
   customQuotes = [], 
@@ -41,10 +40,7 @@ export default function MyLibrary({
       {/* Top Header */}
       <div className="flex items-center justify-between mb-6">
         <button
-          onClick={() => {
-            speechEngine.stop();
-            onBack();
-          }}
+          onClick={onBack}
           className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white dark:bg-[#1E1B18] hover:bg-[#FAF6EE] dark:hover:bg-[#282420] border border-[#D6CEBE] dark:border-[#38322B] text-[#44403C] dark:text-[#EDE8DF] hover:text-[#1C1917] dark:hover:text-[#F5EFE4] text-sm font-semibold transition shadow-xs cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4" />
@@ -114,13 +110,6 @@ export default function MyLibrary({
                 </span>
 
                 <div className="flex items-center gap-2">
-                  <AudioSpeakButton 
-                    text={q.quote}
-                    label="Dinle"
-                    activeLabel="Durdur"
-                    size="xs"
-                  />
-
                   <button
                     onClick={() => onDeleteCustomQuote(q.id)}
                     className="p-1.5 text-[#78716C] dark:text-[#A8A196] hover:text-rose-700 dark:hover:text-rose-400 rounded-lg transition cursor-pointer"
@@ -130,10 +119,7 @@ export default function MyLibrary({
                   </button>
 
                   <button
-                    onClick={() => {
-                      speechEngine.stop();
-                      onStartPractice(q);
-                    }}
+                    onClick={() => onStartPractice(q)}
                     className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-[#C85A32]/10 dark:bg-[#E07048]/15 hover:bg-[#C85A32]/20 dark:hover:bg-[#E07048]/25 text-[#B44A22] dark:text-[#E07048] border border-[#C85A32]/40 dark:border-[#E07048]/40 font-bold transition cursor-pointer"
                   >
                     <Play className="w-3.5 h-3.5 fill-[#B44A22] dark:fill-[#E07048]" />

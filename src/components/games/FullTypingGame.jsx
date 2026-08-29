@@ -19,8 +19,6 @@ import { BOOK_GENRES, DIFFICULTY_LEVELS } from '../../data/bookQuotes';
 import { BOOKS_DATABASE } from '../../data/booksDatabase';
 import { quoteQueue } from '../../utils/quoteQueue';
 import { sounds } from '../../utils/sound';
-import { speechEngine } from '../../utils/speech';
-import AudioSpeakButton from '../common/AudioSpeakButton';
 
 export default function FullTypingGame({ 
   onGameOver, 
@@ -113,7 +111,6 @@ export default function FullTypingGame({
 
   // Transition to typing phase
   const startTypingPhase = () => {
-    speechEngine.stop();
     sounds.playLevelUp();
     if (timerRef.current) clearInterval(timerRef.current);
     setPhase('typing');
@@ -256,7 +253,6 @@ export default function FullTypingGame({
 
   useEffect(() => {
     return () => {
-      speechEngine.stop();
       if (timerRef.current) clearInterval(timerRef.current);
     };
   }, []);
@@ -266,10 +262,7 @@ export default function FullTypingGame({
       {/* Top Navigation Bar */}
       <div className="w-full flex items-center justify-between mb-4 gap-2">
         <button
-          onClick={() => {
-            speechEngine.stop();
-            onBack();
-          }}
+          onClick={onBack}
           className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white dark:bg-[#1E1B18] hover:bg-[#FAF6EE] dark:hover:bg-[#282420] border border-[#D6CEBE] dark:border-[#38322B] text-[#44403C] dark:text-[#EDE8DF] hover:text-[#1C1917] dark:hover:text-[#F5EFE4] text-xs sm:text-sm font-semibold transition cursor-pointer shrink-0 shadow-xs"
         >
           <ArrowLeft className="w-4 h-4" />
@@ -397,15 +390,6 @@ export default function FullTypingGame({
             <p className="text-lg sm:text-2xl font-serif font-medium text-[#1C1917] dark:text-[#F5EFE4] leading-relaxed text-center italic my-6 px-1 quote-text font-quote">
               "{currentQuote.quote}"
             </p>
-
-            <div className="flex justify-center mb-4">
-              <AudioSpeakButton 
-                text={currentQuote.quote}
-                label="Cümleyi Sesli Dinle"
-                activeLabel="Durdur"
-                size="md"
-              />
-            </div>
 
             <div className="mt-4 pt-3 border-t border-[#D6CEBE] dark:border-[#38322B] flex items-center justify-between text-xs text-[#B44A22] dark:text-[#E07048] px-1 font-semibold">
               <span>💡 Anahtar kavramları zihninizde sabitleyin.</span>
@@ -572,18 +556,7 @@ export default function FullTypingGame({
 
             <div className="space-y-3 pt-4 border-t border-[#D6CEBE] dark:border-[#38322B] text-xs">
               <div>
-                <div className="flex items-center justify-between gap-2 mb-1">
-                  <span className="text-[#57534E] dark:text-[#A8A196] font-medium block">
-                    Orijinal Eser: <strong className="text-[#B44A22] dark:text-[#E07048]">{currentQuote.book}</strong> ({currentQuote.author})
-                  </span>
-                  <AudioSpeakButton 
-                    text={currentQuote.quote}
-                    label="Dinle"
-                    activeLabel="Durdur"
-                    size="xs"
-                    variant="minimal"
-                  />
-                </div>
+                <span className="text-[#57534E] dark:text-[#A8A196] font-medium block mb-0.5">Orijinal Eser: <strong className="text-[#B44A22] dark:text-[#E07048]">{currentQuote.book}</strong> ({currentQuote.author})</span>
                 <p className="text-[#1C1917] dark:text-[#F5EFE4] italic font-serif text-sm sm:text-base quote-text leading-relaxed font-quote">
                   "{currentQuote.quote}"
                 </p>

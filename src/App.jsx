@@ -13,7 +13,6 @@ import MyLibrary from './components/MyLibrary';
 import { getSavedStats, saveGameResult, getCustomQuotes, saveCustomQuotes, getSavedTheme, saveTheme } from './utils/storage';
 import { quoteQueue } from './utils/quoteQueue';
 import { sounds } from './utils/sound';
-import { speechEngine } from './utils/speech';
 
 export default function App() {
   const [currentScreen, setCurrentScreen] = useState('home'); // 'home' | 'genreDetail' | 'bookDetail' | 'fullTyping' | 'clozeRecall' | 'wordScramble' | 'library'
@@ -135,7 +134,6 @@ export default function App() {
   };
 
   const handleNavigateHome = () => {
-    speechEngine.stop();
     sounds.playClick();
     setActiveQuote(null);
     setSelectedBookId(null);

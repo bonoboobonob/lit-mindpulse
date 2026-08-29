@@ -18,8 +18,6 @@ import { BOOK_GENRES, DIFFICULTY_LEVELS } from '../../data/bookQuotes';
 import { BOOKS_DATABASE } from '../../data/booksDatabase';
 import { quoteQueue } from '../../utils/quoteQueue';
 import { sounds } from '../../utils/sound';
-import { speechEngine } from '../../utils/speech';
-import AudioSpeakButton from '../common/AudioSpeakButton';
 
 export default function WordScrambleGame({ 
   onGameOver, 
@@ -201,7 +199,6 @@ export default function WordScrambleGame({
 
   useEffect(() => {
     return () => {
-      speechEngine.stop();
       if (timerRef.current) clearInterval(timerRef.current);
     };
   }, []);
@@ -211,10 +208,7 @@ export default function WordScrambleGame({
       {/* Top Navigation */}
       <div className="w-full flex items-center justify-between mb-4 gap-2">
         <button
-          onClick={() => {
-            speechEngine.stop();
-            onBack();
-          }}
+          onClick={onBack}
           className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white dark:bg-[#1E1B18] hover:bg-[#FAF6EE] dark:hover:bg-[#282420] border border-[#D6CEBE] dark:border-[#38322B] text-[#44403C] dark:text-[#EDE8DF] hover:text-[#1C1917] dark:hover:text-[#F5EFE4] text-xs sm:text-sm font-semibold transition cursor-pointer shrink-0 shadow-xs"
         >
           <ArrowLeft className="w-4 h-4" />
@@ -330,15 +324,6 @@ export default function WordScrambleGame({
               "{currentQuote.quote}"
             </p>
 
-            <div className="flex justify-center mb-4">
-              <AudioSpeakButton 
-                text={currentQuote.quote}
-                label="Cümleyi Sesli Dinle"
-                activeLabel="Durdur"
-                size="md"
-              />
-            </div>
-
             <div className="mt-4 pt-3 border-t border-[#D6CEBE] dark:border-[#38322B] flex items-center justify-between text-xs text-[#476C46] dark:text-[#62B889] px-1 font-semibold">
               <span>💡 Kelimelerin dizilim sırasını aklınızda tutun.</span>
               <span className="hidden sm:inline text-[#57534E] dark:text-[#A8A196] font-mono bg-[#FAF6EE] dark:bg-[#282420] border border-[#D6CEBE] dark:border-[#38322B] px-2 py-0.5 rounded">Enter ↵</span>
@@ -347,7 +332,6 @@ export default function WordScrambleGame({
 
           <button
             onClick={() => {
-              speechEngine.stop();
               if (timerRef.current) clearInterval(timerRef.current);
               sounds.playLevelUp();
               setPhase('scramble');
@@ -480,18 +464,9 @@ export default function WordScrambleGame({
 
             {/* Original Literary Quote */}
             <div className="pt-4 border-t border-[#D6CEBE] dark:border-[#38322B] text-xs">
-              <div className="flex items-center justify-between gap-2 mb-1">
-                <span className="text-[#57534E] dark:text-[#A8A196] font-medium block">
-                  Orijinal Eser: <strong className="text-[#B44A22] dark:text-[#E07048] font-serif">{currentQuote.book}</strong> ({currentQuote.author})
-                </span>
-                <AudioSpeakButton 
-                  text={currentQuote.quote}
-                  label="Dinle"
-                  activeLabel="Durdur"
-                  size="xs"
-                  variant="minimal"
-                />
-              </div>
+              <span className="text-[#57534E] dark:text-[#A8A196] font-medium block mb-1">
+                Orijinal Eser: <strong className="text-[#B44A22] dark:text-[#E07048] font-serif">{currentQuote.book}</strong> ({currentQuote.author})
+              </span>
               <p className="text-[#1C1917] dark:text-[#F5EFE4] italic font-serif text-sm sm:text-base quote-text leading-relaxed font-quote">
                 "{currentQuote.quote}"
               </p>
