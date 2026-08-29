@@ -26,7 +26,8 @@ import {
   Laugh,
   Hourglass,
   Scale,
-  Heart
+  Heart,
+  Volume2
 } from 'lucide-react';
 import { 
   OakTreeIllustration, 
@@ -37,6 +38,7 @@ import {
 } from '../assets/illustrations';
 import { BOOK_GENRES, BOOK_QUOTES } from '../data/bookQuotes';
 import { sounds } from '../utils/sound';
+import AudioSpeakButton from './common/AudioSpeakButton';
 
 const PRACTICE_MODES = [
   {
@@ -186,16 +188,24 @@ export default function HomeMenu({
             </p>
           </div>
 
-          <button
-            onClick={() => {
-              sounds.playClick();
-              onStartQuote(dailyQuote);
-            }}
-            className="flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-[#C85A32]/10 dark:bg-[#E07048]/15 hover:bg-[#C85A32]/20 dark:hover:bg-[#E07048]/25 text-[#B44A22] dark:text-[#E07048] border border-[#C85A32]/40 dark:border-[#E07048]/40 text-xs sm:text-sm font-bold transition shrink-0 cursor-pointer"
-          >
-            <Play className="w-3.5 h-3.5 fill-[#B44A22] dark:fill-[#E07048]" />
-            <span>Bu Cümleyi Ezberle</span>
-          </button>
+          <div className="flex items-center gap-2 shrink-0 self-end sm:self-center">
+            <AudioSpeakButton 
+              text={dailyQuote.quote}
+              label="Dinle"
+              activeLabel="Durdur"
+              size="md"
+            />
+            <button
+              onClick={() => {
+                sounds.playClick();
+                onStartQuote(dailyQuote);
+              }}
+              className="flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-[#C85A32]/10 dark:bg-[#E07048]/15 hover:bg-[#C85A32]/20 dark:hover:bg-[#E07048]/25 text-[#B44A22] dark:text-[#E07048] border border-[#C85A32]/40 dark:border-[#E07048]/40 text-xs sm:text-sm font-bold transition shrink-0 cursor-pointer"
+            >
+              <Play className="w-3.5 h-3.5 fill-[#B44A22] dark:fill-[#E07048]" />
+              <span>Bu Cümleyi Ezberle</span>
+            </button>
+          </div>
         </div>
       </div>
 

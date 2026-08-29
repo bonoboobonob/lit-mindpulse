@@ -18,6 +18,8 @@ import { BOOK_GENRES, DIFFICULTY_LEVELS } from '../../data/bookQuotes';
 import { BOOKS_DATABASE } from '../../data/booksDatabase';
 import { quoteQueue } from '../../utils/quoteQueue';
 import { sounds } from '../../utils/sound';
+import { speechEngine } from '../../utils/speech';
+import AudioSpeakButton from '../common/AudioSpeakButton';
 
 const STOPWORDS = ['ve', 'veya', 'bir', 'bu', 'şu', 'o', 'de', 'da', 'ile', 'için', 'ne', 'ise', 'ki', 'gibi', 'kadar', 'en', 'daha', 'çok', 'ama', 'fakat', 'ancak'];
 
@@ -170,6 +172,7 @@ export default function ClozeRecallGame({
   }, [initialQuote, initialBookId, initialGenre, initialDifficulty]);
 
   const startTestingPhase = () => {
+    speechEngine.stop();
     sounds.playLevelUp();
     if (timerRef.current) clearInterval(timerRef.current);
     setPhase('testing');
@@ -266,6 +269,7 @@ export default function ClozeRecallGame({
 
   useEffect(() => {
     return () => {
+      speechEngine.stop();
       if (timerRef.current) clearInterval(timerRef.current);
     };
   }, []);
@@ -275,7 +279,10 @@ export default function ClozeRecallGame({
       {/* Top Navigation */}
       <div className="w-full flex items-center justify-between mb-4 gap-2">
         <button
-          onClick={onBack}
+          onClick={() => {
+            speechEngine.stop();
+            onBack();
+          }}
           className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white dark:bg-[#1E1B18] hover:bg-[#FAF6EE] dark:hover:bg-[#282420] border border-[#D6CEBE] dark:border-[#38322B] text-[#44403C] dark:text-[#EDE8DF] hover:text-[#1C1917] dark:hover:text-[#F5EFE4] text-xs sm:text-sm font-semibold transition cursor-pointer shrink-0 shadow-xs"
         >
           <ArrowLeft className="w-4 h-4" />
@@ -417,6 +424,15 @@ export default function ClozeRecallGame({
               })}
             </p>
 
+            <div className="flex justify-center mb-4">
+              <AudioSpeakButton 
+                text={currentQuote.quote}
+                label="Cümleyi Sesli Dinle"
+                activeLabel="Durdur"
+                size="md"
+              />
+            </div>
+
             <div className="mt-4 pt-3 border-t border-[#D6CEBE] dark:border-[#38322B] flex items-center justify-between text-xs text-[#8C5E3C] dark:text-[#D4AF37] px-1 font-semibold">
               <span>💡 Vurgulanan kelimeleri aklınızda tutun.</span>
               <span className="hidden sm:inline text-[#57534E] dark:text-[#A8A196] font-mono bg-[#FAF6EE] dark:bg-[#282420] border border-[#D6CEBE] dark:border-[#38322B] px-2 py-0.5 rounded">Enter ↵</span>
@@ -528,7 +544,18 @@ export default function ClozeRecallGame({
             {/* Original Literary Quote & Direct Link to Book Detail */}
             <div className="space-y-3 pt-4 mt-4 border-t border-[#D6CEBE] dark:border-[#38322B] text-xs">
               <div>
-                <span className="text-[#57534E] dark:text-[#A8A196] font-medium block mb-0.5">Orijinal Eser: <strong className="text-[#B44A22] dark:text-[#E07048]">{currentQuote.book}</strong> ({currentQuote.author})</span>
+                <div className="flex items-center justify-between gap-2 mb-1">
+                  <span className="text-[#57534E] dark:text-[#A8A196] font-medium block">
+                    Orijinal Eser: <strong className="text-[#B44A22] dark:text-[#E07048]">{currentQuote.book}</strong> ({currentQuote.author})
+                  </span>
+                  <AudioSpeakButton 
+                    text={currentQuote.quote}
+                    label="Dinle"
+                    activeLabel="Durdur"
+                    size="xs"
+                    variant="minimal"
+                  />
+                </div>
                 <p className="text-[#1C1917] dark:text-[#F5EFE4] italic font-serif text-sm sm:text-base quote-text leading-relaxed font-quote">
                   "{currentQuote.quote}"
                 </p>

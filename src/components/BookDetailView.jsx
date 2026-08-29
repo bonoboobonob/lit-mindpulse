@@ -21,6 +21,8 @@ import { BOOKS_DATABASE } from '../data/booksDatabase';
 import { BOOK_GENRES, DIFFICULTY_LEVELS } from '../data/bookQuotes';
 import { BookmarkRibbon } from '../assets/illustrations';
 import { sounds } from '../utils/sound';
+import { speechEngine } from '../utils/speech';
+import AudioSpeakButton from './common/AudioSpeakButton';
 
 export default function BookDetailView({ 
   bookId, 
@@ -60,6 +62,7 @@ export default function BookDetailView({
           {pausedGameSession ? (
             <button
               onClick={() => {
+                speechEngine.stop();
                 sounds.playClick();
                 if (onResumeExercise) onResumeExercise();
               }}
@@ -71,6 +74,7 @@ export default function BookDetailView({
           ) : (
             <button
               onClick={() => {
+                speechEngine.stop();
                 sounds.playClick();
                 onBack();
               }}
@@ -83,6 +87,7 @@ export default function BookDetailView({
 
           <button
             onClick={() => {
+              speechEngine.stop();
               sounds.playClick();
               if (onNavigateHome) onNavigateHome();
               else onBack();
@@ -351,8 +356,17 @@ export default function BookDetailView({
                 </div>
 
                 <div className="flex items-center justify-end gap-2 pt-3 border-t border-[#D6CEBE] dark:border-[#38322B]">
+                  <AudioSpeakButton 
+                    text={p.quote}
+                    label="Dinle"
+                    activeLabel="Durdur"
+                    size="xs"
+                  />
                   <button
-                    onClick={() => onStartSpecificQuote(quoteObj, 'fullTyping')}
+                    onClick={() => {
+                      speechEngine.stop();
+                      onStartSpecificQuote(quoteObj, 'fullTyping');
+                    }}
                     className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-[#C85A32]/10 dark:bg-[#E07048]/15 hover:bg-[#C85A32]/20 dark:hover:bg-[#E07048]/25 text-[#B44A22] dark:text-[#E07048] border border-[#C85A32]/40 dark:border-[#E07048]/40 font-bold transition cursor-pointer text-xs"
                   >
                     <Play className="w-3.5 h-3.5 fill-[#B44A22] dark:fill-[#E07048]" />
