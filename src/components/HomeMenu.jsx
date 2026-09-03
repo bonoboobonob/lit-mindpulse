@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { 
   Play, 
   BookOpen, 
@@ -142,6 +142,33 @@ export default function HomeMenu({
   const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
   const dailyQuote = BOOK_QUOTES[dayOfYear % BOOK_QUOTES.length] || BOOK_QUOTES[0];
 
+  // Accurate genre statistics (real book count and de-duplicated total quotes)
+  const { genreStats, totalSystemQuotes } = useMemo(() => {
+    const stats = {};
+    const allSeen = new Set(BOOKS_DATABASE.flatMap(b => (b.passages || []).map(p => p.quote.trim().toLowerCase())));
+    BOOK_QUOTES.forEach(q => {
+      const norm = q.quote ? q.quote.trim().toLowerCase() : '';
+      if (norm) allSeen.add(norm);
+    });
+
+    BOOK_GENRES.filter(g => g.id !== 'all').forEach(genre => {
+      const gBooks = BOOKS_DATABASE.filter(b => b.genre === genre.id);
+      const seenQuotes = new Set(gBooks.flatMap(b => (b.passages || []).map(p => p.quote.trim().toLowerCase())));
+      BOOK_QUOTES.forEach(q => {
+        if (q.genre === genre.id) {
+          const norm = q.quote ? q.quote.trim().toLowerCase() : '';
+          if (norm) seenQuotes.add(norm);
+        }
+      });
+      stats[genre.id] = {
+        bookCount: gBooks.length,
+        quoteCount: seenQuotes.size,
+      };
+    });
+
+    return { genreStats: stats, totalSystemQuotes: allSeen.size };
+  }, []);
+
   return (
     <div className="w-full max-w-5xl mx-auto px-2 sm:px-4 py-2">
       {/* Atelier Hero Banner (Woodcut & Editorial Grid) */}
@@ -154,7 +181,7 @@ export default function HomeMenu({
         <div className="relative z-10 max-w-2xl">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C85A32]/10 dark:bg-[#E07048]/20 border border-[#C85A32]/30 dark:border-[#E07048]/40 text-[#B44A22] dark:text-[#E07048] text-xs font-bold uppercase tracking-wider mb-4">
             <Feather className="w-3.5 h-3.5 stroke-[2.4]" />
-            <span>The Atelier Edition • Edebi Hafıza Mizanpajı</span>
+            <span>The Atelier Edition • Edebi Hafıza & Kütüphane</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl font-serif font-bold text-[#1C1917] dark:text-[#F5EFE4] tracking-tight leading-snug mb-3">
@@ -165,19 +192,24 @@ export default function HomeMenu({
           </h2>
 
           <p className="text-sm sm:text-base text-[#44403C] dark:text-[#D6CEBE] mb-6 leading-relaxed font-sans font-normal">
-            Dünya klasikleri, felsefe ve Türk edebiyatı şaheserlerinden seçilen 250+ kült cümleyi ezberleyin; çalışma belleğinizi, dil zenginliğinizi ve odaklanmanızı zirveye taşıyın.
+            Dünya klasikleri, felsefe ve Türk edebiyatı şaheserlerinden derlenen <strong className="font-semibold text-[#1C1917] dark:text-[#F5EFE4]">{BOOKS_DATABASE.length} başyapıt</strong> ve <strong className="font-semibold text-[#1C1917] dark:text-[#F5EFE4]">{totalSystemQuotes}+ kült edebi pasajı</strong> ezberleyin; çalışma belleğinizi, dil zenginliğinizi ve odaklanmanızı zirveye taşıyın.
           </p>
 
           <div className="flex flex-wrap items-center gap-3">
             <button
               onClick={() => {
                 sounds.playClick();
-                onSelectMode('fullTyping');
+                const el = document.getElementById('practice-modes');
+                if (el) {
+                  el.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                  onSelectMode('fullTyping');
+                }
               }}
-              className="flex items-center gap-2 px-6 py-3.5 rounded-2xl btn-terracotta font-bold text-sm sm:text-base cursor-pointer shadow-md"
+              className="flex items-center gap-2 px-6 py-3.5 rounded-2xl btn-terracotta font-bold text-sm sm:text-base cursor-pointer shadow-md transition hover:scale-[1.02]"
             >
               <Play className="w-4 h-4 fill-white" />
-              <span>Ezber Antrenmanına Başla</span>
+              <span>Egzersiz Modlarını Keşfet</span>
             </button>
 
             <button
@@ -211,7 +243,7 @@ export default function HomeMenu({
           </div>
 
           <div className="flex-1 pr-6 sm:pr-8">
-            <div className="flex items-center gap-2 text-xs text-[#57534E] dark:text-[#A8A196] mb-2 font-medium">
+            <div className="flex items-center gap-2 text-xs text-[#57534E] dark:text-[#A8A196] mb-2 font-medium flex-wrap">
               <button
                 onClick={() => {
                   sounds.playClick();
@@ -231,6 +263,16 @@ export default function HomeMenu({
               </button>
               <span>—</span>
               <span className="text-[#1C1917] dark:text-[#F5EFE4] font-semibold">{dailyQuote.author}</span>
+              
+              {/* Category Badge */}
+              <span className="px-2 py-0.5 rounded-full bg-[#FAF6EE] dark:bg-[#282420] text-[#8C5E3C] dark:text-[#C8A27A] border border-[#D6CEBE] dark:border-[#38322B] text-[10px] font-bold">
+                {BOOK_GENRES.find(g => g.id === dailyQuote.genre)?.name || 'Dünya Edebiyatı'}
+              </span>
+
+              {/* Difficulty Badge */}
+              <span className="px-2 py-0.5 rounded-full bg-[#C85A32]/10 dark:bg-[#E07048]/20 text-[#B44A22] dark:text-[#E07048] border border-[#C85A32]/30 dark:border-[#E07048]/30 text-[10px] font-bold">
+                {dailyQuote.difficulty === 'easy' ? 'Kolay Seviye' : dailyQuote.difficulty === 'hard' ? 'Zor Seviye' : dailyQuote.difficulty === 'legendary' ? 'Efsanevi Seviye' : 'Orta Seviye'}
+              </span>
             </div>
             <p className="text-base sm:text-lg font-serif italic text-[#1C1917] dark:text-[#F5EFE4] leading-relaxed font-quote">
               "{dailyQuote.quote}"
@@ -245,13 +287,13 @@ export default function HomeMenu({
             className="flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-[#C85A32]/10 dark:bg-[#E07048]/15 hover:bg-[#C85A32]/20 dark:hover:bg-[#E07048]/25 text-[#B44A22] dark:text-[#E07048] border border-[#C85A32]/40 dark:border-[#E07048]/40 text-xs sm:text-sm font-bold transition shrink-0 cursor-pointer"
           >
             <Play className="w-3.5 h-3.5 fill-[#B44A22] dark:fill-[#E07048]" />
-            <span>Bu Cümleyi Ezberle</span>
+            <span>Bu Pasajı Ezberle</span>
           </button>
         </div>
       </div>
 
       {/* 6 Practice Modes (Atelier Style) */}
-      <div className="mb-10">
+      <div id="practice-modes" className="mb-10 scroll-mt-24">
         <h3 className="text-lg font-serif font-bold text-[#1C1917] dark:text-[#F5EFE4] mb-4 flex items-center gap-2">
           <Feather className="w-5 h-5 text-[#B44A22] dark:text-[#E07048]" />
           <span>Egzersiz ve Hatırlama Modları</span>
@@ -301,15 +343,20 @@ export default function HomeMenu({
 
       {/* Genres Explorer Showcase (Book Spine / Archival Style) */}
       <div>
-        <h3 className="text-lg font-serif font-bold text-[#1C1917] dark:text-[#F5EFE4] mb-4 flex items-center gap-2">
-          <BookOpen className="w-5 h-5 text-[#B44A22] dark:text-[#E07048]" />
-          <span>Edebi Türler & Kategoriler (250+ Eser)</span>
-        </h3>
+        <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
+          <h3 className="text-lg font-serif font-bold text-[#1C1917] dark:text-[#F5EFE4] flex items-center gap-2">
+            <BookOpen className="w-5 h-5 text-[#B44A22] dark:text-[#E07048]" />
+            <span>Edebi Türler & Kategoriler</span>
+          </h3>
+          <span className="text-xs font-sans font-semibold text-[#8C5E3C] dark:text-[#C8A27A] bg-[#FAF6EE] dark:bg-[#282420] px-2.5 py-1 rounded-full border border-[#D6CEBE] dark:border-[#38322B]">
+            {BOOKS_DATABASE.length} Eser • {totalSystemQuotes}+ Pasaj & Alıntı
+          </span>
+        </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {BOOK_GENRES.filter(g => g.id !== 'all').map((genre) => {
             const Icon = genreIcons[genre.icon] || BookOpen;
-            const quoteCount = BOOK_QUOTES.filter(q => q.genre === genre.id).length;
+            const stats = genreStats[genre.id] || { bookCount: 0, quoteCount: 0 };
 
             return (
               <div
@@ -328,9 +375,11 @@ export default function HomeMenu({
                     {genre.name}
                   </h5>
                 </div>
-                <span className="text-[11px] text-[#57534E] dark:text-[#A8A196] mt-2 font-sans font-semibold">
-                  {quoteCount} Alıntı
-                </span>
+                <div className="flex items-center gap-1.5 text-[11px] text-[#57534E] dark:text-[#A8A196] mt-2.5 font-sans">
+                  <span className="font-semibold text-[#1C1917] dark:text-[#EDE8DF]">{stats.bookCount} Eser</span>
+                  <span className="text-[#A8A29E] dark:text-[#57534E]">•</span>
+                  <span>{stats.quoteCount} Alıntı</span>
+                </div>
               </div>
             );
           })}

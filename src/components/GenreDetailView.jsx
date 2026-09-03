@@ -158,7 +158,7 @@ export default function GenreDetailView({
                   {genre.name}
                 </h2>
                 <span className="px-2.5 py-0.5 rounded-full bg-[#FAF6EE] dark:bg-[#282420] text-[#B44A22] dark:text-[#E07048] border border-[#D6CEBE] dark:border-[#38322B] text-xs font-bold">
-                  {allGenreQuotes.length} Alıntı
+                  {genreBooks.length} Eser • {allGenreQuotes.length} Alıntı
                 </span>
               </div>
               <p className="text-sm text-[#44403C] dark:text-[#D6CEBE] font-medium leading-relaxed max-w-xl">

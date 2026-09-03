@@ -33,10 +33,10 @@ export default function ClozeRecallGame({
 }) {
   const [selectedGenre, setSelectedGenre] = useState(initialGenre || 'all');
   const [selectedBookId, setSelectedBookId] = useState(initialBookId || null);
-  const [selectedDifficulty, setSelectedDifficulty] = useState(initialDifficulty || 'all');
+  const [selectedDifficulty, setSelectedDifficulty] = useState(initialDifficulty && initialDifficulty !== 'all' ? initialDifficulty : 'medium');
   const [currentQuote, setCurrentQuote] = useState(initialQuote);
 
-  const [phase, setPhase] = useState('study'); // Always start in study mode
+  const [phase, setPhase] = useState(initialQuote ? 'study' : 'selection');
   const [timeLeft, setTimeLeft] = useState(15);
   const [totalStudyTime, setTotalStudyTime] = useState(15);
   
@@ -161,11 +161,11 @@ export default function ClozeRecallGame({
   useEffect(() => {
     setSelectedGenre(initialGenre || 'all');
     setSelectedBookId(initialBookId || null);
-    setSelectedDifficulty(initialDifficulty || 'all');
+    setSelectedDifficulty(initialDifficulty && initialDifficulty !== 'all' ? initialDifficulty : 'medium');
     if (initialQuote) {
       setupClozeQuote(initialQuote);
     } else {
-      startNewRound();
+      setPhase('selection');
     }
   }, [initialQuote, initialBookId, initialGenre, initialDifficulty]);
 
@@ -315,7 +315,7 @@ export default function ClozeRecallGame({
       {phase === 'selection' && (
         <div className="w-full max-w-2xl space-y-6 animate-in fade-in duration-200">
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-[#B44A22] dark:text-[#E07048] mb-2.5">
+            <label className="block text-xs font-bold uppercase tracking-wider text-[#8C5E3C] dark:text-[#C8A27A] mb-2.5">
               1. Edebi Kategori
             </label>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2.5 max-h-56 sm:max-h-72 overflow-y-auto p-2 border border-[#D6CEBE] dark:border-[#38322B] rounded-2xl bg-white dark:bg-[#1C1917] shadow-xs">
@@ -336,7 +336,7 @@ export default function ClozeRecallGame({
           </div>
 
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-[#B44A22] dark:text-[#E07048] mb-2.5">
+            <label className="block text-xs font-bold uppercase tracking-wider text-[#8C5E3C] dark:text-[#C8A27A] mb-2.5">
               2. Zorluk Seviyesi
             </label>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -372,7 +372,7 @@ export default function ClozeRecallGame({
 
           <button
             onClick={startNewRound}
-            className="w-full py-4 rounded-2xl btn-terracotta font-bold text-base shadow-md transition flex items-center justify-center gap-2 cursor-pointer"
+            className="w-full py-4 rounded-2xl bg-[#8C5E3C] hover:bg-[#724C30] text-white font-bold text-base shadow-md transition flex items-center justify-center gap-2 cursor-pointer"
           >
             <Play className="w-5 h-5 fill-white" />
             <span>Boşluk Doldurma Egzersizini Başlat</span>
@@ -622,7 +622,7 @@ export default function ClozeRecallGame({
           <div className="flex items-center gap-3">
             <button
               onClick={startNewRound}
-              className="flex items-center gap-2 px-6 py-3 rounded-2xl btn-terracotta font-bold transition shadow-md cursor-pointer"
+              className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-[#8C5E3C] hover:bg-[#724C30] text-white font-bold transition shadow-md cursor-pointer"
             >
               <Sparkles className="w-4 h-4 fill-white" />
               <span>Sıradaki Yeni Cümle (Enter ↵)</span>

@@ -292,7 +292,7 @@ export default function SpeedTrioGame({
   // Title Rank Determination
   const getRank = (finalScore) => {
     if (finalScore >= 1500) return { title: 'Kütüphane Üstadı', badge: '👑', color: 'text-amber-500' };
-    if (finalScore >= 1000) return { title: 'Baş Sahhaf', badge: '📜', color: 'text-[#B44A22] dark:text-[#E07048]' };
+    if (finalScore >= 1000) return { title: 'Baş Sahhaf', badge: '📜', color: 'text-indigo-700 dark:text-indigo-400' };
     if (finalScore >= 500) return { title: 'Kitap Muhafızı', badge: '🛡️', color: 'text-emerald-600 dark:text-emerald-400' };
     return { title: 'Edebiyat Çırağı', badge: '🌱', color: 'text-stone-600 dark:text-stone-400' };
   };
@@ -331,7 +331,7 @@ export default function SpeedTrioGame({
               <div className={`flex items-center gap-1.5 px-3 py-1 rounded-xl font-bold text-xs sm:text-sm shadow-xs ${
                 timeLeft <= 10 
                   ? 'bg-rose-100 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 border border-rose-300 animate-pulse'
-                  : 'bg-[#C85A32]/10 dark:bg-[#E07048]/20 text-[#B44A22] dark:text-[#E07048] border border-[#C85A32]/40 dark:border-[#E07048]/40'
+                  : 'bg-indigo-600/10 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-600/30 dark:border-indigo-500/40'
               }`}>
                 <Timer className="w-4 h-4" />
                 <span>{timeLeft}s</span>
@@ -340,7 +340,7 @@ export default function SpeedTrioGame({
           )}
 
           <div className="flex items-center gap-1 px-2.5 sm:px-3.5 py-1 bg-[#FAF6EE] dark:bg-[#24201C] border border-[#D6CEBE] dark:border-[#38322B] rounded-xl text-[#1C1917] dark:text-[#F5EFE4] font-bold text-xs sm:text-sm whitespace-nowrap shrink-0 shadow-xs">
-            <Trophy className="w-3.5 h-3.5 text-[#B44A22] dark:text-[#E07048] shrink-0" />
+            <Trophy className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400 shrink-0" />
             <span>Skor: {score}</span>
           </div>
         </div>
@@ -348,7 +348,7 @@ export default function SpeedTrioGame({
 
       {/* Mode Badge & Title */}
       <div className="text-center mb-6">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-500/10 dark:bg-amber-500/15 border border-amber-500/30 dark:border-amber-500/40 text-amber-800 dark:text-amber-300 text-xs font-bold uppercase tracking-wider mb-2">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-indigo-600/10 dark:bg-indigo-500/20 border border-indigo-600/30 dark:border-indigo-500/40 text-indigo-700 dark:text-indigo-300 text-xs font-bold uppercase tracking-wider mb-2">
           <Zap className="w-3.5 h-3.5 fill-current" />
           <span>Edebi Trio Sprint</span>
         </div>
@@ -364,7 +364,7 @@ export default function SpeedTrioGame({
         <div className="w-full max-w-2xl space-y-6 animate-in fade-in duration-200">
           {/* Section 1: Duration Selector */}
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-[#B44A22] dark:text-[#E07048] mb-2.5">
+            <label className="block text-xs font-bold uppercase tracking-wider text-indigo-700 dark:text-indigo-400 mb-2.5">
               1. Sprint Süresi
             </label>
             <div className="grid grid-cols-3 gap-3">
@@ -378,7 +378,7 @@ export default function SpeedTrioGame({
                   onClick={() => setSelectedDuration(m.sec)}
                   className={`p-3.5 rounded-2xl border text-left transition cursor-pointer ${
                     selectedDuration === m.sec
-                      ? 'bg-amber-500/15 border-amber-500 text-[#1C1917] dark:text-[#F5EFE4] shadow-xs ring-1 ring-amber-500'
+                      ? 'bg-indigo-600/15 dark:bg-indigo-500/20 border-indigo-600 dark:border-indigo-500 text-indigo-900 dark:text-indigo-200 shadow-xs ring-1 ring-indigo-500'
                       : 'bg-white dark:bg-[#1C1917] border-[#D6CEBE] dark:border-[#38322B] text-[#57534E] dark:text-[#A8A196] hover:text-[#1C1917] dark:hover:text-[#F5EFE4]'
                   }`}
                 >
@@ -392,7 +392,7 @@ export default function SpeedTrioGame({
 
           {/* Section 2: Category Selector */}
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-[#B44A22] dark:text-[#E07048] mb-2.5">
+            <label className="block text-xs font-bold uppercase tracking-wider text-indigo-700 dark:text-indigo-400 mb-2.5">
               2. Edebi Kategori Tercihi
             </label>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2.5 max-h-56 sm:max-h-64 overflow-y-auto p-2 border border-[#D6CEBE] dark:border-[#38322B] rounded-2xl bg-white dark:bg-[#1C1917] shadow-xs">
@@ -402,7 +402,7 @@ export default function SpeedTrioGame({
                   onClick={() => setSelectedGenre(g.id)}
                   className={`p-3 rounded-xl border text-left transition flex flex-col justify-between cursor-pointer ${
                     selectedGenre === g.id
-                      ? 'bg-amber-500/15 border-amber-500 text-amber-900 dark:text-amber-300 font-bold shadow-xs'
+                      ? 'bg-indigo-600/15 dark:bg-indigo-500/20 border-indigo-600 dark:border-indigo-500 text-indigo-900 dark:text-indigo-300 font-bold shadow-xs'
                       : 'bg-[#FAF6EE] dark:bg-[#24201C] border-[#D6CEBE] dark:border-[#38322B] text-[#44403C] dark:text-[#EDE8DF] hover:text-[#1C1917] dark:hover:text-[#F5EFE4]'
                   }`}
                 >
@@ -416,7 +416,7 @@ export default function SpeedTrioGame({
           {/* Start Button */}
           <button
             onClick={startGame}
-            className="w-full py-4 rounded-2xl btn-terracotta font-bold text-base shadow-lg transition flex items-center justify-center gap-2 cursor-pointer"
+            className="w-full py-4 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-base shadow-lg transition flex items-center justify-center gap-2 cursor-pointer"
           >
             <Play className="w-5 h-5 fill-white" />
             <span>{selectedDuration} Saniyelik Sprint'i Başlat!</span>
@@ -430,7 +430,7 @@ export default function SpeedTrioGame({
           {/* Quick Preferences info pill */}
           <div className="w-full flex items-center justify-between gap-2 mb-3 p-2 rounded-2xl bg-white dark:bg-[#1C1917] border border-[#D6CEBE] dark:border-[#38322B] shadow-xs text-xs">
             <span className="text-[#57534E] dark:text-[#A8A196] font-medium">
-              Kategori: <strong className="text-[#B44A22] dark:text-[#E07048]">{BOOK_GENRES.find(g => g.id === selectedGenre)?.name || 'Tüm Türler'}</strong>
+              Kategori: <strong className="text-indigo-700 dark:text-indigo-300">{BOOK_GENRES.find(g => g.id === selectedGenre)?.name || 'Tüm Türler'}</strong>
             </span>
             <button
               onClick={() => setPhase('intro')}
@@ -443,7 +443,7 @@ export default function SpeedTrioGame({
 
           {/* Quote Card */}
           <div className="w-full p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#1C1917] border-2 border-[#D6CEBE] dark:border-[#38322B] shadow-md mb-6 relative">
-            <div className="text-xs font-bold uppercase tracking-wider text-[#B44A22] dark:text-[#E07048] mb-3 text-center">
+            <div className="text-xs font-bold uppercase tracking-wider text-indigo-700 dark:text-indigo-400 mb-3 text-center">
               Edebi Pasaj
             </div>
 
@@ -526,7 +526,7 @@ export default function SpeedTrioGame({
             <div className="grid grid-cols-3 gap-3 pt-4 border-t border-[#D6CEBE] dark:border-[#38322B]">
               <div>
                 <div className="text-xs text-[#57534E] dark:text-[#A8A196] font-medium">Toplam Skor</div>
-                <div className="text-2xl font-serif font-extrabold text-[#B44A22] dark:text-[#E07048]">{score}</div>
+                <div className="text-2xl font-serif font-extrabold text-indigo-700 dark:text-indigo-400">{score}</div>
               </div>
               <div>
                 <div className="text-xs text-[#57534E] dark:text-[#A8A196] font-medium">Doğru / Yanlış</div>
@@ -571,7 +571,7 @@ export default function SpeedTrioGame({
                             onSelectBook(targetBook.id);
                           }
                         }}
-                        className="text-[11px] not-italic font-bold text-[#B44A22] dark:text-[#E07048] hover:underline cursor-pointer"
+                        className="text-[11px] not-italic font-bold text-indigo-700 dark:text-indigo-400 hover:underline cursor-pointer"
                         title="Bu eseri kütüphanede incele"
                       >
                         {item.book}

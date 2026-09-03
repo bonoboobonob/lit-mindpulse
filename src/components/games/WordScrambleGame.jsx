@@ -31,10 +31,10 @@ export default function WordScrambleGame({
 }) {
   const [selectedGenre, setSelectedGenre] = useState(initialGenre || 'all');
   const [selectedBookId, setSelectedBookId] = useState(initialBookId || null);
-  const [selectedDifficulty, setSelectedDifficulty] = useState(initialDifficulty || 'all');
+  const [selectedDifficulty, setSelectedDifficulty] = useState(initialDifficulty && initialDifficulty !== 'all' ? initialDifficulty : 'medium');
   const [currentQuote, setCurrentQuote] = useState(initialQuote);
 
-  const [phase, setPhase] = useState('study'); // Always start in study mode
+  const [phase, setPhase] = useState(initialQuote ? 'study' : 'selection');
   const [timeLeft, setTimeLeft] = useState(15);
   const [totalStudyTime, setTotalStudyTime] = useState(15);
 
@@ -94,11 +94,11 @@ export default function WordScrambleGame({
   useEffect(() => {
     setSelectedGenre(initialGenre || 'all');
     setSelectedBookId(initialBookId || null);
-    setSelectedDifficulty(initialDifficulty || 'all');
+    setSelectedDifficulty(initialDifficulty && initialDifficulty !== 'all' ? initialDifficulty : 'medium');
     if (initialQuote) {
       startRound(initialQuote);
     } else {
-      startNewGame();
+      setPhase('selection');
     }
   }, [initialQuote, initialBookId, initialGenre, initialDifficulty]);
 
@@ -248,7 +248,7 @@ export default function WordScrambleGame({
       {phase === 'selection' && (
         <div className="w-full max-w-2xl space-y-6 animate-in fade-in duration-200">
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-[#B44A22] dark:text-[#E07048] mb-2.5">
+            <label className="block text-xs font-bold uppercase tracking-wider text-[#476C46] dark:text-[#62B889] mb-2.5">
               1. Edebi Kategori
             </label>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2.5 max-h-56 sm:max-h-72 overflow-y-auto p-2 border border-[#D6CEBE] dark:border-[#38322B] rounded-2xl bg-white dark:bg-[#1C1917] shadow-xs">
@@ -269,7 +269,7 @@ export default function WordScrambleGame({
           </div>
 
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-[#B44A22] dark:text-[#E07048] mb-2.5">
+            <label className="block text-xs font-bold uppercase tracking-wider text-[#476C46] dark:text-[#62B889] mb-2.5">
               2. Zorluk
             </label>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -292,7 +292,7 @@ export default function WordScrambleGame({
 
           <button
             onClick={startNewGame}
-            className="w-full py-4 rounded-2xl btn-terracotta font-bold text-base shadow-lg transition flex items-center justify-center gap-2 cursor-pointer"
+            className="w-full py-4 rounded-2xl bg-[#588157] hover:bg-[#476C46] text-white font-bold text-base shadow-lg transition flex items-center justify-center gap-2 cursor-pointer"
           >
             <Play className="w-5 h-5 fill-white" />
             <span>Kelime Dizme Egzersizini Başlat</span>
@@ -305,7 +305,7 @@ export default function WordScrambleGame({
         <div className="w-full max-w-2xl flex flex-col items-center animate-in fade-in duration-200">
           <div className="w-full bg-[#E5DFD3] dark:bg-[#282420] h-2 rounded-full mb-6 overflow-hidden border border-[#D8CEBD] dark:border-[#38322B]">
             <div
-              className="bg-gradient-to-r from-[#588157] to-[#C85A32] h-full transition-all duration-1000 ease-linear"
+              className="bg-gradient-to-r from-[#588157] to-[#84A98C] h-full transition-all duration-1000 ease-linear"
               style={{ width: `${(timeLeft / totalStudyTime) * 100}%` }}
             />
           </div>
@@ -537,7 +537,7 @@ export default function WordScrambleGame({
                               {matchedBook.passages?.length || 0} Pasaj
                             </span>
                           </div>
-                          <h4 className="font-serif font-bold text-sm text-[#1C1917] dark:text-[#F5EFE4] group-hover:text-[#B44A22] dark:group-hover:text-[#E07048] transition truncate">
+                          <h4 className="font-serif font-bold text-sm text-[#1C1917] dark:text-[#F5EFE4] group-hover:text-[#476C46] dark:group-hover:text-[#62B889] transition truncate">
                             {matchedBook.title}
                           </h4>
                           <p className="text-[11px] text-[#57534E] dark:text-[#A8A196] truncate">
@@ -546,7 +546,7 @@ export default function WordScrambleGame({
                         </div>
                       </div>
 
-                      <div className="flex items-center gap-1 text-xs font-bold text-[#B44A22] dark:text-[#E07048] group-hover:translate-x-0.5 transition shrink-0 pl-2">
+                      <div className="flex items-center gap-1 text-xs font-bold text-[#476C46] dark:text-[#62B889] group-hover:translate-x-0.5 transition shrink-0 pl-2">
                         <span className="hidden sm:inline">Esere Git</span>
                         <ArrowRight className="w-4 h-4" />
                       </div>
@@ -560,7 +560,7 @@ export default function WordScrambleGame({
           <div className="flex flex-wrap items-center justify-center gap-3">
             <button
               onClick={startNewGame}
-              className="flex items-center gap-2 px-6 py-3 rounded-2xl btn-terracotta font-bold transition shadow-md cursor-pointer"
+              className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-[#588157] hover:bg-[#476C46] text-white font-bold transition shadow-md cursor-pointer"
             >
               <Sparkles className="w-4 h-4 fill-white" />
               <span>Sıradaki Yeni Cümle (Enter ↵)</span>

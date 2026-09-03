@@ -5,7 +5,6 @@ const LITERARY_SUBSTITUTES = {
   'vakit': 'zaman',
   'insan': 'birey',
   'insanlar': 'bireyler',
-  'insanlar': 'toplum',
   'yalnızlık': 'ıssızlık',
   'yalnız': 'kimsesiz',
   'karanlık': 'zifir',
