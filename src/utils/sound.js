@@ -1,4 +1,4 @@
-﻿import { Haptics, ImpactStyle, NotificationType } from '@capacitor/haptics';
+import { Haptics, ImpactStyle, NotificationType } from '@capacitor/haptics';
 
 // Web Audio API Sound & Native Haptics Manager for Memory Game
 class SoundManager {
@@ -91,6 +91,15 @@ class SoundManager {
       });
     }
     this.triggerHaptic('success');
+  }
+
+  playSuccess() {
+    this.playMatchSuccess();
+  }
+
+  playType() {
+    this.playTone(600 + Math.random() * 200, 'triangle', 0.04, 0.04);
+    this.triggerHaptic('light');
   }
 
   playError() {

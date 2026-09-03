@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Trophy, Flame, Feather, Award, Target, BookOpen, Puzzle, Sparkles } from 'lucide-react';
+import { X, Trophy, Flame, Feather, Award, Target, BookOpen, Puzzle, Sparkles, Search, Zap } from 'lucide-react';
 
 const iconMap = {
   Award,
@@ -8,6 +8,8 @@ const iconMap = {
   BookOpen,
   Sparkles,
   Puzzle,
+  Search,
+  Zap,
 };
 
 export default function StatsModal({ isOpen, onClose, stats }) {
@@ -88,6 +90,30 @@ export default function StatsModal({ isOpen, onClose, stats }) {
                 <span className="text-sm font-serif text-[#1C1917] dark:text-[#F5EFE4] font-bold">Dokunmatik Kelime Dizme (Scramble)</span>
               </div>
               <span className="font-bold text-[#476C46] dark:text-[#62B889]">{stats.highScores?.wordScramble || 0} Puan</span>
+            </div>
+
+            <div className="flex items-center justify-between p-3.5 rounded-2xl bg-[#FAF6EE] dark:bg-[#24201C] border border-[#D6CEBE] dark:border-[#38322B]">
+              <div className="flex items-center gap-2.5">
+                <span className="text-base">🕵️</span>
+                <span className="text-sm font-serif text-[#1C1917] dark:text-[#F5EFE4] font-bold">Edebi Metin Dedektifi (Intruder)</span>
+              </div>
+              <span className="font-bold text-amber-600 dark:text-amber-400">{stats.highScores?.textDetective || 0} Puan</span>
+            </div>
+
+            <div className="flex items-center justify-between p-3.5 rounded-2xl bg-[#FAF6EE] dark:bg-[#24201C] border border-[#D6CEBE] dark:border-[#38322B]">
+              <div className="flex items-center gap-2.5">
+                <span className="text-base">🔤</span>
+                <span className="text-sm font-serif text-[#1C1917] dark:text-[#F5EFE4] font-bold">İlk Harf Çapası (Scaffolding)</span>
+              </div>
+              <span className="font-bold text-emerald-600 dark:text-emerald-400">{stats.highScores?.firstLetter || 0} Puan</span>
+            </div>
+
+            <div className="flex items-center justify-between p-3.5 rounded-2xl bg-[#FAF6EE] dark:bg-[#24201C] border border-[#D6CEBE] dark:border-[#38322B]">
+              <div className="flex items-center gap-2.5">
+                <span className="text-base">⚡</span>
+                <span className="text-sm font-serif text-[#1C1917] dark:text-[#F5EFE4] font-bold">60s Edebi Trio Sprint</span>
+              </div>
+              <span className="font-bold text-indigo-600 dark:text-indigo-400">{stats.highScores?.speedTrio || 0} Puan</span>
             </div>
           </div>
         </div>

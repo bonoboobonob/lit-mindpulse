@@ -10,7 +10,7 @@ export default function BottomNav({
   onOpenStats,
 }) {
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-40 sm:hidden bg-[#FAF7F2]/95 dark:bg-[#161412]/95 backdrop-blur-md border-t border-[#D6CEBE] dark:border-[#38322B] px-4 py-2 flex items-center justify-around shadow-md transition-colors duration-200">
+    <nav className="fixed bottom-0 left-0 right-0 z-40 sm:hidden bg-[#FAF7F2]/95 dark:bg-[#161412]/95 backdrop-blur-md border-t border-[#D6CEBE] dark:border-[#38322B] px-4 py-2 pb-[calc(0.5rem+env(safe-area-inset-bottom,0px))] flex items-center justify-around shadow-md transition-colors duration-200">
       {/* Home / Library */}
       <button
         onClick={() => {
@@ -32,7 +32,7 @@ export default function BottomNav({
           onOpenPractice();
         }}
         className={`flex flex-col items-center gap-1 p-1 transition cursor-pointer ${
-          currentScreen === 'fullTyping' || currentScreen === 'clozeRecall' || currentScreen === 'wordScramble'
+          ['fullTyping', 'clozeRecall', 'wordScramble', 'textDetective', 'firstLetter', 'speedTrio'].includes(currentScreen)
             ? 'text-[#B44A22] dark:text-[#E07048] font-bold'
             : 'text-[#57534E] dark:text-[#A8A196] hover:text-[#B44A22] dark:hover:text-[#E07048]'
         }`}

@@ -151,9 +151,9 @@ export default function FullTypingGame({
 
   // Normalize string for comparison
   const normalize = (str) => {
-    return str
+    return (str || '')
       .toLocaleLowerCase('tr')
-      .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?"'’]/g, "")
+      .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?"'’«»“”‘’—–…]/g, "")
       .trim();
   };
 
@@ -227,7 +227,7 @@ export default function FullTypingGame({
   useEffect(() => {
     const handleGlobalKeyDown = (e) => {
       if (phase === 'study') {
-        if (e.key === 'Enter' || e.key === ' ') {
+        if (e.key === 'Enter') {
           e.preventDefault();
           startTypingPhase();
         }
@@ -376,12 +376,24 @@ export default function FullTypingGame({
 
           <div className="w-full relative p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#1C1917] border border-[#D6CEBE] dark:border-[#38322B] shadow-md mb-8">
             <div className="flex items-center justify-between text-xs text-[#57534E] dark:text-[#A8A196] mb-4 pb-3 border-b border-[#D6CEBE] dark:border-[#38322B]">
-              <div className="flex items-center gap-2">
+              <button
+                onClick={() => {
+                  const targetBookId = currentQuote.bookId || BOOKS_DATABASE.find(b => 
+                    b.title.toLowerCase() === currentQuote.book?.toLowerCase() ||
+                    (currentQuote.book && b.title.toLowerCase().includes(currentQuote.book.toLowerCase()))
+                  )?.id;
+                  if (onSelectBook && targetBookId) {
+                    onSelectBook(targetBookId, { quote: currentQuote });
+                  }
+                }}
+                className="flex items-center gap-2 text-left hover:opacity-80 transition cursor-pointer"
+                title="Kitabı İncele (Egzersiz duraklatılır)"
+              >
                 <BookOpen className="w-4 h-4 text-[#B44A22] dark:text-[#E07048]" />
-                <span className="font-bold text-[#B44A22] dark:text-[#E07048] font-serif text-sm">{currentQuote.book}</span>
+                <span className="font-bold text-[#B44A22] dark:text-[#E07048] font-serif text-sm underline decoration-dotted underline-offset-2">{currentQuote.book}</span>
                 <span>—</span>
                 <span className="text-[#1C1917] dark:text-[#F5EFE4] font-semibold">{currentQuote.author}</span>
-              </div>
+              </button>
               <span className="px-2.5 py-0.5 rounded-full bg-[#FAF6EE] dark:bg-[#282420] text-[#B44A22] dark:text-[#E07048] border border-[#D6CEBE] dark:border-[#38322B] text-[11px] font-bold">
                 {currentQuote.quote.trim().split(/\s+/).length} Kelime
               </span>
@@ -411,12 +423,24 @@ export default function FullTypingGame({
       {phase === 'typing' && currentQuote && (
         <div className="w-full max-w-2xl flex flex-col items-center animate-in fade-in duration-200">
           <div className="w-full flex items-center justify-between p-3.5 rounded-2xl bg-white dark:bg-[#1C1917] border border-[#D6CEBE] dark:border-[#38322B] mb-4 text-xs shadow-xs">
-            <div className="flex items-center gap-2 truncate">
+            <button
+              onClick={() => {
+                const targetBookId = currentQuote.bookId || BOOKS_DATABASE.find(b => 
+                  b.title.toLowerCase() === currentQuote.book?.toLowerCase() ||
+                  (currentQuote.book && b.title.toLowerCase().includes(currentQuote.book.toLowerCase()))
+                )?.id;
+                if (onSelectBook && targetBookId) {
+                  onSelectBook(targetBookId, { quote: currentQuote });
+                }
+              }}
+              className="flex items-center gap-2 truncate text-left hover:opacity-80 transition cursor-pointer"
+              title="Kitabı İncele (Egzersiz duraklatılır)"
+            >
               <BookOpen className="w-4 h-4 text-[#B44A22] dark:text-[#E07048] shrink-0" />
-              <strong className="text-[#B44A22] dark:text-[#E07048] font-serif truncate">{currentQuote.book}</strong>
+              <strong className="text-[#B44A22] dark:text-[#E07048] font-serif truncate underline decoration-dotted underline-offset-2">{currentQuote.book}</strong>
               <span className="text-[#78716C] dark:text-[#A8A196]">•</span>
               <span className="text-[#1C1917] dark:text-[#F5EFE4] font-semibold truncate">{currentQuote.author}</span>
-            </div>
+            </button>
 
             <span className="text-[#57534E] dark:text-[#A8A196] font-bold shrink-0">
               {currentQuote.quote.trim().split(/\s+/).length} Kelime

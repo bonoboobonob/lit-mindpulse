@@ -48,7 +48,7 @@ export default function WordScrambleGame({
 
   const timerRef = useRef(null);
 
-  const cleanWord = (w) => (w ? w.toLocaleLowerCase('tr').replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?"'’]/g, "").trim() : '');
+  const cleanWord = (w) => (w ? w.toLocaleLowerCase('tr').replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?"'’«»“”‘’—–…]/g, "").trim() : '');
 
   const startRound = (quote) => {
     const rawTokens = quote.quote.trim().split(/\s+/);
@@ -125,7 +125,7 @@ export default function WordScrambleGame({
     let matches = 0;
     const diff = userSequence.map((item, idx) => {
       const origWord = originalTokens[idx] || '';
-      const isExact = item.word === origWord;
+      const isExact = item.word === origWord || (cleanWord(item.word) === cleanWord(origWord) && cleanWord(origWord).length > 0);
       if (isExact) matches++;
       return {
         placedWord: item.word,
@@ -312,12 +312,24 @@ export default function WordScrambleGame({
 
           <div className="w-full p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#1C1917] border border-[#D6CEBE] dark:border-[#38322B] shadow-md mb-8">
             <div className="flex items-center justify-between text-xs text-[#57534E] dark:text-[#A8A196] mb-4 pb-3 border-b border-[#D6CEBE] dark:border-[#38322B]">
-              <div className="flex items-center gap-2">
+              <button
+                onClick={() => {
+                  const targetBookId = currentQuote.bookId || BOOKS_DATABASE.find(b => 
+                    b.title.toLowerCase() === currentQuote.book?.toLowerCase() ||
+                    (currentQuote.book && b.title.toLowerCase().includes(currentQuote.book.toLowerCase()))
+                  )?.id;
+                  if (onSelectBook && targetBookId) {
+                    onSelectBook(targetBookId, { quote: currentQuote });
+                  }
+                }}
+                className="flex items-center gap-2 text-left hover:opacity-80 transition cursor-pointer"
+                title="Kitabı İncele (Egzersiz duraklatılır)"
+              >
                 <BookOpen className="w-4 h-4 text-[#476C46] dark:text-[#62B889]" />
-                <span className="font-bold text-[#476C46] dark:text-[#62B889] font-serif text-sm">{currentQuote.book}</span>
+                <span className="font-bold text-[#476C46] dark:text-[#62B889] font-serif text-sm underline decoration-dotted underline-offset-2">{currentQuote.book}</span>
                 <span>—</span>
                 <span className="text-[#1C1917] dark:text-[#F5EFE4] font-semibold">{currentQuote.author}</span>
-              </div>
+              </button>
             </div>
 
             <p className="text-lg sm:text-2xl font-serif font-medium text-[#1C1917] dark:text-[#F5EFE4] leading-relaxed text-center italic my-6 px-1 quote-text font-quote">
@@ -348,7 +360,21 @@ export default function WordScrambleGame({
       {phase === 'scramble' && currentQuote && (
         <div className="w-full max-w-2xl flex flex-col items-center animate-in fade-in duration-200">
           <div className="text-xs text-[#57534E] dark:text-[#A8A196] mb-3 flex items-center justify-between w-full font-semibold">
-            <span className="font-serif text-[#B44A22] dark:text-[#E07048] font-bold">{currentQuote.book} — {currentQuote.author}</span>
+            <button
+              onClick={() => {
+                const targetBookId = currentQuote.bookId || BOOKS_DATABASE.find(b => 
+                  b.title.toLowerCase() === currentQuote.book?.toLowerCase() ||
+                  (currentQuote.book && b.title.toLowerCase().includes(currentQuote.book.toLowerCase()))
+                )?.id;
+                if (onSelectBook && targetBookId) {
+                  onSelectBook(targetBookId, { quote: currentQuote });
+                }
+              }}
+              className="font-serif text-[#B44A22] dark:text-[#E07048] font-bold underline decoration-dotted underline-offset-2 hover:opacity-80 transition cursor-pointer text-left"
+              title="Kitabı İncele (Egzersiz duraklatılır)"
+            >
+              {currentQuote.book} — {currentQuote.author}
+            </button>
             <span>{userSequence.length} / {originalTokens.length} kelime</span>
           </div>
 

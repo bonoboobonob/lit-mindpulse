@@ -15,7 +15,10 @@ import {
   Share2,
   Sliders,
   Home,
-  RotateCcw
+  RotateCcw,
+  Search,
+  Type,
+  Zap
 } from 'lucide-react';
 import { BOOKS_DATABASE } from '../data/booksDatabase';
 import { BOOK_GENRES, DIFFICULTY_LEVELS } from '../data/bookQuotes';
@@ -27,6 +30,7 @@ export default function BookDetailView({
   pausedGameSession = null,
   onResumeExercise,
   onNavigateHome,
+  onSelectGenre,
   onBack, 
   onStartBookPractice, 
   onStartSpecificQuote 
@@ -50,7 +54,13 @@ export default function BookDetailView({
     ? 'Tam Yazma' 
     : pausedGameSession?.mode === 'clozeRecall' 
     ? 'Boşluk Doldurma' 
-    : 'Kelime Dizme';
+    : pausedGameSession?.mode === 'wordScramble'
+    ? 'Kelime Dizme'
+    : pausedGameSession?.mode === 'textDetective'
+    ? 'Metin Dedektifi'
+    : pausedGameSession?.mode === 'firstLetter'
+    ? 'İlk Harf'
+    : 'Trio Sprint';
 
   return (
     <div className="w-full max-w-5xl mx-auto px-2 sm:px-4 py-2 animate-in fade-in duration-200">
@@ -96,9 +106,16 @@ export default function BookDetailView({
         </div>
 
         <div className="flex items-center gap-2">
-          <span className="px-3 py-1 rounded-full bg-[#C85A32]/10 dark:bg-[#E07048]/15 border border-[#C85A32]/30 dark:border-[#E07048]/40 text-[#B44A22] dark:text-[#E07048] text-xs font-bold">
+          <button
+            onClick={() => {
+              sounds.playClick();
+              if (onSelectGenre) onSelectGenre(genreObj.id);
+            }}
+            className="px-3 py-1 rounded-full bg-[#C85A32]/10 dark:bg-[#E07048]/15 hover:bg-[#C85A32]/20 dark:hover:bg-[#E07048]/25 border border-[#C85A32]/30 dark:border-[#E07048]/40 text-[#B44A22] dark:text-[#E07048] text-xs font-bold transition cursor-pointer"
+            title={`${genreObj.name} kategorisine git`}
+          >
             {genreObj.name}
-          </span>
+          </button>
           <span className="text-xs text-[#57534E] dark:text-[#A8A196] font-medium hidden sm:inline">
             Yayın: {book.year}
           </span>
@@ -241,16 +258,16 @@ export default function BookDetailView({
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-3">
             <button
               onClick={() => {
                 sounds.playClick();
                 onStartBookPractice(book.id, 'fullTyping', practiceDifficulty);
               }}
-              className="flex items-center justify-center gap-2 p-3.5 rounded-2xl bg-[#FAF6EE] dark:bg-[#24201C] hover:bg-[#F2ECE1] dark:hover:bg-[#2E2822] border border-[#D6CEBE] dark:border-[#38322B] text-[#1C1917] dark:text-[#F5EFE4] hover:text-[#B44A22] dark:hover:text-[#E07048] hover:border-[#C85A32] dark:hover:border-[#E07048] font-bold text-sm transition cursor-pointer shadow-xs"
+              className="flex items-center justify-center gap-2 p-3 sm:p-3.5 rounded-2xl bg-[#FAF6EE] dark:bg-[#24201C] hover:bg-[#F2ECE1] dark:hover:bg-[#2E2822] border border-[#D6CEBE] dark:border-[#38322B] text-[#1C1917] dark:text-[#F5EFE4] hover:text-[#B44A22] dark:hover:text-[#E07048] hover:border-[#C85A32] dark:hover:border-[#E07048] font-bold text-xs sm:text-sm transition cursor-pointer shadow-xs"
             >
               <Feather className="w-4 h-4 text-[#B44A22] dark:text-[#E07048]" />
-              <span>✍️ Tam Yazma ({practiceDifficulty === 'all' ? 'Tümü' : practiceDifficulty})</span>
+              <span>✍️ Tam Yazma</span>
             </button>
 
             <button
@@ -258,10 +275,10 @@ export default function BookDetailView({
                 sounds.playClick();
                 onStartBookPractice(book.id, 'clozeRecall', practiceDifficulty);
               }}
-              className="flex items-center justify-center gap-2 p-3.5 rounded-2xl bg-[#FAF6EE] dark:bg-[#24201C] hover:bg-[#F2ECE1] dark:hover:bg-[#2E2822] border border-[#D6CEBE] dark:border-[#38322B] text-[#1C1917] dark:text-[#F5EFE4] hover:text-[#8C5E3C] dark:hover:text-[#D4AF37] hover:border-[#8C5E3C] dark:hover:border-[#D4AF37] font-bold text-sm transition cursor-pointer shadow-xs"
+              className="flex items-center justify-center gap-2 p-3 sm:p-3.5 rounded-2xl bg-[#FAF6EE] dark:bg-[#24201C] hover:bg-[#F2ECE1] dark:hover:bg-[#2E2822] border border-[#D6CEBE] dark:border-[#38322B] text-[#1C1917] dark:text-[#F5EFE4] hover:text-[#8C5E3C] dark:hover:text-[#D4AF37] hover:border-[#8C5E3C] dark:hover:border-[#D4AF37] font-bold text-xs sm:text-sm transition cursor-pointer shadow-xs"
             >
               <Puzzle className="w-4 h-4 text-[#8C5E3C] dark:text-[#D4AF37]" />
-              <span>🧩 Boşluk Doldurma ({practiceDifficulty === 'all' ? 'Tümü' : practiceDifficulty})</span>
+              <span>🧩 Boşluk Doldur</span>
             </button>
 
             <button
@@ -269,10 +286,43 @@ export default function BookDetailView({
                 sounds.playClick();
                 onStartBookPractice(book.id, 'wordScramble', practiceDifficulty);
               }}
-              className="flex items-center justify-center gap-2 p-3.5 rounded-2xl bg-[#FAF6EE] dark:bg-[#24201C] hover:bg-[#F2ECE1] dark:hover:bg-[#2E2822] border border-[#D6CEBE] dark:border-[#38322B] text-[#1C1917] dark:text-[#F5EFE4] hover:text-[#476C46] dark:hover:text-[#62B889] hover:border-[#588157] dark:hover:border-[#62B889] font-bold text-sm transition cursor-pointer shadow-xs"
+              className="flex items-center justify-center gap-2 p-3 sm:p-3.5 rounded-2xl bg-[#FAF6EE] dark:bg-[#24201C] hover:bg-[#F2ECE1] dark:hover:bg-[#2E2822] border border-[#D6CEBE] dark:border-[#38322B] text-[#1C1917] dark:text-[#F5EFE4] hover:text-[#476C46] dark:hover:text-[#62B889] hover:border-[#588157] dark:hover:border-[#62B889] font-bold text-xs sm:text-sm transition cursor-pointer shadow-xs"
             >
               <Layers className="w-4 h-4 text-[#476C46] dark:text-[#62B889]" />
-              <span>📱 Kelime Dizme ({practiceDifficulty === 'all' ? 'Tümü' : practiceDifficulty})</span>
+              <span>📱 Kelime Dizme</span>
+            </button>
+
+            <button
+              onClick={() => {
+                sounds.playClick();
+                onStartBookPractice(book.id, 'textDetective', practiceDifficulty);
+              }}
+              className="flex items-center justify-center gap-2 p-3 sm:p-3.5 rounded-2xl bg-[#FAF6EE] dark:bg-[#24201C] hover:bg-[#F2ECE1] dark:hover:bg-[#2E2822] border border-[#D6CEBE] dark:border-[#38322B] text-[#1C1917] dark:text-[#F5EFE4] hover:text-amber-600 dark:hover:text-amber-400 hover:border-amber-500 font-bold text-xs sm:text-sm transition cursor-pointer shadow-xs"
+            >
+              <Search className="w-4 h-4 text-amber-600 dark:text-amber-400" />
+              <span>🕵️ Metin Dedektifi</span>
+            </button>
+
+            <button
+              onClick={() => {
+                sounds.playClick();
+                onStartBookPractice(book.id, 'firstLetter', practiceDifficulty);
+              }}
+              className="flex items-center justify-center gap-2 p-3 sm:p-3.5 rounded-2xl bg-[#FAF6EE] dark:bg-[#24201C] hover:bg-[#F2ECE1] dark:hover:bg-[#2E2822] border border-[#D6CEBE] dark:border-[#38322B] text-[#1C1917] dark:text-[#F5EFE4] hover:text-emerald-600 dark:hover:text-emerald-400 hover:border-emerald-500 font-bold text-xs sm:text-sm transition cursor-pointer shadow-xs"
+            >
+              <Type className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+              <span>🔤 İlk Harf Çapası</span>
+            </button>
+
+            <button
+              onClick={() => {
+                sounds.playClick();
+                onStartBookPractice(book.id, 'speedTrio', practiceDifficulty);
+              }}
+              className="flex items-center justify-center gap-2 p-3 sm:p-3.5 rounded-2xl bg-[#FAF6EE] dark:bg-[#24201C] hover:bg-[#F2ECE1] dark:hover:bg-[#2E2822] border border-[#D6CEBE] dark:border-[#38322B] text-[#1C1917] dark:text-[#F5EFE4] hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-500 font-bold text-xs sm:text-sm transition cursor-pointer shadow-xs"
+            >
+              <Zap className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
+              <span>⚡ Trio Sprint</span>
             </button>
           </div>
         </div>

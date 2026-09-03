@@ -27,8 +27,26 @@ export const saveTheme = (theme) => {
 export const getSavedStats = () => {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return getDefaultStats();
-    return { ...getDefaultStats(), ...JSON.parse(raw) };
+    const defaults = getDefaultStats();
+    if (!raw) return defaults;
+    const parsed = JSON.parse(raw);
+
+    // Merge existing achievements with new ones
+    const achievementMap = new Map((parsed.achievements || []).map(a => [a.id, a]));
+    const mergedAchievements = defaults.achievements.map(defAch => {
+      const existing = achievementMap.get(defAch.id);
+      return existing ? { ...defAch, unlocked: existing.unlocked } : defAch;
+    });
+
+    return {
+      ...defaults,
+      ...parsed,
+      highScores: {
+        ...defaults.highScores,
+        ...(parsed.highScores || {})
+      },
+      achievements: mergedAchievements
+    };
   } catch (e) {
     console.error('Failed to load stats:', e);
     return getDefaultStats();
@@ -61,6 +79,9 @@ export const getDefaultStats = () => ({
     fullTyping: 0,
     clozeRecall: 0,
     wordScramble: 0,
+    textDetective: 0,
+    firstLetter: 0,
+    speedTrio: 0,
   },
   achievements: [
     { id: 'first_quote', title: 'İlk Cümle', desc: 'İlk edebi alıntını başarıyla ezberle', unlocked: false, icon: 'Feather' },
@@ -68,6 +89,9 @@ export const getDefaultStats = () => ({
     { id: 'words_100', title: 'Kelime Ustası', desc: 'Toplamda 100 kelimelik alıntı ezberle', unlocked: false, icon: 'BookOpen' },
     { id: 'perfect_typing', title: 'Hatasız Kalem', desc: 'Tam Yazma modunda %100 doğruluk yakala', unlocked: false, icon: 'Sparkles' },
     { id: 'cloze_master', title: 'Kavram Avcısı', desc: 'Boşluk doldurma modunda tam puan al', unlocked: false, icon: 'Puzzle' },
+    { id: 'detective_master', title: 'Dedektif Gözü', desc: 'Metin Dedektifi modunda tüm sahte kelimeleri kusursuz tespit et', unlocked: false, icon: 'Search' },
+    { id: 'scaffolding_pro', title: 'Tirat Virtüözü', desc: 'İlk Harf Çapası modunda %90+ doğrulukla pasajı tamamla', unlocked: false, icon: 'Award' },
+    { id: 'speed_champ', title: 'Edebi Şimşek', desc: 'Trio Sprint modunda 1000+ puan rekoruna ulaş', unlocked: false, icon: 'Zap' },
   ]
 });
 
@@ -107,6 +131,9 @@ export const saveGameResult = ({ gameId, score, accuracy = 100, wordsCount = 10 
       if (ach.id === 'words_100' && stats.totalWordsMemorized >= 100) ach.unlocked = true;
       if (ach.id === 'perfect_typing' && gameId === 'fullTyping' && accuracy === 100) ach.unlocked = true;
       if (ach.id === 'cloze_master' && gameId === 'clozeRecall' && accuracy === 100) ach.unlocked = true;
+      if (ach.id === 'detective_master' && gameId === 'textDetective' && accuracy === 100) ach.unlocked = true;
+      if (ach.id === 'scaffolding_pro' && gameId === 'firstLetter' && accuracy >= 90) ach.unlocked = true;
+      if (ach.id === 'speed_champ' && gameId === 'speedTrio' && score >= 1000) ach.unlocked = true;
     });
 
     localStorage.setItem(STORAGE_KEY, JSON.stringify(stats));

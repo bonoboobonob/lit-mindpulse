@@ -26,7 +26,9 @@ import {
   Laugh,
   Hourglass,
   Scale,
-  Heart
+  Heart,
+  Type,
+  Zap
 } from 'lucide-react';
 import { 
   OakTreeIllustration, 
@@ -36,6 +38,7 @@ import {
   BookmarkRibbon 
 } from '../assets/illustrations';
 import { BOOK_GENRES, BOOK_QUOTES } from '../data/bookQuotes';
+import { BOOKS_DATABASE } from '../data/booksDatabase';
 import { sounds } from '../utils/sound';
 
 const PRACTICE_MODES = [
@@ -69,6 +72,36 @@ const PRACTICE_MODES = [
     tagColor: 'text-[#476C46]',
     illustration: OpenBookIllustration,
   },
+  {
+    id: 'textDetective',
+    title: 'Edebi Metin Dedektifi',
+    tag: 'Sahte Kelime Avı • Intruder',
+    desc: 'Orijinal metne sızan sahte veya değiştirilmiş sözcükleri tespit edin, metni yazarın hakiki kalemine kavuşturun.',
+    icon: Search,
+    iconBg: 'bg-amber-600/10 text-amber-700 dark:text-amber-300 border-amber-600/30',
+    tagColor: 'text-amber-700 dark:text-amber-300',
+    illustration: OpenBookIllustration,
+  },
+  {
+    id: 'firstLetter',
+    title: 'İlk Harf Çapası',
+    tag: 'Tirat & Sahne Hafızası • Scaffolding',
+    desc: 'Yalnızca ilk harf ipuçlarını takip ederek metnin tamamını zihninizden hızla geri çağırın ve klavyeyle tamamlayın.',
+    icon: Type,
+    iconBg: 'bg-emerald-600/10 text-emerald-700 dark:text-emerald-300 border-emerald-600/30',
+    tagColor: 'text-emerald-700 dark:text-emerald-300',
+    illustration: OakTreeIllustration,
+  },
+  {
+    id: 'speedTrio',
+    title: '60s Edebi Trio Sprint',
+    tag: 'Hızlı Eşleştirme • Speed Match',
+    desc: '60 saniyede ekrana gelen edebi pasajların hangi eser ve yazara ait olduğunu en hızlı şekilde eşleştirerek kombo yapın.',
+    icon: Zap,
+    iconBg: 'bg-indigo-600/10 text-indigo-700 dark:text-indigo-300 border-indigo-600/30',
+    tagColor: 'text-indigo-700 dark:text-indigo-300',
+    illustration: LighthouseIllustration,
+  },
 ];
 
 const genreIcons = {
@@ -85,6 +118,7 @@ const genreIcons = {
   Wand2,
   Compass,
   Eye,
+  Bookmark,
   Film,
   PenTool,
   Crown,
@@ -101,7 +135,8 @@ export default function HomeMenu({
   onSelectGenre, 
   onOpenLibrary, 
   stats, 
-  onStartQuote 
+  onStartQuote,
+  onSelectBook 
 }) {
   // Deterministic daily quote based on date
   const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
@@ -177,7 +212,23 @@ export default function HomeMenu({
 
           <div className="flex-1 pr-6 sm:pr-8">
             <div className="flex items-center gap-2 text-xs text-[#57534E] dark:text-[#A8A196] mb-2 font-medium">
-              <span className="font-serif font-bold text-[#B44A22] dark:text-[#E07048] text-sm">{dailyQuote.book}</span>
+              <button
+                onClick={() => {
+                  sounds.playClick();
+                  const matchedBook = BOOKS_DATABASE.find(b => 
+                    b.title.toLowerCase() === dailyQuote.book?.toLowerCase() ||
+                    (dailyQuote.book && b.title.toLowerCase().includes(dailyQuote.book.toLowerCase())) ||
+                    (dailyQuote.book && dailyQuote.book.toLowerCase().includes(b.title.toLowerCase()))
+                  );
+                  if (matchedBook && onSelectBook) {
+                    onSelectBook(matchedBook.id);
+                  }
+                }}
+                className="font-serif font-bold text-[#B44A22] dark:text-[#E07048] text-sm hover:underline cursor-pointer text-left"
+                title="Kitabı ve pasajlarını incele"
+              >
+                {dailyQuote.book}
+              </button>
               <span>—</span>
               <span className="text-[#1C1917] dark:text-[#F5EFE4] font-semibold">{dailyQuote.author}</span>
             </div>
@@ -199,14 +250,14 @@ export default function HomeMenu({
         </div>
       </div>
 
-      {/* 3 Main Practice Modes (Atelier Style) */}
+      {/* 6 Practice Modes (Atelier Style) */}
       <div className="mb-10">
         <h3 className="text-lg font-serif font-bold text-[#1C1917] dark:text-[#F5EFE4] mb-4 flex items-center gap-2">
           <Feather className="w-5 h-5 text-[#B44A22] dark:text-[#E07048]" />
           <span>Egzersiz ve Hatırlama Modları</span>
         </h3>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {PRACTICE_MODES.map((mode) => {
             const Icon = mode.icon;
 

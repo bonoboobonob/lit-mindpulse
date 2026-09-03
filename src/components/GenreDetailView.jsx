@@ -28,7 +28,9 @@ import {
   Scale,
   Heart,
   ChevronRight,
-  Info
+  Info,
+  Type,
+  Zap
 } from 'lucide-react';
 import { BOOK_GENRES, BOOK_QUOTES, DIFFICULTY_LEVELS } from '../data/bookQuotes';
 import { BOOKS_DATABASE } from '../data/booksDatabase';
@@ -76,8 +78,8 @@ export default function GenreDetailView({
     ? BOOKS_DATABASE
     : BOOKS_DATABASE.filter(b => b.genre === genre.id);
 
-  // Derive all quotes directly from genreBooks passages ensuring 100% consistency
-  const allGenreQuotes = genreBooks.flatMap(b => (b.passages || []).map(p => ({
+  // Derive all quotes directly from genreBooks passages
+  const dbGenreQuotes = genreBooks.flatMap(b => (b.passages || []).map(p => ({
     id: p.id,
     genre: b.genre,
     difficulty: p.difficulty,
@@ -87,13 +89,41 @@ export default function GenreDetailView({
     bookId: b.id,
   })));
 
+  // Also include any standalone quotes from BOOK_QUOTES for this genre
+  const seenQuotes = new Set(dbGenreQuotes.map(q => q.quote.trim().toLowerCase()));
+  const extraQuotes = [];
+  BOOK_QUOTES.forEach(q => {
+    if (genre.id === 'all' || q.genre === genre.id) {
+      const norm = q.quote ? q.quote.trim().toLowerCase() : '';
+      if (norm && !seenQuotes.has(norm)) {
+        seenQuotes.add(norm);
+        const matchedBook = BOOKS_DATABASE.find(b => 
+          b.title.toLowerCase() === q.book?.toLowerCase() || 
+          (q.book && b.title.toLowerCase().includes(q.book.toLowerCase())) ||
+          (q.book && q.book.toLowerCase().includes(b.title.toLowerCase()))
+        );
+        extraQuotes.push({
+          id: q.id,
+          genre: q.genre,
+          difficulty: q.difficulty,
+          book: q.book,
+          author: q.author,
+          quote: q.quote,
+          bookId: matchedBook ? matchedBook.id : null,
+        });
+      }
+    }
+  });
+
+  const allGenreQuotes = [...dbGenreQuotes, ...extraQuotes];
+
   const filteredQuotes = selectedDifficulty === 'all'
     ? allGenreQuotes
     : allGenreQuotes.filter(q => q.difficulty === selectedDifficulty);
 
   // Distinct authors and books count in this genre
-  const distinctBooks = new Set(allGenreQuotes.map(q => q.book)).size;
-  const distinctAuthors = new Set(allGenreQuotes.map(q => q.author)).size;
+  const distinctBooks = new Set([...genreBooks.map(b => b.title), ...allGenreQuotes.map(q => q.book)]).size;
+  const distinctAuthors = new Set([...genreBooks.map(b => b.author), ...allGenreQuotes.map(q => q.author)]).size;
 
   return (
     <div className="w-full max-w-5xl mx-auto px-2 sm:px-4 py-2 animate-in fade-in duration-200">
@@ -143,16 +173,16 @@ export default function GenreDetailView({
           <span className="text-xs font-bold uppercase tracking-wider text-[#B44A22] dark:text-[#E07048] block mb-3">
             Bu Kategoride Antrenman Başlat
           </span>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-3">
             <button
               onClick={() => {
                 sounds.playClick();
                 onStartGenrePractice(genre.id, 'fullTyping');
               }}
-              className="flex items-center justify-center gap-2 p-3 rounded-2xl bg-[#FAF6EE] dark:bg-[#24201C] hover:bg-[#F2ECE1] dark:hover:bg-[#2E2822] border border-[#D6CEBE] dark:border-[#38322B] text-[#1C1917] dark:text-[#F5EFE4] hover:text-[#B44A22] dark:hover:text-[#E07048] hover:border-[#C85A32] dark:hover:border-[#E07048] font-semibold text-sm transition cursor-pointer shadow-xs"
+              className="flex items-center justify-center gap-2 p-3 rounded-2xl bg-[#FAF6EE] dark:bg-[#24201C] hover:bg-[#F2ECE1] dark:hover:bg-[#2E2822] border border-[#D6CEBE] dark:border-[#38322B] text-[#1C1917] dark:text-[#F5EFE4] hover:text-[#B44A22] dark:hover:text-[#E07048] hover:border-[#C85A32] dark:hover:border-[#E07048] font-semibold text-xs sm:text-sm transition cursor-pointer shadow-xs"
             >
               <Feather className="w-4 h-4 text-[#B44A22] dark:text-[#E07048]" />
-              <span>✍️ Tam Yazma Modu</span>
+              <span>✍️ Tam Yazma</span>
             </button>
 
             <button
@@ -160,10 +190,10 @@ export default function GenreDetailView({
                 sounds.playClick();
                 onStartGenrePractice(genre.id, 'clozeRecall');
               }}
-              className="flex items-center justify-center gap-2 p-3 rounded-2xl bg-[#FAF6EE] dark:bg-[#24201C] hover:bg-[#F2ECE1] dark:hover:bg-[#2E2822] border border-[#D6CEBE] dark:border-[#38322B] text-[#1C1917] dark:text-[#F5EFE4] hover:text-[#8C5E3C] dark:hover:text-[#D4AF37] hover:border-[#8C5E3C] dark:hover:border-[#D4AF37] font-semibold text-sm transition cursor-pointer shadow-xs"
+              className="flex items-center justify-center gap-2 p-3 rounded-2xl bg-[#FAF6EE] dark:bg-[#24201C] hover:bg-[#F2ECE1] dark:hover:bg-[#2E2822] border border-[#D6CEBE] dark:border-[#38322B] text-[#1C1917] dark:text-[#F5EFE4] hover:text-[#8C5E3C] dark:hover:text-[#D4AF37] hover:border-[#8C5E3C] dark:hover:border-[#D4AF37] font-semibold text-xs sm:text-sm transition cursor-pointer shadow-xs"
             >
               <Puzzle className="w-4 h-4 text-[#8C5E3C] dark:text-[#D4AF37]" />
-              <span>🧩 Boşluk Doldurma</span>
+              <span>🧩 Boşluk Doldur</span>
             </button>
 
             <button
@@ -171,10 +201,43 @@ export default function GenreDetailView({
                 sounds.playClick();
                 onStartGenrePractice(genre.id, 'wordScramble');
               }}
-              className="flex items-center justify-center gap-2 p-3 rounded-2xl bg-[#FAF6EE] dark:bg-[#24201C] hover:bg-[#F2ECE1] dark:hover:bg-[#2E2822] border border-[#D6CEBE] dark:border-[#38322B] text-[#1C1917] dark:text-[#F5EFE4] hover:text-[#476C46] dark:hover:text-[#62B889] hover:border-[#588157] dark:hover:border-[#62B889] font-semibold text-sm transition cursor-pointer shadow-xs"
+              className="flex items-center justify-center gap-2 p-3 rounded-2xl bg-[#FAF6EE] dark:bg-[#24201C] hover:bg-[#F2ECE1] dark:hover:bg-[#2E2822] border border-[#D6CEBE] dark:border-[#38322B] text-[#1C1917] dark:text-[#F5EFE4] hover:text-[#476C46] dark:hover:text-[#62B889] hover:border-[#588157] dark:hover:border-[#62B889] font-semibold text-xs sm:text-sm transition cursor-pointer shadow-xs"
             >
               <Layers className="w-4 h-4 text-[#476C46] dark:text-[#62B889]" />
               <span>📱 Kelime Dizme</span>
+            </button>
+
+            <button
+              onClick={() => {
+                sounds.playClick();
+                onStartGenrePractice(genre.id, 'textDetective');
+              }}
+              className="flex items-center justify-center gap-2 p-3 rounded-2xl bg-[#FAF6EE] dark:bg-[#24201C] hover:bg-[#F2ECE1] dark:hover:bg-[#2E2822] border border-[#D6CEBE] dark:border-[#38322B] text-[#1C1917] dark:text-[#F5EFE4] hover:text-amber-600 dark:hover:text-amber-400 hover:border-amber-500 font-semibold text-xs sm:text-sm transition cursor-pointer shadow-xs"
+            >
+              <Search className="w-4 h-4 text-amber-600 dark:text-amber-400" />
+              <span>🕵️ Metin Dedektifi</span>
+            </button>
+
+            <button
+              onClick={() => {
+                sounds.playClick();
+                onStartGenrePractice(genre.id, 'firstLetter');
+              }}
+              className="flex items-center justify-center gap-2 p-3 rounded-2xl bg-[#FAF6EE] dark:bg-[#24201C] hover:bg-[#F2ECE1] dark:hover:bg-[#2E2822] border border-[#D6CEBE] dark:border-[#38322B] text-[#1C1917] dark:text-[#F5EFE4] hover:text-emerald-600 dark:hover:text-emerald-400 hover:border-emerald-500 font-semibold text-xs sm:text-sm transition cursor-pointer shadow-xs"
+            >
+              <Type className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+              <span>🔤 İlk Harf Çapası</span>
+            </button>
+
+            <button
+              onClick={() => {
+                sounds.playClick();
+                onStartGenrePractice(genre.id, 'speedTrio');
+              }}
+              className="flex items-center justify-center gap-2 p-3 rounded-2xl bg-[#FAF6EE] dark:bg-[#24201C] hover:bg-[#F2ECE1] dark:hover:bg-[#2E2822] border border-[#D6CEBE] dark:border-[#38322B] text-[#1C1917] dark:text-[#F5EFE4] hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-500 font-semibold text-xs sm:text-sm transition cursor-pointer shadow-xs"
+            >
+              <Zap className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
+              <span>⚡ Trio Sprint</span>
             </button>
           </div>
         </div>

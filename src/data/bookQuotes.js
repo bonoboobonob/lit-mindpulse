@@ -64,9 +64,9 @@ export const BOOK_QUOTES = [
   { id: 'phil_sp_2', genre: 'philosophy', difficulty: 'medium', book: 'Etika', author: 'Baruch Spinoza', quote: 'İnsan eylemlerine ne ağlamalı, ne öfkelenmeli; yalnızca onları anlamaya çalışmalıdır.' },
   { id: 'phil_sp_3', genre: 'philosophy', difficulty: 'hard', book: 'Etika', author: 'Baruch Spinoza', quote: 'Akıl tarafından yönlendirilen bir insan, kör tutkularının esiri olan bir kimseden katbekat daha özgür ve güçlüdür.' },
 
-  { id: 'phil_sch_1', genre: 'philosophy', difficulty: 'easy', book: 'Yaşam Bilgeliği', author: 'Arthur Schopenhauer', quote: 'Yalnızlık, tüm büyük zihinlerin kaderidir.' },
+  { id: 'phil_sch_1', genre: 'philosophy', difficulty: 'easy', book: 'Yaşam Bilgeliği Üzerine Aforizmalar', author: 'Arthur Schopenhauer', quote: 'Yalnızlık, tüm büyük zihinlerin kaderidir.' },
   { id: 'phil_sch_2', genre: 'philosophy', difficulty: 'medium', book: 'Aşkın Metafiziği', author: 'Arthur Schopenhauer', quote: 'Hayat bir sarkaç gibi acı ile can sıkıntısı arasında gidip gelir.' },
-  { id: 'phil_sch_3', genre: 'philosophy', difficulty: 'hard', book: 'Yaşam Bilgeliği', author: 'Arthur Schopenhauer', quote: 'Bir insanın kendi içinde neye sahip olduğu, dışarıdan ne elde edebileceğinden daima daha belirleyici ve kıymetlidir.' },
+  { id: 'phil_sch_3', genre: 'philosophy', difficulty: 'hard', book: 'Yaşam Bilgeliği Üzerine Aforizmalar', author: 'Arthur Schopenhauer', quote: 'Bir insanın kendi içinde neye sahip olduğu, dışarıdan ne elde edebileceğinden daima daha belirleyici ve kıymetlidir.' },
 
   { id: 'phil_cam_1', genre: 'philosophy', difficulty: 'easy', book: 'Sisifos Söyleni', author: 'Albert Camus', quote: 'Sisifos\'u mutlu olarak hayal etmek gerekir.' },
   { id: 'phil_cam_2', genre: 'philosophy', difficulty: 'medium', book: 'Başkaldıran İnsan', author: 'Albert Camus', quote: 'Başkaldırıyorum, öyleyse varız; adaletsizlik karşısında susmak teslim olmaktır.' },
@@ -101,7 +101,7 @@ export const BOOK_QUOTES = [
 
   { id: 'cls_hug_1', genre: 'classics', difficulty: 'easy', book: 'Sefiller', author: 'Victor Hugo', quote: 'Ölmek hiçbir şeydir; asıl korkunç olan yaşamamaktır.' },
   { id: 'cls_hug_2', genre: 'classics', difficulty: 'medium', book: 'Sefiller', author: 'Victor Hugo', quote: 'Gelecek, cesurların umudu, korkakların ise kabusudur.' },
-  { id: 'cls_hug_3', genre: 'classics', difficulty: 'hard', book: 'Notre Dame\'ın Kamburu', author: 'Victor Hugo', quote: 'Sevmek veya sevilmiş olmak yeterlidir; karanlık gecelerin ardından doğacak şafağı beklemek gerekmez.' },
+  { id: 'cls_hug_3', genre: 'classics', difficulty: 'hard', book: 'Sefiller', author: 'Victor Hugo', quote: 'Sevmek veya sevilmiş olmak yeterlidir; karanlık gecelerin ardından doğacak şafağı beklemek gerekmez.' },
 
   { id: 'cls_hss_1', genre: 'classics', difficulty: 'easy', book: 'Siddhartha', author: 'Hermann Hesse', quote: 'Bilgelik başkasına aktarılamaz; onu kişi kendisi bulmalıdır.' },
   { id: 'cls_hss_2', genre: 'classics', difficulty: 'medium', book: 'Bozkırkurdu', author: 'Hermann Hesse', quote: 'Yalnızlık bağımsızlıktır; onu ben istedim ve uzun yıllar boyunca bedelini ödedim.' },

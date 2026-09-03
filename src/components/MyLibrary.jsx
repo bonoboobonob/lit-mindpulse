@@ -14,6 +14,38 @@ export default function MyLibrary({
   const [author, setAuthor] = useState('');
   const [quoteText, setQuoteText] = useState('');
 
+  const handleOpenAddModal = () => {
+    sounds.playClick();
+    window.history.pushState({ modal: 'addQuote', screen: 'library' }, '', window.location.hash);
+    setShowAddModal(true);
+  };
+
+  const handleCloseAddModal = () => {
+    sounds.playClick();
+    setShowAddModal(false);
+    if (window.history.state?.modal === 'addQuote') {
+      window.history.back();
+    }
+  };
+
+  React.useEffect(() => {
+    if (!showAddModal) return;
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        handleCloseAddModal();
+      }
+    };
+    const handlePopState = () => {
+      setShowAddModal(false);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('popstate', handlePopState);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, [showAddModal]);
+
   const handleSave = () => {
     if (!quoteText.trim()) return;
     sounds.playClick();
@@ -32,7 +64,7 @@ export default function MyLibrary({
     setBookTitle('');
     setAuthor('');
     setQuoteText('');
-    setShowAddModal(false);
+    handleCloseAddModal();
   };
 
   return (
@@ -48,7 +80,7 @@ export default function MyLibrary({
         </button>
 
         <button
-          onClick={() => setShowAddModal(true)}
+          onClick={handleOpenAddModal}
           className="flex items-center gap-2 px-4 py-2 rounded-2xl btn-terracotta font-bold text-xs sm:text-sm shadow-md transition cursor-pointer"
         >
           <PlusCircle className="w-4 h-4 fill-white" />
@@ -178,7 +210,7 @@ export default function MyLibrary({
 
             <div className="flex items-center justify-end gap-2.5">
               <button
-                onClick={() => setShowAddModal(false)}
+                onClick={handleCloseAddModal}
                 className="px-4 py-2 rounded-xl bg-[#FAF6EE] dark:bg-[#282420] text-[#44403C] dark:text-[#EDE8DF] hover:text-[#1C1917] dark:hover:text-[#F5EFE4] font-semibold text-sm cursor-pointer"
               >
                 Vazgeç

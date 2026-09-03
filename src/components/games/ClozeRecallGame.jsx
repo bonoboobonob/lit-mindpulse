@@ -51,11 +51,11 @@ export default function ClozeRecallGame({
   const inputRefs = useRef([]);
 
   // Clean word helper
-  const cleanWord = (w) => w.toLocaleLowerCase('tr').replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?"'’]/g, "").trim();
+  const cleanWord = (w) => (w ? w.toLocaleLowerCase('tr').replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?"'’«»“”‘’—–…]/g, "").trim() : '');
 
   // Parse raw word to separate punctuation
   const parseToken = (rawWord) => {
-    const match = rawWord.match(/^([.,\/#!$%\^&\*;:{}=\-_`~()?"'’]*)(.*?)([.,\/#!$%\^&\*;:{}=\-_`~()?"'’]*)$/);
+    const match = rawWord.match(/^([.,\/#!$%\^&\*;:{}=\-_`~()?"'’«»“”‘’—–…]*)(.*?)([.,\/#!$%\^&\*;:{}=\-_`~()?"'’«»“”‘’—–…]*)$/);
     if (!match) return { prefix: '', core: rawWord, suffix: '' };
     return {
       prefix: match[1] || '',
@@ -392,12 +392,24 @@ export default function ClozeRecallGame({
 
           <div className="w-full p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#1C1917] border border-[#D6CEBE] dark:border-[#38322B] shadow-md mb-8">
             <div className="flex items-center justify-between text-xs text-[#57534E] dark:text-[#A8A196] mb-4 pb-3 border-b border-[#D6CEBE] dark:border-[#38322B]">
-              <div className="flex items-center gap-2">
+              <button
+                onClick={() => {
+                  const targetBookId = currentQuote.bookId || BOOKS_DATABASE.find(b => 
+                    b.title.toLowerCase() === currentQuote.book?.toLowerCase() ||
+                    (currentQuote.book && b.title.toLowerCase().includes(currentQuote.book.toLowerCase()))
+                  )?.id;
+                  if (onSelectBook && targetBookId) {
+                    onSelectBook(targetBookId, { quote: currentQuote });
+                  }
+                }}
+                className="flex items-center gap-2 text-left hover:opacity-80 transition cursor-pointer"
+                title="Kitabı İncele (Egzersiz duraklatılır)"
+              >
                 <BookOpen className="w-4 h-4 text-[#8C5E3C] dark:text-[#D4AF37]" />
-                <span className="font-bold text-[#8C5E3C] dark:text-[#D4AF37] font-serif text-sm">{currentQuote.book}</span>
+                <span className="font-bold text-[#8C5E3C] dark:text-[#D4AF37] font-serif text-sm underline decoration-dotted underline-offset-2">{currentQuote.book}</span>
                 <span>—</span>
                 <span className="text-[#1C1917] dark:text-[#F5EFE4] font-semibold">{currentQuote.author}</span>
-              </div>
+              </button>
             </div>
 
             <p className="text-lg sm:text-2xl font-serif font-medium text-[#1C1917] dark:text-[#F5EFE4] leading-relaxed text-center italic my-6 px-1 quote-text font-quote">
@@ -438,7 +450,21 @@ export default function ClozeRecallGame({
         <div className="w-full max-w-2xl flex flex-col items-center animate-in fade-in duration-200">
           <div className="w-full p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#1C1917] border border-[#D6CEBE] dark:border-[#38322B] shadow-md mb-6">
             <div className="text-xs text-[#57534E] dark:text-[#A8A196] mb-4 pb-3 border-b border-[#D6CEBE] dark:border-[#38322B] flex items-center justify-between font-medium">
-              <span className="font-serif text-[#8C5E3C] dark:text-[#D4AF37] font-bold">{currentQuote.book} ({currentQuote.author})</span>
+              <button
+                onClick={() => {
+                  const targetBookId = currentQuote.bookId || BOOKS_DATABASE.find(b => 
+                    b.title.toLowerCase() === currentQuote.book?.toLowerCase() ||
+                    (currentQuote.book && b.title.toLowerCase().includes(currentQuote.book.toLowerCase()))
+                  )?.id;
+                  if (onSelectBook && targetBookId) {
+                    onSelectBook(targetBookId, { quote: currentQuote });
+                  }
+                }}
+                className="font-serif text-[#8C5E3C] dark:text-[#D4AF37] font-bold underline decoration-dotted underline-offset-2 hover:opacity-80 transition cursor-pointer text-left"
+                title="Kitabı İncele (Egzersiz duraklatılır)"
+              >
+                {currentQuote.book} ({currentQuote.author})
+              </button>
               <span className="text-[#57534E] dark:text-[#A8A196] font-bold">{clozeTokens.filter(t => t.isBlank).length} Boşluk</span>
             </div>
 

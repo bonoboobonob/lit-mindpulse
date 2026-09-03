@@ -40,6 +40,7 @@ class QuoteQueueManager {
   // Get matching quote pool for the given filters
   getMatchingQuotes(genre = 'all', difficulty = 'all', customQuotes = [], bookId = null) {
     let pool = [];
+    const safeCustom = Array.isArray(customQuotes) ? customQuotes : [];
 
     if (bookId) {
       const bookObj = BOOKS_DATABASE.find(b => b.id === bookId);
@@ -55,6 +56,7 @@ class QuoteQueueManager {
         }));
       }
     } else {
+      // 1. All passages from BOOKS_DATABASE
       const allDbQuotes = BOOKS_DATABASE.flatMap(b => (b.passages || []).map(p => ({
         id: p.id,
         genre: b.genre,
@@ -64,7 +66,35 @@ class QuoteQueueManager {
         quote: p.quote,
         bookId: b.id,
       })));
-      pool = [...allDbQuotes, ...customQuotes];
+
+      const seenQuotes = new Set(allDbQuotes.map(q => q.quote.trim().toLowerCase()));
+
+      // 2. Plus unique curated quotes from BOOK_QUOTES
+      const curatedQuotes = [];
+      BOOK_QUOTES.forEach(q => {
+        const norm = q.quote ? q.quote.trim().toLowerCase() : '';
+        if (norm && !seenQuotes.has(norm)) {
+          seenQuotes.add(norm);
+          // Find matching bookId in BOOKS_DATABASE if available
+          const matchedBook = BOOKS_DATABASE.find(b => 
+            b.title.toLowerCase() === q.book?.toLowerCase() ||
+            (q.book && b.title.toLowerCase().includes(q.book.toLowerCase())) ||
+            (q.book && q.book.toLowerCase().includes(b.title.toLowerCase()))
+          );
+
+          curatedQuotes.push({
+            id: q.id,
+            genre: q.genre,
+            difficulty: q.difficulty,
+            book: q.book,
+            author: q.author,
+            quote: q.quote,
+            bookId: matchedBook ? matchedBook.id : null,
+          });
+        }
+      });
+
+      pool = [...allDbQuotes, ...curatedQuotes, ...safeCustom];
     }
 
     // Filter by genre (if not single-book mode) and difficulty
@@ -74,7 +104,7 @@ class QuoteQueueManager {
       return matchG && matchD;
     });
 
-    return matching.length > 0 ? matching : pool;
+    return matching.length > 0 ? matching : (pool.length > 0 ? pool : BOOK_QUOTES);
   }
 
   // Get next non-repeating quote supporting full deck cycle
@@ -82,14 +112,20 @@ class QuoteQueueManager {
     let genre = genreOrOptions;
     let targetDifficulty = difficulty;
     let targetBookId = bookId;
-    let targetCustom = customQuotes;
+    let targetCustom = Array.isArray(customQuotes) ? customQuotes : [];
     let explicitExcludeId = excludeQuoteId;
+
+    // Handle when 3rd argument is passed as bookId (string) instead of customQuotes array
+    if (typeof customQuotes === 'string') {
+      targetBookId = customQuotes;
+      targetCustom = [];
+    }
 
     if (typeof genreOrOptions === 'object' && genreOrOptions !== null) {
       genre = genreOrOptions.genre || 'all';
       targetDifficulty = genreOrOptions.difficulty || 'all';
       targetBookId = genreOrOptions.bookId || null;
-      targetCustom = genreOrOptions.customQuotes || [];
+      targetCustom = Array.isArray(genreOrOptions.customQuotes) ? genreOrOptions.customQuotes : [];
       explicitExcludeId = genreOrOptions.excludeQuoteId || excludeQuoteId;
     }
 

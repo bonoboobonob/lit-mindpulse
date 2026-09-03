@@ -71,6 +71,15 @@
   img, video, canvas, svg, input, textarea, select, button {
     max-width: revert;
   }
+
+  button, [role="button"] {
+    touch-action: manipulation;
+  }
+
+  input, textarea, [contenteditable="true"] {
+    user-select: text !important;
+    -webkit-user-select: text !important;
+  }
 }
 
 /* Editorial Typography & Quote Styling */
@@ -80,6 +89,8 @@
   line-height: 1.65;
   letter-spacing: -0.012em;
   color: #1C1917;
+  user-select: text;
+  -webkit-user-select: text;
 }
 
 html.dark .font-quote {
@@ -94,6 +105,8 @@ html.dark .font-quote {
   max-width: 100%;
   letter-spacing: -0.01em;
   line-height: 1.6;
+  user-select: text;
+  -webkit-user-select: text;
 }
 
 /* Atelier High-Contrast Paper Cards */
